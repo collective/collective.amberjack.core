@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: collective.amberjack.core
-Version: 1.0dev
+Version: 1.0dev-r86273
 Summary: The Amberjack layer
 Home-page: https://svn.plone.org/svn/collective/collective.amberjack.core
 Author: Massimo Azzolini
