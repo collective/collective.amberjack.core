@@ -1,0 +1,21 @@
+/* Stylesheet for the 'amberjack' Plone theme */
+.ajHighlight {
+	background: yellow !important;
+	font-weight: bold;
+}
+
+.ajLink{
+	width:15%;
+	font-size: 9px;
+	color:#000000;
+	display:block;
+	float:left;
+}
+.ajLink:hover{
+	background-color: yellow;
+}
+
+.ajDescr{
+	float:left;
+	width: 80%;
+}
