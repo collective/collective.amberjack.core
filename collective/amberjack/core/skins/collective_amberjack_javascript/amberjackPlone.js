@@ -303,6 +303,13 @@ function checkAllStep(){
 	return allDone;
 }
 
+function initAjPlone(){
+	highlightAllStep();
+	ajTour();
+	disableLinks();
+	jq('#ajControl').draggable({ handle: '#ajControlNavi', cursor: 'crosshair' }).css('cursor', 'move')
+}
+
 /**
  * Start the tour and set some timeout
  * @author Giacomo Spettoli
@@ -310,7 +317,5 @@ function checkAllStep(){
 registerPloneFunction(function () {
 	loadDefaults();
 	Amberjack.open();
-	setTimeout("highlightAllStep()", 300);
-	setTimeout("ajTour()", 400);
-	setTimeout("disableLinks()", 500);
+	setTimeout("initAjPlone()", 300);
 })

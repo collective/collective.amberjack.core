@@ -9,5 +9,11 @@
 	    permission="zope2.View" 
 	    class=".defaults.AmberjackDefaults" 
 	    />
-		
+	
+	<browser:page 
+	    name="ajStandardSteps.js"
+	    for="*" 
+	    permission="zope2.View" 
+	    class=".ajStandardSteps.AmberjackStandardSteps" 
+	    />	
 </configure> 
