@@ -565,7 +565,7 @@ Amberjack = {
 	questionMarkPosition = loc.indexOf('?');
 	loc = (questionMarkPosition == -1 ? loc: loc.substr(0, questionMarkPosition));
 	//if (loc == title){
-	if(this.urlMatch(title)){
+	if(this.urlMatch(title) || this.urlMatch(title+'/')){
 		var xpath = element.getAttribute('xpath');
 		var xcontent = element.getAttribute('xcontent');
 		if (xpath){
