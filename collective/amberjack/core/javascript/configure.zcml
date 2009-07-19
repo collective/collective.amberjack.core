@@ -16,4 +16,5 @@
 	    permission="zope2.View" 
 	    class=".ajStandardSteps.AmberjackStandardSteps" 
 	    />	
+		
 </configure> 

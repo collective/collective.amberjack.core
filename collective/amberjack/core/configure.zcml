@@ -5,7 +5,12 @@
     i18n_domain="collective.amberjack.core">
 
 	<include package=".javascript" />
+	<include package=".browser" />
 	<include file="skins.zcml" />
 	<include file="profiles.zcml" />
 
+	<utility 
+        provides=".registry.IRegistrationUtility"
+        factory=".registry.RegistrationUtility"
+        />
 </configure>

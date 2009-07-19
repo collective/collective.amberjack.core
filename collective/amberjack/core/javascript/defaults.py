@@ -11,7 +11,6 @@ class AmberjackDefaults(BrowserView):
         function loadDefaults(){
             Amberjack.onCloseClickStay = true;
             Amberjack.doCoverBody = false;
-            Amberjack.ADD_STYLE = '%s/p4avideodemo.css';
             Amberjack.BASE_URL = '%s/';    
         }
         """  % (url, url)

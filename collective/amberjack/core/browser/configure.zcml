@@ -1,0 +1,12 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="collective.amberjack.core">
+		
+	<browser:viewlet
+		name="collective.amberjackcore"
+		manager="plone.app.layout.viewlets.interfaces.IBelowContent"
+		permission="zope2.View"
+		class=".viewlets.TourViewlet"
+		/>
+</configure> 

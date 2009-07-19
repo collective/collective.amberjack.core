@@ -14,10 +14,13 @@ collective/amberjack/__init__.py
 collective/amberjack/core/__init__.py
 collective/amberjack/core/configure.zcml
 collective/amberjack/core/profiles.zcml
+collective/amberjack/core/registry.py
 collective/amberjack/core/skins.zcml
 collective/amberjack/core/tests.py
 collective/amberjack/core/version.txt
 collective/amberjack/core/javascript/__init__.py
+collective/amberjack/core/javascript/ajStandardSteps.py
+collective/amberjack/core/javascript/configure.zcml
 collective/amberjack/core/javascript/defaults.py
 collective/amberjack/core/profiles/default/cssregistry.xml
 collective/amberjack/core/profiles/default/jsregistry.xml
@@ -25,6 +28,8 @@ collective/amberjack/core/profiles/default/metadata.xml
 collective/amberjack/core/profiles/default/skins.xml
 collective/amberjack/core/skins/collective_amberjack_images/amberjack.png
 collective/amberjack/core/skins/collective_amberjack_javascript/amberjack.js
+collective/amberjack/core/skins/collective_amberjack_javascript/amberjackPlone.js
+collective/amberjack/core/skins/collective_amberjack_javascript/jquery-ui.js
 collective/amberjack/core/skins/collective_amberjack_skins/skin/model_t/200x150.png
 collective/amberjack/core/skins/collective_amberjack_skins/skin/model_t/control.tpl.js
 collective/amberjack/core/skins/collective_amberjack_skins/skin/model_t/style.css

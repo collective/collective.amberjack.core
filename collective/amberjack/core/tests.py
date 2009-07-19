@@ -11,6 +11,9 @@ from Products.PloneTestCase.layer import PloneSite
 ptc.setupPloneSite()
 
 import collective.amberjack.core
+from collective.amberjack.core import registry
+
+from zope.component import getUtility
 
 class TestCase(ptc.PloneTestCase):
     class layer(PloneSite):
@@ -25,30 +28,23 @@ class TestCase(ptc.PloneTestCase):
         def tearDown(cls):
             pass
 
-
+    def test_register_utility_available(self):
+        register = getUtility(registry.IRegistrationUtility)
+        
+    def test_register_tour(self):
+        register = getUtility(registry.IRegistrationUtility)
+        tour = 'tour1'
+        register.add(tour)
+        self.assertEqual(register.getTours(), [tour,])
+        
+    
+            
+            
+            
 def test_suite():
-    return unittest.TestSuite([
-
-        # Unit tests
-        #doctestunit.DocFileSuite(
-        #    'README.txt', package='collective.amberjack.core',
-        #    setUp=testing.setUp, tearDown=testing.tearDown),
-
-        #doctestunit.DocTestSuite(
-        #    module='collective.amberjack.core.mymodule',
-        #    setUp=testing.setUp, tearDown=testing.tearDown),
-
-
-        # Integration tests that use PloneTestCase
-        #ztc.ZopeDocFileSuite(
-        #    'README.txt', package='collective.amberjack.core',
-        #    test_class=TestCase),
-
-        #ztc.FunctionalDocFileSuite(
-        #    'browser.txt', package='collective.amberjack.core',
-        #    test_class=TestCase),
-
-        ])
+    suite = unittest.TestSuite()
+    suite.addTest(unittest.makeSuite(TestCase))
+    return suite
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')

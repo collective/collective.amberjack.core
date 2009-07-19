@@ -307,7 +307,8 @@ function initAjPlone(){
 	highlightAllStep();
 	ajTour();
 	disableLinks();
-	jq('#ajControl').draggable({ handle: '#ajControlNavi', cursor: 'crosshair' }).css('cursor', 'move')
+	jq('#ajControl').draggable({ handle: '#ajControlNavi', cursor: 'crosshair' })
+	jq('#ajControlNavi').css('cursor', 'move')
 }
 
 /**

@@ -1,0 +1,3 @@
+<tal:viewlet replace="structure view/choosenTour">
+	the tour choosen, identified by tourId
+</tal:viewlet>
