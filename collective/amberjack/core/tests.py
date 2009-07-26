@@ -11,7 +11,7 @@ from Products.PloneTestCase.layer import PloneSite
 ptc.setupPloneSite()
 
 import collective.amberjack.core
-from collective.amberjack.core import registry
+from collective.amberjack.core import tour_manager
 
 from zope.component import getUtility
 
@@ -29,10 +29,10 @@ class TestCase(ptc.PloneTestCase):
             pass
 
     def test_register_utility_available(self):
-        register = getUtility(registry.IRegistrationUtility)
+        register = getUtility(tour_manager.IManageTourUtility)
         
     def test_register_tour(self):
-        register = getUtility(registry.IRegistrationUtility)
+        register = getUtility(tour_manager.IManageTourUtility)
         tour = 'tour1'
         register.add(tour)
         self.assertEqual(register.getTours(), [tour,])

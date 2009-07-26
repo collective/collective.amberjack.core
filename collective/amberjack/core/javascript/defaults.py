@@ -13,4 +13,4 @@ class AmberjackDefaults(BrowserView):
             Amberjack.doCoverBody = false;
             Amberjack.BASE_URL = '%s/';    
         }
-        """  % (url, url)
+        """  % (url, )

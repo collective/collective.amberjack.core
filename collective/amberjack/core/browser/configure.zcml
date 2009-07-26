@@ -4,9 +4,27 @@
    i18n_domain="collective.amberjack.core">
 		
 	<browser:viewlet
-		name="collective.amberjackcore"
+		name="collective.amberjackcore.viewlet"
 		manager="plone.app.layout.viewlets.interfaces.IBelowContent"
 		permission="zope2.View"
 		class=".viewlets.TourViewlet"
 		/>
+		
+	<browser:page
+		for="collective.amberjack.core.interfaces.ITourDefinition"
+		name="tour"
+		class=".tour.PackagedTourView"
+		permission="zope.Public"
+		/>
+		
+	<!--adapter
+		for="* 
+			 zope.publisher.interfaces.http.IHTTPRequest
+			 collective.amberjack.core.interfaces.ITourDefinition
+			 " 
+		factory=".tour.PackagedTourView" 
+		provides="zope.publisher.interfaces.browser.IBrowserView"
+		name="tour"
+		/ -->
+	
 </configure> 

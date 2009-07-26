@@ -10,7 +10,20 @@
 	<include file="profiles.zcml" />
 
 	<utility 
-        provides=".registry.IRegistrationUtility"
-        factory=".registry.RegistrationUtility"
+        provides=".tour_manager.IManageTourUtility"
+        factory=".tour_manager.ManageTourUtility"
         />
+		
+	<utility
+		component=".tours.vocabulary.AvailableToursVocabularyFactory"
+		name="collective.amberjack.core.tours"
+		/>
+		
+	<five:registerPackage
+		package="."
+        initialize=".initialize" />
+	
+	
+	<include file="meta.zcml" />
+	
 </configure>

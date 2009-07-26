@@ -25,7 +25,6 @@ setup(name='collective.amberjack.core',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'plone.registry'
           # -*- Extra requirements: -*-
       ],
       entry_points="""

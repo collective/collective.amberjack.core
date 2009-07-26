@@ -561,10 +561,12 @@ Amberjack = {
    */
   matchPage: function(element){
 	var title = element.getAttribute('title');
+	if( title.substr(title.length-1)=='/'){
+		title = title.substr(0, title.length-1)
+	}
 	var loc = location.href;
 	questionMarkPosition = loc.indexOf('?');
 	loc = (questionMarkPosition == -1 ? loc: loc.substr(0, questionMarkPosition));
-	//if (loc == title){
 	if(this.urlMatch(title) || this.urlMatch(title+'/')){
 		var xpath = element.getAttribute('xpath');
 		var xcontent = element.getAttribute('xcontent');

@@ -1,0 +1,21 @@
+<div class="ajTourDef" style="display:none" tal:attributes="id view/tourId">
+	<tal:steps repeat="macrostep view/steps">
+		<div tal:attributes="title macrostep/url;
+							 xpath macrostep/xpath;
+							 xcontent macrostep/xcontent">
+	        <h2 tal:content="macrostep/title">the title of a macro step</h2>
+	        <div tal:content="structure macrostep/text">the description for the user of a macro step</div>
+			<tal:ajsteps repeat="step macrostep/steps">
+				<tal:ajstep define="step_nr python:view.getStepNumber(step)">
+					<div class="ajDescr">
+			        	<span tal:replace="structure step/description">every step has a brief explanation of what to do</span>
+			        </div>
+			        <a href="" onClick="doStep(this); return false" tal:attributes="class string:ajStep-${step_nr} ajLink">&gt;&gt;</a>
+				</tal:ajstep>
+			</tal:ajsteps>
+	    </div>
+		<script tal:content="view/javascriptSteps" />
+	</tal:steps>
+    
+</div>
+
