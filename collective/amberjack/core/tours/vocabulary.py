@@ -1,9 +1,10 @@
-from zope.app.schema.vocabulary import IVocabularyFactory
+from collective.amberjack.core.tour_manager import IManageTourUtility
+from zope.component import getUtility
 from zope.interface import implements
+from zope.schema.vocabulary import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-from zope.component import getUtility
-from collective.amberjack.core.tour_manager import IManageTourUtility
+
 
 class AvailableToursVocabulary(object):
     implements(IVocabularyFactory)

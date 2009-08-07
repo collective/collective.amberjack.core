@@ -1,8 +1,8 @@
-from zope.interface import implements
 from collective.amberjack.core.interfaces import ITourDefinition
-from zope.component import getMultiAdapter
+from zope.interface import implements
 
-class Tour:
+
+class Tour(object):
     implements(ITourDefinition)
     
     def __init__(self, ajTour):
