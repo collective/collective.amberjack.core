@@ -5,7 +5,7 @@ ajStandardSteps = (
 	('manage_portlets'	, 'div.managePortletsLink a'),
 	
 	('go_home'		, '#portal-breadcrumbs > a'),
-	('go_uplevel'	, '#portal-breadcrumbs span a,last'),
+	('go_uplevel'	, '#portal-breadcrumbs span a:last'),
 	
 	('site_sitemap'		, '#siteaction-sitemap a'),
 	('site_accessibility', '#siteaction-accessibility a'),
@@ -41,10 +41,10 @@ ajStandardSteps = (
 	('content_sendback'	, 'workflow-transition-reject'),
 	
 	('form_apply'		, '#form\\.actions\\.apply'),
-	('form_save_new'		, 'input[name=form_submit]'),
-	('form_save'			, 'input[name=form\\.button\\.Save]'),
-	('form_remove'		, 'input[name=form\\.button\\.Remove]'),
-	('form_cancel'		, 'input[name=form\\.button\\.Cancel]'),
+	('form_save_old'		, 'input[name=form_submit]'), # in Archetypes 1.5.10 (Plone 3.2.2)
+	('form_save'			, 'input[name=form\\.button\\.save]'), # in Archetypes >= 1.5.11 (Plone >= 3.2.3)
+	('form_remove'		, 'input[name=form\\.button\\.remove]'),
+	('form_cancel'		, 'input[name=form\\.button\\.cancel]'),
 	
 	('form_title'		, '#archetypes-fieldname-title input'),
 	('form_description'	, '#archetypes-fieldname-description textarea'),
