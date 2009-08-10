@@ -33,9 +33,9 @@ function ajTour(){
 	 */
 	
 	var theAJClass = 'ajHighlight';
-	var theAJClassBehavoiur = 'ajedElement';
+	var theAJClassBehaviour = 'ajedElement';
 	
-	jq('.' + theAJClassBehavoiur).click(function(){
+	jq('.' + theAJClassBehaviour).click(function(){
 		Amberjack.createCookie('ajcookie_tourId', Amberjack.tourId, 1);
 		Amberjack.createCookie('ajcookie_skinId', Amberjack.skinId, 1);
 	});
@@ -77,12 +77,12 @@ function disableLinks(){
 		
 		var sURL = unescape(window.location.pathname);
 		if(goHome)
-			ajClose.attr("onClick","Amberjack.close();location.href='" + Amberjack.BASE_URL + "';return false");
+			ajClose.attr("onclick","Amberjack.close();location.href='" + Amberjack.BASE_URL + "';return false");
 		else
-			ajClose.attr("onClick","Amberjack.close();location.href = window.location.pathname;return false");
+			ajClose.attr("onclick","Amberjack.close();location.href = window.location.pathname;return false");
 
 		var ajNext = jq("#ajNext");
-		ajNext.attr("onClick","if(checkAllStep()){" + ajNext.attr('onClick') + "}");
+		ajNext.attr("onclick","if(checkAllStep()){" + ajNext.attr('onclick') + "}");
 	}
 }
 
@@ -94,7 +94,7 @@ function disableLinks(){
 function getPageSteps(){
 	var steps = [];
 	if(Amberjack.pageId){
-		var link = jq(Amberjack.pages[Amberjack.pageId].content ).children('a[class^="ajStep"]');
+		var link = jq(Amberjack.pages[Amberjack.pageId].content).children('a[class^="ajStep"]');
 		link.each(function(i){
 			var allClasses = jq(this).attr('class').split(' ');
 			var firstClass = allClasses[0].split('-');
@@ -163,7 +163,7 @@ function highlightAllStep(){
 	}
 }
 
-function switchClass(obj,remClass,addClass){
+function switchClass(obj, remClass, addClass){
 	obj.removeClass(remClass);
 	obj.addClass(addClass);
 }
@@ -175,7 +175,7 @@ function switchClass(obj,remClass,addClass){
  * @param obj object to modify
  * @param value new value of the object
  */
-function changeValue(obj,value){
+function changeValue(obj, value){
 	obj.focus();
 	//obj.click();
 	obj.val(value);
@@ -189,7 +189,7 @@ function changeValue(obj,value){
  * @param num dictionary's label of the step
  */
 function doStep(step){
-	var obj,type_obj,jq_obj,value;
+	var obj, type_obj, jq_obj, value;
 	
 	var allClasses = jq(step).attr("class").split(" ");
 	var firstClass = allClasses[0].split('-');
@@ -287,20 +287,20 @@ function checkStep(num){
  * @return true if all steps done else false
  */
 function checkAllStep(){
-	var allDone = true;
-	var thisStep = true;
+    var allDone = true;
+    var thisStep = true;
 
     var steps = getPageSteps();
     for(i =0; i < steps.length;i++){
 		thisStep = checkStep(steps[i]);
 		if(!thisStep){
-			alert("Step "+steps[i]+" not completed");
+			alert("Step " + steps[i] + " not completed");
 			allDone = false;
 			break;
 		}
 		allDone = allDone && thisStep;
 	}	
-	return allDone;
+    return allDone;
 }
 
 function initAjPlone(){

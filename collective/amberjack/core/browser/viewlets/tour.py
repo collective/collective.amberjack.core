@@ -4,14 +4,10 @@ from plone.app.layout.viewlets import common
 from zope.component import getUtility
 from collective.amberjack.core.tour_manager import IManageTourUtility
 
+
 class TourViewlet(common.ViewletBase):
-    render = ViewPageTemplateFile('tour.pt')
+    index = ViewPageTemplateFile('tour.pt')
     
-    def __init__(self, context, request, view, manager): 
-        self.context = context 
-        self.request = request
-        
-        
     def site(self):
         return self.context.portal_url()
     

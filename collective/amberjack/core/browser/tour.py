@@ -5,25 +5,24 @@ from zope.interface import implements, Interface
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+
 class ITourView(Interface):
-    """
-    the Tour interface
-    """
+    """The Tour interface."""
     
     def tourId():
         pass
-        
+    
     def steps():
         pass
     
-    def _highlight(steps):        
+    def _highlight(steps):
         pass
-        
+    
     def getStepNumber(step):
         pass
-        
+    
     def getSteps(item):
-        pass    
+        pass
     
     def portal_catalog():
         pass
@@ -35,21 +34,19 @@ class ITourView(Interface):
         pass
 
 class TourView(BrowserView):
-    """
-    tour view
-    """
+    """Tour view"""
     implements(ITourView)
     
     __call__ = ViewPageTemplateFile("tour.pt")
-                 
-    def __init__(self, context, request): 
+    
+    def __init__(self, context, request):
         self.context = context 
         self.request = request
         self.ajsteps = list()
     
     def tourId(self):
         raise NotImplementedError("you shouldn't use this directly: subclass it")
-
+    
     def steps(self):
         raise NotImplementedError("you shouldn't use this directly: subclass it")
     
@@ -66,9 +63,7 @@ class TourView(BrowserView):
         return _steps
     
     def getStepNumber(self, step):
-        """
-        adds the step to the ajsteps tuple and returns its position
-        """
+        """Add the step to the ajsteps tuple and return its position"""
         if not step in self.ajsteps:
             self.ajsteps.append(step)
         return self.ajsteps.index(step) + 1
@@ -82,7 +77,7 @@ class TourView(BrowserView):
         return self.context.portal_url()
     
     def javascriptSteps(self):
-        """
+        """Return a dict:
         {'text': '', 'idStep': 'view_tabular', 'description': 'uno', 'selector': ''}
         """
         try:
@@ -104,20 +99,14 @@ class TourView(BrowserView):
         
         
 class PackagedTourView(TourView):    
-    def __init__(self, tour, request):
-        self.tour = tour.tour
-        self.request = request
-        self.ajsteps = list()
-
     def setContext(self, context):
         self.context = context
         
-
     def tourId(self):
         return self.tour['tourId']
         
     def steps(self):
-        """returns a dict:
+        """Return a dict:
         {
         url: ..., 
         title: ..., 

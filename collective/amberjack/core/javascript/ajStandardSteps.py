@@ -1,5 +1,6 @@
 from Products.Five.browser import BrowserView
 
+
 ajStandardSteps = (
 	('manage_portlets'	, 'div.managePortletsLink a'),
 	
@@ -60,17 +61,12 @@ ajStandardSteps = (
 )
 
 class AmberjackStandardSteps(BrowserView): 
-    def __init__(self, context, request): 
-        self.context = context 
-        self.request = request
-        
-    def __call__(self, context, request):
+    def __call__(self):
         js = 'AjStandardSteps = {'
         for (key, value) in ajStandardSteps:
             js += "'%s':'%s',\n" % (key, value)
         
         js += '}'
         return js
-
 
 

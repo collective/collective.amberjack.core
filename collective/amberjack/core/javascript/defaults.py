@@ -1,11 +1,8 @@
 from Products.Five.browser import BrowserView
 
+
 class AmberjackDefaults(BrowserView): 
-    def __init__(self, context, request): 
-        self.context = context 
-        self.request = request
-        
-    def __call__(self, context, request):
+    def __call__(self):
         url = self.context.portal_url()
         return """
         function loadDefaults(){
@@ -14,3 +11,4 @@ class AmberjackDefaults(BrowserView):
             Amberjack.BASE_URL = '%s/';    
         }
         """  % (url, )
+
