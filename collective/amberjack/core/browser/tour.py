@@ -98,7 +98,12 @@ class TourView(BrowserView):
             return ''
         
         
-class PackagedTourView(TourView):    
+class PackagedTourView(TourView):
+    def __init__(self, tour, request):
+        self.tour = tour.tour
+        self.request = request
+        self.ajsteps = list()
+        
     def setContext(self, context):
         self.context = context
         
