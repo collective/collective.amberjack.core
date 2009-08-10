@@ -5,16 +5,15 @@
                          xcontent macrostep/xcontent">
       <h2 tal:content="macrostep/title">the title of a macro step</h2>
       <div tal:content="structure macrostep/text">the description for the user of a macro step</div>
-        <tal:ajsteps repeat="step macrostep/steps">
-          <tal:ajstep define="step_nr python:view.getStepNumber(step)">
-            <div class="ajDescr">
-              <span tal:replace="structure step/description">every step has a brief explanation of what to do</span>
-            </div>
-            <a href="" onclick="doStep(this); return false" tal:attributes="class string:ajStep-${step_nr} ajLink">&gt;&gt;</a>
-          </tal:ajstep>
-        </tal:ajsteps>
+      <tal:ajsteps repeat="step macrostep/steps">
+        <tal:ajstep define="step_nr python:view.getStepNumber(step)">
+          <div class="ajDescr">
+            <span tal:replace="structure step/description">every step has a brief explanation of what to do</span>
+          </div>
+          <a href="" onclick="doStep(this); return false" tal:attributes="class string:ajStep-${step_nr} ajLink">&gt;&gt;</a>
+        </tal:ajstep>
+      </tal:ajsteps>
       </div>
-      <script type="text/ecmascript" tal:content="view/javascriptSteps"></script>
-    </div>
+      <script type="text/ecmascript" tal:content="view/javascriptSteps" />
   </tal:steps>
 </div>

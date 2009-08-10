@@ -2,7 +2,7 @@ from Products.Five.browser import BrowserView
 
 
 class AmberjackDefaults(BrowserView): 
-    def __call__(self):
+    def __call__(self, context, request):
         url = self.context.portal_url()
         return """
         function loadDefaults(){

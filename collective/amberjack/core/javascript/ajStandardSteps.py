@@ -61,7 +61,7 @@ ajStandardSteps = (
 )
 
 class AmberjackStandardSteps(BrowserView): 
-    def __call__(self):
+    def __call__(self, context, request):
         js = 'AjStandardSteps = {'
         for (key, value) in ajStandardSteps:
             js += "'%s':'%s',\n" % (key, value)

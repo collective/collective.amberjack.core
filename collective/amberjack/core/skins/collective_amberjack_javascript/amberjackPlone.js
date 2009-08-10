@@ -77,12 +77,12 @@ function disableLinks(){
 		
 		var sURL = unescape(window.location.pathname);
 		if(goHome)
-			ajClose.attr("onclick","Amberjack.close();location.href='" + Amberjack.BASE_URL + "';return false");
+			ajClose.attr("onClick","Amberjack.close();location.href='" + Amberjack.BASE_URL + "';return false");
 		else
-			ajClose.attr("onclick","Amberjack.close();location.href = window.location.pathname;return false");
+			ajClose.attr("onClick","Amberjack.close();location.href = window.location.pathname;return false");
 
 		var ajNext = jq("#ajNext");
-		ajNext.attr("onclick","if(checkAllStep()){" + ajNext.attr('onclick') + "}");
+		ajNext.attr("onClick","if(checkAllStep()){" + ajNext.attr('onClick') + "}");
 	}
 }
 
