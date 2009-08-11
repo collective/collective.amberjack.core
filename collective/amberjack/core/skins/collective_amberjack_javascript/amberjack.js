@@ -409,7 +409,7 @@ Amberjack = {
   },
 
   /**
-   * Gets the skinId from the url or from a cookie 'ajcookie_tourId'
+   * Gets the skinId from the url or from a cookie 'ajcookie_skinId'
    *
    * @author Massimo Azzolini
    *
