@@ -14,6 +14,6 @@
         </tal:ajstep>
       </tal:ajsteps>
       </div>
-      <script type="text/ecmascript" tal:content="view/javascriptSteps" />
   </tal:steps>
+  <script type="text/ecmascript" tal:content="view/javascriptSteps" />
 </div>
