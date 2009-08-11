@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from plone.memoize.view import memoize
 from Products.Five import BrowserView
+from zope.i18n import translate
 from zope.interface import implements, Interface
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -58,7 +59,8 @@ class TourView(BrowserView):
         espan = '</span>'
         _steps = list()
         for step in steps:
-            step['description'] = step['description'].replace('[', sspan).replace(']', espan)
+            desc = translate(step['description'], context=self.request)
+            step['description'] = desc.replace('[', sspan).replace(']', espan)
             _steps.append(step)
         return _steps
     
@@ -78,7 +80,7 @@ class TourView(BrowserView):
     
     def javascriptSteps(self):
         """Return a dict:
-        {'text': '', 'idStep': 'view_tabular', 'description': 'uno', 'selector': ''}
+        {'1': new AjStep('idStep': 'selector', 'text'), ...}
         """
         try:
             aj = """
