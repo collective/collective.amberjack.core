@@ -1,5 +1,5 @@
 <div class="ajTourDef" style="display:none" tal:attributes="id view/tourId">
-  <tal:steps repeat="macrostep view/steps">
+  <tal:steps repeat="macrostep view/getMacroSteps">
     <div tal:attributes="title macrostep/url;
                          xpath macrostep/xpath;
                          xcontent macrostep/xcontent">

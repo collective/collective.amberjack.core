@@ -3,6 +3,7 @@ from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter, getUtility, provideUtility, getUtilitiesFor, queryUtility
 from zope.component.exceptions import ComponentLookupError
 from zope.interface import Interface, implements
+from collective.amberjack.core.interfaces import ITourDefinition
 
 
 class IManageTourUtility(Interface):
@@ -22,10 +23,10 @@ class ManageTourUtility(object):
     
     def add(self, tour):
         provideUtility(component=tour, provides=ITourDefinition,
-            name=tour.tour['tourId'])
+            name=tour.tourId)
         
     def getTours(self, context):
-        packagedtours = [(name, tour.tour['title'])
+        packagedtours = [(name, tour.title)
             for name, tour in getUtilitiesFor(ITourDefinition)]
         
         portal_catalog = getToolByName(context, 'portal_catalog', None)

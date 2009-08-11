@@ -7,5 +7,25 @@ class Tour(object):
     
     def __init__(self, ajTour):
         self.tour = ajTour
-        
+
+    @property
+    def tourId(self):
+        """Return the tourId."""
+        return self.tour['tourId']
+
+    @property
+    def title(self):
+        """Return the title."""
+        return self.tour['title']
     
+    def steps(self):
+        """Return a dict:
+        {'url': 'url',
+         'xpath': 'xpath expression',
+         'xcontent': 'xcontent',
+         'title': 'title',
+         'text': 'text',
+         'steps': ((description, idStep, selector, text), ...)}
+
+        """
+        return self.tour['steps']
