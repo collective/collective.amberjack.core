@@ -38,7 +38,7 @@ If you want to create a new demo you need at least:
 in the p4a.demo.xxx you have to define two things:
  - the aj demo, in other words the viewlet with the nested DIVs which create the base structure.
  - the custom javascript.
-there are two css classes that can be added to the plone elements: theAJClassBehavoiur and theAJClass.
+there are two css classes that can be added to the plone elements: theAJClassBehaviour and theAJClass.
 the first one is used to define some standard behaviours (e.g. if the element is clicked a cookie with the 
 parameters tourId and skinId is set).
 the second one is used for layout purposes (e.g. for highlighting in yellow a button)
@@ -48,7 +48,7 @@ To do list
 
 initialize/erase the environment
 --------------------------
-we need to create an entry point where to put an ajax call to a plone where the a script (or whatever else..) 
+we need to create an entry point where to put an ajax call to a plone where a script (or whatever else..)
 creates all the objects needed by the tutorial/demo.
 At the end of the tutorial we need to delete the all the objects created.
 
