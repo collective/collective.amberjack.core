@@ -3,7 +3,6 @@ from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter, getUtility, provideUtility, getUtilitiesFor, queryUtility
 from zope.component.interfaces import ComponentLookupError
 from zope.interface import Interface, implements
-from collective.amberjack.core.interfaces import ITourDefinition
 
 
 class IManageTourUtility(Interface):
