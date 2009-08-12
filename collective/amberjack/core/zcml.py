@@ -1,10 +1,11 @@
 """
 ZCML registrations.
 """
-from zope import interface
-from zope.configuration.fields import GlobalObject
+from collective.amberjack.core.interfaces import ITourDefinition
 from collective.amberjack.core.tour import Tour
-from collective.amberjack.core.tour_manager import registerTour
+from zope import interface
+from zope.component import provideUtility
+from zope.configuration.fields import GlobalObject
 
 
 class ITourDirective(interface.Interface):
@@ -17,4 +18,6 @@ class ITourDirective(interface.Interface):
 
 def tour(_context, tourdescriptor, **kwargs):
     """Tour class factory registration."""
-    registerTour(Tour(tourdescriptor))
+    tour = Tour(tourdescriptor)
+    provideUtility(component=tour, provides=ITourDefinition,
+            name=tour.tour['tourId'])

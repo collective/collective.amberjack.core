@@ -1,14 +1,9 @@
-from collective.amberjack.core.interfaces import ITourDefinition
+from collective.amberjack.core.interfaces import ITourDefinition, ITourView
 from Products.CMFCore.utils import getToolByName
-from zope.component import getMultiAdapter, getUtility, provideUtility, getUtilitiesFor, queryUtility
-from zope.component.interfaces import ComponentLookupError
+from zope.component import getMultiAdapter, getUtilitiesFor, queryUtility
 from zope.interface import Interface, implements
 
-
 class IManageTourUtility(Interface):
-    
-    def add(tour):
-        """Add a packagedtour to the available tours."""
         
     def getTours(context):
         """Given a context, return both the packaged
@@ -19,10 +14,6 @@ class IManageTourUtility(Interface):
         
 class ManageTourUtility(object):
     implements(IManageTourUtility)
-    
-    def add(self, tour):
-        provideUtility(component=tour, provides=ITourDefinition,
-            name=tour.tourId())
         
     def getTours(self, context):
         packagedtours = [(name, tour.title())
@@ -45,10 +36,3 @@ class ManageTourUtility(object):
                 return ITourDefinition(brains[0].getObject())
             else:
                 return None
-        
-def registerTour(tour):
-    try:
-        getUtility(IManageTourUtility).add(tour)
-    except ComponentLookupError:
-        provideUtility(component=ManageTourUtility())
-        getUtility(IManageTourUtility).add(tour)
