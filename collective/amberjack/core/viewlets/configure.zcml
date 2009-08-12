@@ -7,7 +7,7 @@
       name="collective.amberjackcore.viewlet"
       manager="plone.app.layout.viewlets.interfaces.IBelowContent"
       permission="zope2.View"
-      class=".viewlets.TourViewlet"
+      class=".tour.TourViewlet"
       />
 
 </configure> 

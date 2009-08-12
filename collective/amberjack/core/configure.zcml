@@ -5,7 +5,7 @@
     i18n_domain="collective.amberjack.core">
 
     <include package=".javascript" />
-    <include package=".browser" />
+    <include package=".viewlets" />
     <include file="skins.zcml" />
     <include file="profiles.zcml" />
 
