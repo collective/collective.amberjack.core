@@ -3,7 +3,7 @@ ZCML registrations.
 """
 from zope import interface
 from zope.configuration.fields import GlobalObject
-from collective.amberjack.core.tours.tour import Tour
+from collective.amberjack.core.tour import Tour
 from collective.amberjack.core.tour_manager import registerTour
 
 

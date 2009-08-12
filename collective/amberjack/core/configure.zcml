@@ -15,7 +15,7 @@
         />
 		
     <utility
-        component=".tours.vocabulary.AvailableToursVocabularyFactory"
+        component=".vocabulary.AvailableToursVocabularyFactory"
         name="collective.amberjack.core.tours"
         />
 		
