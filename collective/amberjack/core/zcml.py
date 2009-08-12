@@ -20,4 +20,4 @@ def tour(_context, tourdescriptor, **kwargs):
     """Tour class factory registration."""
     tour = Tour(tourdescriptor)
     provideUtility(component=tour, provides=ITourDefinition,
-            name=tour.tour['tourId'])
+            name=tour.tourId())

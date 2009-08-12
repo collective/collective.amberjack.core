@@ -1,4 +1,4 @@
-from collective.amberjack.core.interfaces import ITourDefinition, ITourView
+from collective.amberjack.core.interfaces import ITourDefinition
 from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter, getUtilitiesFor, queryUtility
 from zope.interface import Interface, implements
