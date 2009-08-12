@@ -65,10 +65,6 @@ function disableLinks(){
 			alert("You cannot click on other links, please use the console's exit button");
 			return false;
 		});
-		notAj.keypress(function(){
-			alert("You cannot click on other links, please use the console's exit button");
-			return false;
-		});
 		notAj.css("color", "#CCCCCC");
 		notAj.css("cursor", "default");
 
