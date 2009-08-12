@@ -8,12 +8,10 @@ class Tour(object):
     def __init__(self, ajTour):
         self.tour = ajTour
 
-    @property
     def tourId(self):
         """Return the tourId."""
         return self.tour['tourId']
 
-    @property
     def title(self):
         """Return the title."""
         return self.tour['title']

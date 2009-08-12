@@ -23,10 +23,10 @@ class ManageTourUtility(object):
     
     def add(self, tour):
         provideUtility(component=tour, provides=ITourDefinition,
-            name=tour.tourId)
+            name=tour.tourId())
         
     def getTours(self, context):
-        packagedtours = [(name, tour.title)
+        packagedtours = [(name, tour.title())
             for name, tour in getUtilitiesFor(ITourDefinition)]
         
         portal_catalog = getToolByName(context, 'portal_catalog', None)
@@ -43,7 +43,7 @@ class ManageTourUtility(object):
             portal_catalog = getToolByName(context, 'portal_catalog', None)
             brains = portal_catalog(portal_type='ajtour', getTourId=tourId)
             if brains:
-                return brains[0].getObject()
+                return ITourDefinition(brains[0].getObject())
             else:
                 return None
         

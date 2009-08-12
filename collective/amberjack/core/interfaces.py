@@ -5,7 +5,7 @@ class ITourDefinition(Interface):
     def tourId():
         """Return the tourId."""
 
-    def title(self):
+    def title():
         """Return the title."""
     
     def steps():
