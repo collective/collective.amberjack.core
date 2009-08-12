@@ -25,6 +25,15 @@ setup(name='collective.amberjack.core',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'plone.app.layout',
+          'Products.CMFCore',
+          'Products.Five',
+          'Products.GenericSetup',
+          'zope.component',
+          'zope.configuration',
+          'zope.i18n',
+          'zope.interface',
+          'zope.schema',
           # -*- Extra requirements: -*-
       ],
       entry_points="""
