@@ -10,11 +10,4 @@
       class=".viewlets.TourViewlet"
       />
 
-  <browser:page
-      for="collective.amberjack.core.interfaces.ITourDefinition"
-      name="tour"
-      class=".tour.TourView"
-      permission="zope.Public"
-      />
-
 </configure> 

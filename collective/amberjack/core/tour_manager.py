@@ -1,7 +1,7 @@
 from collective.amberjack.core.interfaces import ITourDefinition
 from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter, getUtility, provideUtility, getUtilitiesFor, queryUtility
-from zope.component.exceptions import ComponentLookupError
+from zope.component.interfaces import ComponentLookupError
 from zope.interface import Interface, implements
 from collective.amberjack.core.interfaces import ITourDefinition
 
@@ -16,7 +16,7 @@ class IManageTourUtility(Interface):
         and meta tours (tourId, title)."""
 
     def getTour(tourId, context, request):
-        """Return the view that draws the complete tour."""
+        """Return the tour with the given tourId (object implementing ITourDefinition), None if not found."""
         
 class ManageTourUtility(object):
     implements(IManageTourUtility)
@@ -36,26 +36,16 @@ class ManageTourUtility(object):
         return sorted(packagedtours + metatours)
 
     def getTour(self, tourId, context, request):
-        try:
-            tour = queryUtility(ITourDefinition, name=tourId)
-            if tour:
-                try:                    
-                    view = getMultiAdapter((tour, request), name='tour')
-                    view.setContext(context)
-                    return view()
-                except IndexError:
-                    return '' 
+        tour = queryUtility(ITourDefinition, name=tourId)
+        if tour is not None:
+            return tour
+        else:
+            portal_catalog = getToolByName(context, 'portal_catalog', None)
+            brains = portal_catalog(portal_type='ajtour', getTourId=tourId)
+            if brains:
+                return brains[0].getObject()
             else:
-                portal_catalog = getToolByName(context, 'portal_catalog', None)
-                tour = portal_catalog(portal_type='ajtour', getTourId=tourId)
-                try:
-                    view = getMultiAdapter((tour[0].getObject(), request), name='tour')
-                    return view()
-                except IndexError:
-                    return ''
-            
-        except KeyError:
-            return ''
+                return None
         
 def registerTour(tour):
     try:
