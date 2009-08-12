@@ -1,20 +1,20 @@
 <configure
-   xmlns="http://namespaces.zope.org/zope"
-   xmlns:browser="http://namespaces.zope.org/browser"
-   i18n_domain="collective.amberjack.core">
-    	
-	<browser:page 
-	    name="amberjackDefaults.js"
-	    for="*" 
-	    permission="zope2.View" 
-	    class=".defaults.AmberjackDefaults" 
-	    />
-	
-	<browser:page 
-	    name="ajStandardSteps.js"
-	    for="*" 
-	    permission="zope2.View" 
-	    class=".ajStandardSteps.AmberjackStandardSteps" 
-	    />	
-		
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="collective.amberjack.core">
+
+  <browser:page 
+      name="amberjackDefaults.js"
+      for="*" 
+      permission="zope2.View" 
+      class=".defaults.AmberjackDefaults" 
+      />
+
+  <browser:page 
+      name="ajStandardSteps.js"
+      for="*" 
+      permission="zope2.View" 
+      class=".ajStandardSteps.AmberjackStandardSteps" 
+      />  
+
 </configure> 

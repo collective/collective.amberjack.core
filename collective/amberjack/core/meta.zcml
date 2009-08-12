@@ -8,8 +8,8 @@
         name="tour"
         schema=".zcml.ITourDirective"
         handler=".zcml.tour"
-        />    
+        />
 
   </meta:directives>
-  
+
 </configure>

@@ -4,23 +4,23 @@
     xmlns:cmf="http://namespaces.zope.org/cmf"
     i18n_domain="collective.amberjack.core">
 
-    <include package=".javascript" />
-    <include package=".viewlets" />
-    <include file="skins.zcml" />
-    <include file="profiles.zcml" />
+  <include package=".javascript" />
+  <include package=".viewlets" />
+  <include file="skins.zcml" />
+  <include file="profiles.zcml" />
 
-    <utility 
-        provides=".tour_manager.IManageTourUtility"
-        factory=".tour_manager.ManageTourUtility"
-        />
-		
-    <utility
-        component=".vocabulary.AvailableToursVocabularyFactory"
-        name="collective.amberjack.core.tours"
-        />
-		
-    <five:registerPackage package="." initialize=".initialize" />
+  <utility
+      provides=".tour_manager.IManageTourUtility"
+      factory=".tour_manager.ManageTourUtility"
+      />
 
-    <include file="meta.zcml" />
-	
+  <utility
+      component=".vocabulary.AvailableToursVocabularyFactory"
+      name="collective.amberjack.core.tours"
+      />
+
+  <five:registerPackage package="." initialize=".initialize" />
+
+  <include file="meta.zcml" />
+
 </configure>
