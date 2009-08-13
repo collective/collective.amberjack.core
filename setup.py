@@ -10,6 +10,8 @@ setup(name='collective.amberjack.core',
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
+        "Development Status :: 5 - Production/Stable",
+        "Environment :: Web Environment",
         "Framework :: Plone",
         "Framework :: Zope2",
         "License :: OSI Approved :: GNU General Public License (GPL)",
@@ -31,11 +33,12 @@ setup(name='collective.amberjack.core',
           'plone.app.layout',
           'Products.CMFCore',
           'Products.GenericSetup',
-          'zope.component',
-          'zope.configuration',
-          'zope.i18n',
-          'zope.interface',
-          'zope.schema',
+          # 'zope.component',
+          # 'zope.configuration',
+          # 'zope.i18n',
+          # 'zope.interface',
+          # 'zope.schema',
+          # 'Zope2'
           # -*- Extra requirements: -*-
       ],
       entry_points="""
