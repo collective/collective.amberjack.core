@@ -1,40 +1,34 @@
 from collective.amberjack.core.interfaces import ITourDefinition
-from Products.CMFCore.utils import getToolByName
-from zope.component import getMultiAdapter, getUtilitiesFor, queryUtility
-from zope.interface import Interface, implements
+from collective.amberjack.core.interfaces import ITourRetriever
+from collective.amberjack.core.interfaces import IManageTourUtility
+from zope.component import getUtilitiesFor
+from zope.component import queryUtility
+from zope.interface import implements
 
 
-class IManageTourUtility(Interface):
-        
-    def getTours(context):
-        """Given a context, return both the packaged
-        and meta tours (tourId, title)."""
+class PackagedTourRetriever(object):
+    implements(ITourRetriever)
 
-    def getTour(tourId, context, request):
-        """Return the tour with the given tourId (object implementing ITourDefinition), None if not found."""
+    def getTours(self, context=None):
+        return [(name, tour.title())
+                for name, tour in getUtilitiesFor(ITourDefinition)]
+    def getTour(self, tour_id, context=None):
+        return queryUtility(ITourDefinition, name=tour_id)
 
         
 class ManageTourUtility(object):
     implements(IManageTourUtility)
         
     def getTours(self, context):
-        packagedtours = [(name, tour.title())
-            for name, tour in getUtilitiesFor(ITourDefinition)]
-        
-        portal_catalog = getToolByName(context, 'portal_catalog', None)
-        tours = portal_catalog(portal_type='ajtour')
-        metatours = [(b.id, b.Title) for b in tours]
-        
-        return sorted(packagedtours + metatours)
+        alltours = []
+        for name, retriever in getUtilitiesFor(ITourRetriever):
+            alltours.extend(retriever.getTours(context))
+        return sorted(alltours)
 
-    def getTour(self, tourId, context, request):
-        tour = queryUtility(ITourDefinition, name=tourId)
-        if tour is not None:
-            return tour
-        else:
-            portal_catalog = getToolByName(context, 'portal_catalog', None)
-            brains = portal_catalog(portal_type='ajtour', id=tourId)
-            if brains:
-                return ITourDefinition(brains[0].getObject())
-            else:
-                return None
+    def getTour(self, tour_id, context=None):
+        tour = None
+        for name, retriever in getUtilitiesFor(ITourRetriever):
+            tour = retriever.getTour(tour_id, context)
+            if tour is not None:
+                return tour
+        return tour

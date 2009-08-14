@@ -9,14 +9,16 @@
   <include file="skins.zcml" />
   <include file="profiles.zcml" />
 
-  <utility
-      provides=".tour_manager.IManageTourUtility"
-      factory=".tour_manager.ManageTourUtility"
-      />
+  <utility factory=".tour_manager.ManageTourUtility" />
 
   <utility
       component=".vocabulary.AvailableToursVocabularyFactory"
       name="collective.amberjack.core.tours"
+      />
+
+  <utility
+      name="retriever.packagedtours"
+      factory=".tour_manager.PackagedTourRetriever"
       />
 
   <five:registerPackage package="." initialize=".initialize" />

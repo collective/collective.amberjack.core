@@ -35,7 +35,7 @@ class TourViewlet(common.ViewletBase):
                 return None
         
         manager = getUtility(IManageTourUtility)
-        return manager.getTour(tourId, self.context, self.request)
+        return manager.getTour(tourId, self.context)
 
     def _highlight(self, steps):    
         _steps = []
