@@ -3,6 +3,7 @@ from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter, getUtilitiesFor, queryUtility
 from zope.interface import Interface, implements
 
+
 class IManageTourUtility(Interface):
         
     def getTours(context):
@@ -11,6 +12,7 @@ class IManageTourUtility(Interface):
 
     def getTour(tourId, context, request):
         """Return the tour with the given tourId (object implementing ITourDefinition), None if not found."""
+
         
 class ManageTourUtility(object):
     implements(IManageTourUtility)
@@ -21,7 +23,7 @@ class ManageTourUtility(object):
         
         portal_catalog = getToolByName(context, 'portal_catalog', None)
         tours = portal_catalog(portal_type='ajtour')
-        metatours = [(b.getTourId, b.Title) for b in tours]
+        metatours = [(b.id, b.Title) for b in tours]
         
         return sorted(packagedtours + metatours)
 
@@ -31,7 +33,7 @@ class ManageTourUtility(object):
             return tour
         else:
             portal_catalog = getToolByName(context, 'portal_catalog', None)
-            brains = portal_catalog(portal_type='ajtour', getTourId=tourId)
+            brains = portal_catalog(portal_type='ajtour', id=tourId)
             if brains:
                 return ITourDefinition(brains[0].getObject())
             else:
