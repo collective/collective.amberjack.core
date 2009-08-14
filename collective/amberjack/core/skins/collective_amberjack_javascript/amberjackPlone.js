@@ -202,7 +202,11 @@ function doStep(step){
 	}
 	//alert('DoStep: Jq=' + jq_obj +'\nType='+type_obj+'\nValue='+value + '\n Obj=' + obj.text());
 
-	if(type_obj == 'link') location.href = obj.attr('href') + "?tourId=p4aTour&skinId=safari";
+	if(type_obj == 'link'){
+		Amberjack.createCookie('ajcookie_tourId', Amberjack.tourId, 1);
+		Amberjack.createCookie('ajcookie_skinId', Amberjack.skinId, 1);
+		location.href = obj.attr('href');
+	}
 	else if(type_obj == 'button') obj.click();
 	else if(type_obj == 'collapsible'){
 		if(value=='collapse') switchClass(obj, 'expandedInlineCollapsible', 'collapsedInlineCollapsible');
@@ -219,7 +223,7 @@ function doStep(step){
 			jq("option[value="+tmp[i]+"]").attr("selected","selected");
 		}
 	}
-	else if(type_obj=="form_save_new" || type_obj=="form_save"){
+	else if(type_obj=="form_save_new" || type_obj=="form_save" || type_obj=="form_save_old"){
 		var form = obj.parents("form")
 		form.submit(function(){
 			Amberjack.createCookie('ajcookie_tourId', Amberjack.tourId, 1);

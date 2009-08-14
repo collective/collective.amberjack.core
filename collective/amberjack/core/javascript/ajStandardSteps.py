@@ -2,6 +2,15 @@ from Products.Five.browser import BrowserView
 
 
 ajStandardSteps = (
+    ('link', ''),  # click on the link: need a selector to <a>
+    ('button', ''),  # click on the button: need a selector to a <input type="button|submit|reset|...">
+    ('collapsible', ''), # if [value] is "collapse", switch the class of the element from expandedInlineCollapsible to collapsedInlineCollapsible, else the contrary
+    ('select', ''),  # replace the value of the element
+    ('text', ''),  # replace the value of the element
+    ('checkbox', ''),  # if [value] is "checked", then check the element, else uncheck
+    ('radio', ''),  # if [value] is "checked", then check the element, else uncheck
+    ('multiple_select', ''),  # select the options with value given by [value] (can be a list separated by coma without space)
+
     ('manage_portlets', 'div.managePortletsLink a'),
     
     ('go_home', '#portal-breadcrumbs > a'),
