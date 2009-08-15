@@ -6,6 +6,7 @@ from zope.component import getUtility
 from zope.i18n import translate
 
 from collective.amberjack.core.tour_manager import IManageTourUtility
+import urllib
 
 SSPAN = '<span class="ajHighlight">'
 ESPAN = '</span>'
@@ -46,6 +47,7 @@ class TourViewlet(common.ViewletBase):
         return _steps
 
     def _getMacroStepUrl(self, url):
+        url = urllib.quote(url)
         if url.startswith('/') or url == '':
             url = self.site_url + url
         else:
