@@ -49,6 +49,11 @@ class TourViewlet(common.ViewletBase):
         for step in steps:
             desc = translate(step['description'], context=self.request)
             step['description'] = desc.replace('[', SSPAN).replace(']', ESPAN)
+            if (step['idStep'] != ''):
+                step['display'] = ''
+            else:
+                step['display'] = 'display:none'
+                
             _steps.append(step)
         return _steps
 

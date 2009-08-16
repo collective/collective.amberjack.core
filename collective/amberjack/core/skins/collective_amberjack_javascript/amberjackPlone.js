@@ -21,6 +21,14 @@ AjStep.prototype = {
 	},
 }
 
+AmberjackPlone = {
+	/*
+	 * some utility constants
+	 * BBB: we may move all the functions as methods here
+	 */
+	aj_xpath_exists: 'aj_xpath_exists'
+}
+
 /**
  * Utility function that prepare the page for the tour
  * @author Massimo Azzolini
@@ -90,7 +98,7 @@ function disableLinks(){
 function getPageSteps(){
 	var steps = [];
 	if(Amberjack.pageId){
-		var link = jq(Amberjack.pages[Amberjack.pageId].content).children('a[class^="ajStep"]');
+		var link = jq(Amberjack.pages[Amberjack.pageId].content).find('a[class^="ajStep"]');
 		link.each(function(i){
 			var allClasses = jq(this).attr('class').split(' ');
 			var firstClass = allClasses[0].split('-');

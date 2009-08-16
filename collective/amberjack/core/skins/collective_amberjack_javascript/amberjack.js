@@ -573,6 +573,10 @@ Amberjack = {
 		if (xpath){
 			// needs jquery
 			if (jq) {
+				if (xcontent = AmberjackPlone.aj_xpath_exists){
+					return (jq(xpath).length > 0)
+				}
+				
 				return (jq.trim(jq(xpath).text()) == xcontent);
 			} else {
 				return true;
