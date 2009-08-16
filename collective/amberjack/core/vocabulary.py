@@ -10,12 +10,8 @@ class AvailableToursVocabulary(object):
     implements(IVocabularyFactory)
 
     def __call__(self, context):
-        context = getattr(context, 'context', context)
         manager = getUtility(IManageTourUtility)
-        
         tours = manager.getTours(context)
-        
-        items = [SimpleTerm(value=tourId, token=title) for (tourId, title) in tours]
+        items = [SimpleTerm(value=tour_id, token=tour_id, title=title) for (tour_id, title) in tours]
         return SimpleVocabulary(items)
 
-AvailableToursVocabularyFactory = AvailableToursVocabulary()
