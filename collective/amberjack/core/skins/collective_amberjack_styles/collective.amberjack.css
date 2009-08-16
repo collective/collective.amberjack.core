@@ -4,16 +4,16 @@
 	font-weight: bold;
 }
 
-.ajLink{
+.ajLink {
 	font-size: 9px;
-	color:#000000;
-	float:left;
+	color: #000000;
+	float: left;
 }
-.ajLink:hover{
+.ajLink:hover {
 	background-color: yellow;
 }
 
-.ajDescr{
-	float:left;
+.ajDescr {
+	float: left;
 	width: 80%;
 }

@@ -14,7 +14,7 @@
 #ajControlInfo td {padding:5px 10px;font-size:0.9em;color:#999;background:#eee;border-top:1px solid #ddd}
 #ajControlInfo a {color:#999}
 
-a#ajPrev, a#ajNext {color:#000;padding:0 10px;background:#f99;text-decoration:none;margin-right:10px}
+a#ajPrev, a#ajNext {color:#436976;padding:0 10px;background:#DEE7EC;text-decoration:none;margin-right:10px}
 a#ajPrev.disabled, a#ajNext.disabled {color:#ccc;background:#eee;cursor:default;display:none}
 
 #ajCloseCell {text-align:right}
@@ -24,5 +24,5 @@ a#ajPrev.disabled, a#ajNext.disabled {color:#ccc;background:#eee;cursor:default;
 #ajCount {margin-left:20px}
 
 /* my changes */
-#ajPlayerCell a:hover {background:#c03;color:#fff}
+#ajPlayerCell a:hover {background:#8CACBB;color:#436976}
 #ajPlayerCell a:hover.disabled {color:#ccc;background:#eee}
