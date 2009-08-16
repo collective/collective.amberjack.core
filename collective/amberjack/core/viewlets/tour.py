@@ -2,6 +2,7 @@
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.layout.viewlets import common
 
+from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.i18n import translate
 
@@ -16,8 +17,13 @@ class TourViewlet(common.ViewletBase):
     index = ViewPageTemplateFile('tour.pt')
 
     def update(self):
-        super(TourViewlet, self).update()
-        # we have self.site_url
+        # super(TourViewlet, self).update()
+        # self.navigation_root_url exist only in plone.app.layout > 1.1.8
+        # so we create here to be compatible with Plone 3.2.3
+        self.portal_state = getMultiAdapter((self.context, self.request),
+                                            name=u'plone_portal_state')
+        self.navigation_root_url = self.portal_state.navigation_root_url()
+
         self.tour = self._choosenTour()
         self.enabled = self.tour is not None
         # self.tour may not be traversable, so we use view/tourId
@@ -49,9 +55,9 @@ class TourViewlet(common.ViewletBase):
     def _getMacroStepUrl(self, url):
         url = urllib.quote(url)
         if url.startswith('/') or url == '':
-            url = self.site_url + url
+            url = self.navigation_root_url + url
         else:
-            url = self.site_url + '/' + url
+            url = self.navigation_root_url + '/' + url
         return url
 
     def getMacroSteps(self):
