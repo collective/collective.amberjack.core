@@ -52,7 +52,8 @@ ajStandardSteps = (
     ('form_apply', '#form\\.actions\\.apply'),
     ('form_save_old', 'input[name=form_submit]'),  # in Archetypes 1.5.10 (Plone 3.2.2)
     ('form_save', 'input[name=form\\.button\\.save]'),  # in Archetypes >= 1.5.11 (Plone >= 3.2.3)
-    ('form_save_default_page', 'input[name=form\\.button\\.Save]'),  # in contextSetDefaultPage there's a capital letter 
+    ('form_save_default_page', 'input[name=form\\.button\\.Save]'),  # in contextSetDefaultPage there's a capital letter
+    ('form_save_portlet', '#form\\.actions\\.save]'),  # save a portlet 
     ('form_save_new', 'input[name=form\\.button\\.save]'),
     ('form_remove', 'input[name=form\\.button\\.remove]'),
     ('form_cancel', 'input[name=form\\.button\\.cancel]'),
