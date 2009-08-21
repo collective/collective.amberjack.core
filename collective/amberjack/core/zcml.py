@@ -18,6 +18,7 @@ class ITourDirective(interface.Interface):
 
 def tour(_context, tourdescriptor, **kwargs):
     """Tour class factory registration."""
-    tour = Tour(tourdescriptor)
-    provideUtility(component=tour, provides=ITourDefinition,
-            name=tour.tourId())
+    tour = Tour(**tourdescriptor)
+    provideUtility(component=tour, 
+                   provides=ITourDefinition,
+                   name=tour.tourId)

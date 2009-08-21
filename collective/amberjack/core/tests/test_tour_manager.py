@@ -9,11 +9,17 @@ from zope.component.globalregistry import base
 
 def registerTour(tour=None):
     if not tour:
-        tour = {'tourId': 'dummy_id',
+        tour = {'tourId': u'dummy_id',
                 'title': u'Dummy title',
-                'steps': ()}
-    tour = Tour(tour) 
-    provideUtility(component=tour, provides=ITourDefinition, name=tour.tourId())
+                'steps': ({'url': u'/opt/var',
+                           'xpath': u'xpath expression',
+                           'xcontent': u'xcontent',
+                           'title': u'title',
+                           'text': u'text',
+                           'steps': ()},
+                           ),}
+    tour = Tour(**tour) 
+    provideUtility(component=tour, provides=ITourDefinition, name=tour.tourId)
     
 class TourManagerTestCase(AmberjackCoreTestCase):
 
@@ -31,7 +37,7 @@ class TourManagerTestCase(AmberjackCoreTestCase):
     def test_getTour(self):      
         registerTour()
         manager = getUtility(IManageTourUtility)
-        self.assertEqual(manager.getTour('dummy_id', self.portal).tourId(), 'dummy_id')
+        self.assertEqual(manager.getTour('dummy_id', self.portal).tourId, 'dummy_id')
                          
     def test_PackagedTourRetriever(self):
         registerTour()
@@ -41,9 +47,15 @@ class TourManagerTestCase(AmberjackCoreTestCase):
 
     def test_multiple_same_tours(self):
         [registerTour() for a in range(10)]
-        registerTour({'tourId': 'dummy_id',
+        registerTour({'tourId': u'dummy_id',
                      'title': u'Last tour title',
-                     'steps': ()
+                     'steps': ({'url': u'/opt/var',
+                                'xpath': u'xpath expression',
+                                'xcontent': u'xcontent',
+                                'title': u'title',
+                                'text': u'text',
+                                'steps': ()
+                                },),
                      })
         managetour = getUtility(IManageTourUtility)
         self.assertEqual(len(managetour.getTours(self.portal)), 1)

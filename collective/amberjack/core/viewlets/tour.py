@@ -67,7 +67,7 @@ class TourViewlet(common.ViewletBase):
 
     def getMacroSteps(self):
         results = []
-        for macrostep in self.tour.steps():
+        for macrostep in self.tour.steps:
             _macrostep = {}
             for key, value in macrostep.items():
                 if key == 'steps':

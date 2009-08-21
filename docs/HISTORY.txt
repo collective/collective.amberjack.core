@@ -3,6 +3,8 @@ Changelog
 
 1.0 (unreleased)
 ----------------
+- refactor tour and step: add proper Interface schema for Tour and Step; 
+  add validation checkings, write some coverage tests for that [fdelia, amleczko]
 - add doctests for meta registration [fdelia, amleczko]
 - add unittests for tour_manager [fdelia, amleczko]
 

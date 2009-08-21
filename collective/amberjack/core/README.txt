@@ -21,7 +21,7 @@ Let's check the TourDefinition utility to see our dummy tour::
 
 	>>> from collective.amberjack.core.interfaces import ITourDefinition
 	>>> from zope.component import getUtility
-	>>> utility = getUtility(ITourDefinition, name='dummy_id')
-	>>> utility.tour['title']
+	>>> tour = getUtility(ITourDefinition, name='dummy_id')
+	>>> tour.title
 	u'Dummy title'
 

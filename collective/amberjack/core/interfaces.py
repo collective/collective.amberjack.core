@@ -1,5 +1,6 @@
 from zope.interface import Interface
-from zope.schema import TextLine
+from zope import schema
+from zope.configuration.fields import Tokens, GlobalObject, Path
 
 
 class IAmberjackSkin(Interface):
@@ -10,27 +11,36 @@ class IAmberjackSkin(Interface):
        Example:
        http://nohost:8080/plone/skin/<utility_name>/control.tpl.js
     """
-    title = TextLine(title=u"The title of the skin shown in the select menu")
+    title = schema.TextLine(title=u"The title of the skin shown in the select menu")
 
 
 class ITourDefinition(Interface):
-    def tourId():
-        """Return the tourId."""
-
-    def title():
-        """Return the title."""
     
-    def steps():
-        """Return a dict:
-        {'url': 'url',
-         'xpath': 'xpath expression',
-         'xcontent': 'xcontent',
-         'title': 'title',
-         'text': 'text',
-         'steps': ((description, idStep, selector, text), ...)}
+    tourId = schema.TextLine(title = u'Tour proper id', 
+                             required = True)
+    
+    title = schema.TextLine(title = u'Tour proper title', 
+                            required = True)
+    
+    steps = schema.Tuple(title = u'Tour steps', 
+                         required = True)
 
-        """
 
+class IStepDefinition(Interface):
+    
+    url = Path(title = u'Step url', required = True)
+     
+    xpath = schema.TextLine(title = u'XPath',required = True) 
+    
+    xcontent = schema.TextLine(title = u'XContent',required = True)
+    
+    title = schema.TextLine(title = u'Title',required = True)
+    
+    text = schema.TextLine(title = u'Text',required = True) 
+
+    steps = schema.Tuple(title = u'Step micro steps', 
+                         required = True)
+    
 
 class ITourRetriever(Interface):
     def getTours(context=None):

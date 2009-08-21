@@ -7,7 +7,12 @@ zcml_template = '''
     
 </configure>'''
 
-DummyTour = {'tourId': 'dummy_id',
+DummyTour = {'tourId': u'dummy_id',
              'title': u'Dummy title',
-             'steps': ()
+             'steps': ({'url': u'/path',
+                        'xpath': u'xpath expression',
+                        'xcontent': u'xcontent',
+                        'title': u'title',
+                        'text': u'text',
+                        'steps': ()},),
              }

@@ -10,7 +10,7 @@ class PackagedTourRetriever(object):
     implements(ITourRetriever)
 
     def getTours(self, context=None):
-        return [(name, tour.title())
+        return [(name, tour.title)
                 for name, tour in getUtilitiesFor(ITourDefinition)]
     def getTour(self, tour_id, context=None):
         return queryUtility(ITourDefinition, name=tour_id)
