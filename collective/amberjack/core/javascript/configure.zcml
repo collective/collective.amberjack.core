@@ -3,18 +3,20 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="collective.amberjack.core">
 
-  <browser:page 
+  <browser:page
       name="amberjackDefaults.js"
-      for="*" 
-      permission="zope2.View" 
-      class=".defaults.AmberjackDefaults" 
+      for="*"
+      permission="zope2.View"
+      class=".defaults.AmberjackDefaults"
       />
 
   <browser:page 
       name="ajStandardSteps.js"
-      for="*" 
-      permission="zope2.View" 
+      for="*"
+      permission="zope2.View"
       class=".ajStandardSteps.AmberjackStandardSteps" 
-      />  
+      />
+
+  <browser:resource name="ui.draggable-1.7.2.js" file="ui.draggable-1.7.2.js" />
 
 </configure> 

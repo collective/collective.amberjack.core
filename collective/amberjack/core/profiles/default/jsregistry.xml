@@ -1,30 +1,30 @@
 <?xml version="1.0"?>
 
 <object name="portal_javascripts">
-	
- <javascript 
+
+ <javascript
     id="amberjack.js"
     cacheable="False" compression="safe" cookable="False"
     enabled="True" expression=""  inline="False" />
-	
+
  <javascript
- 	id="amberjackDefaults.js"
+    id="amberjackDefaults.js"
     cacheable="False" compression="safe" cookable="False"
     enabled="True" expression=""  inline="False" />
 
-  <javascript
+ <javascript
     id="amberjackPlone.js"
     cacheable="False" compression="safe" cookable="False"
     enabled="True" expression=""  inline="False" />
-    
+
  <javascript
     id="ajStandardSteps.js"
     cacheable="False" compression="safe" cookable="False"
     enabled="True" expression=""  inline="False" />
-	
+
  <javascript
-    id="jquery-ui.js"
+    id="++resource++ui.draggable-1.7.2.js"
     cacheable="False" compression="safe" cookable="False"
     enabled="True" expression=""  inline="False" />
-	
+
 </object>
