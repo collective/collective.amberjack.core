@@ -4,8 +4,14 @@
     <div tal:attributes="title macrostep/url;
                          xpath macrostep/xpath;
                          xcontent macrostep/xcontent">
+      <dl tal:condition="python: not macrostep.isVisible(context)" class="portalMessage warning">
+      	<dt>Warning</dt>
+      	<dd>This step is not visible.</dd>
+      </dl>
+
       <h2 tal:content="macrostep/title">the title of a macro step</h2>
       <div tal:content="structure macrostep/text">the description for the user of a macro step</div>
+
 	  <ul class="ajSteps">
       <tal:ajsteps repeat="step macrostep/steps">
         <tal:ajstep define="step_nr python:view.getStepNumber(step)">

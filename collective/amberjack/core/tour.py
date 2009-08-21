@@ -30,6 +30,8 @@ class Tour(object):
 
 class Step(dict):
     implements(IStepDefinition)
+    
+    validation = None
 
     def __init__(self, **kwargs):
         for k,v in kwargs.items():
@@ -41,3 +43,9 @@ class Step(dict):
         for field in schema.getFields(IStepDefinition).values():
             bound = field.bind(self)
             bound.validate(bound.get(self))
+            
+    def isVisible(self, context):
+        if callable(self.validation):
+            return self.validation(context)
+        return True
+            

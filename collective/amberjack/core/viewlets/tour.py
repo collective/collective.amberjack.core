@@ -7,6 +7,7 @@ from zope.component import getUtility
 from zope.i18n import translate
 
 from collective.amberjack.core.tour_manager import IManageTourUtility
+from collective.amberjack.core.tour import Step
 import urllib
 
 SSPAN = '<span class="ajHighlight">'
@@ -22,7 +23,7 @@ class TourViewlet(common.ViewletBase):
         # so we create here to be compatible with Plone 3.2.3
         self.portal_state = getMultiAdapter((self.context, self.request),
                                             name=u'plone_portal_state')
-        self.navigation_root_url = self.portal_state.navigation_root_url()
+        self.navigation_root_url = unicode(self.portal_state.navigation_root_url())
 
         self.tour = self._choosenTour()
         self.enabled = self.tour is not None
@@ -40,21 +41,22 @@ class TourViewlet(common.ViewletBase):
                 tourId = self.request.cookies['ajcookie_tourId']
             except KeyError:
                 return None
-        
+        if not tourId:
+            return None
         manager = getUtility(IManageTourUtility)
         return manager.getTour(tourId, self.context)
 
     def _highlight(self, steps):    
-        _steps = []
+        _steps = ()
         for step in steps:
             desc = translate(step['description'], context=self.request)
             step['description'] = desc.replace('[', SSPAN).replace(']', ESPAN)
-            if (step['idStep'] != ''):
-                step['display'] = ''
+            if (step['idStep'] != u''):
+                step['display'] = u''
             else:
-                step['display'] = 'display:none'
+                step['display'] = u'display:none'
                 
-            _steps.append(step)
+            _steps += (step,)
         return _steps
 
     def _getMacroStepUrl(self, url):
@@ -66,7 +68,7 @@ class TourViewlet(common.ViewletBase):
         return url
 
     def getMacroSteps(self):
-        results = []
+        results = []        
         for macrostep in self.tour.steps:
             _macrostep = {}
             for key, value in macrostep.items():
@@ -76,7 +78,7 @@ class TourViewlet(common.ViewletBase):
                     _macrostep[key] = self._getMacroStepUrl(value)
                 else:
                     _macrostep[key] = value
-            results.append(_macrostep)
+            results.append(Step(**_macrostep))
         return results
 
     def getStepNumber(self, step):

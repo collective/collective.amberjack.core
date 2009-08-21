@@ -1,6 +1,6 @@
 from zope.interface import Interface
 from zope import schema
-from zope.configuration.fields import Tokens, GlobalObject, Path
+from zope.configuration.fields import Tokens, GlobalObject, Path, PythonIdentifier
 
 
 class IAmberjackSkin(Interface):
@@ -40,7 +40,13 @@ class IStepDefinition(Interface):
 
     steps = schema.Tuple(title = u'Step micro steps', 
                          required = True)
-    
+
+    validation = GlobalObject(title = u'Precondition method.',
+                              description = u'Should return true if the step can be visible.',
+                              required = False)
+
+    def isVisible(context):
+        """ Return true is the step can be visible """
 
 class ITourRetriever(Interface):
     def getTours(context=None):
