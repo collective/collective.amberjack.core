@@ -3,7 +3,7 @@ Changelog
 
 1.0 (unreleased)
 ----------------
-- add basic step validations: isAnonymous and isAuthenticated
+- add basic step validations: isAnonymous and isAuthenticated [amleczko]
 - refactor tour and step: add proper Interface schema for Tour and Step; 
   add validation checkings, write some coverage tests for that [fdelia, amleczko]
 - add doctests for meta registration [fdelia, amleczko]
