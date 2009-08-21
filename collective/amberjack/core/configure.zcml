@@ -4,10 +4,13 @@
     xmlns:cmf="http://namespaces.zope.org/cmf"
     i18n_domain="collective.amberjack.core">
 
+  <five:registerPackage package="." initialize=".initialize" />
+
   <include package=".javascript" />
   <include package=".viewlets" />
   <include file="skins.zcml" />
   <include file="profiles.zcml" />
+  <include file="meta.zcml" />
 
   <utility factory=".tour_manager.ManageTourUtility" />
 
@@ -17,12 +20,23 @@
       />
 
   <utility
+      name="collective.amberjack.skins"
+      factory=".vocabulary.AvailableSkinsVocabulary"
+      />
+
+  <utility
       name="retriever.packagedtours"
       factory=".tour_manager.PackagedTourRetriever"
       />
 
-  <five:registerPackage package="." initialize=".initialize" />
+  <utility
+      name="safari"
+      factory=".skins.SafariSkin"
+      />
 
-  <include file="meta.zcml" />
+  <utility
+      name="model_t"
+      factory=".skins.ModelTSkin"
+      />
 
 </configure>

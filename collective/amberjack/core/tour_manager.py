@@ -18,7 +18,7 @@ class PackagedTourRetriever(object):
         
 class ManageTourUtility(object):
     implements(IManageTourUtility)
-        
+    
     def getTours(self, context):
         alltours = []
         for name, retriever in getUtilitiesFor(ITourRetriever):

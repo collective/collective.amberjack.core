@@ -1,4 +1,16 @@
 from zope.interface import Interface
+from zope.schema import TextLine
+
+
+class IAmberjackSkin(Interface):
+    """Register an Amberjack skin.
+
+       The skin resources have to be accessible from the url
+       skin/<utility_name>/
+       Example:
+       http://nohost:8080/plone/skin/<utility_name>/control.tpl.js
+    """
+    title = TextLine(title=u"The title of the skin shown in the select menu")
 
 
 class ITourDefinition(Interface):
