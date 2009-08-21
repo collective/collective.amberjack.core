@@ -1,7 +1,10 @@
 Changelog
 =========
 
-1.0 (unreleased)
+1.1 (unreleased)
 ----------------
+- add doctests for meta registration [fdelia, amleczko]
 
+1.0 Released
+----------------
 - Initial release
