@@ -6,9 +6,6 @@
 
   <five:registerPackage package="." initialize=".initialize" />
 
-  <include package="collective.js.jquery" />
-  <include package="collective.js.jqueryui" />
-
   <include package=".javascript" />
   <include package=".viewlets" />
   <include file="skins.zcml" />

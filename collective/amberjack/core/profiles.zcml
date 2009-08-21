@@ -1,9 +1,38 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="collective.amberjack.core">
 
+  <!-- We include jquery 1.3.2 only for Plone 3.2
+       Auto sort support was removed in Plone 3.3 -->
+  <include
+      zcml:condition="installed Products.ATContentTypes.interface.autosort"
+      package="collective.js.jquery"
+      />
+  <include package="collective.js.jqueryui" />
+
   <genericsetup:registerProfile
+      zcml:condition="installed Products.ATContentTypes.interface.autosort"
+      name="default"
+      title="Amberjack"
+      directory="profiles/plone32"
+      description='Extension profile for the "amberjack" Plone theme.'
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:registerProfile
+      zcml:condition="installed Products.ATContentTypes.interface.autosort"
+      name="plone33"
+      title="Amberjack"
+      directory="profiles/default"
+      description='Extension profile for the "amberjack" Plone theme.'
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <!-- plone.indexer appears for the first time in Plone 3.3 -->
+  <genericsetup:registerProfile
+      zcml:condition="installed plone.indexer"
       name="default"
       title="Amberjack"
       directory="profiles/default"

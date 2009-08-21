@@ -2,7 +2,6 @@
 <metadata>
   <version>2</version>
   <dependencies>
-    <dependency>profile-collective.js.jquery:default</dependency>
     <dependency>profile-collective.js.jqueryui:default</dependency>
   </dependencies>
 </metadata>
