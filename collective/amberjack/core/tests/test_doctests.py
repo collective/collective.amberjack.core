@@ -1,4 +1,4 @@
-from collective.amberjack.core.tests.base import zcml_template
+from collective.amberjack.core.tests import zcml_template
 from zope.app.testing import placelesssetup
 from zope.testing.doctest import ELLIPSIS, NORMALIZE_WHITESPACE, \
     REPORT_ONLY_FIRST_FAILURE

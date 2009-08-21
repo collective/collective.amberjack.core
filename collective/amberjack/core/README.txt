@@ -12,7 +12,7 @@ Than registration is as simple as::
 
     >>> simple_directive = '''
     ... <collective.amberjack:tour
-    ...     tourdescriptor="collective.amberjack.core.tests.base.DummyTour"
+    ...     tourdescriptor="collective.amberjack.core.tests.DummyTour"
     ... />'''
     >>> config_zcml = template % simple_directive
     >>> zcml.load_string(config_zcml) 

@@ -1,13 +1,18 @@
-zcml_template = '''
-<configure
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:collective.amberjack="http://namespaces.plone.org/collective.amberjack.core">
-    
-    %s
-    
-</configure>'''
+from Products.Five import fiveconfigure, zcml
+from Products.PloneTestCase import PloneTestCase as ptc
+from Products.PloneTestCase.layer import onsetup
+from Testing import ZopeTestCase as ztc
+import collective.amberjack.core
 
-DummyTour = {'tourId': 'dummy_id',
-             'title': u'Dummy title',
-             'steps': ()
-             }
+@onsetup
+def setup_product():
+    fiveconfigure.debug_mode = True
+    zcml.load_config('configure.zcml', collective.amberjack.core)
+    fiveconfigure.debug_mode = False
+    ztc.installPackage('collective.amberjack.core')
+    
+setup_product()
+ptc.setupPloneSite(products=['collective.amberjack.core'])
+
+class AmberjackCoreTestCase(ptc.PloneTestCase):
+    """ """
