@@ -1,11 +1,11 @@
 Changelog
 =========
 
-1.1 (unreleased)
+1.0 (unreleased)
 ----------------
 - add doctests for meta registration [fdelia, amleczko]
 - add unittests for tour_manager [fdelia, amleczko]
 
-1.0 Released
+0.1 Released
 ----------------
 - Initial release
