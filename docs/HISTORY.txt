@@ -3,6 +3,7 @@ Changelog
 
 1.0 (unreleased)
 ----------------
+- add url to next tour at the end of a tour [vincentfretin]
 - add basic step validations: isAnonymous and isAuthenticated [amleczko]
 - refactor tour and step: add proper Interface schema for Tour and Step; 
   add validation checkings, write some coverage tests for that [fdelia, amleczko]
@@ -10,5 +11,5 @@ Changelog
 - add unittests for tour_manager [fdelia, amleczko]
 
 0.1 Released
-----------------
+------------
 - Initial release

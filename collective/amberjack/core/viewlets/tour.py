@@ -5,6 +5,7 @@ from plone.app.layout.viewlets import common
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.i18n import translate
+from zope.schema.vocabulary import getVocabularyRegistry
 
 from collective.amberjack.core.tour_manager import IManageTourUtility
 from collective.amberjack.core.tour import Step
@@ -107,3 +108,25 @@ class TourViewlet(common.ViewletBase):
             """
         except: #XXX put the right Error
             return ''
+
+    def nextTour(self):
+        """If a next tour is available, return
+        {'url': 'url to run next tour',
+         'title': u'next tour url'}
+        else None
+        """
+        tour_id = self.tour.tourId
+        vr = getVocabularyRegistry()
+        vocab = vr.get(self.context, "collective.amberjack.core.tours")
+        previousTerm = None
+        for term in vocab:
+            if previousTerm is not None and previousTerm.token == tour_id:
+                return {'url': '%s?tourId=%s' % (self.navigation_root_url, term.token),
+                        'title': term.title}
+            previousTerm = term
+        return None
+
+
+
+
+
