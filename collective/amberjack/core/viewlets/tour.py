@@ -109,6 +109,16 @@ class TourViewlet(common.ViewletBase):
         except: #XXX put the right Error
             return ''
 
+    def _choosenSkin(self):
+        try:
+            skinId = self.request['skinId']
+        except KeyError:
+            try:
+                skinId = self.request.cookies['ajcookie_skinId']
+            except KeyError:
+                return None
+        return skinId
+
     def nextTour(self):
         """If a next tour is available, return
         {'url': 'url to run next tour',
@@ -118,12 +128,12 @@ class TourViewlet(common.ViewletBase):
         tour_id = self.tour.tourId
         vr = getVocabularyRegistry()
         vocab = vr.get(self.context, "collective.amberjack.core.tours")
-        previousTerm = None
+        previous_term = None
         for term in vocab:
-            if previousTerm is not None and previousTerm.token == tour_id:
-                return {'url': '%s?tourId=%s' % (self.navigation_root_url, term.token),
+            if previous_term is not None and previous_term.token == tour_id:
+                return {'url': '%s?tourId=%s&skinId=%s' % (self.navigation_root_url, term.token, self._choosenSkin()),
                         'title': term.title}
-            previousTerm = term
+            previous_term = term
         return None
 
 
