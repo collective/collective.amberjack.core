@@ -14,39 +14,42 @@ class IAmberjackSkin(Interface):
     title = schema.TextLine(title=u"The title of the skin shown in the select menu")
 
 
-class ITourDefinition(Interface):
-    
-    tourId = schema.TextLine(title = u'Tour proper id', 
-                             required = True)
-    
-    title = schema.TextLine(title = u'Tour proper title', 
-                            required = True)
-    
-    steps = schema.Tuple(title = u'Tour steps', 
-                         required = True)
-
-
 class IStepDefinition(Interface):
     
-    url = Path(title = u'Step url', required = True)
+    url = Path(title=u'Step url', required=True)
      
-    xpath = schema.TextLine(title = u'XPath',required = True) 
+    xpath = schema.TextLine(title=u'XPath', required=True) 
     
-    xcontent = schema.TextLine(title = u'XContent',required = True)
+    xcontent = schema.TextLine(title=u'XContent', required=True)
     
-    title = schema.TextLine(title = u'Title',required = True)
+    title = schema.TextLine(title=u'Title', required=True)
     
-    text = schema.TextLine(title = u'Text',required = True) 
+    text = schema.TextLine(title=u'Text', required=True) 
 
-    steps = schema.Tuple(title = u'Step micro steps', 
-                         required = True)
+    steps = schema.Tuple(title=u'Step micro steps', 
+                         required=True)
 
-    validation = GlobalObject(title = u'Precondition method.',
-                              description = u'Should return true if the step can be visible.',
-                              required = False)
+    validation = GlobalObject(title=u'Precondition method',
+                              description=u'Should return True if the step can be visible.',
+                              required=False)
 
     def isVisible(context):
-        """ Return true is the step can be visible """
+        """Return True is the step can be visible."""
+
+
+class ITourDefinition(Interface):
+    
+    tourId = schema.TextLine(title=u'Tour proper id', 
+                             required=True)
+    
+    title = schema.TextLine(title=u'Tour proper title', 
+                            required=True)
+    
+    steps = schema.Tuple(title=u'Tour steps', 
+# If you uncomment it, the validation will be done twice for Step object.
+#                         value_type=schema.Object(schema=IStepDefinition),
+                         required=True)
+
 
 class ITourRetriever(Interface):
     def getTours(context=None):

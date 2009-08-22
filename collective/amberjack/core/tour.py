@@ -7,11 +7,11 @@ class Tour(object):
     implements(ITourDefinition)
     
     def __init__(self, **kwargs):
-        for k,v in kwargs.items():
+        for k, v in kwargs.items():
             if k == 'steps': 
                 self._addSteps(v)
             else:
-                setattr(self, k,v)
+                setattr(self, k, v)
         self._validateFields()
 
     def _addSteps(self, steps):
@@ -34,9 +34,9 @@ class Step(dict):
     validation = None
 
     def __init__(self, **kwargs):
-        for k,v in kwargs.items():
-            self.__setitem__(k,v)
-            setattr(self,k,v)
+        for k, v in kwargs.items():
+            self.__setitem__(k, v)
+            setattr(self, k, v)
         self._validateFields()
         
     def _validateFields(self):         
