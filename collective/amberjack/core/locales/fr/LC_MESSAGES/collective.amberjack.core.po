@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.amberjack.core\n"
-"POT-Creation-Date: 2009-08-24 17:58+0000\n"
-"PO-Revision-Date: 2009-08-24 11:16+0200\n"
+"POT-Creation-Date: 2009-08-24 21:25+0000\n"
+"PO-Revision-Date: 2009-08-24 23:27+0100\n"
 "Last-Translator: Vincent Fretin <vincent.fretin@gmail.com>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -17,8 +17,36 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.amberjack.core\n"
 
+#: ../validators.py:29
+msgid "You have to be Contributor to execute this step."
+msgstr "Vous devez être Contributeur pour exécuter cette étape."
+
+#: ../validators.py:33
+msgid "You have to be Editor to execute this step."
+msgstr "Vous devez être Rédacteur pour exécuter cette étape."
+
+#: ../validators.py:21
+msgid "You have to be Manager to execute this step."
+msgstr "Vous devez être Administrateur pour exécuter cette étape."
+
+#: ../validators.py:37
+msgid "You have to be Reader to execute this step."
+msgstr "Vous devez être Lecteur pour exécuter cette étape."
+
+#: ../validators.py:25
+msgid "You have to be Reviewer to execute this step."
+msgstr "Vous devez être Modérateur pour exécuter cette étape."
+
+#: ../validators.py:12
+msgid "You have to be anonymous to execute this step."
+msgstr "Vous devez être anonyme pour exécuter cette étape."
+
+#: ../validators.py:17
+msgid "You have to be logged in to execute this step."
+msgstr "Vous devez vous connecter pour exécuter cette étape."
+
 #. Default: "Next tour:"
-#: ../viewlets/tour.pt:29
+#: ../viewlets/tour.pt:36
 msgid "next-tour"
 msgstr "Prochaine visite guidée :"
 
