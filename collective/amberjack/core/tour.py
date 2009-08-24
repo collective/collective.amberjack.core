@@ -44,10 +44,10 @@ class Step(dict):
             bound = field.bind(self)
             bound.validate(bound.get(self))
             
-    def validate(self, context):
+    def validate(self, context, request):
         errors = []
         for validator in self.validators:
-            message = validator(context)
+            message = validator(context, request)
             if message:
                 errors.append(message)
         return errors

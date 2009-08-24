@@ -4,7 +4,7 @@
     <div tal:attributes="title macrostep/url;
                          xpath macrostep/xpath;
                          xcontent macrostep/xcontent"
-         tal:define="errors python:macrostep.validate(context)">
+         tal:define="errors python:macrostep.validate(context, request)">
       <dl tal:condition="errors"
           tal:repeat="error errors"
           class="portalMessage warning">

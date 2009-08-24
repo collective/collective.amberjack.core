@@ -34,7 +34,7 @@ class IStepDefinition(Interface):
         ),
         required=False)
 
-    def validate(context):
+    def validate(context, request):
         """Return an empty list if the step can be started,
         else a list of errors."""
 
