@@ -1,10 +1,16 @@
 <tal:viewlet condition="view/enabled" i18n:domain="collective.amberjack.core">
 <div class="ajTourDef" style="display:none" tal:attributes="id view/tourId">
   <tal:steps repeat="macrostep view/getMacroSteps">
-    <div tal:condition="python:macrostep.isVisible(context)"
-         tal:attributes="title macrostep/url;
+    <div tal:attributes="title macrostep/url;
                          xpath macrostep/xpath;
-                         xcontent macrostep/xcontent">
+                         xcontent macrostep/xcontent"
+         tal:define="errors python:macrostep.validate(context)">
+      <dl tal:condition="errors"
+          tal:repeat="error errors"
+          class="portalMessage warning">
+        <dt i18n:domain="plone">Warning</dt>
+        <dd tal:content="error">Error message</dd>
+      </dl>
       <h2 tal:content="macrostep/title">the title of a macro step</h2>
       <div tal:content="structure macrostep/text">the description for the user of a macro step</div>
 
@@ -17,7 +23,8 @@
               </div>
               <a href="" onclick="doStep(this); return false" 
                  tal:attributes="class string:ajStep-${step_nr} ajLink;
-                                 style step/display">&gt;&gt;</a>
+                                 style step/display;
+                                 onclick python:errors and 'return false' or default">&gt;&gt;</a>
             </li>
           </tal:ajstep>
         </tal:ajsteps>

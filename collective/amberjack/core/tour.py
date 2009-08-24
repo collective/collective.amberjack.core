@@ -31,7 +31,7 @@ class Tour(object):
 class Step(dict):
     implements(IStepDefinition)
     
-    validation = None
+    validators = ()
 
     def __init__(self, **kwargs):
         for k, v in kwargs.items():
@@ -44,8 +44,11 @@ class Step(dict):
             bound = field.bind(self)
             bound.validate(bound.get(self))
             
-    def isVisible(self, context):
-        if callable(self.validation):
-            return self.validation(context)
-        return True
+    def validate(self, context):
+        errors = []
+        for validator in self.validators:
+            message = validator(context)
+            if message:
+                errors.append(message)
+        return errors
             

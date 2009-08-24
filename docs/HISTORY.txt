@@ -4,6 +4,11 @@ Changelog
 1.0 (unreleased)
 ----------------
 
+- Renamed validation to validators, now a list of validators.
+  Renamed isVisible to validate.
+  Now show a warning box for each error message.
+  [vincentfretin]
+
 - Internationalize the "of" separator, but the javascript is cached once it's generated so the translation is the first language seen on the portal after a restart.
   [vincentfretin]
 

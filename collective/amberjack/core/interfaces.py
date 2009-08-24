@@ -29,12 +29,14 @@ class IStepDefinition(Interface):
     steps = schema.Tuple(title=u'Step micro steps', 
                          required=True)
 
-    validation = GlobalObject(title=u'Precondition method',
-                              description=u'Should return True if the step can be visible.',
-                              required=False)
+    validators = schema.Tuple(value_type=GlobalObject(title=u'Precondition callable',
+        description=u'Should return None if the precondition is satisfied, else an error message.',
+        ),
+        required=False)
 
-    def isVisible(context):
-        """Return True is the step can be visible."""
+    def validate(context):
+        """Return an empty list if the step can be started,
+        else a list of errors."""
 
 
 class ITourDefinition(Interface):
