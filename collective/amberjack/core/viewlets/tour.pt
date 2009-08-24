@@ -1,14 +1,10 @@
 <tal:viewlet condition="view/enabled" i18n:domain="collective.amberjack.core">
 <div class="ajTourDef" style="display:none" tal:attributes="id view/tourId">
   <tal:steps repeat="macrostep view/getMacroSteps">
-    <div tal:attributes="title macrostep/url;
+    <div tal:condition="python:macrostep.isVisible(context)"
+         tal:attributes="title macrostep/url;
                          xpath macrostep/xpath;
                          xcontent macrostep/xcontent">
-      <dl tal:condition="python: not macrostep.isVisible(context)" class="portalMessage warning">
-        <dt i18n:domain="plone">Warning</dt>
-        <dd i18n:translate="">This step is not visible.</dd>
-      </dl>
-
       <h2 tal:content="macrostep/title">the title of a macro step</h2>
       <div tal:content="structure macrostep/text">the description for the user of a macro step</div>
 
