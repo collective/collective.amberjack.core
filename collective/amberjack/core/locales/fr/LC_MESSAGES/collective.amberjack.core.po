@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.amberjack.core\n"
-"POT-Creation-Date: 2009-08-24 10:01+0000\n"
+"POT-Creation-Date: 2009-08-24 17:58+0000\n"
 "PO-Revision-Date: 2009-08-24 11:16+0200\n"
 "Last-Translator: Vincent Fretin <vincent.fretin@gmail.com>\n"
 "Language-Team: French\n"
@@ -21,4 +21,9 @@ msgstr ""
 #: ../viewlets/tour.pt:29
 msgid "next-tour"
 msgstr "Prochaine visite guidée :"
+
+#. Default: "of"
+#: ../javascript/defaults.py:17
+msgid "separator-between-steps"
+msgstr "sur"
 

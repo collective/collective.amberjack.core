@@ -4,6 +4,9 @@ Changelog
 1.0 (unreleased)
 ----------------
 
+- Internationalize the "of" separator, but the javascript is cached once it's generated so the translation is the first language seen on the portal after a restart.
+  [vincentfretin]
+
 - Internationalize the expected text of a step.
   [vincentfretin]
 

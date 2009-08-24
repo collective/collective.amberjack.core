@@ -1,5 +1,8 @@
 from Products.Five.browser import BrowserView
+from zope.i18n import translate
+from zope.i18nmessageid import MessageFactory
 
+_ = MessageFactory("collective.amberjack.core")
 
 class AmberjackDefaults(BrowserView): 
     def __call__(self, context, request):
@@ -8,7 +11,8 @@ class AmberjackDefaults(BrowserView):
         function loadDefaults(){
             Amberjack.onCloseClickStay = true;
             Amberjack.doCoverBody = false;
-            Amberjack.BASE_URL = '%s/';    
+            Amberjack.BASE_URL = '%s/';
+            Amberjack.textOf = "%s";
         }
-        """  % (url, )
+        """  % (url, translate(_('separator-between-steps', default=u"of"), context=self.request))
 
