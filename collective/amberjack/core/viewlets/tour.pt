@@ -8,7 +8,7 @@
       <dl tal:condition="errors"
           tal:repeat="error errors"
           class="portalMessage warning">
-        <dt i18n:domain="plone">Warning</dt>
+        <dt i18n:domain="plone" i18n:translate="">Warning</dt>
         <dd tal:content="error">Error message</dd>
       </dl>
       <h2 tal:content="macrostep/title">the title of a macro step</h2>
