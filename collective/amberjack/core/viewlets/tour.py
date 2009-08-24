@@ -97,7 +97,7 @@ class TourViewlet(common.ViewletBase):
             var AjSteps = {
                     """
             for idx, step in enumerate(self.ajsteps):
-                ajstep = """'%s': new AjStep('%s','%s','%s')""" % (idx + 1, step['idStep'], step['selector'], step['text'])
+                ajstep = """'%s': new AjStep('%s','%s',"%s")""" % (idx + 1, step['idStep'], step['selector'], translate(step['text'], context=self.request))
                 if idx + 1 != len(self.ajsteps):
                     ajstep += """,
                     """

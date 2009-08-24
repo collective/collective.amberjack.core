@@ -4,6 +4,9 @@ Changelog
 1.0 (unreleased)
 ----------------
 
+- Internationalize the expected text of a step.
+  [vincentfretin]
+
 - Don't disable button, input, textarea, select. The user needs to fill out
   the "remaining fields" and upload an image for example.
   [vincentfretin]
