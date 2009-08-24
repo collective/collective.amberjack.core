@@ -14,8 +14,8 @@ class AvailableToursVocabulary(object):
     def __call__(self, context):
         manager = getUtility(ITourManager)
         tours = manager.getTours(context)
-        terms = [SimpleTerm(value=tour_id, token=tour_id, title=title)
-                 for (tour_id, title) in tours]
+        terms = [SimpleTerm(value=tour, token=tour_id, title=tour.title)
+                 for (tour_id, tour) in tours]
         return SimpleVocabulary(terms)
 
 
@@ -23,6 +23,6 @@ class AvailableSkinsVocabulary(object):
     implements(IVocabularyFactory)
 
     def __call__(self, context):
-        terms = [SimpleTerm(name, name, skin.title)
+        terms = [SimpleTerm(skin, name, skin.title)
                  for name, skin in getUtilitiesFor(IAmberjackSkin)]
         return SimpleVocabulary(terms)

@@ -55,7 +55,7 @@ class ITourDefinition(Interface):
 
 class ITourRetriever(Interface):
     def getTours(context=None):
-        """Given a context, return a list of tuple (tour_id, title)."""
+        """Given a context, return a list of tuple (tour_id, tour)."""
 
     def getTour(tour_id, context=None):
         """Return the tour with the given tour_id (object implementing ITourDefinition), None if not found."""
@@ -63,7 +63,7 @@ class ITourRetriever(Interface):
 
 class ITourManager(Interface):
     def getTours(context=None):
-        """Given a context, return a list of tuple (tour_id, title)."""
+        """Given a context, return a list of tuple (tour_id, tour)."""
 
     def getTour(tour_id, context=None):
         """Return the tour with the given tour_id (object implementing ITourDefinition), None if not found."""

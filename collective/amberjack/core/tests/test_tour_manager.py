@@ -7,8 +7,8 @@ from collective.amberjack.core.validators import isAnonymous, isAuthenticated
 import unittest
 from zope.component.globalregistry import base
 
-def isNotVisibleStep(context):
-    return False
+def isNotVisibleStep(context, request):
+    return u"The step is visible"
 
 def registerTour(tour=None):
     if not tour:
@@ -23,6 +23,7 @@ def registerTour(tour=None):
                            ),}
     tour = Tour(**tour) 
     provideUtility(component=tour, provides=ITourDefinition, name=tour.tourId)
+    return tour
     
 class TourManagerTestCase(AmberjackCoreTestCase):
 
@@ -30,12 +31,12 @@ class TourManagerTestCase(AmberjackCoreTestCase):
         #Remove all tour definitions
         utilities = base.getUtilitiesFor(ITourDefinition)
         for utility in utilities:
-            base.unregisterUtility(component=utility[1], provided=ITourDefinition, name=utility[0])        
+            base.unregisterUtility(component=utility[1], provided=ITourDefinition, name=utility[0])
 
     def test_getTours(self):
-        registerTour()
+        tour = registerTour()
         manager = getUtility(ITourManager)
-        self.assertEqual(manager.getTours(self.portal),[(u'dummy_id', u'Dummy title')])
+        self.assertEqual(manager.getTours(self.portal), [(u'dummy_id', tour)])
         
     def test_getTour(self):      
         registerTour()
@@ -44,12 +45,14 @@ class TourManagerTestCase(AmberjackCoreTestCase):
                          
     def test_PackagedTourRetriever(self):
         registerTour()
-        managetour = getUtility(ITourManager)
+        manager = getUtility(ITourManager)
         packagetour = getUtility(ITourRetriever, name='retriever.packagedtours')        
-        self.assertEqual(managetour.getTours(self.portal), packagetour.getTours(self.portal))
+        self.assertEqual(manager.getTours(self.portal), packagetour.getTours(self.portal))
 
     def test_multiple_same_tours(self):
-        [registerTour() for a in range(10)]
+        for a in range(10):
+            registerTour()
+
         registerTour({'tourId': u'dummy_id',
                      'title': u'Last tour title',
                      'steps': ({'url': u'/opt/var',
@@ -62,7 +65,7 @@ class TourManagerTestCase(AmberjackCoreTestCase):
                      })
         managetour = getUtility(ITourManager)
         self.assertEqual(len(managetour.getTours(self.portal)), 1)
-        self.assertEqual(managetour.getTours(self.portal)[0][1], u'Last tour title')
+        self.assertEqual(managetour.getTours(self.portal)[0][1].title, u'Last tour title')
 
     def test_steps_preconditions(self):
         registerTour({'tourId': u'tour_with_conditions',
@@ -70,7 +73,7 @@ class TourManagerTestCase(AmberjackCoreTestCase):
                      'steps': ({'url': u'/opt/var',
                                 'xpath': u'xpath expression',
                                 'xcontent': u'xcontent',
-                                'validation': isNotVisibleStep,
+                                'validators': (isNotVisibleStep,),
                                 'title': u'title',
                                 'text': u'text',
                                 'steps': ()
@@ -80,7 +83,7 @@ class TourManagerTestCase(AmberjackCoreTestCase):
         managetour = getUtility(ITourManager)
         tour = managetour.getTour('tour_with_conditions', self.portal)
         for step in tour.steps:
-            self.assertFalse(step.isVisible(self.portal))
+            self.assertEqual(step.validate(self.portal, self.app.REQUEST), [u"The step is visible"])
 
     def test_steps_preconditions2(self):
         registerTour({'tourId': u'tour_with_conditions',
@@ -97,7 +100,7 @@ class TourManagerTestCase(AmberjackCoreTestCase):
         managetour = getUtility(ITourManager)
         tour = managetour.getTour('tour_with_conditions', self.portal)
         for step in tour.steps:
-            self.assertTrue(step.isVisible(self.portal))
+            self.assertEqual(step.validate(self.portal, self.app.REQUEST), [])
 
     def test_steps_anonymous_validation(self):
         registerTour({'tourId': u'tour_with_conditions',
@@ -108,14 +111,14 @@ class TourManagerTestCase(AmberjackCoreTestCase):
                                 'title': u'title',
                                 'text': u'text',
                                 'steps': (),
-                                'validation': isAnonymous,
+                                'validators': (isAnonymous,),
                                 },),
                      })
         
         managetour = getUtility(ITourManager)
         tour = managetour.getTour('tour_with_conditions', self.portal)
         for step in tour.steps:
-            self.assertFalse(step.isVisible(self.portal))
+            self.assertNotEqual(step.validate(self.portal, self.app.REQUEST), [])
 
     def test_steps_authenticated_validation(self):
         registerTour({'tourId': u'tour_with_conditions',
@@ -126,14 +129,14 @@ class TourManagerTestCase(AmberjackCoreTestCase):
                                 'title': u'title',
                                 'text': u'text',
                                 'steps': (),
-                                'validation': isAuthenticated,
+                                'validators': (isAuthenticated,),
                                 },),
                      })
         
         managetour = getUtility(ITourManager)
         tour = managetour.getTour('tour_with_conditions', self.portal)
         for step in tour.steps:
-            self.assertTrue(step.isVisible(self.portal))
+            self.assertEqual(step.validate(self.portal, self.app.REQUEST), [])
 
 def test_suite():
     suite = unittest.TestSuite()
