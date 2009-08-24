@@ -1,4 +1,4 @@
-from collective.amberjack.core.interfaces import IManageTourUtility, \
+from collective.amberjack.core.interfaces import ITourManager, \
     ITourDefinition, ITourRetriever
 from collective.amberjack.core.tests.base import AmberjackCoreTestCase
 from collective.amberjack.core.tour import Tour
@@ -34,17 +34,17 @@ class TourManagerTestCase(AmberjackCoreTestCase):
 
     def test_getTours(self):
         registerTour()
-        manager = getUtility(IManageTourUtility)
+        manager = getUtility(ITourManager)
         self.assertEqual(manager.getTours(self.portal),[(u'dummy_id', u'Dummy title')])
         
     def test_getTour(self):      
         registerTour()
-        manager = getUtility(IManageTourUtility)
+        manager = getUtility(ITourManager)
         self.assertEqual(manager.getTour('dummy_id', self.portal).tourId, 'dummy_id')
                          
     def test_PackagedTourRetriever(self):
         registerTour()
-        managetour = getUtility(IManageTourUtility)
+        managetour = getUtility(ITourManager)
         packagetour = getUtility(ITourRetriever, name='retriever.packagedtours')        
         self.assertEqual(managetour.getTours(self.portal), packagetour.getTours(self.portal))
 
@@ -60,7 +60,7 @@ class TourManagerTestCase(AmberjackCoreTestCase):
                                 'steps': ()
                                 },),
                      })
-        managetour = getUtility(IManageTourUtility)
+        managetour = getUtility(ITourManager)
         self.assertEqual(len(managetour.getTours(self.portal)), 1)
         self.assertEqual(managetour.getTours(self.portal)[0][1], u'Last tour title')
 
@@ -77,7 +77,7 @@ class TourManagerTestCase(AmberjackCoreTestCase):
                                 },),
                      })
         
-        managetour = getUtility(IManageTourUtility)
+        managetour = getUtility(ITourManager)
         tour = managetour.getTour('tour_with_conditions', self.portal)
         for step in tour.steps:
             self.assertFalse(step.isVisible(self.portal))
@@ -94,7 +94,7 @@ class TourManagerTestCase(AmberjackCoreTestCase):
                                 },),
                      })
         
-        managetour = getUtility(IManageTourUtility)
+        managetour = getUtility(ITourManager)
         tour = managetour.getTour('tour_with_conditions', self.portal)
         for step in tour.steps:
             self.assertTrue(step.isVisible(self.portal))
@@ -112,7 +112,7 @@ class TourManagerTestCase(AmberjackCoreTestCase):
                                 },),
                      })
         
-        managetour = getUtility(IManageTourUtility)
+        managetour = getUtility(ITourManager)
         tour = managetour.getTour('tour_with_conditions', self.portal)
         for step in tour.steps:
             self.assertFalse(step.isVisible(self.portal))
@@ -130,7 +130,7 @@ class TourManagerTestCase(AmberjackCoreTestCase):
                                 },),
                      })
         
-        managetour = getUtility(IManageTourUtility)
+        managetour = getUtility(ITourManager)
         tour = managetour.getTour('tour_with_conditions', self.portal)
         for step in tour.steps:
             self.assertTrue(step.isVisible(self.portal))

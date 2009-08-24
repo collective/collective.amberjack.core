@@ -59,7 +59,7 @@ class ITourRetriever(Interface):
         """Return the tour with the given tour_id (object implementing ITourDefinition), None if not found."""
 
 
-class IManageTourUtility(Interface):
+class ITourManager(Interface):
     def getTours(context=None):
         """Given a context, return a list of tuple (tour_id, title)."""
 

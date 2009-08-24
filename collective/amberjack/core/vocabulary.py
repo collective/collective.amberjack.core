@@ -1,5 +1,5 @@
 from collective.amberjack.core.interfaces import IAmberjackSkin
-from collective.amberjack.core.interfaces import IManageTourUtility
+from collective.amberjack.core.interfaces import ITourManager
 from zope.component import getUtility
 from zope.component import getUtilitiesFor
 from zope.interface import implements
@@ -12,7 +12,7 @@ class AvailableToursVocabulary(object):
     implements(IVocabularyFactory)
 
     def __call__(self, context):
-        manager = getUtility(IManageTourUtility)
+        manager = getUtility(ITourManager)
         tours = manager.getTours(context)
         terms = [SimpleTerm(value=tour_id, token=tour_id, title=title)
                  for (tour_id, title) in tours]

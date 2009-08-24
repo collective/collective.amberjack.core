@@ -7,7 +7,7 @@ from zope.component import getUtility
 from zope.i18n import translate
 from zope.schema.vocabulary import getVocabularyRegistry
 
-from collective.amberjack.core.tour_manager import IManageTourUtility
+from collective.amberjack.core.tour_manager import ITourManager
 from collective.amberjack.core.tour import Step
 import urllib
 
@@ -44,7 +44,7 @@ class TourViewlet(common.ViewletBase):
                 return None
         if not tourId:
             return None
-        manager = getUtility(IManageTourUtility)
+        manager = getUtility(ITourManager)
         return manager.getTour(tourId, self.context)
 
     def _highlight(self, steps):    

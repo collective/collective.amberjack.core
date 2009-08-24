@@ -1,6 +1,6 @@
 from collective.amberjack.core.interfaces import ITourDefinition
 from collective.amberjack.core.interfaces import ITourRetriever
-from collective.amberjack.core.interfaces import IManageTourUtility
+from collective.amberjack.core.interfaces import ITourManager
 from zope.component import getUtilitiesFor
 from zope.component import queryUtility
 from zope.interface import implements
@@ -16,8 +16,8 @@ class PackagedTourRetriever(object):
         return queryUtility(ITourDefinition, name=tour_id)
 
         
-class ManageTourUtility(object):
-    implements(IManageTourUtility)
+class TourManager(object):
+    implements(ITourManager)
     
     def getTours(self, context):
         alltours = []

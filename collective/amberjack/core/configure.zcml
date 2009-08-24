@@ -12,7 +12,7 @@
   <include file="profiles.zcml" />
   <include file="meta.zcml" />
 
-  <utility factory=".tour_manager.ManageTourUtility" />
+  <utility factory=".tour_manager.ITourManager" />
 
   <utility
       name="collective.amberjack.core.tours"
