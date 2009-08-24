@@ -24,7 +24,7 @@
   <genericsetup:registerProfile
       zcml:condition="installed Products.ATContentTypes.interface.autosort"
       name="plone33"
-      title="Amberjack"
+      title="Amberjack (used by the Plone 3.2 profile)"
       directory="profiles/default"
       description='Extension profile for the "amberjack" Plone theme.'
       provides="Products.GenericSetup.interfaces.EXTENSION"
