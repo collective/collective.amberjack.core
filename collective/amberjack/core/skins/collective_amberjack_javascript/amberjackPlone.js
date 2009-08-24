@@ -67,7 +67,7 @@ function ajTour(){
  */
 function disableLinks(){
 	if(Amberjack.pageId){
-		var notAj = jq("button, input, textarea, select, a").not(".ajHighlight,.ajedElement,[id^='aj'],[class^='aj']");
+		var notAj = jq("a").not(".ajHighlight,.ajedElement,[id^='aj'],[class^='aj']");
 		//NOTE: we assume that there are no other 'ajXXX' ids
 		notAj.click(function(){
 			alert("You cannot click on other links, please use the console's exit button");
