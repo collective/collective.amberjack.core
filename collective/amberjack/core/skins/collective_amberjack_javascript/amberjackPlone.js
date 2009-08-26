@@ -21,13 +21,6 @@ AjStep.prototype = {
 	},
 }
 
-AmberjackPlone = {
-	/*
-	 * some utility constants
-	 * BBB: we may move all the functions as methods here
-	 */
-	aj_xpath_exists: 'aj_xpath_exists'
-}
 
 /**
  * Utility function that prepare the page for the tour
@@ -258,7 +251,7 @@ function doStep(step){
 		form.submit()
 	}
 	// STANDARD STEPS
-	else if(obj.attr('type')=='file') {alert('Please select a file.')} //BBB translate the message
+	else if(obj.attr('type')=='file') {alert(this.aj_plone_consts['BrowseFile'])} //
 	else if(type_obj.match("menu")){
 		if(value=='deactivate') switchClass(obj, 'activated', 'deactivated');
 		else switchClass(obj,'deactivated','activated');
@@ -346,6 +339,37 @@ function initAjPlone(){
 	jq('#ajControlNavi').css('cursor', 'move')
 }
 
+
+
+AmberjackPlone = {
+    /**
+     * some utility constants
+     * BBB: we may move all the functions as methods here
+     */
+    aj_xpath_exists: 'aj_xpath_exists',    // used to just check if a given xpath exists on a page
+	aj_plone_consts: {},                   // all the plone constants we need to check
+    aj_dont_change_step: ['validationError'],
+	/**
+	 *  checks if saving an object we get a validation error
+	 */
+	validationError: function(){
+		return (
+		  (jq('#region-content dl.portalMessage.error dt').text() == this.aj_plone_consts['Error']) &
+		  (jq('#region-content dl.portalMessage.error dd').text() == this.aj_plone_consts['ErrorValidation'])
+		  )
+	},
+	
+	dontChange: function(){
+        dontchange = false
+	    for (i = 0; i < this.aj_dont_change_step.length; i++){
+	        //dontchange = (dontchange | eval('this.' + AmberjackPlone.aj_dont_change_step[i]+'()'))
+			dontchange = (dontchange | this[this.aj_dont_change_step[i]]())
+	    }
+		return dontchange
+	}
+}
+
+
 /**
  * Start the tour and set some timeout
  * @author Giacomo Spettoli
@@ -355,3 +379,7 @@ registerPloneFunction(function () {
 	Amberjack.open();
 	setTimeout("initAjPlone()", 300);
 })
+
+
+
+

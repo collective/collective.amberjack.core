@@ -433,7 +433,11 @@ Amberjack = {
     if (!pageCurrent) {
         pageCurrent = 0
     } else {
-		pageCurrent -= 1
+		if (AmberjackPlone.dontChange()){
+			pageCurrent -= 2
+		} else {
+		    pageCurrent -= 1	
+		}
 	}
     pageId = Amberjack.getPageId(_children[pageCurrent]);
     if (!(Amberjack.matchPage(_children[pageCurrent]) && _children[pageCurrent].innerHTML !== '')) {
