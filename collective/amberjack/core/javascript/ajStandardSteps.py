@@ -32,6 +32,7 @@ ajStandardSteps = (
     ('new_image', '#image'),
     ('new_news', '#news-item'),
     ('new_document', '#document'),
+    ('new_file', '#file'),
     
     ('view_standard', '#folder_listing'),
     ('view_summary', '#folder_summary_view'),
@@ -47,21 +48,57 @@ ajStandardSteps = (
     ('contentview_sharing', '#contentview-local_roles a'),
     
     ('content_publish', '#workflow-transition-publish'),
-    ('content_sendback', 'workflow-transition-reject'),
+    ('content_sendback', '#workflow-transition-reject'),
     
     ('form_apply', '#form\\.actions\\.apply'),
     ('form_save_old', 'input[name=form_submit]'),  # in Archetypes 1.5.10 (Plone 3.2.2)
     ('form_save', 'input[name=form\\.button\\.save]'),  # in Archetypes >= 1.5.11 (Plone >= 3.2.3)
-    ('form_save_default_page', 'input[name=form\\.button\\.Save]'),  # in contextSetDefaultPage there's a capital letter
-    ('form_save_portlet', '#form\\.actions\\.save]'),  # save a portlet 
-    ('form_save_new', 'input[name=form\\.button\\.save]'),
+    ('form_save_default_page', 'input[name=form\\.button\\.Save]'),  # in contextSetDefaultPage there's a capital letter 
+    ('form_actions_save', 'input[name=form\\.actions\\.save]'), #BBB has problems
     ('form_remove', 'input[name=form\\.button\\.remove]'),
     ('form_cancel', 'input[name=form\\.button\\.cancel]'),
     
     ('form_title', '#archetypes-fieldname-title input'),
     ('form_description', '#archetypes-fieldname-description textarea'),
+    ('form_content', '#content'),
     ('form_location', '#archetypes-fieldname-location input'),
     ('form_url', '#remoteUrl'),
+    
+    ('form_header', 'input[@id="form\\.header"]'),
+    ('form_footer', 'input[@id="form\\.footer"]'),
+    
+    ('folder_copy', 'input[@name="folder_copy:method"]'),
+    ('folder_cut', 'input[@name="folder_cut:method"]'),
+    ('folder_paste', 'input[@name="folder_paste:method"]'),
+    ('folder_delete', 'input[@name="folder_delete:method"]'),
+    ('folder_rename', 'input[@name="folder_rename_form:method"]'),
+    ('content_status_history', 'input[@name="content_status_history:method"]'),
+    
+    ('image_title', '#title'),
+    ('image_description', '#description'),
+    ('image_file', '#image_file'),
+    ('image_save', '.formControls input.context'),
+    ('file_file', '#file_file'),
+    
+    ('button_bold', '#kupu-bold-button'),
+    ('button_italic', '#kupu-italic-button'),
+    ('button_justify', '#kupu-bg-justify'),
+    ('button_justify_left', '#kupu-justifyleft-button'),
+    ('button_justify_center', '#kupu-justifycenter-button'),
+    ('button_justify_rigth', '#kupu-justifyright-button'),
+    ('button_internal_link', '#kupu-linklibdrawer-button'),
+    ('button_external_link', '#kupu-linkdrawer-button'), 
+    ('button_insert_image', '#kupu-imagelibdrawer-button'),
+    ('button_dialog_ok', '#kupu-librarydrawer div.kupu-dialogbuttons button.kupu-dialog-button'), # there are 3 buttons of the same kind
+    ('button_dialog_cancel', '#kupu-librarydrawer div.kupu-dialogbuttons button.kupu-dialog-button'), # there are 3 buttons of the same kind
+    ('button_dialog_reload', '#kupu-librarydrawer div.kupu-dialogbuttons button.kupu-dialog-button'), # there are 3 buttons of the same kind
+    ('text_area','#kupu-editor-iframe-text'), #    ('text_area','#kupu-editor-text .ajHighlight'),
+    ('preview', '#linkdrawer-preview'),
+    ('image_align_left', '#image-align-left'),
+
+    
+    ('link_to_home', '#root'),
+    #('radio_button_welcome_to_plone', '#5eaaf087c2c71011ec51b44776235ae5'),
     
     ('calendar_next', '#calendar-next'),
     ('calendar_previous', '#calendar-previous'),
@@ -71,6 +108,7 @@ ajStandardSteps = (
     ('menu_display', '#plone-contentmenu-display'),
     ('menu_add-new', '#plone-contentmenu-factories'),
     ('menu_state', '#plone-contentmenu-workflow'),
+   
 )
 
 class AmberjackStandardSteps(BrowserView): 

@@ -68,6 +68,9 @@ class TourViewlet(common.ViewletBase):
             url = self.navigation_root_url + '/' + url
         return url
 
+    def _expandSelector(self, selector):
+        return selector.replace('AJ_ROOT', self.navigation_root_url)
+        
     def getMacroSteps(self):
         results = []        
         for macrostep in self.tour.steps:
@@ -97,7 +100,7 @@ class TourViewlet(common.ViewletBase):
             var AjSteps = {
                     """
             for idx, step in enumerate(self.ajsteps):
-                ajstep = """'%s': new AjStep('%s','%s',"%s")""" % (idx + 1, step['idStep'], step['selector'], translate(step['text'], context=self.request))
+                ajstep = """'%s': new AjStep('%s','%s',"%s")""" % (idx + 1, step['idStep'], self._expandSelector(step['selector']), translate(step['text'], context=self.request))
                 if idx + 1 != len(self.ajsteps):
                     ajstep += """,
                     """

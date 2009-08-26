@@ -44,8 +44,7 @@ function ajTour(){
 	var theAJClassBehaviour = 'ajedElement';
 	
 	jq('.' + theAJClassBehaviour).click(function(){
-		Amberjack.createCookie('ajcookie_tourId', Amberjack.tourId, 1);
-		Amberjack.createCookie('ajcookie_skinId', Amberjack.skinId, 1);
+		setAmberjackCookies()
 	});
 	
 	// manages the << >> buttons
@@ -162,7 +161,7 @@ function highlightStep(num){
  */
 function highlightAllStep(){
 	var steps = getPageSteps();
-	for(i =0; i < steps.length;i++){
+	for(var i =0; i < steps.length;i++){
 		highlightStep(steps[i]);
 	}
 }
@@ -186,11 +185,25 @@ function changeValue(obj, value){
 	obj.blur();
 }
 
+function changeSelectValue(obj, value){
+	var o = obj[0].options;   
+	var oL = o.length;
+	for(var i = 0; i<oL; i++){
+	  if (o[i].value == value){
+	      o[i].selected = true
+	  }
+	}
+	
+	jq(obj[0]).trigger('change', true)
+}
+
 /**
  * Function for doing steps
  * @author Giacomo Spettoli
  * 
  * @param num dictionary's label of the step
+ * 
+ * BBB needs to be revised: type_obj is not a complete range of all the cases
  */
 function doStep(step){
 	var obj, type_obj, jq_obj, value;
@@ -209,19 +222,25 @@ function doStep(step){
 		return false;
 	}
 	//alert('DoStep: Jq=' + jq_obj +'\nType='+type_obj+'\nValue='+value + '\n Obj=' + obj.text());
-
-	if(type_obj == 'link'){
-		Amberjack.createCookie('ajcookie_tourId', Amberjack.tourId, 1);
-		Amberjack.createCookie('ajcookie_skinId', Amberjack.skinId, 1);
+        
+	if (type_obj == 'link') {
+		setAmberjackCookies()
 		location.href = obj.attr('href');
 	}
-	else if(type_obj == 'button') obj.click();
-	else if(type_obj == 'collapsible'){
-		if(value=='collapse') switchClass(obj, 'expandedInlineCollapsible', 'collapsedInlineCollapsible');
-		else switchClass(obj, 'collapsedInlineCollapsible', 'expandedInlineCollapsible');
+	else if (type_obj == 'button') 
+			obj.click();
+    else if (type_obj == 'collapsible') {
+		if (value == 'collapse') 
+			switchClass(obj, 'expandedInlineCollapsible', 'collapsedInlineCollapsible');
+		else 
+			switchClass(obj, 'collapsedInlineCollapsible', 'expandedInlineCollapsible');
 	}
-	else if(type_obj == "select" || type_obj == "text")	changeValue(obj,value);
-	else if(type_obj == "checkbox" || type_obj == "radio"){
+	else if (type_obj == "text") 
+		changeValue(obj, value);
+	else if (type_obj == "select") {
+		setAmberjackCookies()
+		changeSelectValue(obj, value);
+	}else if(type_obj == "checkbox" || type_obj == "radio"){
 		if(value=='checked')obj.attr('checked',value);
 		else obj.removeAttr('checked');
 	}
@@ -231,15 +250,15 @@ function doStep(step){
 			jq("option[value="+tmp[i]+"]").attr("selected","selected");
 		}
 	}
-	else if(type_obj=="form_save_new" || type_obj=="form_save" || type_obj=="form_save_old"){
+	else if(type_obj=="form_save_new" || type_obj=="form_save" || type_obj=="form_actions_save" || type_obj=="form_save_default_page"){
 		var form = obj.parents("form")
 		form.submit(function(){
-			Amberjack.createCookie('ajcookie_tourId', Amberjack.tourId, 1);
-			Amberjack.createCookie('ajcookie_skinId', Amberjack.skinId, 1);
+			setAmberjackCookies()
 		});
 		form.submit()
 	}
 	// STANDARD STEPS
+	else if(obj.attr('type')=='file') {alert('please, browse a file')} //BBB translate the message
 	else if(type_obj.match("menu")){
 		if(value=='deactivate') switchClass(obj, 'activated', 'deactivated');
 		else switchClass(obj,'deactivated','activated');
@@ -249,13 +268,21 @@ function doStep(step){
 	}
 	else if(jq_obj==""){
 		obj.click(function(){
-			Amberjack.createCookie('ajcookie_tourId', Amberjack.tourId, 1);
-			Amberjack.createCookie('ajcookie_skinId', Amberjack.skinId, 1);
+            setAmberjackCookies()
 		});	
 		obj.click();
 		if(obj.attr("href"))
 			location.href = obj.attr("href");
 	}	
+}
+
+/*
+ * BBB: refactor the calls to this function
+ */
+function setAmberjackCookies(){
+	Amberjack.createCookie('ajcookie_tourId', Amberjack.tourId, 1);
+    Amberjack.createCookie('ajcookie_skinId', Amberjack.skinId, 1);
+	Amberjack.createCookie('ajcookie_pageCurrent', Amberjack.pageCurrent + 1)
 }
 
 /**

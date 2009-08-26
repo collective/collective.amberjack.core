@@ -1,27 +1,92 @@
 /* Stylesheet for the 'amberjack' Plone theme */
-.ajHighlight {
-	background: yellow !important;
-	font-weight: bold;
-}
+
+
 
 .ajLink {
-	font-size: 9px;
-	color: #000000;
-	float: left;
+    font-size: 9px;
+    color: #000000;
+    float: left;
 }
 .ajLink:hover {
-	background-color: yellow;
+    background-color: yellow;
 }
 
 .ajSteps li{
-	padding-bottom: 10px;
-	margin-left: 15px;
-	list-style-type: square; 
-	clear:both;
+    padding-bottom: 10px;
+    margin-left: 15px;
+    list-style-type: square; 
+    clear:both;
 }
 
 .ajDescr{
-	float: left;
-	width: 80%;
-	padding-right: 10px;
+    float: left;
+    width: 80%;
+    padding-right: 10px;
+}
+
+
+
+button#kupu-save-button.ajHighlight{
+background:transparent url(kupuimages/save.png) no-repeat scroll 0 0 !important; 
+    border:2px solid yellow;
+}
+
+
+button#kupu-bold-button.ajHighlight{
+background:transparent url(kupuimages/bold.png) no-repeat scroll 0 0 !important; 
+    border:2px solid yellow;
+}
+
+
+
+button#kupu-italic-button.ajHighlight{
+background:transparent url(kupuimages/italic.png) no-repeat scroll 0 0 !important; 
+    border:2px solid yellow;
+}
+
+
+button#kupu-justifyleft-button.ajHighlight{
+background:transparent url(kupuimages/justify-left.png) no-repeat scroll 0 0 !important; 
+    border:2px solid yellow;
+}
+
+button#kupu-justifycenter-button.ajHighlight{
+background:transparent url(kupuimages/justify-center.png) no-repeat scroll 0 0 !important; 
+    border:2px solid yellow;
+}
+
+button#kupu-justifyright-button.ajHighlight{
+background:transparent url(kupuimages/justify-right.png) no-repeat scroll 0 0 !important; 
+    border:2px solid yellow;
+}
+
+
+button#kupu-imagelibdrawer-button.ajHighlight{
+background:transparent url(kupuimages/imagelibdrawer.png) no-repeat scroll 0 0 !important; 
+    border:2px solid yellow;
+}
+
+
+button#kupu-linklibdrawer-button.ajHighlight{
+background:transparent url(kupuimages/linklibdrawer.png) no-repeat scroll 0 0 !important; 
+    border:2px solid yellow;
+}
+
+
+button#kupu-anchors.ajHighlight{
+background:transparent url(kupuimages/anchors.png) no-repeat scroll 0 0 !important; 
+    border:2px solid yellow;
+}
+
+#kupu-editor-text .ajHighlight{
+    border:2px solid yellow !important;
+}
+
+.fulleditor .ajHighlight{
+    border:2px solid yellow !important;
+}
+
+.ajHighlight {
+    background: yellow !important;
+    font-weight: bold;
 }

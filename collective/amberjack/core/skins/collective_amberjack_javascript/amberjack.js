@@ -414,13 +414,32 @@ Amberjack = {
    * @author Massimo Azzolini
    *
    */
-  getSkinId: function(){
+    getSkinId: function(){
 	Amberjack.skinId = Amberjack.skinId ? Amberjack.skinId : AmberjackBase.getUrlParam(location.href, 'skinId');
 	if (!Amberjack.skinId) {
       Amberjack.skinId = Amberjack.readCookie('ajcookie_skinId');
 	  Amberjack.eraseCookie('ajcookie_skinId');
     }
     return Amberjack.skinId;
+  },
+
+  /**
+   * Gets the pageId form the cookie ajcookie_pageCurrent
+   */
+  getCurrentPageId: function(_children){
+  	// try to get the pageCurrent: look at the cookie, if available, else let's assume it's the No 1
+    pageCurrent = Amberjack.readCookie('ajcookie_pageCurrent');
+	Amberjack.eraseCookie('ajcookie_pageCurrent');
+    if (!pageCurrent) {
+        pageCurrent = 0
+    } else {
+		pageCurrent -= 1
+	}
+    pageId = Amberjack.getPageId(_children[pageCurrent]);
+    if (!(Amberjack.matchPage(_children[pageCurrent]) && _children[pageCurrent].innerHTML !== '')) {
+        pageId = false;
+    }
+	return {pageId:pageId, pageCurrent:pageCurrent + 1};
   },
 
   /**
@@ -486,14 +505,6 @@ Amberjack = {
         return ;
       }
 
-      // -- start: check for matching page in divs --
-	  
-      if (Amberjack.matchPage(_children[i]) && _children[i].innerHTML !== '') {
-        Amberjack.pageCurrent = i + 1;
-        Amberjack.pageId = Amberjack.getPageId(_children[i]);
-      }
-      // -- end: check for matching page in divs --
-
       Amberjack.pageCount++;
       if (i >= 1 && i < _children.length) {
         Amberjack.pages[Amberjack.getPageId(_children[i])].prevUrl = _children[i - 1].getAttribute('title');
@@ -503,7 +514,12 @@ Amberjack = {
       }
 	  Amberjack.pages[Amberjack.getPageId(_children[i])].content = _children[i]
     }
-
+    
+	// get the current page Id
+	currPage = Amberjack.getCurrentPageId(_children);
+	Amberjack.pageId = currPage.pageId
+	Amberjack.pageCurrent = currPage.pageCurrent
+	
     if (_children[i-1].innerHTML === '') { // empty page div reduces pageCount by 1
       Amberjack.pageCount = Amberjack.pageCount - 1;
       Amberjack.hasExitPage = true;
@@ -573,7 +589,7 @@ Amberjack = {
 		if (xpath){
 			// needs jquery
 			if (jq) {
-				if (xcontent = AmberjackPlone.aj_xpath_exists){
+				if (xcontent == AmberjackPlone.aj_xpath_exists){
 					return (jq(xpath).length > 0)
 				}
 				
@@ -602,10 +618,12 @@ Amberjack = {
    * @example Amberjack.urlMatch('http://mysite.com/domains/')
    */
   urlMatch: function(href) {
+  	  href = unescape(href)
+	  loc = unescape(location.href)
 	  if(href.match("portal_factory"))
-		  return (location.href.indexOf(href) != -1);
-	  else if(location.href.indexOf('?')) return location.href.split('?')[0] == href;
-	  else return location.href == href;
+		  return (loc.indexOf(href) != -1);
+	  else if(loc.indexOf('?')) return loc.split('?')[0] == href;
+	  else return loc == href;
   },
 
 
