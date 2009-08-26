@@ -258,7 +258,7 @@ function doStep(step){
 		form.submit()
 	}
 	// STANDARD STEPS
-	else if(obj.attr('type')=='file') {alert('please, browse a file')} //BBB translate the message
+	else if(obj.attr('type')=='file') {alert('Please select a file.')} //BBB translate the message
 	else if(type_obj.match("menu")){
 		if(value=='deactivate') switchClass(obj, 'activated', 'deactivated');
 		else switchClass(obj,'deactivated','activated');
