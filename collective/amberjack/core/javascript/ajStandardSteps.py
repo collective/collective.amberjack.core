@@ -51,7 +51,6 @@ ajStandardSteps = (
     ('content_sendback', '#workflow-transition-reject'),
     
     ('form_apply', '#form\\.actions\\.apply'),
-    ('form_save_old', 'input[name=form_submit]'),  # in Archetypes 1.5.10 (Plone 3.2.2)
     ('form_save', 'input[name=form\\.button\\.save]'),  # in Archetypes >= 1.5.11 (Plone >= 3.2.3)
     ('form_save_default_page', 'input[name=form\\.button\\.Save]'),  # in contextSetDefaultPage there's a capital letter 
     ('form_actions_save', 'input[name=form\\.actions\\.save]'), #BBB has problems
