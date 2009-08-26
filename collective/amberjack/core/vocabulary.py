@@ -23,6 +23,6 @@ class AvailableSkinsVocabulary(object):
     implements(IVocabularyFactory)
 
     def __call__(self, context):
-        terms = [SimpleTerm(skin, name, skin.title)
+        terms = [SimpleTerm(name, name, skin.title)
                  for name, skin in getUtilitiesFor(IAmberjackSkin)]
         return SimpleVocabulary(terms)
