@@ -346,9 +346,11 @@ AmberjackPlone = {
      * some utility constants
      * BBB: we may move all the functions as methods here
      */
-    aj_xpath_exists: 'aj_xpath_exists',    // used to just check if a given xpath exists on a page
-	aj_plone_consts: {},                   // all the plone constants we need to check
-    aj_dont_change_step: ['validationError'],
+    aj_xpath_exists:     'aj_xpath_exists',    // used to just check if a given xpath exists on a page
+    aj_any_url:          'aj_any_url',         // we accept any url in the title
+	aj_plone_consts:     {},                   // all the plone constants we need to check
+    aj_dont_change_step: ['validationError'],  // set of use case in which aj will not go further to the next step
+    
 	/**
 	 *  checks if saving an object we get a validation error
 	 */

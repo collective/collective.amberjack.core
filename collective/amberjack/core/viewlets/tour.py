@@ -61,6 +61,8 @@ class TourViewlet(common.ViewletBase):
         return _steps
 
     def _getMacroStepUrl(self, url):
+        if url.startswith('aj_'):
+            return url
         url = urllib.quote(url)
         if url.startswith('/') or url == '':
             url = self.navigation_root_url + url

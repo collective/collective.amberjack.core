@@ -581,7 +581,10 @@ Amberjack = {
    */
   matchPage: function(element){
 	var title = element.getAttribute('title');
-	if( title.substr(title.length-1)=='/'){
+	if (title == AmberjackPlone.aj_any_url) {
+        return true
+    }
+	if (title.substr(title.length-1)=='/'){
 		title = title.substr(0, title.length-1)
 	}
 	var loc = location.href;
