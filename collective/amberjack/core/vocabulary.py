@@ -14,7 +14,8 @@ class AvailableToursVocabulary(object):
     def __call__(self, context):
         manager = getUtility(ITourManager)
         tours = manager.getTours(context)
-        terms = [SimpleTerm(value=tour, token=tour_id, title=tour.title)
+        # Don't set value=tour, we want to save a list of tour_id in the portlet.
+        terms = [SimpleTerm(value=tour_id, token=tour_id, title=tour.title)
                  for (tour_id, tour) in tours]
         return SimpleVocabulary(terms)
 
