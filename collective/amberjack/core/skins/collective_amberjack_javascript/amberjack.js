@@ -433,10 +433,10 @@ Amberjack = {
     if (!pageCurrent) {
         pageCurrent = 0
     } else {
-		if (AmberjackPlone.dontChange()){
-			pageCurrent -= 2
+		if (AmberjackPlone.canMoveToNextStep()){
+			pageCurrent -= 1
 		} else {
-		    pageCurrent -= 1	
+		    pageCurrent -= 2	
 		}
 	}
     pageId = Amberjack.getPageId(_children[pageCurrent]);

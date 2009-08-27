@@ -349,25 +349,24 @@ AmberjackPlone = {
     aj_xpath_exists:     'aj_xpath_exists',    // used to just check if a given xpath exists on a page
     aj_any_url:          'aj_any_url',         // we accept any url in the title
 	aj_plone_consts:     {},                   // all the plone constants we need to check
-    aj_dont_change_step: ['validationError'],  // set of use case in which aj will not go further to the next step
+    aj_canMove_validators: ['validationError'],// set of use case in which aj cannot go further to the next step
     
 	/**
 	 *  checks if saving an object we get a validation error
 	 */
 	validationError: function(){
-		return (
+		return !(
 		  (jq('#region-content dl.portalMessage.error dt').text() == this.aj_plone_consts['Error']) &
 		  (jq('#region-content dl.portalMessage.error dd').text() == this.aj_plone_consts['ErrorValidation'])
 		  )
 	},
 	
-	dontChange: function(){
-        dontchange = false
-	    for (i = 0; i < this.aj_dont_change_step.length; i++){
-	        //dontchange = (dontchange | eval('this.' + AmberjackPlone.aj_dont_change_step[i]+'()'))
-			dontchange = (dontchange | this[this.aj_dont_change_step[i]]())
+	canMoveToNextStep: function(){
+        canMove = true
+	    for (i = 0; i < this.aj_canMove_validators.length; i++){
+			canMove = (canMove & this[this.aj_canMove_validators[i]]())
 	    }
-		return dontchange
+		return canMove
 	}
 }
 
