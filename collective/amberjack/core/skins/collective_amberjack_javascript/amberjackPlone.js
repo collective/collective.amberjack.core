@@ -335,7 +335,20 @@ function initAjPlone(){
 	highlightAllStep();
 	ajTour();
 	disableLinks();
-	jq('#ajControl').draggable({ handle: '#ajControlNavi', cursor: 'crosshair' })
+	jq('#ajControl').draggable({ 
+                        handle: '#ajControlNavi', 
+                        cursor: 'crosshair',
+                        stop: function(event, ui) {
+                            var Stoppos = jq(this).position();
+                            Amberjack.createCookie('ajcookie_controlposition', Stoppos.left + "#" + Stoppos.top, 1);
+                           
+                        }
+                    })
+    coords = Amberjack.readCookie('ajcookie_controlposition')
+    if (coords){
+        point = coords.split('#')
+        jq('#ajControl').css('left', point[0]+'px').css('top',point[1]+ 'px');
+    }
 	jq('#ajControlNavi').css('cursor', 'move')
 }
 
