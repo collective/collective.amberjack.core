@@ -334,6 +334,8 @@ function checkAllStep(){
 function initAjPlone(){
 	highlightAllStep();
 	ajTour();
+    // restore previous window position
+    AmberjackPlone.restoreWindowPosition()
 	disableLinks();
 	jq('#ajControl').draggable({ 
                         handle: '#ajControlNavi', 
@@ -344,11 +346,6 @@ function initAjPlone(){
                            
                         }
                     })
-    coords = Amberjack.readCookie('ajcookie_controlposition')
-    if (coords){
-        point = coords.split('#')
-        jq('#ajControl').css('left', point[0]+'px').css('top',point[1]+ 'px');
-    }
 	jq('#ajControlNavi').css('cursor', 'move')
 }
 
@@ -380,7 +377,17 @@ AmberjackPlone = {
 			canMove = (canMove & this[this.aj_canMove_validators[i]]())
 	    }
 		return canMove
-	}
+	}, 
+    
+    restoreWindowPosition: function(){
+        coords = Amberjack.readCookie('ajcookie_controlposition')
+        if (coords){
+            point = coords.split('#')
+            jq('#ajControl').css('left', point[0]+'px').css('top',point[1]+ 'px');
+        } else {
+            jq('#ajControl').css('right', '30px').css('top','30px');
+        }
+    }
 }
 
 
