@@ -1,7 +1,5 @@
 /* Stylesheet for the 'amberjack' Plone theme */
 
-
-
 .ajLink {
     font-size: 9px;
     color: #000000;
@@ -24,7 +22,9 @@
     padding-right: 10px;
 }
 
-
+input#form.actions.save.context {
+	background: yellow !important;
+}
 
 button#kupu-save-button.ajHighlight{
 background:transparent url(kupuimages/save.png) no-repeat scroll 0 0 !important; 
@@ -85,6 +85,11 @@ background:transparent url(kupuimages/anchors.png) no-repeat scroll 0 0 !importa
 .fulleditor .ajHighlight{
     border:2px solid yellow !important;
 }
+
+#kupu-editor-iframe-form.text.ajHighlight{
+	border:2px solid yellow !important;
+}
+
 
 .ajHighlight {
     background: yellow !important;

@@ -9,15 +9,16 @@
 
   <i18n:registerTranslations directory="locales" />
 
-  <include package="collective.js.jqueryui" />
+  <include file="meta.zcml" />
 
+  <include package="collective.js.jqueryui" />
   <include package=".javascript" />
   <include package=".viewlets" />
   <include file="skins.zcml" />
   <include file="profiles.zcml" />
-  <include file="meta.zcml" />
-
+  
   <utility factory=".tour_manager.TourManager" />
+  <utility factory=".micro_steps_manager.MicroStepsManager" />
 
   <utility
       name="collective.amberjack.core.tours"

@@ -59,19 +59,19 @@ ajStandardSteps = (
     
     ('form_title', '#archetypes-fieldname-title input'),
     ('form_description', '#archetypes-fieldname-description textarea'),
-    ('form_content', '#content'),
+     ('form_text', '#archetypes-fieldname-text iframe'),
     ('form_location', '#archetypes-fieldname-location input'),
     ('form_url', '#remoteUrl'),
     
-    ('form_header', 'input[@id="form\\.header"]'),
-    ('form_footer', 'input[@id="form\\.footer"]'),
+    ('form_header', 'input[id="form\\.header"]'),
+    ('form_footer', 'input[id="form\\.footer"]'),
     
-    ('folder_copy', 'input[@name="folder_copy:method"]'),
-    ('folder_cut', 'input[@name="folder_cut:method"]'),
-    ('folder_paste', 'input[@name="folder_paste:method"]'),
-    ('folder_delete', 'input[@name="folder_delete:method"]'),
-    ('folder_rename', 'input[@name="folder_rename_form:method"]'),
-    ('content_status_history', 'input[@name="content_status_history:method"]'),
+    ('folder_copy', 'input[name="folder_copy:method"]'),
+    ('folder_cut', 'input[name="folder_cut:method"]'),
+    ('folder_paste', 'input[name="folder_paste:method"]'),
+    ('folder_delete', 'input[name="folder_delete:method"]'),
+    ('folder_rename', 'input[name="folder_rename_form:method"]'),
+    ('content_status_history', 'input[name="content_status_history:method"]'),
     
     ('image_title', '#title'),
     ('image_description', '#description'),
@@ -110,12 +110,4 @@ ajStandardSteps = (
    
 )
 
-class AmberjackStandardSteps(BrowserView): 
-    def __call__(self, context, request):
-        js = 'AjStandardSteps = {'
-        for (key, value) in ajStandardSteps:
-            js += "'%s':'%s',\n" % (key, value)
-        
-        js += '}'
-        return js
 

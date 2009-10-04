@@ -18,7 +18,7 @@
     enabled="True" expression=""  inline="False" />
 
  <javascript
-    id="ajStandardSteps.js"
+    id="amberjackSteps.js"
     cacheable="False" compression="safe" cookable="False"
     enabled="True" expression=""  inline="False" />
 
