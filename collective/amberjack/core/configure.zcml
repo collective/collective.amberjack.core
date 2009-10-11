@@ -9,16 +9,14 @@
 
   <i18n:registerTranslations directory="locales" />
 
-  <include file="meta.zcml" />
-
+  <utility factory=".tour_manager.TourManager" />
+  <utility factory=".micro_steps_manager.MicroStepsManager" />
+  
   <include package="collective.js.jqueryui" />
-  <include package=".javascript" />
   <include package=".viewlets" />
   <include file="skins.zcml" />
   <include file="profiles.zcml" />
   
-  <utility factory=".tour_manager.TourManager" />
-  <utility factory=".micro_steps_manager.MicroStepsManager" />
 
   <utility
       name="collective.amberjack.core.tours"
@@ -44,5 +42,8 @@
       name="model_t"
       factory=".skins.ModelTSkin"
       />
+
+  <include file="meta.zcml" />
+  <include package=".javascript" />  
 
 </configure>

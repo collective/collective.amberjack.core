@@ -1,16 +1,12 @@
-from collective.amberjack.core.interfaces import IMicroStepsDefinition
 from collective.amberjack.core.interfaces import IMicroStepsManager
-from zope.component import getUtilitiesFor
-from zope.interface import implements
+from plone.registry import Registry
+from zope.interface import implements 
+
+registry = Registry()
 
 class MicroStepsManager(object):
     implements(IMicroStepsManager)
-
+        
     def getSteps(self, context=None):
-        for name, microstep in getUtilitiesFor(IMicroStepsDefinition):
-            for stepdef in microstep.stepsdefinition:
-                yield stepdef
-
-class MicroStep(object):
-    def __init__(self, stepsdefinition):
-        self.stepsdefinition = stepsdefinition
+        for microstep in registry.records['collective.amberjack.core.microsteps'].value:
+            yield microstep

@@ -1,6 +1,3 @@
-from Products.Five.browser import BrowserView
-
-
 ajStandardSteps = (
     ('link', ''),  # click on the link: need a selector to <a>
     ('button', ''),  # click on the button: need a selector to a <input type="button|submit|reset|...">

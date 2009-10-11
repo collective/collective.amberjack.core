@@ -2,11 +2,14 @@
 ZCML registrations.
 """
 from collective.amberjack.core.interfaces import ITourDefinition
-from collective.amberjack.core.interfaces import IMicroStepsDefinition
+from collective.amberjack.core.interfaces import IMicroStepsManager
 from collective.amberjack.core.tour import Tour
-from collective.amberjack.core.micro_steps_manager import MicroStep
+from collective.amberjack.core.micro_steps_manager import registry
+from plone.registry import Record
+from plone.registry import field
 from zope import interface
 from zope.component import provideUtility
+from zope.component import getUtility
 from zope.configuration.fields import GlobalObject
 
 
@@ -34,5 +37,10 @@ class IStepDirective(interface.Interface):
         required=True)
     
 def ajstep(_context, stepsdescriptor):
-    provideUtility(component=MicroStep(stepsdescriptor), 
-                   provides=IMicroStepsDefinition)
+    if not 'collective.amberjack.core.microsteps' in registry:
+        microsteps = field.Tuple(title=u'microstep')
+        record_microstep = Record(microsteps)
+        record_microstep.value = stepsdescriptor
+        registry.records['collective.amberjack.core.microsteps'] = record_microstep
+    else:
+        registry.records['collective.amberjack.core.microsteps'].value += stepsdescriptor

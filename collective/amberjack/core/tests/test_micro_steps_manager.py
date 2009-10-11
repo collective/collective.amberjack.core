@@ -1,25 +1,25 @@
-from collective.amberjack.core.interfaces import IMicroStepsDefinition, IMicroStepsManager
+from collective.amberjack.core.interfaces import IMicroStepsManager
 from collective.amberjack.core.tests.base import AmberjackCoreTestCase
-from collective.amberjack.core.micro_steps_manager import MicroStep
+from collective.amberjack.core.micro_steps_manager import registry
+from plone.registry import Record
+from plone.registry import field
 from zope.component import getUtility, provideUtility
 import unittest
 from zope.component.globalregistry import base
 
+
     
 class TourManagerTestCase(AmberjackCoreTestCase):
 
-    def afterSetUp(self):
-        #Remove all tour definitions
-        utilities = base.getUtilitiesFor(IMicroStepsDefinition)
-        for utility in utilities:
-            base.unregisterUtility(component=utility[1], provided=IMicroStepsDefinition)
-
     def test_getSteps_single_registration(self):
         steps = (('name1', 'selector1'),('name2', 'selector2'),)
-        provideUtility(component=MicroStep(steps), provides=IMicroStepsDefinition)
-        manager = getUtility(IMicroStepsManager)
+        microsteps = field.Tuple(title=u'microstep')
+        record_microstep = Record(microsteps)
+        record_microstep.value = steps
+        registry.records['collective.amberjack.core.microsteps'] = record_microstep
         re_steps = ()
-        for s in manager.getSteps():
+        microstepsmanager = getUtility(IMicroStepsManager)
+        for s in microstepsmanager.getSteps():
             re_steps = re_steps + s
         
         self.assertNotEqual(re_steps, steps)
@@ -27,11 +27,18 @@ class TourManagerTestCase(AmberjackCoreTestCase):
     def test_getSteps_double_registration(self):
         steps_a = (('name1', 'selector1'),('name2', 'selector2'),)
         steps_b = (('name3', 'selector3'),('name4', 'selector4'),)
-        provideUtility(component=MicroStep(steps_a), provides=IMicroStepsDefinition)
-        provideUtility(component=MicroStep(steps_b), provides=IMicroStepsDefinition)
-        manager = getUtility(IMicroStepsManager)
+        
+        # set the steps
+        microsteps = field.Tuple(title=u'microstep')
+        record_microstep = Record(microsteps)
+        record_microstep.value = steps_a
+        registry.records['collective.amberjack.core.microsteps'] = record_microstep
+        registry.records['collective.amberjack.core.microsteps'].value += steps_b
+        
+        # get teh steps
+        microstepsmanager = getUtility(IMicroStepsManager)
         re_steps = ()
-        for s in manager.getSteps():
+        for s in microstepsmanager.getSteps():
             re_steps = re_steps + s
         self.assertNotEqual(re_steps, steps_a+steps_b)
 

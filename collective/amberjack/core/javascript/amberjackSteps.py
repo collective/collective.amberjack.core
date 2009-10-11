@@ -4,9 +4,9 @@ from collective.amberjack.core.interfaces import IMicroStepsManager
 
 class AmberjackSteps(BrowserView):
     def __call__(self, context, request):
-        amberjackSteps = getUtility(IMicroStepsManager)
+        microstepsmanager = getUtility(IMicroStepsManager)
         js = 'AjStandardSteps = {'
-        for (key, value) in amberjackSteps.getSteps():
+        for (key, value) in microstepsmanager.getSteps():
             js += "'%s':'%s',\n" % (key, value)
         
         js += '}'
