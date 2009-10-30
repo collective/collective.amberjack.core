@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.amberjack.core\n"
-"POT-Creation-Date: 2009-08-24 21:25+0000\n"
+"POT-Creation-Date: 2009-10-30 02:12+0000\n"
 "PO-Revision-Date: 2009-08-24 23:27+0100\n"
 "Last-Translator: Vincent Fretin <vincent.fretin@gmail.com>\n"
 "Language-Team: French\n"
@@ -16,6 +16,10 @@ msgstr ""
 "Language-Name: French\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.amberjack.core\n"
+
+#: ../javascript/defaults.py:19
+msgid "Please select a file."
+msgstr ""
 
 #: ../validators.py:29
 msgid "You have to be Contributor to execute this step."
@@ -51,7 +55,7 @@ msgid "next-tour"
 msgstr "Prochaine visite guidée :"
 
 #. Default: "of"
-#: ../javascript/defaults.py:17
+#: ../javascript/defaults.py:33
 msgid "separator-between-steps"
 msgstr "sur"
 

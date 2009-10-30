@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2009-08-24 21:25+0000\n"
+"POT-Creation-Date: 2009-10-30 02:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,10 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.amberjack.core\n"
+
+#: ../javascript/defaults.py:19
+msgid "Please select a file."
+msgstr ""
 
 #: ../validators.py:29
 msgid "You have to be Contributor to execute this step."
@@ -51,7 +55,7 @@ msgid "next-tour"
 msgstr ""
 
 #. Default: "of"
-#: ../javascript/defaults.py:17
+#: ../javascript/defaults.py:33
 msgid "separator-between-steps"
 msgstr ""
 
