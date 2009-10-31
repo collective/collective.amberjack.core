@@ -67,4 +67,10 @@ class ITourManager(Interface):
 
     def getTour(tour_id, context=None):
         """Return the tour with the given tour_id (object implementing ITourDefinition), None if not found."""
-
+    
+class IMicroStepsManager(Interface):
+    def addStepsDefinition(steps):
+        """add a tuple of steps' definition to the registry"""
+        
+    def getSteps():
+        """returns the list of all the registered microsteps"""

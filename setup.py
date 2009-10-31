@@ -33,6 +33,7 @@ setup(name='collective.amberjack.core',
           'plone.app.layout',
           'Products.GenericSetup',
           'collective.js.jqueryui',
+          'plone.registry',
           # -*- Extra requirements: -*-
       ],
       entry_points="""
