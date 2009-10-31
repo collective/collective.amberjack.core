@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.amberjack.core\n"
-"POT-Creation-Date: 2009-10-30 02:12+0000\n"
+"POT-Creation-Date: 2009-10-31 11:51+0000\n"
 "PO-Revision-Date: 2009-10-29 21:40-0400\n"
 "Last-Translator: Leonardo Caballero <leonardocaballero@gmail.com>\n"
 "Language-Team: Spanish <plone-conosur@lists.plone.org>\n"

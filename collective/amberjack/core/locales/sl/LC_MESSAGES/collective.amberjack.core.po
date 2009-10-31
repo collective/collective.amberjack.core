@@ -3,59 +3,61 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: amberjack\n"
 "POT-Creation-Date: 2009-10-31 11:51+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2009-10-31 11:49+0100\n"
+"Last-Translator: Domen Kožar <domen@dev.si>\n"
+"Language-Team: SLOVENIAN <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
+"Language-Code: si\n"
+"Language-Name: Slovenian\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.amberjack.core\n"
+"X-Poedit-Language: Slovenian\n"
+"X-Poedit-Country: SLOVENIA\n"
 
 #: ../javascript/defaults.py:19
 msgid "Please select a file."
-msgstr ""
+msgstr "Izberite datoteko."
 
 #: ../validators.py:29
 msgid "You have to be Contributor to execute this step."
-msgstr ""
+msgstr "Za izvajanje koraka morate biti Contributor"
 
 #: ../validators.py:33
 msgid "You have to be Editor to execute this step."
-msgstr ""
+msgstr "Za izvajanje koraka morate biti Editor"
 
 #: ../validators.py:21
 msgid "You have to be Manager to execute this step."
-msgstr ""
+msgstr "Za izvajanje koraka morate biti Manager"
 
 #: ../validators.py:37
 msgid "You have to be Reader to execute this step."
-msgstr ""
+msgstr "Za izvajanje koraka morate biti Reader"
 
 #: ../validators.py:25
 msgid "You have to be Reviewer to execute this step."
-msgstr ""
+msgstr "Za izvajanje koraka morate biti Reviewer"
 
 #: ../validators.py:12
 msgid "You have to be anonymous to execute this step."
-msgstr ""
+msgstr "Za izvajanje koraka ne smete biti prijavljeni."
 
 #: ../validators.py:17
 msgid "You have to be logged in to execute this step."
-msgstr ""
+msgstr "Za izvajanje koraka se morate prijaviti."
 
 #. Default: "Next tour:"
 #: ../viewlets/tour.pt:36
 msgid "next-tour"
-msgstr ""
+msgstr "Nasledni vodič:"
 
 #. Default: "of"
 #: ../javascript/defaults.py:33
 msgid "separator-between-steps"
-msgstr ""
+msgstr "od"
 
