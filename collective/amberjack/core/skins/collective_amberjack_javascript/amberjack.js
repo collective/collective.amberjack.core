@@ -428,7 +428,8 @@ Amberjack = {
    */
   getCurrentPageId: function(_children){
   	// try to get the pageCurrent: look at the cookie, if available, else let's assume it's the No 1
-    pageCurrent = Amberjack.readCookie('ajcookie_pageCurrent');
+	pageCurrent = AmberjackBase.getUrlParam(location.href, 'pageCurrent');	
+	pageCurrent = pageCurrent? pageCurrent : Amberjack.readCookie('ajcookie_pageCurrent');
 	Amberjack.eraseCookie('ajcookie_pageCurrent');
     if (!pageCurrent) {
         pageCurrent = 0

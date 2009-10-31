@@ -8,15 +8,15 @@ AjStep.prototype = {
 	getJq: function(){
 		return this._JQ;
 	},
-	getType: function(){
+	getType: function() {
 		return this._TYPE;
 	},
-	getValue: function(){
+	getValue: function() {
 		return this._VALUE;
 	},
-	getObj: function(){
+	getObj: function() {
 		var type_obj = this._TYPE;
-		if(this._JQ=='')return jq(AjStandardSteps[this._TYPE]);
+		if(this._JQ=='') return jq(AjStandardSteps[this._TYPE]);
 		else return jq(this._JQ);
 	},
 }
@@ -27,7 +27,7 @@ AjStep.prototype = {
  * @author Massimo Azzolini
  * @author Giacomo Spettoli
  */
-function ajTour(){
+function ajTour() {
 	/* 
 	 * sets the plone elements that can be "pressed" as "highlight"
 	 * next we need to alert the user if he tries to click somewhere else..
@@ -220,8 +220,8 @@ function doStep(step){
 		setAmberjackCookies()
 		location.href = obj.attr('href');
 	}
-	else if (type_obj == 'button') 
-			obj.click();
+	else if (type_obj == 'button')
+		obj.click();
     else if (type_obj == 'collapsible') {
 		if (value == 'collapse') 
 			switchClass(obj, 'expandedInlineCollapsible', 'collapsedInlineCollapsible');
@@ -244,11 +244,15 @@ function doStep(step){
 		}
 	}
 	else if(type_obj=="form_save_new" || type_obj=="form_save" || type_obj=="form_actions_save" || type_obj=="form_save_default_page"){
-		var form = obj.parents("form")
+		var form = obj.parents("form");
 		form.submit(function(){
-			setAmberjackCookies()
+			setAmberjackCookies();
 		});
-		form.submit()
+		// For some reason, using form.submit ignores the kupu content...
+		//form.submit()
+		// ... so we simulate the click
+		window.onbeforeunload = null;
+		jq(obj).click()
 	}
 	// STANDARD STEPS
 	else if(obj.attr('type')=='file') {alert(this.aj_plone_consts['BrowseFile'])} //
