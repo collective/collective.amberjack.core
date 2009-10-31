@@ -389,7 +389,9 @@ AmberjackPlone = {
             point = coords.split('#')
             jq('#ajControl').css('left', point[0]+'px').css('top',point[1]+ 'px');
         } else {
-            jq('#ajControl').css('left', '300px').css('top','30px');
+            var winW = jq(window).width();
+            var startPosition = winW/2-jq('#ajControl').width()/2; 
+            jq('#ajControl').css('left', startPosition + 'px').css('top','30px');
         }
     }
 }
