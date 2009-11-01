@@ -25,6 +25,7 @@
                  tal:attributes="class string:ajStep-${step_nr} ajLink;
                                  style step/display;
                                  onclick python:errors and 'return false' or default">&gt;&gt;</a>
+			  <span class="visualClear"></span>
             </li>
           </tal:ajstep>
         </tal:ajsteps>

@@ -8,11 +8,13 @@
 .ajLink:hover {
     background-color: yellow;
 }
-
+ul.ajSteps {
+	margin-bottom:0;
+}
 .ajSteps li{
-    padding-bottom: 10px;
-    margin-left: 15px;
-    list-style-type: square; 
+    list-style: none;
+	background: transparent url(dot.gif) no-repeat left top;
+	padding-left: 12px; 
     clear:both;
 }
 

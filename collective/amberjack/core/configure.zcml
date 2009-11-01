@@ -43,6 +43,11 @@
       name="model_t"
       factory=".skins.ModelTSkin"
       />
+      
+  <utility
+      name="light_grey"
+      factory=".skins.LightGreySkin"
+      />
 
   <include file="meta.zcml" />
   <include package=".javascript" />  

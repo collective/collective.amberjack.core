@@ -9,3 +9,7 @@ class SafariSkin(object):
 class ModelTSkin(object):
     implements(IAmberjackSkin)
     title = "Model_t"
+
+class LightGreySkin(object):
+    implements(IAmberjackSkin)
+    title = "Light Grey"
