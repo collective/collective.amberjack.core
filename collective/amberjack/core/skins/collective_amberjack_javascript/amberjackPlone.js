@@ -229,7 +229,7 @@ function doStep(step){
 		setAmberjackCookies()
 		changeSelectValue(obj, value);
 	}else if(type_obj == "checkbox" || type_obj == "radio"){
-		if(value=='checked')obj.attr('checked',value);
+		if (value=='checked') obj.attr('checked',value);
 		else obj.removeAttr('checked');
 	}
 	else if(type_obj == "multiple_select"){
