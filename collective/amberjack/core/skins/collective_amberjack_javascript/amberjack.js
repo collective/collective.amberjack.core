@@ -440,7 +440,7 @@ Amberjack = {
 		    pageCurrent -= 2	
 		}
 	}
-    pageId = Amberjack.getPageId(_children[pageCurrent]);
+    pageId = Amberjack.getPageId(_children, pageCurrent);
     if (!(Amberjack.matchPage(_children[pageCurrent]) && _children[pageCurrent].innerHTML !== '')) {
         pageId = false;
     }
@@ -499,7 +499,7 @@ Amberjack = {
 
     // init tour pages
     for (i = 0; i < _children.length; i++) {
-      Amberjack.pages[Amberjack.getPageId(_children[i])] = {};
+      Amberjack.pages[Amberjack.getPageId(_children, i)] = {};
     }
 
     for (i = 0; i < _children.length; i++) {
@@ -512,12 +512,12 @@ Amberjack = {
 
       Amberjack.pageCount++;
       if (i >= 1 && i < _children.length) {
-        Amberjack.pages[Amberjack.getPageId(_children[i])].prevUrl = _children[i - 1].getAttribute('title');
+        Amberjack.pages[Amberjack.getPageId(_children, i)].prevUrl = _children[i - 1].getAttribute('title');
       }
       if (i < _children.length - 1) {
-        Amberjack.pages[Amberjack.getPageId(_children[i])].nextUrl = _children[i + 1].getAttribute('title');
+        Amberjack.pages[Amberjack.getPageId(_children, i)].nextUrl = _children[i + 1].getAttribute('title');
       }
-	  Amberjack.pages[Amberjack.getPageId(_children[i])].content = _children[i]
+	  Amberjack.pages[Amberjack.getPageId(_children, i)].content = _children[i]
     }
     
 	// get the current page Id
@@ -550,12 +550,13 @@ Amberjack = {
    * @param element the element to be "keyed"
    *
    */
-  getPageId: function(element){
+  getPageId: function(children, pos){
+    var element = children[pos]
 	var title = element.getAttribute('title');
 	var xpath = element.getAttribute('xpath');
 	var xcontent = element.getAttribute('xcontent');
 	
-	return '(' + title + ';' + xpath + ';' + xcontent + ')';
+	return '(' + title + ';' + xpath + ';' + xcontent + ';' + pos + ')';
   },
 
   /**
@@ -763,17 +764,6 @@ Amberjack = {
     window.clearInterval(Amberjack.interval);
     document.body.removeChild(document.getElementById('ajBodyCover'));
   },
-
-  /*
-  doHighlight: function() {
-    var body = document.body;
-    var highlightElements = AmberjackBase.getElementsByTagNameAndAttr('div', 'class', 'ajHighlight', body);
-    for (i = 0; i < highlightElements.length; i++) {
-      highlightElements[i].style.border = '3px solid red';
-      highlightElements[i].style.backgroundColor = '#fee';
-    }
-  },
-  */
 
 
   /**

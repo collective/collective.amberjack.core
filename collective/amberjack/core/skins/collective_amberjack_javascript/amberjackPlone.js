@@ -45,10 +45,7 @@ function ajTour() {
 	var ajPrev = jq('#ajPrev');
 	
 	ajNext.click(function(){
-		/* 
-		 * you may do something when pressing the next button
-		 * e.g. checking if everything has been correctly done
-		 */
+		setAmberjackCookies()
 	});
 }
 
