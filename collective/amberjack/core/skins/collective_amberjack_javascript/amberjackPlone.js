@@ -242,6 +242,10 @@ function doStep(step){
 			jq("option[value="+tmp[i]+"]").attr("selected","selected");
 		}
 	}
+    else if(type_obj=="form_text"){
+        var kupu_contents = jq('#kupu-editor-iframe-text').contents().find('p')
+        kupu_contents.replaceWith("<p>" + value + "</p>")
+    }
 	else if(type_obj=="form_save_new" || type_obj=="form_save" || type_obj=="form_actions_save" || type_obj=="form_save_default_page"){
 		var form = obj.parents("form");
 		form.submit(function(){
