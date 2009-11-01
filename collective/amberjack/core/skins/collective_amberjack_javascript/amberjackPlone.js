@@ -172,7 +172,6 @@ function switchClass(obj, remClass, addClass){
  */
 function changeValue(obj, value){
 	obj.focus();
-	//obj.click();
 	obj.val(value);
 	obj.blur();
 }
@@ -252,7 +251,6 @@ function doStep(step){
 			setAmberjackCookies();
 		});
 		// For some reason, using form.submit ignores the kupu content...
-		//form.submit()
 		// ... so we simulate the click
 		window.onbeforeunload = null;
 		jq(obj).click()
@@ -304,6 +302,9 @@ function checkStep(num){
 	var type_obj = AjSteps[num].getType();
 	var value = AjSteps[num].getValue();
 	var stepDone = false;
+    if(type_obj == ""){
+        stepDone = true
+    }
 	if(type_obj == "collapsible"){
 		if(value=="collapse") {
 			stepDone = obj.hasClass("collapsedInlineCollapsible");
