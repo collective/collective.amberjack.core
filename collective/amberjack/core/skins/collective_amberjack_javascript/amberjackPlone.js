@@ -65,9 +65,8 @@ function disableLinks(){
 			alert("You cannot click on other links, please use the console's exit button");
 			return false;
 		});
-		notAj.css("color", "#CCCCCC");
-		notAj.css("cursor", "default");
-
+		notAj.addClass("aj_link_inactive");
+		var actionAjtour = jq("#ajtour").addClass("aj_link_inactive");
 		var ajClose = jq("#ajClose");
 		var goHome = false;
 		
