@@ -334,7 +334,7 @@ function checkAllStep(){
 			break;
 		}
 		allDone = allDone && thisStep;
-	}	
+	}
     return allDone;
 }
 
@@ -344,6 +344,17 @@ function initAjPlone(){
     // restore previous window position
     AmberjackPlone.restoreWindowPosition()
 	disableLinks();
+    var last_step = jq('#ajControl').find('#ajLastStep')
+    // if it's the last step add this tour to the completed cookie
+    if(last_step.length !== 0){
+        completed = Amberjack.readCookie('ajcookie_completed')
+        if(completed){
+            completed = completed + '#another one'
+        } else {
+            completed = 'first one'
+        }
+        Amberjack.createCookie('ajcookie_completed', completed, 1);
+    }
 	jq('#ajControl').draggable({ 
                         handle: '#ajControlNavi', 
                         cursor: 'crosshair',
@@ -409,7 +420,3 @@ registerPloneFunction(function () {
 	Amberjack.open();
 	setTimeout("initAjPlone()", 300);
 })
-
-
-
-
