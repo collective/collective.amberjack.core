@@ -471,7 +471,7 @@ Amberjack = {
 
 
     if (!Amberjack.skinId) { // set default skinId
-      Amberjack.skinId = 'model_t';
+      Amberjack.skinId = 'light_grey';
     }
 
     var tourDef = false;

@@ -209,7 +209,6 @@ function doStep(step){
 		alert("Error in doStep(): Step " + num +" not found");
 		return false;
 	}
-	//alert('DoStep: Jq=' + jq_obj +'\nType='+type_obj+'\nValue='+value + '\n Obj=' + obj.text());
         
 	if (type_obj == 'link') {
 		setAmberjackCookies()
@@ -358,10 +357,9 @@ function initAjPlone(){
 	jq('#ajControl').draggable({ 
                         handle: '#ajControlNavi', 
                         cursor: 'crosshair',
+                        containment: 'body',
                         stop: function(event, ui) {
-                            var Stoppos = jq(this).position();
-                            Amberjack.createCookie('ajcookie_controlposition', Stoppos.left + "#" + Stoppos.top, 1);
-                           
+                            Amberjack.createCookie('ajcookie_controlposition', ui.position.left + "#" + ui.position.top, 10);
                         }
                     })
 	jq('#ajControlNavi').css('cursor', 'move')
