@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: collective.amberjack.core\n"
 "POT-Creation-Date: 2009-10-31 11:51+0000\n"
-"PO-Revision-Date: 2009-11-26 15:03-0300\n"
+"PO-Revision-Date: 2009-11-26 15:15-0300\n"
 "Last-Translator: Thiago Tamosauskas <thiago@simplesconsultoria.com.br>\n"
 "Language-Team: Portuguese\n"
 "MIME-Version: 1.0\n"
@@ -12,49 +12,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Language-Code: pt-br\n"
-"Language-Name: Brazilian Potuguese \n"
+"Language-Name: Brazilian Potuguese\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.amberjack.core\n"
 
 #: ../javascript/defaults.py:19
 msgid "Please select a file."
-msgstr ""
+msgstr "Por favor selecione um arquivo."
 
 #: ../validators.py:29
 msgid "You have to be Contributor to execute this step."
-msgstr ""
+msgstr "Você deve ser um Colaborador para executar este passo."
 
 #: ../validators.py:33
 msgid "You have to be Editor to execute this step."
-msgstr ""
+msgstr "Você deve ser um Editor para executar este passo."
 
 #: ../validators.py:21
 msgid "You have to be Manager to execute this step."
-msgstr ""
+msgstr "Você deve ser um Administrador para executar este passo."
 
 #: ../validators.py:37
 msgid "You have to be Reader to execute this step."
-msgstr ""
+msgstr "Você deve ser um leitor para executar este passo."
 
 #: ../validators.py:25
 msgid "You have to be Reviewer to execute this step."
-msgstr ""
+msgstr "Você deve ser um Revisor para executar este passo."
 
 #: ../validators.py:12
 msgid "You have to be anonymous to execute this step."
-msgstr ""
+msgstr "Você deve ser um usuário anônimo para executar este passo."
 
 #: ../validators.py:17
 msgid "You have to be logged in to execute this step."
-msgstr ""
+msgstr "Você deve ser um usuário autenticado para executar este passo."
 
 #. Default: "Next tour:"
 #: ../viewlets/tour.pt:36
 msgid "next-tour"
-msgstr ""
+msgstr "Próximo Tutorial"
 
 #. Default: "of"
 #: ../javascript/defaults.py:33
 msgid "separator-between-steps"
-msgstr ""
+msgstr "de"
 
