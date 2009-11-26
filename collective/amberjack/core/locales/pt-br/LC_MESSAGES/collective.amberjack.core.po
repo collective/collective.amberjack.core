@@ -12,9 +12,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Language-Code: pt-br\n"
-"Language-Name: Brazilian Potuguese\n"
+"Language-Name: Brazilian Portuguese\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.amberjack.core\n"
+"X-Is-Fallback-For: pt\n"
 
 #: ../javascript/defaults.py:19
 msgid "Please select a file."
