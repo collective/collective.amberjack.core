@@ -1,6 +1,12 @@
 Changelog
 =========
 
+
+1.1 (unreleased)
+----------------
+
+- compatibility with plone4 [amleczko]
+
 1.0 (unreleased)
 ----------------
 
