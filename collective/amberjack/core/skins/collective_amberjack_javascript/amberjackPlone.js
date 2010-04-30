@@ -58,7 +58,6 @@ function changeSelectValue(obj, value){
 	jq(obj[0]).trigger('change', true);
 }
 
-
 AmberjackPlone = {
     /**
      * some utility constants
@@ -322,6 +321,12 @@ AmberjackPlone = {
 		else if(type_obj.match("menu")){
 			if(value=='deactivate') obj.removeClass('activated').addclass('deactivated');
 			else obj.removeClass('deactivated').addClass('activated');
+		}
+		else if(type_obj=="tiny_button_exec") {
+			tinyMCE.get('text').execCommand(value)
+		}
+		else if(type_obj=="tiny_button_click"){
+			tinyMCE.get('text').buttons[value].onclick
 		}
 		else if(value!="") {
 			changeValue(obj,value);

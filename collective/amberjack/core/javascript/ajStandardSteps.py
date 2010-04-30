@@ -7,7 +7,10 @@ ajStandardSteps = (
     ('checkbox', ''),  # if [value] is "checked", then check the element, else uncheck
     ('radio', ''),  # if [value] is "checked", then check the element, else uncheck
     ('multiple_select', ''),  # select the options with value given by [value] (can be a list separated by coma without space)
-
+    
+    ('tiny_button_exec',''),
+    ('tiny_button_click',''),
+    
     ('manage_portlets', 'div.managePortletsLink a'),
     
     ('go_home', '#portal-breadcrumbs > a'),
@@ -76,12 +79,6 @@ ajStandardSteps = (
     ('image_save', '.formControls input.context'),
     ('file_file', '#file_file'),
     
-    ('button_bold', '#kupu-bold-button'),
-    ('button_italic', '#kupu-italic-button'),
-    ('button_justify', '#kupu-bg-justify'),
-    ('button_justify_left', '#kupu-justifyleft-button'),
-    ('button_justify_center', '#kupu-justifycenter-button'),
-    ('button_justify_rigth', '#kupu-justifyright-button'),
     ('button_internal_link', '#kupu-linklibdrawer-button'),
     ('button_external_link', '#kupu-linkdrawer-button'), 
     ('button_insert_image', '#kupu-imagelibdrawer-button'),
