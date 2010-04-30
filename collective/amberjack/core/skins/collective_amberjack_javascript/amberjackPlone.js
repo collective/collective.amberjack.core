@@ -240,8 +240,13 @@ function doStep(step){
 		}
 	}
     else if(type_obj=="form_text"){
-        var kupu_contents = jq('#kupu-editor-iframe-text').contents().find('p')
-        kupu_contents.replaceWith("<p>" + value + "</p>")
+		if (jq('#text_ifr').length) {
+			var editor_contents = jq('#text_ifr').contents().find('p')
+		}
+		else{
+			var editor_contents = jq('#kupu-editor-iframe-text').contents().find('p')
+		}
+        editor_contents.replaceWith("<p>" + value + "</p>")
     }
 	else if(type_obj=="form_save_new" || type_obj=="form_save" || type_obj=="form_actions_save" || type_obj=="form_save_default_page"){
 		var form = obj.parents("form");
