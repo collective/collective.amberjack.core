@@ -1,8 +1,11 @@
 Changelog
 =========
 
-1.0 (unreleased)
+0.9 (2010-04-30)
 ----------------
+
+- Change version to 0.9 (plone3 release series)
+  [amleczko]
 
 - Renamed validation to validators, now a list of validators.
   Renamed isVisible to validate.

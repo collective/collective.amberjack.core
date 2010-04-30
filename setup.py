@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.0dev'
+version = '0.9'
 
 setup(name='collective.amberjack.core',
       version=version,
@@ -20,8 +20,8 @@ setup(name='collective.amberjack.core',
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
       keywords='',
-      author='Massimo Azzolini',
-      author_email='massimo@redturtle.net',
+      author='Massimo Azzolini and contributors',
+      author_email='collective.amberjack.support@lists.coactivate.org',
       url='http://pypi.python.org/pypi/collective.amberjack.core',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
