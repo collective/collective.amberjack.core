@@ -418,8 +418,8 @@ AmberjackPlone = {
  * Start the tour and set some timeout
  * @author Giacomo Spettoli
  */
-registerPloneFunction(function () {
+jq(document).ready(function () {
 	loadDefaults();
 	Amberjack.open();
 	setTimeout("initAjPlone()", 300);
-})
+});
