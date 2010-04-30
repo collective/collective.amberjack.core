@@ -32,7 +32,7 @@ setup(name='collective.amberjack.core',
           'setuptools',
           'plone.app.layout',
           'Products.GenericSetup',
-#          'collective.js.jqueryui',
+          'collective.js.jqueryui>=1.7.2.8',
           'plone.registry',
           # -*- Extra requirements: -*-
       ],
