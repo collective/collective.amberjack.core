@@ -5,7 +5,7 @@ version = '0.9'
 
 setup(name='collective.amberjack.core',
       version=version,
-      description="The Amberjack layer",
+      description="Collective Amberjack core functionality",
       long_description=open(os.path.join("collective/amberjack/core", "README.txt")).read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -32,7 +32,7 @@ setup(name='collective.amberjack.core',
           'setuptools',
           'plone.app.layout',
           'Products.GenericSetup',
-          'collective.js.jqueryui',
+          'collective.js.jqueryui<1.8',
           'plone.registry',
           # -*- Extra requirements: -*-
       ],
