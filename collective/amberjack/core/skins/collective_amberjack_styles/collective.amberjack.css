@@ -3,6 +3,7 @@
 .ajLink {
     font-size: 9px;
     color: #000000;
+    float: left;
 }
 .ajLink:hover {
     background-color: yellow;
@@ -12,10 +13,9 @@ ul.ajSteps {
 }
 .ajSteps li{
     list-style: none;
-    background: transparent url(dot.gif) no-repeat left top;
-    padding-left: 12px; 
+	background: transparent url(dot.gif) no-repeat left top;
+	padding-left: 12px; 
     clear:both;
-    display: block;
 }
 
 .ajDescr{
@@ -82,10 +82,6 @@ a.tour_inactive:hover {
 
 /*** Amberjack popup tour generic styles ***/
 #ajControlBody h2 {
-  margin:0 0 0.5em;
+	margin:0 0 0.5em;
 }
 
-
-#ajControlBody div {
-  padding: 0 0 0.5em 0;
-}
