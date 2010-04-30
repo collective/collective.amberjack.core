@@ -8,6 +8,7 @@ Changelog
 - compatibility with plone4 [amleczko]
 - add control and functionality to manage text in kupu and tiny for step 'form_text' [mirco]
 - add two 'ajStandardSteps' to use the TinyMCE's buttons [mirco]
+- minor Javascript refactoring [keul]
 
 1.0 (unreleased)
 ----------------

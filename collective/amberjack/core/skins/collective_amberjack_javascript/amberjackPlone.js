@@ -6,7 +6,7 @@
  * @param {String} value an optional value (depends on type choosen)
  */
 
-var AjStep = function(type, jqElement, value) {
+function AjStep(type, jqElement, value) {
 	this._JQ = jqElement;
 	this._TYPE = type;
 	this._VALUE = value;
@@ -153,7 +153,7 @@ AmberjackPlone = {
 			try{
 				obj = AjSteps[num].getObj();
 			}catch(e){
-				AmberjackBase.alert("Error in highlightStep(): Step " + num +" not found");
+				AmberjackBase.alert("Error in highlightStep(): Step " + (num+1) +" not found");
 				return false;
 			}
 			var type_obj = AjSteps[num].getType();
@@ -231,14 +231,14 @@ AmberjackPlone = {
 			
 			var sURL = unescape(window.location.pathname);
 			if(goHome)
-				ajClose.attr("onclick","Amberjack.close();location.href='" + Amberjack.BASE_URL + "';return false");
+				ajClose.attr("onClick","Amberjack.close();location.href='" + Amberjack.BASE_URL + "';return false");
 			else
-				ajClose.attr("onclick","Amberjack.close();location.href = window.location.pathname;return false");	
+				ajClose.attr("onClick","Amberjack.close();location.href = window.location.pathname;return false");	
 
 			var ajNext = jq("#ajNext");
 			
 			// BBB
-			ajNext.attr("onclick","if(AmberjackPlone.checkAllSteps()){" + ajNext.attr('onclick') + "}");
+			ajNext.attr("onClick","if(AmberjackPlone.checkAllSteps()){" + ajNext.attr('onClick') + "}");
 		}
 	},
 
@@ -256,7 +256,7 @@ AmberjackPlone = {
 		
 		var allClasses = jq(step).attr("class").split(" ");
 		var firstClass = allClasses[0].split('-');
-		var num = firstClass[1];
+		var num = parseInt(firstClass[1])-1;
 	
 		try {
 			obj = AjSteps[num].getObj();
@@ -355,7 +355,7 @@ AmberjackPlone = {
 	    for(i =0; i < steps.length;i++){
 			thisStep = AmberjackPlone.checkStep(steps[i]);
 			if(!thisStep){
-				AmberjackBase.alert("Step " + steps[i] + " not completed");
+				AmberjackBase.alert("Step " + (steps[i]+1) + " not completed");
 				allDone = false;
 				break;
 			}
@@ -402,16 +402,17 @@ AmberjackPlone = {
 	 * @author Giacomo Spettoli
 	 * @return steps array of current page step's id
 	 */
-	getPageSteps: function(){
+	getPageSteps: function() {
 		var steps = [];
 		if(Amberjack.pageId){
 			var link = jq(Amberjack.pages[Amberjack.pageId].content).find('a[class^="ajStep"]');
 			link.each(function(i){
 				var allClasses = jq(this).attr('class').split(' ');
 				var firstClass = allClasses[0].split('-');
-				steps.push(firstClass[1]);
+				steps.push(parseInt(firstClass[1])-1);
 			});
 		}
+		console.log(steps);
 		return steps;
 	},
 
