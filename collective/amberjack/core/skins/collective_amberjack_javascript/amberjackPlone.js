@@ -323,10 +323,13 @@ AmberjackPlone = {
 			else obj.removeClass('deactivated').addClass('activated');
 		}
 		else if(type_obj=="tiny_button_exec") {
-			tinyMCE.get('text').execCommand(value)
+			tinyMCE.get('text').execCommand(value);
 		}
 		else if(type_obj=="tiny_button_click"){
-			tinyMCE.get('text').buttons[value].onclick
+			tinyMCE.get('text').buttons[value].onclick();
+		}
+		else if(type_obj=="iframe_action_click"){
+			obj.contents().find(value).click();
 		}
 		else if(value!="") {
 			changeValue(obj,value);
@@ -434,6 +437,21 @@ AmberjackPlone = {
  * Start the tour and set some timeout
  * @author Giacomo Spettoli
  */
+
+var t = setInterval(function(){
+	if(jq('.plonepopup iframe').length){
+		clearInterval(t);
+		console.log('inizio del bind');
+		jq.each(jq("a[href^=javascript\\:]", jq('.plonepopup iframe').contents()), function(key, value){
+			console.log(jq(value));
+			jq(value).live('click', function(){
+				console.log(this);
+				eval(this.href.substring(11).split(' '));
+			});
+		}) 
+	}
+}, 300);
+
 jq(document).ready(function () {
 	loadDefaults();
 	Amberjack.open();

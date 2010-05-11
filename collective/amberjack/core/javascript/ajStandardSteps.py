@@ -10,6 +10,7 @@ ajStandardSteps = (
     
     ('tiny_button_exec',''),
     ('tiny_button_click',''),
+    ('iframe_action_click',''),
     
     ('manage_portlets', 'div.managePortletsLink a'),
     
@@ -79,9 +80,6 @@ ajStandardSteps = (
     ('image_save', '.formControls input.context'),
     ('file_file', '#file_file'),
     
-    ('button_internal_link', '#kupu-linklibdrawer-button'),
-    ('button_external_link', '#kupu-linkdrawer-button'), 
-    ('button_insert_image', '#kupu-imagelibdrawer-button'),
     ('button_dialog_ok', '#kupu-librarydrawer div.kupu-dialogbuttons button.kupu-dialog-button'), # there are 3 buttons of the same kind
     ('button_dialog_cancel', '#kupu-librarydrawer div.kupu-dialogbuttons button.kupu-dialog-button'), # there are 3 buttons of the same kind
     ('button_dialog_reload', '#kupu-librarydrawer div.kupu-dialogbuttons button.kupu-dialog-button'), # there are 3 buttons of the same kind
@@ -90,7 +88,8 @@ ajStandardSteps = (
     ('image_align_left', '#image-align-left'),
 
     
-    ('link_to_home', '#root'),
+    ('link_to_home', '#mce_59 #home'),
+    ('link_to_external', '#mce_59'),
     #('radio_button_welcome_to_plone', '#5eaaf087c2c71011ec51b44776235ae5'),
     
     ('calendar_next', '#calendar-next'),
