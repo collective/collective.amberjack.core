@@ -10,7 +10,8 @@ ajStandardSteps = (
     
     ('tiny_button_exec',''),
     ('tiny_button_click',''),
-    ('iframe_action_click',''),
+    ('iframe_click',''),
+    ('iframe_text',''),
     
     ('manage_portlets', 'div.managePortletsLink a'),
     
@@ -83,14 +84,7 @@ ajStandardSteps = (
     ('button_dialog_ok', '#kupu-librarydrawer div.kupu-dialogbuttons button.kupu-dialog-button'), # there are 3 buttons of the same kind
     ('button_dialog_cancel', '#kupu-librarydrawer div.kupu-dialogbuttons button.kupu-dialog-button'), # there are 3 buttons of the same kind
     ('button_dialog_reload', '#kupu-librarydrawer div.kupu-dialogbuttons button.kupu-dialog-button'), # there are 3 buttons of the same kind
-    ('text_area','#kupu-editor-iframe-text'), #    ('text_area','#kupu-editor-text .ajHighlight'),
-    ('preview', '#linkdrawer-preview'),
     ('image_align_left', '#image-align-left'),
-
-    
-    ('link_to_home', '#mce_59 #home'),
-    ('link_to_external', '#mce_59'),
-    #('radio_button_welcome_to_plone', '#5eaaf087c2c71011ec51b44776235ae5'),
     
     ('calendar_next', '#calendar-next'),
     ('calendar_previous', '#calendar-previous'),

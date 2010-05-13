@@ -328,8 +328,24 @@ AmberjackPlone = {
 		else if(type_obj=="tiny_button_click"){
 			tinyMCE.get('text').buttons[value].onclick();
 		}
-		else if(type_obj=="iframe_action_click"){
-			obj.contents().find(value).click();
+		else if(type_obj=="iframe_click"){
+			jq('.plonepopup iframe').contents().find(jq_obj).click();
+		}
+		else if(type_obj=="iframe_text"){
+			obj = jq('.plonepopup iframe').contents().find(jq_obj);
+			changeValue(obj, value);
+		}
+		else if(type_obj=="iframe_select"){
+			AmberjackPlone.setAmberjackCookies();
+			obj = jq('.plonepopup iframe').contents().find(jq_obj);
+			changeSelectValue(obj, value);
+		}
+		else if(type_obj=="iframe_radio"){
+			obj = jq('.plonepopup iframe').contents().find(jq_obj);
+			if (obj.is(':checked'))
+	            obj.attr('checked', false);
+	        else
+	            obj.attr('checked', true);
 		}
 		else if(value!="") {
 			changeValue(obj,value);
@@ -434,23 +450,39 @@ AmberjackPlone = {
 
 
 /**
+ * 
+ * @author Mirco Angelini
+ */
+
+var handledFunctions = ['mcTabs','displayPanel','getFolderListing','tinyMCEPopup','getCurrentFolderListing'];
+
+var popup_interval = setInterval(function(){
+	if(jq('.plonepopup iframe').length){
+		clearInterval(popup_interval);
+		var element_interval = setInterval(function(){
+			if(jq("a[href^=javascript\\:]", jq('.plonepopup iframe').contents()).length){
+				clearInterval(element_interval);
+				jq.each(jq("a[href^=javascript\\:]", jq('.plonepopup iframe').contents()), function(key, value){
+					var old_href = value.href;
+					for (var i=0;i<handledFunctions.length;i++)
+						old_href = old_href.replace(handledFunctions[i],'window.frames[1].'+handledFunctions[i]);
+					var new_href = unescape(old_href.substring(11));
+					jq(value).bind('click', function(e){
+						e.preventDefault;
+						eval(new_href);
+					});
+					value.href = 'javascript:;';
+				})
+			}
+		}, 300)
+	}
+}, 300);
+
+
+/**
  * Start the tour and set some timeout
  * @author Giacomo Spettoli
  */
-
-var t = setInterval(function(){
-	if(jq('.plonepopup iframe').length){
-		clearInterval(t);
-		console.log('inizio del bind');
-		jq.each(jq("a[href^=javascript\\:]", jq('.plonepopup iframe').contents()), function(key, value){
-			console.log(jq(value));
-			jq(value).live('click', function(){
-				console.log(this);
-				eval(this.href.substring(11).split(' '));
-			});
-		}) 
-	}
-}, 300);
 
 jq(document).ready(function () {
 	loadDefaults();
