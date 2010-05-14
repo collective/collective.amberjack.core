@@ -394,6 +394,11 @@ Amberjack = {
   interval: false,
 
   /**
+   * use inside getIdPart
+   */
+  pageIdParts: {'title': 0, 'xpath': 1, 'xcontent': 2},
+
+  /**
    * Gets the tourId from the url or from a cookie 'ajcookie_tourId'
    *
    * @author Massimo Azzolini
@@ -547,30 +552,29 @@ Amberjack = {
    *
    * @author Massimo Azzolini
    *
-   * @param element the element to be "keyed"
+   * @param children an array of elements that are tour steps
+   * @param pos position of a specific step inside the array 'children'
    *
    */
   getPageId: function(children, pos){
-    var element = children[pos]
+    var element = children[pos];
 	var title = element.getAttribute('title');
 	var xpath = element.getAttribute('xpath');
-	var xcontent = element.getAttribute('xcontent');
-	
+	var xcontent = element.getAttribute('xcontent');	
 	return '(' + title + ';' + xpath + ';' + xcontent + ';' + pos + ')';
   },
 
   /**
-   * Returns a part of a PageId: title, xpath, xcontent
+   * Returns a part of a PageId: title, xpath, xcontent.
    *
    * @author Massimo Azzolini
    *
-   * @param id the pageId
-   * @param part the part to extract
+   * @param id the pageId, commonly generated from getPageId method
+   * @param part the part to extract. See Amberjack.pageIdParts
    *
    */
-  getIdPart: function(id, part){
-	d = {'title': 0, 'xpath': 1, 'xcontent': 2};
-	return id.substr(1, id.length-2).split(';')[d[part]];
+  getIdPart: function(id, part) {
+	return id.substr(1, id.length-2).split(';')[Amberjack.pageIdParts[part]];
   },
 
   /**
@@ -586,13 +590,11 @@ Amberjack = {
 	if (title == AmberjackPlone.aj_any_url) {
         return true
     }
-	if (title.substr(title.length-1)=='/'){
+	if (title.substr(title.length-1)=='/') {
 		title = title.substr(0, title.length-1)
 	}
-	var loc = location.href;
-	questionMarkPosition = loc.indexOf('?');
-	loc = (questionMarkPosition == -1 ? loc: loc.substr(0, questionMarkPosition));
-	if(this.urlMatch(title) || this.urlMatch(title+'/')){
+	var loc = window.location.protocol +'//'+ window.location.host + window.location.pathname;
+	if (this.urlMatch(title) || this.urlMatch(title+'/')) {
 		var xpath = element.getAttribute('xpath');
 		var xcontent = element.getAttribute('xcontent');
 		if (xpath){
@@ -617,7 +619,7 @@ Amberjack = {
   /**
    * Checks if passed href is *included* in current location's href
    * 
-   * [edit] made some modification for workin better in Plone
+   * [edit] made some modification for working better in Plone
    *  
    * @author Arash Yalpani
    * @author Giacomo Spettoli
@@ -627,11 +629,10 @@ Amberjack = {
    * @example Amberjack.urlMatch('http://mysite.com/domains/')
    */
   urlMatch: function(href) {
-  	  href = unescape(href)
-	  loc = unescape(location.href)
-	  if(href.match("portal_factory"))
+  	  var href = unescape(href);
+	  var loc = unescape(window.location.protocol +'//'+ window.location.host + window.location.pathname);
+	  if (href.match("portal_factory"))
 		  return (loc.indexOf(href) != -1);
-	  else if(loc.indexOf('?')) return loc.split('?')[0] == href;
 	  else return loc == href;
   },
 

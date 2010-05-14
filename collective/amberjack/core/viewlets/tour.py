@@ -94,24 +94,29 @@ class TourViewlet(common.ViewletBase):
         return self.ajsteps.index(step) + 1
     
     def javascriptSteps(self):
-        """Return a dict:
-        {'1': new AjStep('idStep': 'selector', 'text'), ...}
+        """Return an Array:
+        [new AjStep('idStep': 'selector', 'text'), ...]
         """
         try:
             aj = """
-            var AjSteps = {
+            var AjSteps = [
                     """
-            for idx, step in enumerate(self.ajsteps):
-                ajstep = """'%s': new AjStep('%s','%s',"%s")""" % (idx + 1, step['idStep'], self._expandSelector(step['selector']), translate(step['text'], context=self.request))
-                if idx + 1 != len(self.ajsteps):
+            cnt = 0
+            for step in self.ajsteps:
+                ajstep = """new AjStep('%s','%s',"%s")""" % (step['idStep'],
+                                                             self._expandSelector(step['selector']),
+                                                             translate(step['text'], context=self.request))
+                if cnt+1 != len(self.ajsteps):
                     ajstep += """,
                     """
                 aj += ajstep
+                cnt+=1
             
             return aj + """
-            }
+            ]
             """
-        except: #XXX put the right Error
+        except Exception, inst: #XXX put the right Error
+            self.context.plone_log(inst)
             return ''
 
     def _choosenSkin(self):

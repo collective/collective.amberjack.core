@@ -21,7 +21,7 @@
               <div class="ajDescr">
                 <span tal:replace="structure step/description">every step has a brief explanation of what to do</span>
               </div>
-              <a href="" onclick="doStep(this); return false" 
+              <a href="" onclick="AmberjackPlone.doStep(this); return false" 
                  tal:attributes="class string:ajStep-${step_nr} ajLink;
                                  style step/display;
                                  onclick python:errors and 'return false' or default">&gt;&gt;</a>

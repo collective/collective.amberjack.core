@@ -2,9 +2,11 @@ AmberjackControl.open(
   '<div id="ajControl">'+
     '<div id="ajControlNavi">' +
 		      '<div id="ajPlayerCell">' +
-		        '<a id="ajPrev" class="{prevClass}" href="javascript:;" onclick="this.blur();{prevClick}"><span>{textPrev}</span></a>' + 
-		        '<a id="ajNext" class="{nextClass}" href="javascript:;" onclick="this.blur();{nextClick}"><span>{textNext}</span></a>' +
-		        '<p id="ajCount"><span class="ajCurrPage">{currPage}</span> {textOf} {pageCount}</p>' +
+/*	  
+*        '<a id="ajPrev" class="{prevClass}" href="javascript:;" onclick="this.blur();{prevClick}"><span>{textPrev}</span></a>' + 
+*/
+        '<span id="ajCount">{currPage} {textOf} {pageCount}</span>' +
+		'<a id="ajNext" class="{nextClass}" href="javascript:;" onclick="this.blur();{nextClick}"><span>{textNext}</span></a>' +
 		      '</div>' +
 		      '<div id="ajCloseCell">' +
 		        '<a id="ajClose" href="javascript:;" onclick="Amberjack.close();return false"><span>{textClose}</span></a>' +

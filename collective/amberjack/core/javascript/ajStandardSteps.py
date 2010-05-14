@@ -7,7 +7,12 @@ ajStandardSteps = (
     ('checkbox', ''),  # if [value] is "checked", then check the element, else uncheck
     ('radio', ''),  # if [value] is "checked", then check the element, else uncheck
     ('multiple_select', ''),  # select the options with value given by [value] (can be a list separated by coma without space)
-
+    
+    ('tiny_button_exec',''),
+    ('tiny_button_click',''),
+    ('iframe_click',''),
+    ('iframe_text',''),
+    
     ('manage_portlets', 'div.managePortletsLink a'),
     
     ('go_home', '#portal-breadcrumbs > a'),
@@ -56,7 +61,7 @@ ajStandardSteps = (
     
     ('form_title', '#archetypes-fieldname-title input'),
     ('form_description', '#archetypes-fieldname-description textarea'),
-    ('form_text', '#archetypes-fieldname-text iframe'),
+    ('form_text', '#text_ifr'),
     ('form_location', '#archetypes-fieldname-location input'),
     ('form_url', '#remoteUrl'),
     
@@ -76,25 +81,10 @@ ajStandardSteps = (
     ('image_save', '.formControls input.context'),
     ('file_file', '#file_file'),
     
-    ('button_bold', '#kupu-bold-button'),
-    ('button_italic', '#kupu-italic-button'),
-    ('button_justify', '#kupu-bg-justify'),
-    ('button_justify_left', '#kupu-justifyleft-button'),
-    ('button_justify_center', '#kupu-justifycenter-button'),
-    ('button_justify_rigth', '#kupu-justifyright-button'),
-    ('button_internal_link', '#kupu-linklibdrawer-button'),
-    ('button_external_link', '#kupu-linkdrawer-button'), 
-    ('button_insert_image', '#kupu-imagelibdrawer-button'),
     ('button_dialog_ok', '#kupu-librarydrawer div.kupu-dialogbuttons button.kupu-dialog-button'), # there are 3 buttons of the same kind
     ('button_dialog_cancel', '#kupu-librarydrawer div.kupu-dialogbuttons button.kupu-dialog-button'), # there are 3 buttons of the same kind
     ('button_dialog_reload', '#kupu-librarydrawer div.kupu-dialogbuttons button.kupu-dialog-button'), # there are 3 buttons of the same kind
-    ('text_area','#kupu-editor-iframe-text'), #    ('text_area','#kupu-editor-text .ajHighlight'),
-    ('preview', '#linkdrawer-preview'),
     ('image_align_left', '#image-align-left'),
-
-    
-    ('link_to_home', '#root'),
-    #('radio_button_welcome_to_plone', '#5eaaf087c2c71011ec51b44776235ae5'),
     
     ('calendar_next', '#calendar-next'),
     ('calendar_previous', '#calendar-previous'),
