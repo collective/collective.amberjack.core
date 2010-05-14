@@ -39,7 +39,8 @@ input#form.actions.save.context {
 
 .ajHighlight {
     background-color: yellow !important;
-    font-weight: bold;
+	color: black !important;
+	font-weight: bold !important;
 }
 input.ajHighlight,
 textarea.ajHighlight {

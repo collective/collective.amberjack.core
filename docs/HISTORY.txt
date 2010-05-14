@@ -10,6 +10,8 @@ Changelog
 - add some 'ajStandardSteps' to use the TinyMCE's buttons [mirco]
 - inserted some changes into the js to make click on the buttons of TinyMCE [mirco]
 - inserted some changes into the js to do actions in the iframe [mirco]
+- changes to fix the operation of the highlights [mirco]
+- commented the previous button of tours [mirco]
 - minor Javascript refactoring [keul]
 
 1.0 (unreleased)

@@ -159,7 +159,7 @@ AmberjackPlone = {
 			var type_obj = AjSteps[num].getType();
 			
 			if(type_obj=="checkbox" || type_obj=="radio"){
-				jq("label[for="+obj.attr('id')+"]").addClass(theAJClass);
+				obj.parent().addClass(theAJClass);
 				obj.addClass(theAJClassBehaviour);
 			}
 			else if (type_obj=="select"){
@@ -175,7 +175,7 @@ AmberjackPlone = {
 				obj.addClass(theAJClassBehaviour);
 			}
 			else if (type_obj.match("menu")){
-				obj.addClass(theAJClass);
+				obj.children('dt').children('a').addClass(theAJClass);
 				obj.children('dt').children('a').addClass(theAJClassBehaviour);
 			}
 			else{
@@ -298,13 +298,8 @@ AmberjackPlone = {
 			}
 		}
 	    else if(type_obj=="form_text"){
-			if (jq('#text_ifr').length) {
-				var editor_contents = jq('#text_ifr').contents().find('p')
-			}
-			else{
-				var editor_contents = jq('#kupu-editor-iframe-text').contents().find('p')
-			}
-	        editor_contents.replaceWith("<p>" + value + "</p>")
+			var obj_contents = obj.contents().find('p')
+	        obj_contents.replaceWith("<p>" + value + "</p>")
 	    }
 		else if(type_obj=="form_save_new" || type_obj=="form_save" || type_obj=="form_actions_save" || type_obj=="form_save_default_page"){
 			var form = obj.parents("form");
@@ -431,7 +426,7 @@ AmberjackPlone = {
 				steps.push(parseInt(firstClass[1])-1);
 			});
 		}
-		console.log(steps);
+//		console.log(steps);
 		return steps;
 	},
 

@@ -61,7 +61,7 @@ ajStandardSteps = (
     
     ('form_title', '#archetypes-fieldname-title input'),
     ('form_description', '#archetypes-fieldname-description textarea'),
-    ('form_text', '#archetypes-fieldname-text iframe'),
+    ('form_text', '#text_ifr'),
     ('form_location', '#archetypes-fieldname-location input'),
     ('form_url', '#remoteUrl'),
     
