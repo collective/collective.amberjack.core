@@ -1,7 +1,7 @@
 Contributors
 ============
 
- * Massimo Azzolini [massimo]
+ * Massimo Azzolini [massimo_azzolini]
  * Vincent Fretin [vincentfretin]
  * Luca Fabbri [keul]
  * Federica D'Elia [fdelia]
