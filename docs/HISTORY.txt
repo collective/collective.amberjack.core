@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.0.1 (2010-??-??) unreleased
+-----------------------------
+
+- updated dependency with collective.js.jqueryui
+  [mirco]
+
 1.0 (2010-05-17)
 ----------------
 

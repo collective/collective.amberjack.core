@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.0'
+version = '1.0.1-unreleased'
 
 setup(name='collective.amberjack.core',
       version=version,
@@ -33,7 +33,7 @@ setup(name='collective.amberjack.core',
           'setuptools',
           'plone.app.layout',
           'Products.GenericSetup',
-          'collective.js.jqueryui>=1.7.2.8',
+          'collective.js.jqueryui>=1.8dev',
           'plone.registry',
           # -*- Extra requirements: -*-
       ],
