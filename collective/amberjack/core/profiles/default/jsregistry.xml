@@ -21,10 +21,5 @@
     id="amberjackSteps.js"
     cacheable="False" compression="safe" cookable="False"
     enabled="True" expression=""  inline="False" />
-
- <javascript
-    id="++resource++ui.draggable-1.7.2.js"
-    cacheable="False" compression="safe" cookable="False"
-    enabled="True" expression=""  inline="False" />
-
+	
 </object>

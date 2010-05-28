@@ -1,11 +1,14 @@
 Changelog
 =========
 
-1.0.1 (2010-??-??) unreleased
+1.1a (2010-??-??) unreleased
 -----------------------------
 
 - updated dependency with collective.js.jqueryui
   [mirco]
+- removed registration of ui.draggable-1.7.2 from jsregistry [mirco]
+- add dependency whit collective.amberjack.portlet [mirco]
+
 
 1.0 (2010-05-17)
 ----------------
