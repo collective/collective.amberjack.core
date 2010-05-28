@@ -8,7 +8,7 @@ Changelog
   [mirco]
 - removed registration of ui.draggable-1.7.2 from jsregistry [mirco]
 - add dependency whit collective.amberjack.portlet [mirco]
-
+- added .metadata files for image inside the skins [keul]
 
 1.0 (2010-05-17)
 ----------------
