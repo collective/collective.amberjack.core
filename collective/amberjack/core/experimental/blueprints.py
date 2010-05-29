@@ -1,6 +1,7 @@
 from zope.interface import classProvides, implements
 from zope.component import getUtility
 from collective.amberjack.core.experimental.interfaces import IStep, IStepBlueprint
+from collective.amberjack.core import validators
 
 SSPAN = '<span class="ajHighlight">'
 ESPAN = '</span>'
@@ -18,6 +19,7 @@ class Step(object):
         self.url = self._options['url']
         self.title = self._options['title']
         self.text = normalizeHTML(self._options.get('text',''))
+        self.validators = self._options.get('validators','').splitlines()
 
     def constructMicroSteps(self, options):
         microsteps = options.get('microsteps','').splitlines()
@@ -37,8 +39,15 @@ class Step(object):
         return results
 
     def validate(self, context, request):
-        #ToBeImplemented
-        return []
+        errors = []
+        for _validator in self.validators:
+            if not _validator:
+                continue
+            validator = getattr(validators, _validator)
+            message = validator(context, request)
+            if message:
+                errors.append(message)
+        return errors
 
 class MicroStep(object):
     classProvides(IStepBlueprint)
