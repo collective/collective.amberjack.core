@@ -1,3 +1,14 @@
+"""
+migrates a dictionary-based tour into a configuration-based one
+./bin/instance run src/collective.amberjack.core/collective/amberjack/core/tour_converter.py <tourId>
+
+tourId is the one specified in the tour definition. e.g.
+ajTour = {'tourId': u'basic01_add_and_publish_a_folder',
+          'title': ...,
+          'steps': ...
+                   }
+
+"""
 import sys
 from zope.component import getUtility
 from collective.amberjack.core.tour_manager import ITourManager
@@ -69,7 +80,6 @@ class Converter:
                 self.config.set(section, k, '\n'.join(v))
         elif v.strip():
            self.config.set(section, k, "'%s'" % v)
-
 
 def main(app=None):
     tourId = sys.argv[1]
