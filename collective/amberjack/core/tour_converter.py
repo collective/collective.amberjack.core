@@ -53,7 +53,7 @@ class Converter:
             if k == 'validators':
                 validators = ['']
                 for validator in v:
-                    validators.append("'%s'" % validator.__name__)
+                    validators.append(validator.__name__)
                 self.set(step_name, 'validators', validators)
                 continue
             if k == 'steps':
@@ -79,7 +79,7 @@ class Converter:
             if ''.join(v).strip():
                 self.config.set(section, k, '\n'.join(v))
         elif v.strip():
-           self.config.set(section, k, "'%s'" % v)
+           self.config.set(section, k, v)
 
 def main(app=None):
     tourId = sys.argv[1]
