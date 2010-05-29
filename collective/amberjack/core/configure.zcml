@@ -14,7 +14,6 @@
 
   <include package="plone.registry" />
   <include package="collective.js.jqueryui" />
-  <include package=".viewlets" />
   <include file="skins.zcml" />
   <include file="profiles.zcml" />
   
@@ -51,5 +50,12 @@
 
   <include file="meta.zcml" />
   <include package=".javascript" />  
+
+  <!--
+  <include package=".experimental" />
+  -->
+  
+     <include package=".viewlets" />
+  
 
 </configure>
