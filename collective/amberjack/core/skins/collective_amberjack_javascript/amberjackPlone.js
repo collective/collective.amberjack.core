@@ -257,6 +257,10 @@ AmberjackPlone = {
 		var allClasses = jq(step).attr("class").split(" ");
 		var firstClass = allClasses[0].split('-');
 		var num = parseInt(firstClass[1])-1;
+        
+        var prevStepDone = AmberjackPlone.checkPreviousSteps(num) 
+        if(!prevStepDone)
+            return prevStepDone;
 	
 		try {
 			obj = AjSteps[num].getObj();
@@ -354,30 +358,43 @@ AmberjackPlone = {
 				location.href = obj.attr("href");
 		}	
 	},
+        
+    /**
+     * Check all current page's steps
+     * @author Giacomo Spettoli
+     * 
+     * @return true if all steps done else false
+     */
+    checkAllSteps: function(){
+        var steps = AmberjackPlone.getPageSteps();
+        return AmberjackPlone.checkPreviousSteps(steps.length);
+    },
 
-	/**
-	 * Check all current page's steps
-	 * @author Giacomo Spettoli
-	 * 
-	 * @return true if all steps done else false
-	 */
-	checkAllSteps: function(){
-	    var allDone = true;
-	    var thisStep = true;
-	
-	    var steps = AmberjackPlone.getPageSteps();
-	    for(i =0; i < steps.length;i++){
-			thisStep = AmberjackPlone.checkStep(steps[i]);
-			if(!thisStep){
-				AmberjackBase.alert("Step " + (steps[i]+1) + " not completed");
-				allDone = false;
-				break;
-			}
-			allDone = allDone && thisStep;
-		}
-	    return allDone;
-	},
-
+    /**
+     * Check that all the previous steps have been done.
+     *  
+     * @param num dictionary's label of the actual step, 0 means all
+     * @return true if done else false
+     */
+    checkPreviousSteps:function(num){
+        var allDone = true;
+        var thisStep = true;
+        var steps = AmberjackPlone.getPageSteps();
+        //if (num == 0) {
+        //    num = steps.length
+        //}
+        for(i = 0; i < steps.length && steps[i] < num; i++){
+            thisStep = AmberjackPlone.checkStep(steps[i]);
+            if(!thisStep){
+                AmberjackBase.alert("Step " + (steps[i]+1) + " not completed");
+                allDone = false;
+                break;
+            }
+            allDone = allDone && thisStep;
+        }
+        return allDone;
+    },
+        
 	/**
 	 * Check that the step has been done.
 	 * @author Giacomo Spettoli
@@ -396,18 +413,20 @@ AmberjackPlone = {
 		
 		var type_obj = AjSteps[num].getType();
 		var value = AjSteps[num].getValue();
-		var stepDone = false;
-	    if(type_obj == "") {
-	        stepDone = true
-	    }
+		var stepDone = true;
+	    //if(type_obj == "") {
+	    //    stepDone = true
+	    //}
 		if(type_obj == "collapsible") {
 			if(value=="collapse") {
 				stepDone = obj.hasClass("collapsedInlineCollapsible");
 			}
 			else stepDone = obj.hasClass("expandedInlineCollapsible");
 		}
-		else if(type_obj == "checkbox" || type_obj == "radio") stepDone = obj.attr("checked");
-		else if(type_obj == "select" || type_obj == "text") stepDone = (obj.val()==value?true:false);
+		else if(obj.is("checkbox") || obj.is("radio")) stepDone = obj.attr("checked");
+		else if(obj.is("select") || obj.is("input") || obj.is("textarea")) {
+            if(value!="") stepDone = (obj.val()==value?true:false);
+        }
 		return stepDone;
 	},
 

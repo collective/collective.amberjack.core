@@ -18,8 +18,6 @@
       class=".amberjackSteps.AmberjackSteps" 
       />
 
-  <browser:resource name="ui.draggable-1.7.2.js" file="ui.draggable-1.7.2.js" />
-
   <collective.amberjack:ajstep 
       stepsdescriptor=".ajStandardSteps.ajStandardSteps" />
   
