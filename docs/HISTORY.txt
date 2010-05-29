@@ -14,6 +14,7 @@ Changelog
 - added stepAdapters.js, reducing the complexity of doStep and highlightStep methods [keul]
 - show label element in the correct way #572464 [fdelia]
 - change the way to hide actions of micro-steps when they haven't an idStep [mirco]
+- layout calendar select #580573 [fdelia]
 
 1.0 (2010-05-17)
 ----------------
