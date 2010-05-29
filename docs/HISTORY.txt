@@ -13,6 +13,7 @@ Changelog
 - javascript resources were all not cachable/coockable [keul]
 - added stepAdapters.js, reducing the complexity of doStep and highlightStep methods [keul]
 - show label element in the correct way #572464 [fdelia]
+- change the way to hide actions of micro-steps when they haven't an idStep [mirco]
 
 1.0 (2010-05-17)
 ----------------

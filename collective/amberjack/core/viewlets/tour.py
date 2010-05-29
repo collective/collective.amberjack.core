@@ -55,7 +55,7 @@ class TourViewlet(common.ViewletBase):
             if (step['idStep'] != u''):
                 step['display'] = u''
             else:
-                step['display'] = u'display:none'
+                step['display'] = u'visibility:hidden'
                 
             _steps += (step,)
         return _steps
