@@ -101,7 +101,7 @@ AmberjackBase = {
 
   alert: function(str) {
     if (jq.fn.dialog)
-		jq('<div id="ajMessage">'+str+'<div>').dialog({ modal: true, title: 'Amberjack alert', zIndex: 30000 });
+		jq('<div id="ajMessage">'+str+'<div>').dialog({ modal: true, title: 'Amberjack alert', zIndex: 500000 });
 	else
 		alert('Amberjack alert: ' + str);
   },
