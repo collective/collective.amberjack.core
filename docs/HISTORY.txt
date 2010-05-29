@@ -4,18 +4,30 @@ Changelog
 1.1a (2010-??-??) unreleased
 -----------------------------
 
+- add experimental package (new tour syntax with registration and config parser)
+  [amleczko]
 - updated dependency with collective.js.jqueryui
   [mirco]
-- removed ui.draggable-1.7.2 file and the registration from jsregistry [mirco]
-- add dependency whit collective.amberjack.portlet [mirco]
-- Inserted 'checkPreviousSteps' function to control if the previous micro-steps are done [mirco]
-- added .metadata files for image inside the skins [keul]
-- javascript resources were all not cachable/coockable [keul]
-- added stepAdapters.js, reducing the complexity of doStep and highlightStep methods [keul]
-- show label element in the correct way #572464 [fdelia]
-- change the way to hide actions of micro-steps when they haven't an idStep [mirco]
-- layout calendar select #580573 [fdelia]
-- rely on jQuery UI for performing alert if available (close #572239)  [keul, fdelia]
+- removed ui.draggable-1.7.2 file and the registration from jsregistry
+  [mirco]
+- add dependency whit collective.amberjack.portlet
+  [mirco]
+- Inserted 'checkPreviousSteps' function to control if the previous micro-steps are done
+  [mirco]
+- added .metadata files for image inside the skins
+  [keul]
+- javascript resources were all not cachable/coockable
+  [keul]
+- added stepAdapters.js, reducing the complexity of doStep and highlightStep methods
+  [keul]
+- show label element in the correct way #572464
+  [fdelia]
+- change the way to hide actions of micro-steps when they haven't an idStep
+  [mirco]
+- layout calendar select #580573
+  [fdelia]
+- rely on jQuery UI for performing alert if available (close #572239)
+  [keul, fdelia]
 
 1.0 (2010-05-17)
 ----------------
