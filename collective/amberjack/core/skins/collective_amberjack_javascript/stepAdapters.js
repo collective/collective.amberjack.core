@@ -54,8 +54,8 @@ AmberjackPlone.stepAdapters = {
 	},
 	checkbox: {
 		highlight: function(obj, type_obj, jq_obj, value) {
-			obj.parent().addClass(theAJClass);
-			obj.addClass(theAJClassBehaviour);
+			obj.parent().addClass(AmberjackPlone.theAJClass);
+			obj.addClass(AmberjackPlone.theAJClassBehaviour);
 		},
 		step: function(obj, type_obj, jq_obj, value) {
 	        if (obj.is(':checked'))
@@ -72,9 +72,9 @@ AmberjackPlone.stepAdapters = {
 		highlight: function(obj, type_obj, jq_obj, value) {
 			var tmp = AjSteps[num].getValue().split(",");
 			for (var i=0;i<tmp.length;i++){
-				jq("option[value="+tmp[i]+"]").addClass(theAJClass);
+				jq("option[value="+tmp[i]+"]").addClass(AmberjackPlone.theAJClass);
 			}
-			obj.addClass(theAJClassBehaviour);
+			obj.addClass(AmberjackPlone.theAJClassBehaviour);
 		},
 		step: function(obj, type_obj, jq_obj, value) {
 			var tmp = value.split(",");
@@ -86,15 +86,15 @@ AmberjackPlone.stepAdapters = {
 	form_text: {
 		highlight: null,
 		step: function(obj, type_obj, jq_obj, value) {
-			var obj_contents = obj.contents().find('p')
-	        obj_contents.replaceWith("<p>" + value + "</p>")
+			var obj_contents = obj.contents().find('p');
+	        obj_contents.replaceWith("<p>" + value + "</p>");
 		}
 	},
 	form_save_new: {
 		highlight: null,
 		step: function(obj, type_obj, jq_obj, value) {
 			var form = obj.parents("form");
-			form.submit(function(){
+			form.submit(function() {
 				AmberjackPlone.setAmberjackCookies();
 			});
 			// For some reason, using form.submit ignores the kupu content...

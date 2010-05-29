@@ -61,12 +61,14 @@ function changeSelectValue(obj, value){
 AmberjackPlone = {
     /**
      * some utility constants
-     * BBB: we may move all the functions as methods here
      */
     aj_xpath_exists:     'aj_xpath_exists',    // used to just check if a given xpath exists on a page
     aj_any_url:          'aj_any_url',         // we accept any url in the title
 	aj_plone_consts:     {},                   // all the plone constants we need to check
     aj_canMove_validators: ['validationError'],// set of use case in which aj cannot go further to the next step
+
+	theAJClass: 'ajHighlight',
+	theAJClassBehaviour: 'ajedElement',
 
 	init: function() {
 		AmberjackPlone.highlightAllSteps();
@@ -146,41 +148,22 @@ AmberjackPlone = {
 	 */
 	highlightStep: function(num) {
 		if(Amberjack.pageId){
-			
-			var theAJClass = 'ajHighlight';
-			var theAJClassBehaviour = 'ajedElement';
 			var obj;
-			try{
+			try {
 				obj = AjSteps[num].getObj();
-			}catch(e){
+			} catch (e) {
 				AmberjackBase.alert("Error in highlightStep(): Step " + (num+1) +" not found");
 				return false;
 			}
 			var type_obj = AjSteps[num].getType();
 			
-			if(type_obj=="checkbox" || type_obj=="radio"){
-				obj.parent().addClass(theAJClass);
-				obj.addClass(theAJClassBehaviour);
-			}
-			else if (type_obj=="select"){
-				var highlightThis = jq(obj + " option[value="+ AjSteps[num].getValue() +"]");
-				highlightThis.addClass(theAJClass);
-				obj.addClass(theAJClassBehaviour);
-			}
-			else if (type_obj=="multiple_select"){
-				var tmp = AjSteps[num].getValue().split(",");
-				for (var i=0;i<tmp.length;i++){
-					jq("option[value="+tmp[i]+"]").addClass(theAJClass);
-				}
-				obj.addClass(theAJClassBehaviour);
-			}
+			if (AmberjackPlone.stepAdapters[type_obj] && AmberjackPlone.stepAdapters[type_obj].highlight)
+				AmberjackPlone.stepAdapters[type_obj].highlight(obj, type_obj, null, null);	
 			else if (type_obj.match("menu")){
-				obj.children('dt').children('a').addClass(theAJClass);
-				obj.children('dt').children('a').addClass(theAJClassBehaviour);
+				obj.children('dt').children('a').addClass(AmberjackPlone.theAJClass+' '+AmberjackPlone.theAJClassBehaviour);
 			}
-			else{
-				obj.addClass(theAJClass);
-				obj.addClass(theAJClassBehaviour);
+			else {
+				obj.addClass(AmberjackPlone.theAJClass+' '+AmberjackPlone.theAJClassBehaviour);
 			}
 		}
 	},
@@ -253,7 +236,6 @@ AmberjackPlone = {
 	 */
 	doStep: function(step) {
 		var obj, type_obj, jq_obj, value;
-		
 		var allClasses = jq(step).attr("class").split(" ");
 		var firstClass = allClasses[0].split('-');
 		var num = parseInt(firstClass[1])-1;
@@ -267,94 +249,26 @@ AmberjackPlone = {
 			type_obj = AjSteps[num].getType();
 			jq_obj = AjSteps[num].getJq();
 			value = AjSteps[num].getValue();
-		} catch(e){
+		} catch(e) {
 			AmberjackBase.alert("Error in doStep(): Step " + num +" not found");
 			return false;
 		}
-	        
-		if (type_obj == 'link') {
-			AmberjackPlone.setAmberjackCookies();
-			location.href = obj.attr('href');
-		}
-		else if (type_obj == 'button')
-			obj.click();
-	    else if (type_obj == 'collapsible') {
-			if (value == 'collapse') 
-				obj.removeClass('expandedInlineCollapsible').addClass('collapsedInlineCollapsible');
-			else
-				obj.removeClass('collapsedInlineCollapsible').addClass('expandedInlineCollapsible');
-		}
-		else if (type_obj == "text") 
-			changeValue(obj, value);
-		else if (type_obj == "select") {
-			AmberjackPlone.setAmberjackCookies();
-			changeSelectValue(obj, value);
-		} else if(type_obj == "checkbox" || type_obj == "radio") {
-	        if (obj.is(':checked'))
-	            obj.attr('checked', false);
-	        else
-	            obj.attr('checked', true);
-		}
-		else if(type_obj == "multiple_select"){
-			var tmp = value.split(",");
-			for (var i=0;i<tmp.length;i++){
-				jq("option[value="+tmp[i]+"]").attr("selected","selected");
-			}
-		}
-	    else if(type_obj=="form_text"){
-			var obj_contents = obj.contents().find('p')
-	        obj_contents.replaceWith("<p>" + value + "</p>")
-	    }
-		else if(type_obj=="form_save_new" || type_obj=="form_save" || type_obj=="form_actions_save" || type_obj=="form_save_default_page"){
-			var form = obj.parents("form");
-			form.submit(function(){
-				AmberjackPlone.setAmberjackCookies();
-			});
-			// For some reason, using form.submit ignores the kupu content...
-			// ... so we simulate the click
-			window.onbeforeunload = null;
-			jq(obj).click();
-		}
-		// STANDARD STEPS
-		else if(obj.attr('type')=='file') {alert(this.aj_plone_consts['BrowseFile'])} //
-		else if(type_obj.match("menu")){
-			if(value=='deactivate') obj.removeClass('activated').addclass('deactivated');
-			else obj.removeClass('deactivated').addClass('activated');
-		}
-		else if(type_obj=="tiny_button_exec") {
-			tinyMCE.get('text').execCommand(value);
-		}
-		else if(type_obj=="tiny_button_click"){
-			tinyMCE.get('text').buttons[value].onclick();
-		}
-		else if(type_obj=="iframe_click"){
-			jq('.plonepopup iframe').contents().find(jq_obj).click();
-		}
-		else if(type_obj=="iframe_text"){
-			obj = jq('.plonepopup iframe').contents().find(jq_obj);
-			changeValue(obj, value);
-		}
-		else if(type_obj=="iframe_select"){
-			AmberjackPlone.setAmberjackCookies();
-			obj = jq('.plonepopup iframe').contents().find(jq_obj);
-			changeSelectValue(obj, value);
-		}
-		else if(type_obj=="iframe_radio"){
-			obj = jq('.plonepopup iframe').contents().find(jq_obj);
-			if (obj.is(':checked'))
-	            obj.attr('checked', false);
-	        else
-	            obj.attr('checked', true);
-		}
-		else if(value!="") {
+	    
+		if (AmberjackPlone.stepAdapters[type_obj] && AmberjackPlone.stepAdapters[type_obj].step)
+			AmberjackPlone.stepAdapters[type_obj].step(obj, type_obj, jq_obj, value);		
+		else if (value!="") {
 			changeValue(obj,value);
 		}
-		else if(jq_obj=="") {
+		else if(type_obj.match("menu")){
+			if (value=='deactivate') obj.removeClass('activated').addclass('deactivated');
+			else obj.removeClass('deactivated').addClass('activated');
+		}
+		else if (jq_obj=="") {
 			obj.click(function(){
 	            AmberjackPlone.setAmberjackCookies()
 			});	
 			obj.click();
-			if(obj.attr("href"))
+			if (obj.attr("href"))
 				location.href = obj.attr("href");
 		}	
 	},
@@ -402,11 +316,11 @@ AmberjackPlone = {
 	 * @param num dictionary's label of the step
 	 * @return true if done else false
 	 */
-	checkStep:function(num){
+	checkStep: function(num) {
 		var obj;
-		try{
+		try {
 			obj = AjSteps[num].getObj();
-		}catch(e){
+		} catch(e) {
 			alert("Error in checkStep(): Step " + num +" not found");
 			return false;
 		}
@@ -414,18 +328,16 @@ AmberjackPlone = {
 		var type_obj = AjSteps[num].getType();
 		var value = AjSteps[num].getValue();
 		var stepDone = true;
-	    //if(type_obj == "") {
-	    //    stepDone = true
-	    //}
-		if(type_obj == "collapsible") {
-			if(value=="collapse") {
+
+		if (type_obj == "collapsible") {
+			if (value=="collapse") {
 				stepDone = obj.hasClass("collapsedInlineCollapsible");
 			}
 			else stepDone = obj.hasClass("expandedInlineCollapsible");
 		}
 		else if(obj.is("checkbox") || obj.is("radio")) stepDone = obj.attr("checked");
 		else if(obj.is("select") || obj.is("input") || obj.is("textarea")) {
-            if(value!="") stepDone = (obj.val()==value?true:false);
+            if(value!="") stepDone = obj.val()==value;
         }
 		return stepDone;
 	},
@@ -445,7 +357,6 @@ AmberjackPlone = {
 				steps.push(parseInt(firstClass[1])-1);
 			});
 		}
-//		console.log(steps);
 		return steps;
 	},
 
@@ -463,11 +374,9 @@ AmberjackPlone = {
 }
 
 
-/**
- * 
+/* 
  * @author Mirco Angelini
  */
-
 var handledFunctions = ['mcTabs','displayPanel','getFolderListing','tinyMCEPopup','getCurrentFolderListing'];
 
 var popup_interval = setInterval(function(){
