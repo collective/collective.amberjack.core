@@ -12,6 +12,7 @@ Changelog
 - added .metadata files for image inside the skins [keul]
 - javascript resources were all not cachable/coockable [keul]
 - added stepAdapters.js, reducing the complexity of doStep and highlightStep methods [keul]
+- show label element in the correct way #572464 [fdelia]
 
 1.0 (2010-05-17)
 ----------------
