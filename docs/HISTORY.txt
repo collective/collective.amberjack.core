@@ -15,6 +15,7 @@ Changelog
 - show label element in the correct way #572464 [fdelia]
 - change the way to hide actions of micro-steps when they haven't an idStep [mirco]
 - layout calendar select #580573 [fdelia]
+- rely on jQuery UI for performing alert if available (close #572239)  [keul, fdelia]
 
 1.0 (2010-05-17)
 ----------------
