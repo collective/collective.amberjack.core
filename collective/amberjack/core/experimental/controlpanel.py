@@ -15,7 +15,7 @@ class AJControlPanelAdapter(SchemaAdapterBase):
         reg = getUtility(ITourRegistration, 'zip_archive')
         registration = reg(value)
         registration.register()
-      
+
     def get_uri(self):
         return None
 
