@@ -47,6 +47,50 @@ textarea.ajHighlight {
 	background-image: none;
 	background-color: #FFFF99;
 }
+/*.formControls .ajHighlight {
+	background-color: yellow !important;
+	color: black !important;
+	border: 0.1em solid #555555;
+	border-bottom-right-radius: 0.5em;
+	border-bottom-left-radius: 0.5em;
+	border-radius-bottomleft: 0.9em;
+	-moz-border-radius-bottomleft: 0.9em;
+	-webkit-border-radius-bottomleft: 0.9em;
+	border-radius-bottomright: 0.9em;
+	-moz-border-radius-bottomright: 0.9em;
+	-webkit-border-radius-bottomright: 0.9em;
+	border-radius-topleft: 0.9em;
+	-moz-border-radius-topleft: 0.9em;
+	-webkit-border-radius-topleft: 0.9em;
+	border-radius-topright: 0.9em;
+	-moz-border-radius-topright: 0.9em;
+	-webkit-border-radius-topright: 0.9em;
+	padding: 0 0.5em;
+	box-shadow: 0 0 1px #555555 inset;
+	-moz-box-shadow: 0 0 1px #555555 inset;
+	-webkit-box-shadow: 0 0 1px #555555 inset;
+}*/
+.plone_jscalendar select.ajHighlight {
+	background-color: yellow !important;
+	color: black !important;
+	border: 0.1em solid #555555;
+	border-radius-bottomleft: 0.5em;
+	-moz-border-radius-bottomleft: 0.5em;
+	-webkit-border-radius-bottomleft: 0.5em;
+	border-radius-bottomright: 0.5em;
+	-moz-border-radius-bottomright: 0.5em;
+	-webkit-border-radius-bottomright: 0.5em;
+	border-radius-topleft: 0.5em;
+	-moz-border-radius-topleft: 0.5em;
+	-webkit-border-radius-topleft: 0.5em;
+	border-radius-topright: 0.5em;
+	-moz-border-radius-topright: 0.5em;
+	-webkit-border-radius-topright: 0.5em;
+	padding: 0 0.1em 0 0.5em;
+	box-shadow: -0.1em 0 1px #555555 inset;
+   	-moz-box-shadow: -0.1em 0 1px #555555 inset;
+   	-webkit-box-shadow: -0.1em 0 1px #555555 inset;
+}
 a.ajHighlight:hover {
 	color: #000!important;
 }
