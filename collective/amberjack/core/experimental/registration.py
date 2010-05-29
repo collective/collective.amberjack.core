@@ -4,7 +4,10 @@ from collective.amberjack.core.interfaces import ITourDefinition
 from collective.amberjack.core.experimental.interfaces import ITourRegistration
 from collective.amberjack.core.experimental.tour import Tour
 import zipfile
+from cStringIO import StringIO
+import urllib2
 import os
+from urlparse import urlparse
 
 class TourRegistration(object):
     """
@@ -12,8 +15,9 @@ class TourRegistration(object):
     """
     classProvides(ITourRegistration)
 
-    def __init__(self, uri):
-        self.uri = uri
+    def __init__(self, source, request):
+        self.source = source
+        self.request = request
 
     def source_packages(self):
         raise NotImplemented
@@ -36,12 +40,37 @@ class FileArchiveRegistration(TourRegistration):
     """
     classProvides(ITourRegistration)
 
+    # BBB: other archives
+
     def source_packages(self):
-        self.archive = zipfile.ZipFile(self.uri, "r")
+        _zip = StringIO()
+        _zip.write(self.source)
+        self.archive = zipfile.ZipFile(_zip)
         for f in self.archive.namelist():
             if not self.isProperTour(f):
                 continue
             yield self.archive.open(f,'r')
 
     def tour_namespace(self):
-        return os.path.basename(self.archive.filename)
+        return self.request.form['form.zipfile'].filename
+
+class WebRegistration(TourRegistration):
+    """
+    Web tour registration
+    """
+    classProvides(ITourRegistration)
+
+    # BBB: other archives
+
+    def source_packages(self):
+        response = urllib2.urlopen(self.source)
+        _zip = StringIO()
+        _zip.write(response.read())
+        self.archive = zipfile.ZipFile(_zip)
+        for f in self.archive.namelist():
+            if not self.isProperTour(f):
+                continue
+            yield self.archive.open(f,'r')
+
+    def tour_namespace(self):
+        return os.path.basename(urlparse(self.request.form['form.url']).path)

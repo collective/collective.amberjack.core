@@ -20,7 +20,7 @@ class Step(object):
         self.text = normalizeHTML(self._options.get('text',''))
 
     def constructMicroSteps(self, options):
-        microsteps = options.get('steps','').splitlines()
+        microsteps = options.get('microsteps','').splitlines()
         results = []
         for microstep_id in microsteps:
             microstep_id = microstep_id.strip()

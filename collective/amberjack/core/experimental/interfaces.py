@@ -12,4 +12,20 @@ class IStepBlueprint(Interface):
 
 class ITourRegistration(Interface):
     """ """
-    uri = schema.TextLine(title= u"URI", required=True)
+
+class IFileArchiveTourRegistration(Interface):
+    """ """
+    zipfile = schema.Bytes(
+        title=u'Choose archive file',
+        required=False)
+
+class IWebTourRegistration(Interface):
+    """ """
+    url = schema.URI(
+        title=u'Choose url',
+        required=False)
+
+class ITourRegistrationForm(IFileArchiveTourRegistration,
+                            IWebTourRegistration):
+    """ """
+

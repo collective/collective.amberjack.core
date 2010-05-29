@@ -17,7 +17,9 @@
       permission="cmf.ManagePortal"
       />
 
-     <adapter factory=".controlpanel.AJControlPanelAdapter"/>
+  <adapter
+      factory=".controlpanel.AJControlPanelAdapter"
+    />
 
   <utility
       component=".blueprints.Step"
@@ -31,7 +33,12 @@
 
   <utility
       component=".registration.FileArchiveRegistration"
-      name="zip_archive"
+      name="zipfile"
+      />
+
+  <utility
+      component=".registration.WebRegistration"
+      name="url"
       />
 
 
