@@ -15,6 +15,7 @@ AmberjackPlone.stepAdapters = {
 	
 	link: {
 		highlight: null,
+        checkStep: null,
 		step: function(obj, type_obj, jq_obj, value) {
 			AmberjackPlone.setAmberjackCookies();
 			location.href = obj.attr('href');
@@ -22,12 +23,19 @@ AmberjackPlone.stepAdapters = {
 	},
 	button: {
 		highlight: null,
+        checkStep: null,
 		step: function(obj, type_obj, jq_obj, value) {
 			obj.click();
 		}
 	},
 	collapsible: {
 		highlight: null,
+        checkStep: function (obj, jq_obj, value) {
+            if (value=="collapse") {
+                return obj.hasClass("collapsedInlineCollapsible");
+            }
+            else return obj.hasClass("expandedInlineCollapsible");
+        },
 		step: function(obj, type_obj, jq_obj, value) {
 			if (value == 'collapse') 
 				obj.removeClass('expandedInlineCollapsible').addClass('collapsedInlineCollapsible');
@@ -37,6 +45,10 @@ AmberjackPlone.stepAdapters = {
 	},
 	text: {
 		highlight: null,
+        checkStep: function (obj, jq_obj, value) {
+            if(value!="") return obj.val()==value;
+            else return true;
+        },
 		step: function(obj, type_obj, jq_obj, value) {
 			changeValue(obj, value);
 		}
@@ -47,6 +59,10 @@ AmberjackPlone.stepAdapters = {
 			highlightThis.addClass(AmberjackPlone.theAJClass);
 			obj.addClass(AmberjackPlone.theAJClassBehaviour);
 		},
+        checkStep: function (obj, jq_obj, value) {
+            if(value!="") return obj.val()==value;
+            else return true;
+        },
 		step: function(obj, type_obj, jq_obj, value) {
 			AmberjackPlone.setAmberjackCookies();
 			changeSelectValue(obj, value);
@@ -57,6 +73,9 @@ AmberjackPlone.stepAdapters = {
 			obj.parent().addClass(AmberjackPlone.theAJClass);
 			obj.addClass(AmberjackPlone.theAJClassBehaviour);
 		},
+        checkStep: function (obj, jq_obj, value) {
+            return obj.attr("checked");
+        },
 		step: function(obj, type_obj, jq_obj, value) {
 	        if (obj.is(':checked'))
 	            obj.attr('checked', false);
@@ -66,6 +85,7 @@ AmberjackPlone.stepAdapters = {
 	},
 	radio: {
 		highlight: null, // AmberjackPlone.stepAdapters.checkbox.highlight,
+		checkStep: null, // AmberjackPlone.stepAdapters.checkbox.checkStep,
 		step: null // AmberjackPlone.stepAdapters.checkbox.step
 	},
 	multiple_select: {
@@ -76,6 +96,16 @@ AmberjackPlone.stepAdapters = {
 			}
 			obj.addClass(AmberjackPlone.theAJClassBehaviour);
 		},
+        checkStep: function (obj, jq_obj, value) {
+            var tmp = value.split(",");
+            var selected = true;
+            for (var i=0;i<tmp.length;i++){
+                //TODO
+                //selected = selected && jq("option[value="+tmp[i]+"]").attr("selected","selected");
+                selected = true;
+            }
+            return selected;
+        },
 		step: function(obj, type_obj, jq_obj, value) {
 			var tmp = value.split(",");
 			for (var i=0;i<tmp.length;i++){
@@ -85,6 +115,10 @@ AmberjackPlone.stepAdapters = {
 	},
 	form_text: {
 		highlight: null,
+        checkStep: function (obj, jq_obj, value) {
+            var obj_contents = obj.contents().find('p');
+            return obj_contents.text() == value;
+        },
 		step: function(obj, type_obj, jq_obj, value) {
 			var obj_contents = obj.contents().find('p');
 	        obj_contents.replaceWith("<p>" + value + "</p>");
@@ -92,6 +126,7 @@ AmberjackPlone.stepAdapters = {
 	},
 	form_save_new: {
 		highlight: null,
+        checkStep: null,
 		step: function(obj, type_obj, jq_obj, value) {
 			var form = obj.parents("form");
 			form.submit(function() {
@@ -105,42 +140,54 @@ AmberjackPlone.stepAdapters = {
 	},
 	form_save: {
 		highlight: null,
+        checkStep: null,
 		step: null // AmberjackPlone.stepAdapters.form_save_new.step
 	},
 	form_actions_save: {
 		highlight: null,
+        checkStep: null,
 		step: null // AmberjackPlone.stepAdapters.form_save_new.step
 	},
 	form_save_default_page: {
 		highlight: null,
+        checkStep: null,
 		step: null // AmberjackPlone.stepAdapters.form_save_new.step
 	},
 	file: {
 		highlight: null,
+        checkStep: null,
 		step: function(obj, type_obj, jq_obj, value) {
 			AmberjackBase.alert(this.aj_plone_consts['BrowseFile']);
 		}
 	},
 	tiny_button_exec: {
 		highlight: null,
+        checkStep: null,
 		step: function(obj, type_obj, jq_obj, value) {
 			tinyMCE.get('text').execCommand(value);
 		}
 	},
 	tiny_button_click: {
 		highlight: null,
+        checkStep: null,
 		step: function(obj, type_obj, jq_obj, value) {
 			tinyMCE.get('text').buttons[value].onclick();
 		}
 	},
 	iframe_click: {
 		highlight: null,
+        checkStep: null,
 		step: function(obj, type_obj, jq_obj, value) {
 			jq('.plonepopup iframe').contents().find(jq_obj).click();
 		}
 	},
 	iframe_text: {
 		highlight: null,
+        checkStep: function(obj, jq_obj, value) {
+            obj = jq('.plonepopup iframe').contents().find(jq_obj);
+            if(value!="") return obj.val()==value;
+            else return true;
+        },
 		step: function(obj, type_obj, jq_obj, value) {
 			obj = jq('.plonepopup iframe').contents().find(jq_obj);
 			changeValue(obj, value);
@@ -148,6 +195,11 @@ AmberjackPlone.stepAdapters = {
 	},
 	iframe_select: {
 		highlight: null,
+        checkStep: function(obj, jq_obj, value) {
+            obj = jq('.plonepopup iframe').contents().find(jq_obj);
+            if(value!="") return obj.val()==value;
+            else return true;
+        },
 		step: function(obj, type_obj, jq_obj, value) {
 			AmberjackPlone.setAmberjackCookies();
 			obj = jq('.plonepopup iframe').contents().find(jq_obj);
@@ -156,6 +208,10 @@ AmberjackPlone.stepAdapters = {
 	},
 	iframe_radio: {
 		highlight: null,
+        checkStep: function(obj, jq_obj, value) {
+            obj = jq('.plonepopup iframe').contents().find(jq_obj);
+            return obj.attr("checked");
+        },
 		step: function(obj, type_obj, jq_obj, value) {
 			obj = jq('.plonepopup iframe').contents().find(jq_obj);
 			if (obj.is(':checked'))

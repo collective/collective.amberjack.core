@@ -281,7 +281,7 @@ AmberjackPlone = {
      */
     checkAllSteps: function(){
         var steps = AmberjackPlone.getPageSteps();
-        return AmberjackPlone.checkPreviousSteps(steps.length);
+        return AmberjackPlone.checkPreviousSteps(steps[steps.length-1]);
     },
 
     /**
@@ -294,10 +294,9 @@ AmberjackPlone = {
         var allDone = true;
         var thisStep = true;
         var steps = AmberjackPlone.getPageSteps();
-        //if (num == 0) {
-        //    num = steps.length
-        //}
+        
         for(i = 0; i < steps.length && steps[i] < num; i++){
+            var type_obj = AjSteps[steps[i]].getType();
             thisStep = AmberjackPlone.checkStep(steps[i]);
             if(!thisStep){
                 AmberjackBase.alert("Step " + (steps[i]+1) + " not completed");
@@ -326,20 +325,19 @@ AmberjackPlone = {
 		}
 		
 		var type_obj = AjSteps[num].getType();
+        var jq_obj = AjSteps[num].getJq();
 		var value = AjSteps[num].getValue();
 		var stepDone = true;
-
-		if (type_obj == "collapsible") {
-			if (value=="collapse") {
-				stepDone = obj.hasClass("collapsedInlineCollapsible");
-			}
-			else stepDone = obj.hasClass("expandedInlineCollapsible");
-		}
-		else if(obj.is("checkbox") || obj.is("radio")) stepDone = obj.attr("checked");
-		else if(obj.is("select") || obj.is("input") || obj.is("textarea")) {
-            if(value!="") stepDone = obj.val()==value;
+        var stepRequired = true;
+        
+        if (stepRequired) {
+            if (AmberjackPlone.stepAdapters[type_obj] && AmberjackPlone.stepAdapters[type_obj].step)
+                stepDone = AmberjackPlone.stepAdapters[type_obj].checkStep(obj, jq_obj, value)
+            else if (value!="") {
+                stepDone = obj.val()==value;
+            }
         }
-		return stepDone;
+        return stepDone;
 	},
 
 	/**
