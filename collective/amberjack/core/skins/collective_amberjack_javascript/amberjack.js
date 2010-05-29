@@ -215,7 +215,7 @@ AmberjackBase = {
    * @param type Either 'script' OR 'style'
    * @param onerror Optional: callback handler if loading did not work
    *
-   * @example loadScript('http://localhost/js/dummy.js', function(){alert('could not load')})
+   * @example loadScript('http://localhost/js/dummy.js', function(){AmberjackBase.alert('could not load')})
    * Note that a HEAD tag needs to be existent in the current document
    */
 

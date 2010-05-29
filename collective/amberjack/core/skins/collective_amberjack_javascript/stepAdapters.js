@@ -118,7 +118,7 @@ AmberjackPlone.stepAdapters = {
 	file: {
 		highlight: null,
 		step: function(obj, type_obj, jq_obj, value) {
-			alert(this.aj_plone_consts['BrowseFile']);
+			AmberjackBase.alert(this.aj_plone_consts['BrowseFile']);
 		}
 	},
 	tiny_button_exec: {
