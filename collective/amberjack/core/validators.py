@@ -36,3 +36,12 @@ def isReader(context, request):
     if not request.AUTHENTICATED_USER.has_role('Editor', context):
         return _(u"You have to be Reader to execute this step.")
 
+def isFolderCreated(context, request):
+    portal = getToolByName(context, 'portal_url').getPortalObject()
+    myfolder = getattr(portal, 'myfolder', None)
+    if myfolder is None:
+        return _(u"The [MyFolder] folder doesn't exist yet. Please close this tour and start the first tour.")
+
+def isNotFolderCreated(context, request):
+    if isFolderCreated(context, request) is None:
+        return _(u"Please remove the [MyFolder] folder to start the tour.")
