@@ -7,7 +7,7 @@ ajTour = {'tourId': u'basic01_add_and_publish_a_folder',
           'title': ...,
           'steps': ...
                    }
-
+tourId can also be ALL that means "get all the registered tours and convert them"
 """
 import sys
 from zope.component import getUtility
@@ -22,14 +22,12 @@ def normalize(noun):
 
 class Converter:
 
-    def __init__(self, tourId, context):
+    def __init__(self, tourId, tour):
         self.tourId = tourId
-        self.context = context
+        self.tour = tour
         self.config = ConfigParser.RawConfigParser()
-        manager = getUtility(ITourManager)
-        self.tour = manager.getTour(tourId, context)
-
-    def convert(self):
+        
+    def convertTour(self):
         if not self.tour:
             return
         self.config.add_section('amberjack')
@@ -46,7 +44,7 @@ class Converter:
             self.config.write(configfile)
 
     def convert_step(self, step, step_no):
-        step_name = normalize(step['title'])
+        step_name = normalize('%s_%s' % (step_no, step['title']))
         self.config.add_section(step_name)
         self.config.set(step_name, 'blueprint', 'collective.amberjack.blueprints.step')
         for k, v in step.items(): 
@@ -63,7 +61,7 @@ class Converter:
                     self.convert_microstep(microstep, microstep_name)
                     section_microsteps.append(microstep_name)
                 if section_microsteps != ['']:
-                    self.set(step_name, 'steps', section_microsteps)
+                    self.set(step_name, 'microsteps', section_microsteps)
                 continue
 
             self.set(step_name, k, v)
@@ -83,7 +81,13 @@ class Converter:
 
 def main(app=None):
     tourId = sys.argv[1]
-    Converter(tourId, app).convert()
+    manager = getUtility(ITourManager)
+    if tourId == 'ALL':
+        for tourId, tour in manager.getTours(app):
+            Converter(tourId, tour).convertTour()
+    else:
+        tour = manager.getTour(tourId, app)
+        Converter(tourId, tour).convertTour()
 
 if __name__ == '__main__':
     main(app=app) 
