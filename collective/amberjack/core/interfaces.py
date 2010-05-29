@@ -1,6 +1,6 @@
 from zope.interface import Interface
 from zope import schema
-from zope.configuration.fields import Tokens, GlobalObject, Path, PythonIdentifier
+from zope.configuration.fields import GlobalObject, Path
 
 
 class IAmberjackSkin(Interface):
@@ -74,3 +74,4 @@ class IMicroStepsManager(Interface):
         
     def getSteps():
         """returns the list of all the registered microsteps"""
+
