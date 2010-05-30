@@ -21,14 +21,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-
-// Try to be compatible with other browsers
-// Only use firebug logging if available
-if (typeof console == 'undefined') {
-  console = {};
-  console.log = function() {};
-}
-
 /**
  * Capsulates some static helper functions
  * @author Arash Yalpani
@@ -104,6 +96,13 @@ AmberjackBase = {
 		jq('<div id="ajMessage">'+str+'<div>').dialog({ modal: true, title: 'Amberjack alert', zIndex: 500000 });
 	else
 		alert('Amberjack alert: ' + str);
+  },
+
+  log: function(str, e) {
+  	if (window.console && window.console.log) {
+		window.console.log("Amberjack log:" +str);
+		if (e && e.description) window.console.log("Amberjack log:" +e.description);
+	}
   },
 
   /**

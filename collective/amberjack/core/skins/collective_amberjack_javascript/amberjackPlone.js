@@ -78,7 +78,7 @@ AmberjackPlone = {
 		AmberjackPlone.disableLinks();
 	    var last_step = jq('#ajControl').find('#ajLastStep')
 	    // if it's the last step add this tour to the completed cookie
-	    if(last_step.length !== 0){
+	    if (last_step.length !== 0){
 	        completed = Amberjack.readCookie('ajcookie_completed')
 	        if(completed){
 	            completed = completed + '#another one'
@@ -152,7 +152,9 @@ AmberjackPlone = {
 			try {
 				obj = AjSteps[num].getObj();
 			} catch (e) {
-				AmberjackBase.alert("Error in highlightStep(): Step " + (num+1) +" not found");
+				var msg = "Error in highlightStep(): Step " + (num+1) +" not found";
+				AmberjackBase.alert(msg);
+				AmberjackBase.log(msg, e);
 				return false;
 			}
 			var type_obj = AjSteps[num].getType();
@@ -178,10 +180,8 @@ AmberjackPlone = {
 	 * @author Giacomo Spettoli
 	 */
 	ajTour: function() {
-		var theAJClass = 'ajHighlight';
-		var theAJClassBehaviour = 'ajedElement';
 		
-		jq('.' + theAJClassBehaviour).click(function(){
+		jq('.' + AmberjackPlone.theAJClassBehaviour).click(function() {
 			AmberjackPlone.setAmberjackCookies();
 		});
 		
@@ -199,8 +199,8 @@ AmberjackPlone = {
 	 * @author Giacomo Spettoli
 	 * @author Massimo Azzolini
 	 */
-	disableLinks: function(){
-		if(Amberjack.pageId){
+	disableLinks: function() {
+		if (Amberjack.pageId) {
 			var notAj = jq("a").not(".ajHighlight,.ajedElement,[id^='aj'],[class^='aj']");
 			//NOTE: we assume that there are no other 'ajXXX' ids
 			notAj.click(function(){
@@ -221,7 +221,7 @@ AmberjackPlone = {
 			var ajNext = jq("#ajNext");
 			
 			// BBB
-			ajNext.attr("onClick","if(AmberjackPlone.checkAllSteps()){" + ajNext.attr('onClick') + "}");
+			ajNext.attr("onClick","if (AmberjackPlone.checkAllSteps()) {" + ajNext.attr('onClick') + "}");
 		}
 	},
 
@@ -241,7 +241,7 @@ AmberjackPlone = {
 		var num = parseInt(firstClass[1])-1;
         
         var prevStepDone = AmberjackPlone.checkPreviousSteps(num) 
-        if(!prevStepDone)
+        if (!prevStepDone)
             return prevStepDone;
 	
 		try {
@@ -250,16 +250,18 @@ AmberjackPlone = {
 			jq_obj = AjSteps[num].getJq();
 			value = AjSteps[num].getValue();
 		} catch(e) {
-			AmberjackBase.alert("Error in doStep(): Step " + num +" not found");
+			var msg = "Error in doStep(): Step " + num +" not found";
+			AmberjackBase.alert(msg);
+			AmberjackBase.log(msg, e);
 			return false;
 		}
 	    
 		if (AmberjackPlone.stepAdapters[type_obj] && AmberjackPlone.stepAdapters[type_obj].step)
 			AmberjackPlone.stepAdapters[type_obj].step(obj, type_obj, jq_obj, value);		
 		else if (value!="") {
-			changeValue(obj,value);
+			changeValue(obj, value);
 		}
-		else if(type_obj.match("menu")){
+		else if (type_obj.match("menu")) {
 			if (value=='deactivate') obj.removeClass('activated').addclass('deactivated');
 			else obj.removeClass('deactivated').addClass('activated');
 		}
@@ -270,9 +272,9 @@ AmberjackPlone = {
 			obj.click();
 			if (obj.attr("href"))
 				location.href = obj.attr("href");
-		}	
+		}
 	},
-        
+
     /**
      * Check all current page's steps
      * @author Giacomo Spettoli
@@ -295,7 +297,7 @@ AmberjackPlone = {
         var thisStep = true;
         var steps = AmberjackPlone.getPageSteps();
         
-        for(i = 0; i < steps.length && steps[i] < num; i++){
+        for (var i = 0; i < steps.length && steps[i] < num; i++) {
             var type_obj = AjSteps[steps[i]].getType();
             thisStep = AmberjackPlone.checkStep(steps[i]);
             if(!thisStep){
@@ -320,7 +322,9 @@ AmberjackPlone = {
 		try {
 			obj = AjSteps[num].getObj();
 		} catch(e) {
-			alert("Error in checkStep(): Step " + num +" not found");
+			var msg = "Error in checkStep(): Step " + num +" not found"; 
+			AmberjackBase.alert(msg);
+			AmberjackBase.log(msg, e);
 			return false;
 		}
 		
@@ -331,7 +335,7 @@ AmberjackPlone = {
         var stepRequired = true;
         
         if (stepRequired) {
-            if (AmberjackPlone.stepAdapters[type_obj] && AmberjackPlone.stepAdapters[type_obj].step)
+            if (AmberjackPlone.stepAdapters[type_obj] && AmberjackPlone.stepAdapters[type_obj].checkStep)
                 stepDone = AmberjackPlone.stepAdapters[type_obj].checkStep(obj, jq_obj, value)
             else if (value!="") {
                 stepDone = obj.val()==value;
