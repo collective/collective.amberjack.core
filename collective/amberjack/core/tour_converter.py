@@ -20,12 +20,45 @@ def normalize(noun):
     normalizer = getUtility(IIDNormalizer)
     return normalizer.normalize(noun)
 
+class OrderedConfigParser(ConfigParser.RawConfigParser):
+
+    def _ajcmp(self, x, y):
+        x2=x.split('_')
+        y2=y.split('_')
+        xlen = len(x2)
+        ylen = len(y2)
+        if xlen > ylen:
+            for i in range(xlen-ylen):
+                y2.insert(-1, '')
+        else:
+            for i in range(ylen-xlen):
+                x2.insert(-1, '')
+        return cmp(x2, y2)
+
+    def write(self, fp):
+        """Write an .ini-format representation of the configuration state."""
+        if self._defaults:
+            fp.write("[%s]\n" % DEFAULTSECT)
+            for (key, value) in self._defaults.items():
+                fp.write("%s = %s\n" % (key, str(value).replace('\n', '\n\t')))
+            fp.write("\n")
+        keys = self._sections.keys()
+        keys.sort(self._ajcmp)
+        for section in keys:
+            fp.write("[%s]\n" % section)
+            for (key, value) in self._sections[section].items(): 
+                if key != "__name__":
+                    fp.write("%s = %s\n" %
+                        (key, str(value).replace('\n', '\n\t')))
+            fp.write("\n")
+
+
 class Converter:
 
     def __init__(self, tourId, tour):
         self.tourId = tourId
         self.tour = tour
-        self.config = ConfigParser.RawConfigParser()
+        self.config = OrderedConfigParser()
         
     def convertTour(self):
         if not self.tour:
@@ -35,7 +68,7 @@ class Converter:
 
         section_steps = ['']
         for step_no, step in enumerate(self.tour.__dict__['steps']):
-            step_name = normalize(step['title'])
+            step_name = self._step_name(step, step_no)
             section_steps.append(step_name)
             self.convert_step(step, step_no)
 
@@ -43,8 +76,14 @@ class Converter:
         with open('%s.cfg' % self.tourId, 'wb') as configfile:
             self.config.write(configfile)
 
+    def _step_name(self, step, step_no):
+        return normalize('%s_%s' % (step_no, step['title']))
+
+    def _microstep_name(self, step_no, i):
+        return '%s_%s_microstep' % (step_no, i)
+
     def convert_step(self, step, step_no):
-        step_name = normalize('%s_%s' % (step_no, step['title']))
+        step_name = self._step_name(step, step_no)
         self.config.add_section(step_name)
         self.config.set(step_name, 'blueprint', 'collective.amberjack.blueprints.step')
         for k, v in step.items(): 
@@ -57,9 +96,9 @@ class Converter:
             if k == 'steps':
                 section_microsteps = ['']
                 for i, microstep in enumerate(v):
-                    microstep_name = 'microstep_%s_%s' % (step_no, i)
-                    self.convert_microstep(microstep, microstep_name)
+                    microstep_name = self._microstep_name(step_no, i)
                     section_microsteps.append(microstep_name)
+                    self.convert_microstep(microstep, microstep_name)
                 if section_microsteps != ['']:
                     self.set(step_name, 'microsteps', section_microsteps)
                 continue
