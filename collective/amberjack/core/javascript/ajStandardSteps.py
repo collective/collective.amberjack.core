@@ -6,7 +6,7 @@ ajStandardSteps = (
     ('text', ''),  # replace the value of the element
     ('checkbox', ''),  # if [value] is "checked", then check the element, else uncheck
     ('radio', ''),  # if [value] is "checked", then check the element, else uncheck
-    ('multiple_select', ''),  # select the options with value given by [value] (can be a list separated by coma without space)
+    ('multiple_select', ''),  # select the options with value given by [value] (can be a list separated by comma without space)
     
     ('tiny_button_exec',''),
     ('tiny_button_click',''),
