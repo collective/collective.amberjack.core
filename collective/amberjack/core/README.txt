@@ -19,67 +19,74 @@ Useful links
 How to create new tour
 ======================
 
-First of all you need to define the tour.
+First of all you need to define the tour. Starting version 1.1 we are using
+configuration based style.
 
-A tour looks like that::
+A tour is a .cfg file. It has an ``amberjack`` main section which
+has two options: ``title`` and ``steps`` - this is where you define tour steps::
 
-    {'tourId': u'example_tour',
-     'title': _(u"Example tour"),
-     'steps': <steps>}
+    [amberjack]
+    steps = 
+        my_step1
+        my_step2
+    title = My first amberjack tour
 
-a <steps> looks like that::
+there are also available two blueprints:
+1. Step
+a ``step`` section is defined by ``collective.amberjack.blueprints.step`` and
+has several options: 
+  * ``title``
+  * ``text``
+  * ``url`` - step url definition
+  * ``xpath`` - xpath selector
+  * ``xcontent`` - xcontent selector
+  * ``microsteps`` - microsteps sections
+  * ``validators`` - tales expression validation
 
-    ({'url': u'/',
-      'xpath': u'',
-      'xcontent': u'',
-      'title': _(u"Some title"),
-      'text': _(u"Some text"),
-      'steps': ({'description': _(u"Some description"),
-                 'idStep': u'',
-                 'selector': u'',
-                 'text': u''},
-                ...
-               )       
-     },)                     
+it looks like that::
 
-                      
-Steps parameters:
+    [my_step1]
+    blueprint = collective.amberjack.blueprints.step
+    title = This is my first Step
+    text = You should now know how to create a step section
+    url = /mystep
+    validators =
+        python: context.isFolderish()
+    xpath = ''
+    xcontent = ''
+    microsteps = 
+        microstep_1
+        microstep_2
 
-    * the description for the user (use [] to <span class="ajHighlight">highlight</span> parts), 
-    * the step id, [see ajStandardSteps section below]
-    * an optional selector
-    * an optional text used by the step
+2. Microstep
+a ``microstep`` section is defined by ``collective.amberjack.blueprints.microsteps`` 
+and it has several options:
 
-An example::
+  * ``idstep``
+  * ``text``
+  * ``description``
+  * ``selector``
 
-    >>> add_folder = {
-    >>>			   'url': u'/',
-    >>>            'xpath': u'',
-    >>>            'xcontent': u'',
-    >>>            'title': _(u"Create a new folder"),
-    >>>            'text': _(u"Folders are ..."),
-    >>>            'steps': ({'description': _(u"Click the [Add new...] drop-down menu."),
-    >>>                       'idStep': u'menu_add-new',
-    >>>                       'selector': u'',
-    >>>                       'text': u''},
-    >>>                      {'description': _(u"Select [Folder] from the menu."),
-    >>>                       'idStep': u'new_folder',
-    >>>                       'selector': u'',
-    >>>                       'text': u''})}
-    >>> 
-    >>> ajTour = {'tourId': u'basic01_add_a_folder',
-    >>>           'title': _(u'Add a Folder'),
-    >>>           'steps': (add_folder,
-    >>>                    )}
+it looks like that::
+
+    [microstep_1]
+    blueprint = collective.amberjack.blueprints.microstep
+    idstep = menu_state
+    text = This is my dummy microstep
+    description = Now you should now how to define microsteps
+    selector = #insert
 
 
-Then you have to register it in zcml::
+Tour registration
+=================
+
+Finally you have to register it. The only acceptable format is an archive 
+(zip or tar) which contains one or multiple .cfg files (tours)
+Using zcml::
 
     <configure 
         xmlns:collective.amberjack="http://namespaces.plone.org/collective.amberjack.core">
         <collective.amberjack:tour
-            tourdescriptor=".example_tour.ajTour"
+            tourlocation="mytourpackage.zip"
         />
     </configure>
-
-

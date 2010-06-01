@@ -1,6 +1,6 @@
 from Products.Five.browser import BrowserView
 from zope.component import getUtility
-from collective.amberjack.core.interfaces import IMicroStepsManager
+from collective.amberjack.core.deprecated.interfaces import IMicroStepsManager
 
 class AmberjackSteps(BrowserView):
     """Generate a Javascript structure like this:

@@ -1,5 +1,5 @@
 from collective.amberjack.core.interfaces import IAmberjackSkin
-from collective.amberjack.core.interfaces import ITourManager
+from collective.amberjack.core.deprecated.interfaces import ITourManager
 from zope.component import getUtility
 from zope.component import getUtilitiesFor
 from zope.interface import implements
