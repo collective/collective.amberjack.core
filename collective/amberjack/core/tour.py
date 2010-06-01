@@ -1,54 +1,51 @@
-from collective.amberjack.core.interfaces import ITourDefinition,\
-    IStepDefinition
 from zope.interface import implements
-from zope import schema
+from plone.i18n.normalizer.interfaces import IIDNormalizer
+from zope.component import getUtility
+from collective.amberjack.core.interfaces import ITour
+from collective.amberjack.core import utils
 
-class Tour(object):
-    implements(ITourDefinition)
-    
-    def __init__(self, **kwargs):
-        for k, v in kwargs.items():
-            if k == 'steps': 
-                self._addSteps(v)
-            else:
-                setattr(self, k, v)
-        self._validateFields()
+import UserDict
+import os
 
-    def _addSteps(self, steps):
-        if not steps:
-            raise AttributeError, 'Tour need to have steps.'
-        self.steps = ()
-        for step in steps:
-            if not isinstance(step, dict):
-                raise TypeError, 'Step should be a dictionary.'
-            self.steps += (Step(**step),)
-        
-    def _validateFields(self):         
-        for field in schema.getFields(ITourDefinition).values():
-            bound = field.bind(self)
-            bound.validate(bound.get(self))
+class Tour(UserDict.DictMixin):
+    implements(ITour)
 
-class Step(dict):
-    implements(IStepDefinition)
-    
-    validators = ()
+    def __init__(self, configuration, tour_id):
+        try:
+            self._filename = os.path.basename(configuration.name)
+        except AttributeError:
+            self._filename = 'no_filename'
+        self._raw = utils._load_config(configuration)
+        self._data = {}
+        self._options = self._raw['amberjack']
+        self._steps_ids = self._options['steps'].splitlines()
+        self.steps = utils.constructTour(self, self._steps_ids)
+        self.title = self._options['title']
+        self.setTourId(tour_id)
 
-    def __init__(self, **kwargs):
-        for k, v in kwargs.items():
-            self.__setitem__(k, v)
-            setattr(self, k, v)
-        self._validateFields()
-        
-    def _validateFields(self):         
-        for field in schema.getFields(IStepDefinition).values():
-            bound = field.bind(self)
-            bound.validate(bound.get(self))
-            
-    def validate(self, context, request):
-        errors = []
-        for validator in self.validators:
-            message = validator(context, request)
-            if message:
-                errors.append(message)
-        return errors
-            
+    def setTourId(self, tour_id):
+        normalizer = getUtility(IIDNormalizer)
+        self.tourId = normalizer.normalize('%s.%s' % (tour_id, self.title))
+
+    def __getitem__(self, step):
+        try:
+            return self._data[step]
+        except KeyError:
+            pass
+        data = self._raw[step]
+        options = utils.Options(self, step, data)
+        self._data[step] = options
+        options._substitute()
+        return options
+
+    def __setitem__(self, key, value):
+        raise NotImplementedError('__setitem__')
+
+    def __delitem__(self, key):
+        raise NotImplementedError('__delitem__')
+
+    def keys(self):
+        return self._raw.keys()
+
+    def __repr__(self):
+        return ('<AmberjackTour based on %s>' % self._filename)

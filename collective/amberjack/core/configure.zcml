@@ -2,6 +2,7 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:cmf="http://namespaces.zope.org/cmf"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="collective.amberjack.core">
 
@@ -9,14 +10,20 @@
 
   <i18n:registerTranslations directory="locales" />
 
-  <utility factory=".tour_manager.TourManager" />
-  <utility factory=".micro_steps_manager.MicroStepsManager" />
-
   <include package="plone.registry" />
   <include package="collective.js.jqueryui" />
+  <include package="plone.i18n" />
+
   <include file="skins.zcml" />
   <include file="profiles.zcml" />
-  
+  <include file="meta.zcml" />
+  <include package=".javascript" />  
+  <include package=".deprecated" /> 
+
+  <!-- uncoment this line if you want to use old viewlet
+  <include package=".deprecated.viewlets" /> 
+  -->
+  <include package=".viewlets" />  
 
   <utility
       name="collective.amberjack.core.tours"
@@ -28,34 +35,35 @@
       factory=".vocabulary.AvailableSkinsVocabulary"
       />
 
+  <adapter
+      factory=".controlpanel.AJControlPanelAdapter"
+    />
+
   <utility
-      name="retriever.packagedtours"
-      factory=".tour_manager.PackagedTourRetriever"
+      component=".blueprints.Step"
+      name="collective.amberjack.blueprints.step"
       />
 
   <utility
-      name="safari"
-      factory=".skins.SafariSkin"
+      component=".blueprints.MicroStep"
+      name="collective.amberjack.blueprints.microstep"
       />
 
   <utility
-      name="model_t"
-      factory=".skins.ModelTSkin"
+      component=".registration.FileArchiveRegistration"
+      name="zipfile"
       />
-      
+
   <utility
-      name="light_grey"
-      factory=".skins.LightGreySkin"
+      component=".registration.WebRegistration"
+      name="url"
       />
 
-  <include file="meta.zcml" />
-  <include package=".javascript" />  
-
-  <!--
-  <include package=".experimental" />
-  -->
-  
-     <include package=".viewlets" />
-  
+  <browser:page
+      name="aj-controlpanel"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".controlpanel.AJControlPanelForm"
+      permission="cmf.ManagePortal"
+      />
 
 </configure>

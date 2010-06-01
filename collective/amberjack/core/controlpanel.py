@@ -1,4 +1,5 @@
-from collective.amberjack.core.experimental.interfaces import ITourRegistration, IFileArchiveTourRegistration, IWebTourRegistration, ITourRegistrationForm
+from collective.amberjack.core.interfaces import ITourRegistration, \
+    IFileArchiveTourRegistration, IWebTourRegistration, ITourRegistrationForm
 from plone.app.controlpanel.form import ControlPanelForm
 from plone.fieldsets.fieldsets import FormFieldsets
 from zope.component import adapts
@@ -36,5 +37,5 @@ class AJControlPanelForm(ControlPanelForm):
             reg = queryUtility(ITourRegistration, name)
             if not reg:
                 continue
-            registration = reg(source, self.context.REQUEST)
+            registration = reg(source, request=self.context.REQUEST)
             registration.register()

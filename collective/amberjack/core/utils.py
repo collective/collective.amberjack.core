@@ -1,9 +1,11 @@
+from zope.component import getUtility
+from zope.app.pagetemplate import engine
+from collective.amberjack.core.validators import _validators_
+from collective.amberjack.core.interfaces import IStep, IStepBlueprint
+
 import ConfigParser
 import re
 import UserDict
-from zope.component import getUtility
-
-from collective.amberjack.core.experimental.interfaces import IStep, IStepBlueprint
 
 def _load_config(configuration):
     parser = ConfigParser.RawConfigParser()
@@ -131,4 +133,26 @@ class Options(UserDict.DictMixin):
         result.update(self._cooked)
         result.update(self._data)
         return result
+
+class Condition(object):
+
+    def __init__(self, expression, context, request):
+        self.expression = expression
+        self.context = context
+        self.request = request
+
+    def _get_globals(self):
+        kw = {}
+        for validator in _validators_:
+          kw[validator.__name__] = validator
+        kw['request'] = self.request
+        kw['context'] = self.context
+        return kw
+
+    def __call__(self):
+        _engine = engine.TrustedEngine
+        _compiled = _engine.compile(self.expression)
+        _globals = self._get_globals()
+        _context = engine.TrustedEngine.getContext(_globals)
+        return _compiled(_context)
 
