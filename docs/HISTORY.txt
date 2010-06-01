@@ -4,8 +4,6 @@ Changelog
 1.1a (2010-??-??) unreleased
 -----------------------------
 
-- add experimental package (new tour syntax with registration and config parser)
-  [amleczko]
 - updated dependency with collective.js.jqueryui
   [mirco]
 - removed ui.draggable-1.7.2 file and the registration from jsregistry
@@ -28,6 +26,10 @@ Changelog
   [fdelia]
 - rely on jQuery UI for performing alert if available (close #572239)
   [keul, fdelia]
+- new tour syntax with registration and config parser
+  [amleczko]
+- move old stuff to depracated folder
+  [amleczko]
 
 1.0 (2010-05-17)
 ----------------
