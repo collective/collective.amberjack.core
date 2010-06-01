@@ -128,6 +128,14 @@ a.tour_inactive:hover {
 }
 
 /*** Amberjack popup tour generic styles ***/
+
+#ajControl {
+  position: fixed;
+  top:0;
+  right:0;
+  z-index:999999;
+}
+
 #ajControlBody h2 {
   margin:0 0 0.5em;
 }
