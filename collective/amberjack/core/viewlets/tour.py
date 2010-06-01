@@ -4,15 +4,10 @@ from plone.app.layout.viewlets import common
 
 from zope.component import getMultiAdapter
 from zope.component import getUtility
-from zope.i18n import translate
 from zope.schema.vocabulary import getVocabularyRegistry
 
-from collective.amberjack.core.tour_manager import ITourManager
-from collective.amberjack.core.tour import Step
+from collective.amberjack.core.deprecated.tour_manager import ITourManager
 import urllib
-
-SSPAN = '<span class="ajHighlight">'
-ESPAN = '</span>'
 
 
 class TourViewlet(common.ViewletBase):
@@ -33,7 +28,7 @@ class TourViewlet(common.ViewletBase):
         if self.enabled:
             self.tourId = self.tour.tourId
             self.ajsteps = []
-    
+
     def _choosenTour(self):
         try:
             tourId = self.request['tourId']
@@ -47,20 +42,13 @@ class TourViewlet(common.ViewletBase):
         manager = getUtility(ITourManager)
         return manager.getTour(tourId, self.context)
 
-    def _highlight(self, steps):    
-        _steps = ()
-        for step in steps:
-            desc = translate(step['description'], context=self.request)
-            step['description'] = desc.replace('[', SSPAN).replace(']', ESPAN)
-            if (step['idStep'] != u''):
-                step['display'] = u''
-            else:
-                step['display'] = u'visibility:hidden'
-                
-            _steps += (step,)
-        return _steps
+    def highlight(self, step):
+        if step.idStep != u'':
+            return u''
+        else:
+            return u'display:none'
 
-    def _getMacroStepUrl(self, url):
+    def getStepUrl(self, url):
         if url.startswith('aj_'):
             return url
         url = urllib.quote(url)
@@ -74,18 +62,7 @@ class TourViewlet(common.ViewletBase):
         return selector.replace('AJ_ROOT', self.navigation_root_url)
         
     def getMacroSteps(self):
-        results = []        
-        for macrostep in self.tour.steps:
-            _macrostep = {}
-            for key, value in macrostep.items():
-                if key == 'steps':
-                    _macrostep[key] = self._highlight(tuple(macrostep['steps']))
-                elif key == 'url':
-                    _macrostep[key] = self._getMacroStepUrl(value)
-                else:
-                    _macrostep[key] = value
-            results.append(Step(**_macrostep))
-        return results
+        return self.tour.steps
 
     def getStepNumber(self, step):
         """Add the step to the ajsteps list and return its position"""
@@ -103,9 +80,9 @@ class TourViewlet(common.ViewletBase):
                     """
             cnt = 0
             for step in self.ajsteps:
-                ajstep = """new AjStep('%s','%s',"%s")""" % (step['idStep'],
-                                                             self._expandSelector(step['selector']),
-                                                             translate(step['text'], context=self.request))
+                ajstep = """new AjStep('%s','%s',"%s")""" % (step.idStep,
+                                                             self._expandSelector(step.selector),
+                                                             step.text)
                 if cnt+1 != len(self.ajsteps):
                     ajstep += """,
                     """
@@ -145,8 +122,3 @@ class TourViewlet(common.ViewletBase):
                         'title': term.title}
             previous_term = term
         return None
-
-
-
-
-
