@@ -398,7 +398,7 @@ Amberjack = {
   /**
    * use inside getIdPart
    */
-  pageIdParts: {'title': 0, 'xpath': 1, 'xcontent': 2},
+  pageIdParts: {'title': 0, 'xpath': 1, 'xcontent': 2},  
 
   /**
    * Gets the tourId from the url or from a cookie 'ajcookie_tourId'
@@ -562,8 +562,8 @@ Amberjack = {
     var element = children[pos];
 	var title = element.getAttribute('title');
 	var xpath = element.getAttribute('xpath');
-	var xcontent = element.getAttribute('xcontent');	
-	return '(' + title + ';' + xpath + ';' + xcontent + ';' + pos + ')';
+	var xcontent = element.getAttribute('xcontent');
+	return '(' + title + ';' + xpath + ';' + xcontent + ';' + pos + ')'; 
   },
 
   /**
@@ -781,12 +781,19 @@ Amberjack = {
       if (Amberjack.doCoverBody) {
         Amberjack.uncoverBody();
       }
+      //delete cookies
+      Amberjack.eraseCookie('ajcookie_tourId');
+      Amberjack.eraseCookie('ajcookie_pageCurrent');
       return null;
     }
 
     if (Amberjack.closeUrl) {
       window.location.href = Amberjack.closeUrl;
     }
+    //delete cookies
+    Amberjack.eraseCookie('ajcookie_tourId');
+	Amberjack.eraseCookie('ajcookie_pageCurrent');
+	
     return null;
   }
 };

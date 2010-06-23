@@ -5,7 +5,6 @@
  * @param {String} jq a jQuery selector
  * @param {String} value an optional value (depends on type choosen)
  */
-
 function AjStep(type, jqElement, value) {
 	this._JQ = jqElement;
 	this._TYPE = type;
@@ -30,7 +29,340 @@ function AjStep(type, jqElement, value) {
 		else return jq(this._JQ);
 	};
 	
+   /* Highlight the step for better view
+	* @author Giacomo Spettoli*/
+	 this.highlightStep = function(){
+		try {
+			obj = this.getObj();
+			} catch (e) {
+			var msg = "Error in highlightStep(): Step " + (num+1) +" not found";
+			AmberjackBase.alert(msg);
+			AmberjackBase.log(msg, e);
+			return false;
+			}
+			var type_obj = this._TYPE;
+		
+			if (AmberjackPlone.stepAdapters[type_obj] && AmberjackPlone.stepAdapters[type_obj].highlight)
+				AmberjackPlone.stepAdapters[type_obj].highlight(obj, type_obj, null, null);	
+			else if (type_obj.match("menu")){
+				obj.children('dt').children('a').addClass(AmberjackPlone.theAJClass+' '+AmberjackPlone.theAJClassBehaviour);
+			}
+			else {
+				obj.addClass(AmberjackPlone.theAJClass+' '+AmberjackPlone.theAJClassBehaviour);
+			}
+		}
+	 
+	 
+	 /* Check that the step has been done.
+	 * @author Giacomo Spettoli*/
+	 this.checkStep = function(){
+		 
+			var obj;
+			try {
+				obj = this.getObj();
+			} catch(e) {
+				var msg = "Error in checkStep(): Step " + num +" not found"; 
+				AmberjackBase.alert(msg);
+				AmberjackBase.log(msg, e);
+				return false;
+			}
+			
+			var stepDone = true;
+		    var stepRequired = true; 
+		    var type_obj = this._TYPE;
+		    var jq_obj = this._JQ;
+		    var value = this._VALUE;
+		        
+		        if (stepRequired) {
+		            if (AmberjackPlone.stepAdapters[type_obj] && AmberjackPlone.stepAdapters[type_obj].checkStep)
+		                stepDone = AmberjackPlone.stepAdapters[type_obj].checkStep(obj, jq_obj, value)
+		            else if (value!="") {
+		                stepDone = obj.val()==value;
+		            }
+		        }
+		        return stepDone;
+		 
+	 }
+	 
+	 /* Function for doing step
+	  * @author Giacomo Spettoli*/
+	 this.doStep = function(){
+			var obj, type_obj, jq_obj, value;
+			
+			try {
+				obj = this.getObj();
+				type_obj = this._TYPE;
+				jq_obj = this._JQ;
+				value = this._VALUE;
+			} catch(e) {
+				var msg = "Error in doStep(): Step " + num +" not found";
+				AmberjackBase.alert(msg);
+				AmberjackBase.log(msg, e);
+				return false;
+			}
+		    
+			if (AmberjackPlone.stepAdapters[type_obj] && AmberjackPlone.stepAdapters[type_obj].step)
+				AmberjackPlone.stepAdapters[type_obj].step(obj, type_obj, jq_obj, value);		
+			else if (value!="") {
+				changeValue(obj, value);
+			}
+			else if (type_obj.match("menu")) {
+				if (value=='deactivate') obj.removeClass('activated').addclass('deactivated');
+				else obj.removeClass('deactivated').addClass('activated');
+			}
+			else if (jq_obj=="") {
+				obj.click(function(){
+		            AmberjackPlone.setAmberjackCookies()
+				});	
+				obj.click();
+				if (obj.attr("href"))
+					location.href = obj.attr("href");
+			}
+	 }
+	
 };
+
+/**
+ * The model of a windmill microstep
+ * 
+ * @author Andrea Benetti
+ * 
+ * @param {String} method to execute (mandatory)
+ * @param {String} locator (optional,depends on method passed,example: "'locator'^>'locatorValue'")
+ * @param {String} a string with method's options (depends on method passed, example: "'optionName'<^'optionValue'^>...")
+ */
+function AjWindmStep(method,locator,options) {
+	
+	this._METHOD = method;
+	this._LOCATOR = '';
+	this._LOCVALUE='';	
+	this._OPTIONS = '';
+	
+	if(windmillMethods[this._METHOD]['locator']){
+		if( method !='highlight'){
+			var dict=eval('('+locator+')')
+			for(var k in dict){
+				this._LOCATOR = dict[k];
+				this._LOCVALUE = k;
+				break;
+    			}
+		}
+		else{
+		if(locator!='{}' && locator !='')
+			this._LOCATOR=eval('('+locator+')');	
+		 }
+	}
+	if(windmillMethods[this._METHOD]['option']){
+		
+		if(this._METHOD=='type' || this._METHOD=='editor'){
+		var startOp=options.indexOf(':');
+		var end=options.lastIndexOf('\"');
+		var sub=options.substring(startOp,end);
+		var start=sub.indexOf('\"');
+		sub=options.substring(start+startOp+1,end);
+		sub = sub.replace(/"/g,'\\"');
+		options=options.substring(0,startOp).trim()+' : "'+sub+'"}';
+		}
+		else if(this._METHOD=='editorSelect') {
+			
+				var startOp=options.indexOf(":");
+				var pre=options.substring(0,startOp);
+				var ind=pre.indexOf('bookmark');
+				if(ind!=-1){ //text option after bookmark options
+					var ind=0;
+					var a=options;
+					var count=0;
+					for(k=0;k<10;k++){
+                        ind=a.indexOf('"');
+						a=a.substr(ind+1);
+                        count+=ind+1;
+					}
+					start=options.indexOf('"',count)
+					var end=options.lastIndexOf('"');
+					var sub=options.substring(start+1,end);
+					sub = sub.replace(/"/g,'\\"');
+					options=options.substring(0,start+1).trim()+sub+'"}';
+					
+				}else{
+					var ind=0;
+					var a=options;
+					for(k=0;k<10;k++){
+						ind=a.lastIndexOf('"');
+						a=a.substr(0,ind);
+					}
+					var end=a.lastIndexOf('"',ind);
+					start=options.indexOf('"');
+					var sub=options.substring(start+1,end);
+					sub = sub.replace(/"/g,'\\"');
+					options=options.substring(0,startOp).trim()+' : "'+sub+options.substr(end).trim();
+				}
+				
+		}
+		this._OPTIONS = eval('('+options+')');
+	}
+	
+	this.getLocator= function() {
+		if(this._METHOD=='highlight' && this._LOCATOR!=''){
+			var curLocators=this._LOCATOR;
+			var l=new Array();
+			i=0;
+			for(var k in curLocators){
+					this._LOCATOR = curLocators[k];
+					this._LOCVALUE= k;
+					l[i]=this.getObj();
+					i+=1;
+				}
+			this._LOCATOR=curLocators;
+			return l;
+		}
+		else
+			return this._LOCATOR;
+	};
+	
+	this.getMethod= function() {
+		return this._METHOD;
+	};
+	
+	this.getLocValue= function() {
+		return this._LOCVALUE;
+	};
+	
+	this.getOptions= function() {
+		return this._OPTIONS;
+	};
+	
+
+	this.highlightStep = function(){
+		var metodo=this._METHOD;
+		if(metodo=='highlight'){
+			AmberjackPlone.stepAdapters['w_highlight'].highlight(this.getLocator());
+			return;
+			}
+		try {
+			obj = this.getObj();
+			} catch (e) {
+				var msg = "Error in highlightStep(): Step " + (num+1) +" not found";
+				AmberjackBase.alert(msg);
+				AmberjackBase.log(msg, e);
+				return false;
+			}
+		if(metodo.indexOf('waits.')!=-1 || metodo =='editorSelect') return;
+		if (obj && AmberjackPlone.stepAdapters['w_'+metodo] && AmberjackPlone.stepAdapters['w_'+metodo].highlight){
+			if(obj.parentNode.tagName=='a' || obj.parentNode.tagName=='A')
+				AmberjackPlone.stepAdapters['w_'+metodo].highlight(obj.parentNode);	
+			else
+				AmberjackPlone.stepAdapters['w_'+metodo].highlight(obj);
+		}
+		else if(obj) {
+			jq(obj).addClass(AmberjackPlone.theAJClass+' '+AmberjackPlone.theAJClassBehaviour);
+		}
+		return;
+		
+	};
+	
+	this.checkStep = function(){
+		
+		var metodo=this._METHOD;
+		if(metodo=='highlight') return true;
+		var obj;
+		try {
+			obj = this.getObj();
+		} catch(e) {
+			var msg = "Error in checkStep(): Step " + num +" not found"; 
+			AmberjackBase.alert(msg);
+			AmberjackBase.log(msg, e);
+			return false;
+		}
+		
+		var stepDone = true;
+	    var stepRequired = true;
+			 
+       	        if (stepRequired && obj) {
+		            if (AmberjackPlone.stepAdapters['w_'+metodo] && AmberjackPlone.stepAdapters['w_'+metodo].checkStep)
+		                stepDone = AmberjackPlone.stepAdapters['w_'+metodo].checkStep(obj,this._OPTIONS,this._LOCVALUE)
+		        }
+       	        
+       	        return stepDone;
+
+		
+	};
+	
+	this.doStep = function(){
+		var obj;
+		var metodo=this._METHOD;
+		try {
+			obj = this.getObj();
+			} catch(e) {
+			var msg = "Error in doStep(): Step " + num +" not found";
+			AmberjackBase.alert(msg);
+			AmberjackBase.log(msg, e);
+			return false;
+			}
+			
+			$(document).unbind('click');  //forbid exit from current context when click on document because the AmberjackControls is part of body
+		if (AmberjackPlone.stepAdapters['w_'+metodo] && AmberjackPlone.stepAdapters['w_'+metodo].step)
+			AmberjackPlone.stepAdapters['w_'+metodo].step(obj,this._LOCATOR,this._OPTIONS,this._LOCVALUE)
+			
+	};
+	
+	this.getObj= function() {
+		  var element = null;
+		  //If a link was passed, lookup as link
+		  if(this._LOCATOR =='link') {
+		    element = elementslib.Element.LINK(this._LOCVALUE);
+		  }
+		  //if xpath was passed, lookup as xpath
+		  else if(this._LOCATOR=='xpath') {        
+		    element = elementslib.Element.XPATH(this._LOCVALUE);
+		  }
+		  
+		  //if id was passed, do as such
+		  else if(this._LOCATOR=='id') {
+		    element = elementslib.Element.ID(this._LOCVALUE);
+		  }
+		   
+		  //if jsid was passed
+		  else if(this._LOCATOR=='jsid') {
+		    var jsid = window.eval(this._LOCVALUE);
+		    element = elementslib.Element.ID(jsid);
+		  }
+		  //if name was passed
+		  else if(this._LOCATOR=='name') {
+		    element = elementslib.Element.NAME(this._LOCVALUE);
+		  }
+		  //if value was passed
+		  else if(this._LOCATOR=='value') {
+		    element = elementslib.Element.VALUE(this._LOCVALUE);
+		  }
+		  //if classname was passed
+		  else if(this._LOCATOR=='classname') {
+		    element = elementslib.Element.CLASSNAME(this._LOCVALUE);
+		  }
+		  //if tagname was passed
+		  else if(this._LOCATOR=='tagname') {
+		    element = elementslib.Element.TAGNAME(this._LOCVALUE);
+		  }
+		  //if label was passed
+		  else if(this._LOCATOR=='label') {
+		    element = elementslib.Element.LABEL(this._LOCVALUE);
+		  }
+		  //if jquery was passed
+		  else if(this._LOCATOR=='jquery') {
+			  this._LOCVALUE = helpers.repAll(this._LOCVALUE, ").", ")<*>");
+		    var jQ = jQuery(window.document);
+		    var chain= this._LOCVALUE.split('<*>');
+		    
+		    this._LOCVALUE= helpers.repAll(this._LOCVALUE, "<*>", ".");
+		    var start = eval('jQ.find'+chain[0]);
+		    var theRest = this._LOCVALUE.replace(chain[0],'');
+		    element = eval('start'+theRest);
+		  }
+		  return element;
+
+	};
+	
+};
+
 
 /**
  * Change the value of a textbox
@@ -57,6 +389,7 @@ function changeSelectValue(obj, value){
 	
 	jq(obj[0]).trigger('change', true);
 }
+
 
 AmberjackPlone = {
     /**
@@ -136,37 +469,7 @@ AmberjackPlone = {
 	highlightAllSteps: function() {
 		var steps = AmberjackPlone.getPageSteps();
 		for(var i=0; i < steps.length;i++){
-			AmberjackPlone.highlightStep(steps[i]);
-		}
-	},
-
-	/**
-	 * Highlight the step for better view
-	 * @author Giacomo Spettoli
-	 * 
-	 * @param num dictionary's label of the step
-	 */
-	highlightStep: function(num) {
-		if(Amberjack.pageId){
-			var obj;
-			try {
-				obj = AjSteps[num].getObj();
-			} catch (e) {
-				var msg = "Error in highlightStep(): Step " + (num+1) +" not found";
-				AmberjackBase.alert(msg);
-				AmberjackBase.log(msg, e);
-				return false;
-			}
-			var type_obj = AjSteps[num].getType();
-			
-			if (AmberjackPlone.stepAdapters[type_obj] && AmberjackPlone.stepAdapters[type_obj].highlight)
-				AmberjackPlone.stepAdapters[type_obj].highlight(obj, type_obj, null, null);	
-			else if (type_obj.match("menu")){
-				obj.children('dt').children('a').addClass(AmberjackPlone.theAJClass+' '+AmberjackPlone.theAJClassBehaviour);
-			}
-			else {
-				obj.addClass(AmberjackPlone.theAJClass+' '+AmberjackPlone.theAJClassBehaviour);
-			}
+			 AjSteps[steps[i]].highlightStep()
 		}
 	},
 
@@ -232,10 +535,9 @@ AmberjackPlone = {
 	 * 
 	 * @param num dictionary's label of the step
 	 * 
-	 * BBB needs to be revised: type_obj is not a complete range of all the cases
 	 */
 	doStep: function(step) {
-		var obj, type_obj, jq_obj, value;
+
 		var allClasses = jq(step).attr("class").split(" ");
 		var firstClass = allClasses[0].split('-');
 		var num = parseInt(firstClass[1])-1;
@@ -243,38 +545,11 @@ AmberjackPlone = {
         var prevStepDone = AmberjackPlone.checkPreviousSteps(num) 
         if (!prevStepDone)
             return prevStepDone;
+        
+        AjSteps[num].doStep();
+        
+	}, 
 	
-		try {
-			obj = AjSteps[num].getObj();
-			type_obj = AjSteps[num].getType();
-			jq_obj = AjSteps[num].getJq();
-			value = AjSteps[num].getValue();
-		} catch(e) {
-			var msg = "Error in doStep(): Step " + num +" not found";
-			AmberjackBase.alert(msg);
-			AmberjackBase.log(msg, e);
-			return false;
-		}
-	    
-		if (AmberjackPlone.stepAdapters[type_obj] && AmberjackPlone.stepAdapters[type_obj].step)
-			AmberjackPlone.stepAdapters[type_obj].step(obj, type_obj, jq_obj, value);		
-		else if (value!="") {
-			changeValue(obj, value);
-		}
-		else if (type_obj.match("menu")) {
-			if (value=='deactivate') obj.removeClass('activated').addclass('deactivated');
-			else obj.removeClass('deactivated').addClass('activated');
-		}
-		else if (jq_obj=="") {
-			obj.click(function(){
-	            AmberjackPlone.setAmberjackCookies()
-			});	
-			obj.click();
-			if (obj.attr("href"))
-				location.href = obj.attr("href");
-		}
-	},
-
     /**
      * Check all current page's steps
      * @author Giacomo Spettoli
@@ -286,6 +561,7 @@ AmberjackPlone = {
         return AmberjackPlone.checkPreviousSteps(steps[steps.length-1]);
     },
 
+  
     /**
      * Check that all the previous steps have been done.
      *  
@@ -298,8 +574,7 @@ AmberjackPlone = {
         var steps = AmberjackPlone.getPageSteps();
         
         for (var i = 0; i < steps.length && steps[i] < num; i++) {
-            var type_obj = AjSteps[steps[i]].getType();
-            thisStep = AmberjackPlone.checkStep(steps[i]);
+            thisStep = AjSteps[steps[i]].checkStep();
             if(!thisStep){
                 AmberjackBase.alert("Step " + (steps[i]+1) + " not completed");
                 allDone = false;
@@ -309,40 +584,7 @@ AmberjackPlone = {
         }
         return allDone;
     },
-        
-	/**
-	 * Check that the step has been done.
-	 * @author Giacomo Spettoli
-	 *  
-	 * @param num dictionary's label of the step
-	 * @return true if done else false
-	 */
-	checkStep: function(num) {
-		var obj;
-		try {
-			obj = AjSteps[num].getObj();
-		} catch(e) {
-			var msg = "Error in checkStep(): Step " + num +" not found"; 
-			AmberjackBase.alert(msg);
-			AmberjackBase.log(msg, e);
-			return false;
-		}
-		
-		var type_obj = AjSteps[num].getType();
-        var jq_obj = AjSteps[num].getJq();
-		var value = AjSteps[num].getValue();
-		var stepDone = true;
-        var stepRequired = true;
-        
-        if (stepRequired) {
-            if (AmberjackPlone.stepAdapters[type_obj] && AmberjackPlone.stepAdapters[type_obj].checkStep)
-                stepDone = AmberjackPlone.stepAdapters[type_obj].checkStep(obj, jq_obj, value)
-            else if (value!="") {
-                stepDone = obj.val()==value;
-            }
-        }
-        return stepDone;
-	},
+   	
 
 	/**
 	 * Get all current page's step

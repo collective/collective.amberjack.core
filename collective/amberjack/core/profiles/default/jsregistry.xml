@@ -27,5 +27,12 @@
     id="amberjackSteps.js"
     cacheable="True" compression="safe" cookable="True"
     enabled="True" expression=""  inline="False" />
-	
+ 
+ 
+ <!-- Windmill libraries modified for amberjack -->   
+ <javascript
+    id="windmillUtils.js"
+    cacheable="True" compression="safe" cookable="True"
+    enabled="True" expression=""  inline="False" />
+   	
 </object>

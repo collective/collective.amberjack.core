@@ -14,6 +14,7 @@ class Step(object):
         self._tour = tour
         self._options = options        
         self.microsteps = self.constructMicroSteps(options)
+        
         self.xpath = self._options.get('xpath','')
         self.xcontent = self._options.get('xcontent','')
         self.url = self._options['url']
@@ -59,7 +60,25 @@ class MicroStep(object):
         self.description = normalizeHTML(self._options['description'])
         self.selector = self._options.get('selector','')
         self.text = normalizeHTML(self._options.get('text',''))
-        self.idStep = self._options.get('idstep','')
+        self.method=self._options.get('method','')
+
+ 
+"""
+Windmill microstep
+"""     
+class WindmillMicroStep(object):
+    classProvides(IStepBlueprint)
+    implements(IStep)
+    
+    def __init__(self, tour, name, options):
+        self._tour = tour
+        self._options = options
+        self.description = normalizeHTML(self._options['description'])
+        self.selector = self._options.get('selector','')
+        self.text = normalizeHTML(self._options.get('text',''))
+        self.method=self._options.get('method','')
+            
         
+
 def normalizeHTML(text):
     return text.replace('[', SSPAN).replace(']', ESPAN)

@@ -45,7 +45,6 @@ def archive_handler(filename, source):
     """ yield extracted files from a archive """
 
     source.seek(0)
-
     if filename.endswith('.zip'):
         #ZIP
         _zip = zipfile.ZipFile(source)

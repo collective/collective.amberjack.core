@@ -8,7 +8,7 @@ from zope.schema.vocabulary import getVocabularyRegistry
 
 from collective.amberjack.core.deprecated.tour_manager import ITourManager
 import urllib
-
+import re
 
 class TourViewlet(common.ViewletBase):
     index = ViewPageTemplateFile('tour.pt')
@@ -42,8 +42,16 @@ class TourViewlet(common.ViewletBase):
         manager = getUtility(ITourManager)
         return manager.getTour(tourId, self.context)
 
+
+
+
     def highlight(self, step):
-        if step.idStep != u'':
+        
+        if (step._options['blueprint']=='collective.amberjack.blueprints.windmillmicrostep'):
+            if step.method.find('waits.')!=-1 or step.method=='highlight':
+                return u'display:none'
+            
+        if step.method != u'':
             return u''
         else:
             return u'display:none'
@@ -51,7 +59,14 @@ class TourViewlet(common.ViewletBase):
     def getStepUrl(self, url):
         if url.startswith('aj_'):
             return url
+        if(url.startswith(self.navigation_root_url)):
+            if(re.search(r'(\d{4})-(\d{2})-(\d{2})',url)!=None): #Use regular expression for check if the url contains a temporary date
+                return 'aj_any_url'
+            else:
+                url=url[url.find(self.navigation_root_url)+len(self.navigation_root_url):]
+            
         url = urllib.quote(url)
+            
         if url.startswith('/') or url == '':
             url = self.navigation_root_url + url
         else:
@@ -70,9 +85,10 @@ class TourViewlet(common.ViewletBase):
             self.ajsteps.append(step)
         return self.ajsteps.index(step) + 1
     
+ 
     def javascriptSteps(self):
         """Return an Array:
-        [new AjStep('idStep': 'selector', 'text'), ...]
+        [new AjStep('method', 'selector', 'text'), ...]
         """
         try:
             aj = """
@@ -80,9 +96,16 @@ class TourViewlet(common.ViewletBase):
                     """
             cnt = 0
             for step in self.ajsteps:
-                ajstep = """new AjStep('%s','%s',"%s")""" % (step.idStep,
+                
+                if step._options['blueprint']=='collective.amberjack.blueprints.windmillmicrostep':
+                    ajstep = """new AjWindmStep('%s',"%s","%s")""" % (step.method,
+                                                                      step.selector.replace('"','\\"'),
+                                                                      step.text.replace('"','\\"'))
+                else:    
+                    ajstep = """new AjStep('%s','%s',"%s")""" % (step.method,
                                                              self._expandSelector(step.selector),
-                                                             step.text)
+                                                             step.text.replace('"','\\"'))
+                
                 if cnt+1 != len(self.ajsteps):
                     ajstep += """,
                     """
