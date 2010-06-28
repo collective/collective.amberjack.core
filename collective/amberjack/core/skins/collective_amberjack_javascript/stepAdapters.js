@@ -17,7 +17,7 @@ AmberjackPlone.stepAdapters = {
 	/*COLLECTIVE.AMBERJACK.WINDMILL   @author: Andrea Benetti##################################################*/	
 		w_click: {
 			highlight: function(obj) {
-			jq(obj).addClass(AmberjackPlone.theAJClass+' '+AmberjackPlone.theAJClassBehaviour)
+				jq(obj).addClass(AmberjackPlone.theAJClass+' '+AmberjackPlone.theAJClassBehaviour)
 				},
 			step: function(obj,locator,options,locatorValue) {
 			
@@ -56,9 +56,9 @@ AmberjackPlone.stepAdapters = {
 		w_type: {
 			highlight: null,
 			step: function(obj,locator,options,locatorValue) {
-			var testo=options['text'];
-			controller.type(obj,testo)
-			},
+				var testo=options['text'];
+				controller.type(obj,testo)
+				},
 			checkStep: function (obj, options,locatorValue) {
 				var testo=options['text'];
 	            if(testo!="") return jq(obj).val()==testo;
@@ -68,10 +68,10 @@ AmberjackPlone.stepAdapters = {
 		
 		w_select: {
 			highlight: function(obj, type_obj, jq_obj, value) {
-			var highlightThis = jq(obj + " option[value="+ AjSteps[num].getValue() +"]");
-			highlightThis.addClass(AmberjackPlone.theAJClass);
-			obj.addClass(AmberjackPlone.theAJClassBehaviour);
-			},
+				var highlightThis = jq(obj + " option[value="+ AjSteps[num].getValue() +"]");
+				highlightThis.addClass(AmberjackPlone.theAJClass);
+				obj.addClass(AmberjackPlone.theAJClassBehaviour);
+				},
 			step: function(obj,locator,options,locatorValue) {
 				AmberjackPlone.setAmberjackCookies();
 				for(var i in options){
@@ -85,15 +85,15 @@ AmberjackPlone.stepAdapters = {
 		
 		w_check: {
 			highlight: function(obj) {
-			jq(obj).parent().addClass(AmberjackPlone.theAJClass);
-			jq(obj).addClass(AmberjackPlone.theAJClassBehaviour);
-			},
+				jq(obj).parent().addClass(AmberjackPlone.theAJClass);
+				jq(obj).addClass(AmberjackPlone.theAJClassBehaviour);
+				},
 			step: function(obj,locator,options,locatorValue) {
 				controller.check(obj)
-			},
+				},
 			checkStep: function (obj,options,locatorValue) {
 	            return jq(obj).attr("checked");
-	        }
+				}
 		},
 		
 		w_radio: {
@@ -114,7 +114,7 @@ AmberjackPlone.stepAdapters = {
 				  tx=tx.replace(/&gt\;/g,'>')
 				  controller.editor(tx,locatorValue);
 				},
-				checkStep:null
+			  checkStep:null
 			/*checkStep: function (obj,options,locatorValue) {
 				  var tx=options['editor']
 				  return (tinyMCE.get(locatorValue).getContent({format : 'text'}).replace(/<[^>]+>/gi, "")==tx || tinyMCE.get(locatorValue).getContent()==tx)
@@ -126,7 +126,7 @@ AmberjackPlone.stepAdapters = {
 			step:function(obj,locator,options,locatorValue) {
 				var bookmark=options['bookmark'];
 				controller.editorSelect(locatorValue, bookmark);
-			},
+				},
 			checkStep:null
 			/*checkStep: function (obj,options,locatorValue) {
 				 var selected=options['text'];

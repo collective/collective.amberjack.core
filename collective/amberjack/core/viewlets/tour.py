@@ -98,7 +98,7 @@ class TourViewlet(common.ViewletBase):
             for step in self.ajsteps:
                 
                 if step._options['blueprint']=='collective.amberjack.blueprints.windmillmicrostep':
-                    ajstep = """new AjWindmStep('%s',"%s","%s")""" % (step.method,
+                    ajstep = """new AjWindmillStep('%s',"%s","%s")""" % (step.method,
                                                                       step.selector.replace('"','\\"'),
                                                                       step.text.replace('"','\\"'))
                 else:    
