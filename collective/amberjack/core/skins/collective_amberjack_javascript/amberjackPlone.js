@@ -86,7 +86,7 @@ function AjStep(type, jqElement, value) {
 	 
 	 /* Function for doing step
 	  * @author Giacomo Spettoli*/
-	 this.doStep = function(){
+	 this.doStep = function(num){
 			var obj, type_obj, jq_obj, value;
 			
 			try {
@@ -287,7 +287,8 @@ function AjWindmStep(method,locator,options) {
 		
 	};
 	
-	this.doStep = function(){
+	this.doStep = function(num){
+
 		var obj;
 		var metodo=this._METHOD;
 		try {
@@ -297,6 +298,12 @@ function AjWindmStep(method,locator,options) {
 			AmberjackBase.alert(msg);
 			AmberjackBase.log(msg, e);
 			return false;
+			}
+			if(tinyMCE.activeEditor){
+				if(num-1>=0)
+					if(AjSteps[num-1].getLocValue()==tinyMCE.activeEditor.id+'_style_text_text' || AjSteps[num-1].getLocValue()==tinyMCE.activeEditor.id+"_style_text_open"){  //if in the previous microstep i opened the tiny drop-down style list, now i want to select an entry.
+						AmberjackPlone.stepAdapters['w_'+AjSteps[num-1].getMethod()].step(AjSteps[num-1].getObj(),AjSteps[num-1].getLocator(),AjSteps[num-1].getOptions(),AjSteps[num-1].getLocValue())
+					}
 			}
 			
 			$(document).unbind('click');  //forbid exit from current context when click on document because the AmberjackControls is part of body
@@ -546,7 +553,7 @@ AmberjackPlone = {
         if (!prevStepDone)
             return prevStepDone;
         
-        AjSteps[num].doStep();
+        AjSteps[num].doStep(num);
         
 	}, 
 	
