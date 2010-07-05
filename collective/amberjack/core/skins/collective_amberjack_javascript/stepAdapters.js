@@ -67,11 +67,7 @@ AmberjackPlone.stepAdapters = {
 		},
 		
 		w_select: {
-			highlight: function(obj, type_obj, jq_obj, value) {
-				var highlightThis = jq(obj + " option[value="+ AjSteps[num].getValue() +"]");
-				highlightThis.addClass(AmberjackPlone.theAJClass);
-				obj.addClass(AmberjackPlone.theAJClassBehaviour);
-				},
+			highlight: null,
 			step: function(obj,locator,options,locatorValue) {
 				AmberjackPlone.setAmberjackCookies();
 				for(var i in options){
