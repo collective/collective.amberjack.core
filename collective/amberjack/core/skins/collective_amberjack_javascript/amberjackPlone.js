@@ -322,8 +322,12 @@ function AjWindmillStep(method,locator,options) {
 			return false;
 		}
 			
-		this.checkIfStyleList()
+		this.checkIfStyleList();
+		var multSelect=this.checkifMultipleSelect(obj);
 			
+		if(multSelect==true)
+			return;
+		
 		$(document).unbind('click');  //forbid exit from current context when click on document because the AmberjackControls is part of body
 		if (AmberjackPlone.stepAdapters['w_'+metodo] && AmberjackPlone.stepAdapters['w_'+metodo].step && obj)
 			AmberjackPlone.stepAdapters['w_'+metodo].step(obj,this._LOCATOR,this._OPTIONS,this._LOCVALUE);
@@ -391,12 +395,33 @@ function AjWindmillStep(method,locator,options) {
 	this.checkIfStyleList= function(){
 		var num=this._NUM
 		if(tinyMCE.activeEditor){
-			if(num-1>=0)
-				if(AjSteps[num-1].getLocValue()==tinyMCE.activeEditor.id+'_style_text_text' || AjSteps[num-1].getLocValue()==tinyMCE.activeEditor.id+"_style_text_open"){  //if in the previous microstep i opened the tiny drop-down style list, now i want to select an entry.
-					AmberjackPlone.stepAdapters['w_'+AjSteps[num-1].getMethod()].step(AjSteps[num-1].getObj(),AjSteps[num-1].getLocator(),AjSteps[num-1].getOptions(),AjSteps[num-1].getLocValue());
+			while(num-1>=0 && (AjSteps[num-1].getMethod()=='highlight' || AjSteps[num-1].getMethod().indexOf('waits.')!=-1))
+				num=num-1;
+			if(num-1>=0){
+			         if(AjSteps[num-1].getLocValue()==tinyMCE.activeEditor.id+'_style_text_text' || AjSteps[num-1].getLocValue()==tinyMCE.activeEditor.id+"_style_text_open"){  //if in the previous microstep i opened the tiny drop-down style list, now i want to select an entry.
+						   AmberjackPlone.stepAdapters['w_'+AjSteps[num-1].getMethod()].step(AjSteps[num-1].getObj(),AjSteps[num-1].getLocator(),AjSteps[num-1].getOptions(),AjSteps[num-1].getLocValue());
 				}
+			}
 		}
 		
+	};
+	
+	
+	//check if i clicked on a multiple selection option
+	this.checkifMultipleSelect(element){
+	   			
+			if(this._LOCATOR=='value'){
+	   				var parent=jQuery(element).parent().get(0);
+	   				if(parent.tagName.toLowerCase()=='select')
+	   					if(jQuery(element).parent().attr("multiple")){
+	   						if(jQuery(element).attr("selected")==true)
+	   								jQuery(element).removeAttr("selected");
+	   						else
+	   								jQuery(element).attr("selected","selected");
+	   						return;
+	   					}
+	   			}
+	
 	};
 	
 	
@@ -467,6 +492,7 @@ AmberjackPlone = {
 	                            Amberjack.createCookie('ajcookie_controlposition', ui.position.left + "#" + ui.position.top, 10);
 	                        }
 	                    })
+	                    
 		jq('#ajControlNavi').css('cursor', 'move')
 	},
 

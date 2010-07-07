@@ -479,7 +479,7 @@ var controller = new function() {
                    this.editorSelect = function (id,bookmark){
                   	tinyMCE.get(id).selection.moveToBookmark(eval("(" + bookmark + ")"));
                   //solution for show the tiny buttons that appear only when onMouseUp  
-    				this.click(tinyMCE.get(id).selection.getNode().parentNode)
+    				windEvents.triggerMouseEvent(tinyMCE.get(id).selection.getNode(), 'mouseup', true);
                    };
 
 
