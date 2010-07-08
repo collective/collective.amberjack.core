@@ -323,6 +323,7 @@ function AjWindmillStep(method,locator,options) {
 		}
 			
 		this.checkIfStyleList();
+
 		var multSelect=this.checkifMultipleSelect(obj);
 			
 		if(multSelect==true)
@@ -408,7 +409,7 @@ function AjWindmillStep(method,locator,options) {
 	
 	
 	//check if i clicked on a multiple selection option
-	this.checkifMultipleSelect(element){
+	this.checkifMultipleSelect= function(element){
 	   			
 			if(this._LOCATOR=='value'){
 	   				var parent=jQuery(element).parent().get(0);
@@ -418,10 +419,10 @@ function AjWindmillStep(method,locator,options) {
 	   								jQuery(element).removeAttr("selected");
 	   						else
 	   								jQuery(element).attr("selected","selected");
-	   						return;
+	   						return true;
 	   					}
 	   			}
-	
+			return false;
 	};
 	
 	
