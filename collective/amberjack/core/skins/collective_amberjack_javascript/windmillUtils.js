@@ -364,7 +364,7 @@ var controller = new function() {
                   
                   this.radio = function(element){
                 	  if(element)
-                    return jq(element).click();
+                		  	return jq(element).click();
                   };
 
 

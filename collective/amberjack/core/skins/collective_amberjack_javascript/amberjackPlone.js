@@ -392,7 +392,7 @@ function AjWindmillStep(method,locator,options) {
 
 	};
 	
-	//check if previous microstep was a click for open tiny drop-down style list
+	//check if the previous microstep was a click for open tiny drop-down style list
 	this.checkIfStyleList= function(){
 		var num=this._NUM
 		if(tinyMCE.activeEditor){
@@ -408,12 +408,12 @@ function AjWindmillStep(method,locator,options) {
 	};
 	
 	
-	//check if i clicked on a multiple selection option
+	//perform microstep if i clicked on an option of a multiple selection list
 	this.checkifMultipleSelect= function(element){
 	   			
 			if(this._LOCATOR=='value'){
 	   				var parent=jQuery(element).parent().get(0);
-	   				if(parent.tagName.toLowerCase()=='select')
+	   				if(parent && parent.tagName.toLowerCase()=='select')
 	   					if(jQuery(element).parent().attr("multiple")){
 	   						if(jQuery(element).attr("selected")==true)
 	   								jQuery(element).removeAttr("selected");

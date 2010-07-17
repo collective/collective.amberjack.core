@@ -29,7 +29,7 @@
     enabled="True" expression=""  inline="False" />
  
  
- <!-- Windmill libraries modified for amberjack -->   
+ <!-- Windmill libraries modified for amberjack's integration-->   
  <javascript
     id="windmillUtils.js"
     cacheable="True" compression="safe" cookable="True"

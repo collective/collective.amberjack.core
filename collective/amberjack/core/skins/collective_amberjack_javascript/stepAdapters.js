@@ -14,7 +14,7 @@
 AmberjackPlone.stepAdapters = {
 		
 		
-	/*COLLECTIVE.AMBERJACK.WINDMILL   @author: Andrea Benetti##################################################*/	
+	/* collective.amberjack.windmill integration   @author: Andrea Benetti##################################################*/	
 		w_click: {
 			highlight: function(obj) {
 				jq(obj).addClass(AmberjackPlone.theAJClass+' '+AmberjackPlone.theAJClassBehaviour)
@@ -68,6 +68,7 @@ AmberjackPlone.stepAdapters = {
 		
 		w_select: {
 			highlight: null,
+			checkStep: null,
 			step: function(obj,locator,options,locatorValue) {
 				AmberjackPlone.setAmberjackCookies();
 				for(var i in options){
@@ -87,9 +88,7 @@ AmberjackPlone.stepAdapters = {
 			step: function(obj,locator,options,locatorValue) {
 				controller.check(obj)
 				},
-			checkStep: function (obj,options,locatorValue) {
-	            return jq(obj).attr("checked");
-				}
+			checkStep: null
 		},
 		
 		w_radio: {

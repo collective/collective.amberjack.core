@@ -435,7 +435,7 @@ Amberjack = {
    */
   getCurrentPageId: function(_children){
   	// try to get the pageCurrent: look at the cookie, if available, else let's assume it's the No 1
-	pageCurrent = AmberjackBase.getUrlParam(location.href, 'pageCurrent');	
+	pageCurrent = AmberjackBase.getUrlParam(location.href, 'pageCurrent');
 	pageCurrent = pageCurrent? pageCurrent : Amberjack.readCookie('ajcookie_pageCurrent');
 	Amberjack.eraseCookie('ajcookie_pageCurrent');
     if (!pageCurrent) {
@@ -632,7 +632,13 @@ Amberjack = {
    */
   urlMatch: function(href) {
   	  var href = unescape(href);
-	  var loc = unescape(window.location.protocol +'//'+ window.location.host + window.location.pathname);
+  	  var params;
+  	  var hasParams=false;
+  	  if (href.indexOf('?')!=-1){						//added check for get the url parameters otherwise if the href contains them i get a "page not found" error
+  	  params=href.substring(href.indexOf('?'));
+  	  hasParams=true;
+  	  }
+	  var loc = unescape(window.location.protocol +'//'+ window.location.host + window.location.pathname) + (hasParams ? params : '');
 	  if (href.match("portal_factory"))
 		  return (loc.indexOf(href) != -1);
 	  else return loc == href;
