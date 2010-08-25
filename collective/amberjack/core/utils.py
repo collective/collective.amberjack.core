@@ -1,7 +1,9 @@
-from zope.component import getUtility
+from zope.component import getUtility, getMultiAdapter
+from zope.interface import implements
 from zope.app.pagetemplate import engine
+
 from collective.amberjack.core.validators import _validators_
-from collective.amberjack.core.interfaces import IStep, IStepBlueprint
+from collective.amberjack.core.interfaces import IStep, IStepBlueprint, ITour
 
 import ConfigParser
 import re
@@ -156,3 +158,15 @@ class Condition(object):
         _context = engine.TrustedEngine.getContext(_globals)
         return _compiled(_context)
 
+class ToursRoot(object):
+    implements(ITour)
+    
+    def getToursRoot(self, context, request):
+        portal_state =  getMultiAdapter((context, request), name=u'plone_portal_state')
+        user_id = context.portal_membership.getAuthenticatedMember().id
+        member_folder_path = '/Members/' + user_id
+        try:
+            portal_state.portal().restrictedTraverse(member_folder_path.split('/')[1:])
+            return unicode(portal_state.navigation_root_url() + member_folder_path)
+        except:
+            return unicode(portal_state.navigation_root_url())

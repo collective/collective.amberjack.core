@@ -6,6 +6,7 @@ from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.schema.vocabulary import getVocabularyRegistry
 
+from collective.amberjack.core.interfaces import ITour
 from collective.amberjack.core.deprecated.tour_manager import ITourManager
 import urllib
 import re
@@ -17,9 +18,11 @@ class TourViewlet(common.ViewletBase):
         # super(TourViewlet, self).update()
         # self.navigation_root_url exist only in plone.app.layout > 1.1.8
         # so we create here to be compatible with Plone 3.2.3
-        self.portal_state = getMultiAdapter((self.context, self.request),
-                                            name=u'plone_portal_state')
-        self.navigation_root_url = unicode(self.portal_state.navigation_root_url())
+#        self.portal_state = getMultiAdapter((self.context, self.request),
+#                                            name=u'plone_portal_state')
+#        self.navigation_root_url = unicode(self.portal_state.navigation_root_url())
+        rootTool = getUtility(ITour, 'collective.amberjack.core.toursroot')
+        self.navigation_root_url = rootTool.getToursRoot(self.context, self.request)
 
         self.tour = self._choosenTour()
         self.enabled = self.tour is not None

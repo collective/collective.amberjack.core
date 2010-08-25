@@ -492,7 +492,7 @@ Amberjack = {
     if (!tourDef) {
       AmberjackBase.alert('DIV with CLASS "ajTourDef" and ID "' + Amberjack.tourId + '" is not defined');
     }
-
+	
     // Is there a specified closeUrl (title attribute of DIV.ajTourDef)?
     // Don't show close button if not set
     Amberjack.closeUrl = tourDef.getAttribute('title') ? tourDef.getAttribute('title') : false;
@@ -541,8 +541,8 @@ Amberjack = {
       AmberjackBase.alert('no matching page in ajTourDef found');
     }
 	Amberjack.elements = _children
-    AmberjackBase.postFetch(Amberjack.BASE_URL + 'skin/' + Amberjack.skinId.toLowerCase() + '/control.tpl.js', 'script');
-    AmberjackBase.postFetch(Amberjack.BASE_URL + 'skin/' + Amberjack.skinId.toLowerCase() + '/style.css', 'style');
+    AmberjackBase.postFetch(Amberjack.PORTAL_URL + 'skin/' + Amberjack.skinId.toLowerCase() + '/control.tpl.js', 'script');
+    AmberjackBase.postFetch(Amberjack.PORTAL_URL + 'skin/' + Amberjack.skinId.toLowerCase() + '/style.css', 'style');
 
     if (Amberjack.doCoverBody) {
       Amberjack.coverBody();

@@ -65,6 +65,11 @@
       name="url"
       />
 
+  <utility
+      name="collective.amberjack.core.toursroot"
+      factory=".utils.ToursRoot"
+      />
+
   <browser:page
       name="aj-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
