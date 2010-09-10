@@ -1,5 +1,5 @@
 from collective.amberjack.core.interfaces import ITourRegistration, \
-    IFileArchiveTourRegistration, IWebTourRegistration, ITourRegistrationForm
+    IControlPanelTourRegistration, IAjConfiguration, IAmberjackSetupForm
 from plone.app.controlpanel.form import ControlPanelForm
 from plone.fieldsets.fieldsets import FormFieldsets
 from zope.component import adapts
@@ -10,25 +10,33 @@ from zope.component import queryUtility
 
 class AJControlPanelAdapter(SchemaAdapterBase):
     adapts(IPloneSiteRoot)
-    implements(ITourRegistrationForm)
+    implements(IAmberjackSetupForm)
     zipfile = None
     url = None
+        
+    def get_sandbox(self):
+        return self.context.portal_amberjack.sandbox
+
+    def set_sandbox(self, value):
+        setattr(self.context.portal_amberjack,'sandbox',value)
+
+    sandbox = property(get_sandbox, set_sandbox)
 
 class AJControlPanelForm(ControlPanelForm):
 
-    archive = FormFieldsets(IFileArchiveTourRegistration)
-    archive.label = u'Archives'
-    archive.id = 'archives'
+    tour_registration = FormFieldsets(IControlPanelTourRegistration)
+    tour_registration.label = u'Tour registration'
+    tour_registration.id = 'tour_registration'
 
-    web = FormFieldsets(IWebTourRegistration)
-    web.label = u'Web'
-    web.id = 'web'
+    configuration = FormFieldsets(IAjConfiguration)
+    configuration.label = u'Configuration'
+    configuration.id = 'configuration'
 
-    form_fields = FormFieldsets(archive, web)
+    form_fields = FormFieldsets(configuration, tour_registration)
 
-    label = u"Amberjack tour registration"
-    description = u"Registration of the tours."
-    form_name = u"Tours registraion"
+    label = u"Amberjack Setup"
+    description = u"Configuraion for Amberjack."
+    form_name = u"Amberjack Setup"
 
     def _on_save(self, data=None):
         for name,source in data.items():

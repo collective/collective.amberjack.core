@@ -1,9 +1,12 @@
 from zope.component import getUtility, getMultiAdapter
 from zope.interface import implements
+from zope.schema.fieldproperty import FieldProperty
 from zope.app.pagetemplate import engine
 
 from collective.amberjack.core.validators import _validators_
-from collective.amberjack.core.interfaces import IStep, IStepBlueprint, ITour
+from collective.amberjack.core.interfaces import IStep, IStepBlueprint, ITour, IAjConfiguration
+
+from OFS.SimpleItem import SimpleItem
 
 import ConfigParser
 import re
@@ -161,8 +164,13 @@ class Condition(object):
 class ToursRoot(object):
     implements(ITour)
     
-    def getToursRoot(self, context, request):
+    def getToursRoot(self, context, request, url=''):
         portal_state =  getMultiAdapter((context, request), name=u'plone_portal_state')
+        if url:
+            if url.startswith('ABS'):
+                return unicode(portal_state.navigation_root_url())
+        if not context.portal_amberjack.sandbox:
+            return unicode(portal_state.navigation_root_url())
         user_id = context.portal_membership.getAuthenticatedMember().id
         member_folder_path = '/Members/' + user_id
         try:
@@ -170,3 +178,10 @@ class ToursRoot(object):
             return unicode(portal_state.navigation_root_url() + member_folder_path)
         except:
             return unicode(portal_state.navigation_root_url())
+        
+class AmberjackTool(SimpleItem):
+    """Amberjack Tool"""
+    implements(IAjConfiguration)
+    
+    sandbox = FieldProperty(IAjConfiguration['sandbox'])
+    

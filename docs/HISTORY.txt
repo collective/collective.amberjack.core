@@ -30,6 +30,8 @@ Changelog
   [amleczko]
 - move old stuff to depracated folder
   [amleczko]
+- implemented the sandbox
+  [mirco]
 
 1.0 (2010-05-17)
 ----------------

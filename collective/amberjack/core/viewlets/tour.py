@@ -60,20 +60,26 @@ class TourViewlet(common.ViewletBase):
             return u'display:none'
 
     def getStepUrl(self, url):
+        
+        rootTool = getUtility(ITour, 'collective.amberjack.core.toursroot')
+        navigation_root_url = rootTool.getToursRoot(self.context, self.request, url)
+
         if url.startswith('aj_'):
             return url
-        if(url.startswith(self.navigation_root_url)):
+        if(url.startswith(navigation_root_url)):
             if(re.search(r'(\d{4})-(\d{2})-(\d{2})',url)!=None): #Use regular expression for check if the url contains a temporary date
                 return 'aj_any_url'
             else:
-                url=url[url.find(self.navigation_root_url)+len(self.navigation_root_url):]
+                url=url[url.find(navigation_root_url)+len(navigation_root_url):]
+        if url.startswith('ABS'):
+            url=url[3:]
             
         url = urllib.quote(url)
             
         if url.startswith('/') or url == '':
-            url = self.navigation_root_url + url
+            url = navigation_root_url + url
         else:
-            url = self.navigation_root_url + '/' + url
+            url = navigation_root_url + '/' + url
         return url
 
     def _expandSelector(self, selector):
