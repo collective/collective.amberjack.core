@@ -177,7 +177,7 @@ class ToursRoot(object):
             portal_state.portal().restrictedTraverse(member_folder_path.split('/')[1:])
             return unicode(portal_state.navigation_root_url() + member_folder_path)
         except:
-            return unicode(portal_state.navigation_root_url())
+            return None
         
 class AmberjackTool(SimpleItem):
     """Amberjack Tool"""
