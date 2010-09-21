@@ -9,12 +9,6 @@
         schema=".zcml.ITourDirective"
         handler=".zcml.tour"
         />
-    
-    <meta:directive
-        name="ajstep"
-        schema=".zcml.IStepDirective"
-        handler=".zcml.ajstep"
-        />
 
   </meta:directives>
 

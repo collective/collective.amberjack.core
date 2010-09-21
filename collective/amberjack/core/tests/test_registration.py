@@ -1,6 +1,6 @@
 from unittest import defaultTestLoader, main
 from zope.component import queryUtility, getUtility
-from collective.amberjack.core.experimental.interfaces import ITourRegistration
+from collective.amberjack.core.interfaces import ITourRegistration
 from collective.amberjack.core.interfaces import ITourDefinition
 from Testing import ZopeTestCase as ztc
 from Products.Five import zcml
@@ -18,25 +18,31 @@ class RegistrationTests(ztc.ZopeTestCase):
         zcml.load_config('configure.zcml', plone.i18n.normalizer)
         zcml.load_string('''<configure
         xmlns="http://namespaces.zope.org/zope">
-        <utility component="collective.amberjack.core.experimental.blueprints.Step"
+        <utility component="collective.amberjack.core.blueprints.Step"
                  name="collective.amberjack.blueprints.step" />
         </configure>''')
 
         zcml.load_string('''<configure
         xmlns="http://namespaces.zope.org/zope">
-        <utility component="collective.amberjack.core.experimental.blueprints.MicroStep"
+        <utility component="collective.amberjack.core.blueprints.MicroStep"
                  name="collective.amberjack.blueprints.microstep" />
         </configure>''')
 
         zcml.load_string('''<configure
         xmlns="http://namespaces.zope.org/zope">
-        <utility component="collective.amberjack.core.experimental.registration.FileArchiveRegistration"
+        <utility component="collective.amberjack.core.registration.FileArchiveRegistration"
                  name="zip_archive" />
         </configure>''')
 
     def test_register_zip(self):
         reg = queryUtility(ITourRegistration, 'zip_archive')
-        registration = reg(os.path.join(self.test_folder, 'basic_tours.zip'))
+        archive_path = os.path.join(self.test_folder, 'basic_tours.zip')
+        archive = open(archive_path,'r')
+        archive.seek(0)
+        source = archive.read()
+        archive.close()
+        filename = os.path.basename(archive_path)
+        registration = reg(source, filename)
         registration.register()
         tour = getUtility(ITourDefinition, u'basic_tours-zip-add-and-publish-a-folder')
         self.assertEqual(tour.tourId, 'basic_tours-zip-add-and-publish-a-folder')

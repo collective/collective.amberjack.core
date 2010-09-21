@@ -6,7 +6,7 @@ from zope.component import getUtility
 from zope.schema.vocabulary import getVocabularyRegistry
 
 from collective.amberjack.core.interfaces import ITour
-from collective.amberjack.core.deprecated.tour_manager import ITourManager
+from collective.amberjack.core.tour_manager import ITourManager
 import urllib
 import re
 

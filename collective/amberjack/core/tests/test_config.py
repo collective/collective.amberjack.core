@@ -5,8 +5,8 @@ from StringIO import StringIO
 import plone.i18n.normalizer
 from Products.Five import zcml
 
-from collective.amberjack.core.experimental import utils
-from collective.amberjack.core.experimental.tour import Tour
+from collective.amberjack.core import utils
+from collective.amberjack.core.tour import Tour
 
 class ConfigTests(ztc.ZopeTestCase):
 
@@ -15,13 +15,13 @@ class ConfigTests(ztc.ZopeTestCase):
         zcml.load_config('configure.zcml', plone.i18n.normalizer)
         zcml.load_string('''<configure
         xmlns="http://namespaces.zope.org/zope">
-        <utility component="collective.amberjack.core.experimental.blueprints.Step"
+        <utility component="collective.amberjack.core.blueprints.Step"
                  name="collective.amberjack.blueprints.step" />
         </configure>''')
 
         zcml.load_string('''<configure
         xmlns="http://namespaces.zope.org/zope">
-        <utility component="collective.amberjack.core.experimental.blueprints.MicroStep"
+        <utility component="collective.amberjack.core.blueprints.MicroStep"
                  name="collective.amberjack.blueprints.microstep" />
         </configure>''')
 

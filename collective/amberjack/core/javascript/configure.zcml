@@ -11,14 +11,4 @@
       class=".defaults.AmberjackDefaults"
       />
 
-  <browser:page 
-      name="amberjackSteps.js"
-      for="*"
-      permission="zope2.View"
-      class=".amberjackSteps.AmberjackSteps" 
-      />
-
-  <collective.amberjack:ajstep 
-      stepsdescriptor=".ajStandardSteps.ajStandardSteps" />
-  
 </configure> 

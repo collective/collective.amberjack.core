@@ -1,6 +1,6 @@
 from zope.interface import classProvides
 from zope.component import provideUtility
-from collective.amberjack.core.deprecated.interfaces import ITourDefinition
+from collective.amberjack.core.interfaces import ITourDefinition
 from collective.amberjack.core.interfaces import ITourRegistration
 from collective.amberjack.core.tour import Tour
 from cStringIO import StringIO
