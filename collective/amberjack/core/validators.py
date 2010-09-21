@@ -18,25 +18,9 @@ def isAuthenticated(context):
     if isAnonymous(context) is None:
         return _(u"You have to be logged in to execute this step.")
 
-def isManager(context, request):
-    if not request.AUTHENTICATED_USER.has_role('Manager', context):
-        return _(u"You have to be Manager to execute this step.")
-
-def isReviewer(context, request):
-    if not request.AUTHENTICATED_USER.has_role('Reviewer', context):
-        return _(u"You have to be Reviewer to execute this step.")
-
-def isContributor(context, request):
-    if not request.AUTHENTICATED_USER.has_role('Contributor', context):
-        return _(u"You have to be Contributor to execute this step.")
-
-def isEditor(context, request):
-    if not request.AUTHENTICATED_USER.has_role('Editor', context):
-        return _(u"You have to be Editor to execute this step.")
-
-def isReader(context, request):
-    if not request.AUTHENTICATED_USER.has_role('Editor', context):
-        return _(u"You have to be Reader to execute this step.")
+def hasRole(context, request, role):
+    if not request.AUTHENTICATED_USER.has_role(role, context):
+        return _(u"You have to be %s to execute this step." % role)
 
 def isFolderCreated(context, path):
     portal = getToolByName(context, 'portal_url').getPortalObject()
@@ -53,7 +37,7 @@ def isFolderCreated(context, path):
     
     if path.startswith('/'):
              path = path[1:]    
-    myfolder = root.unrestrictedTraverse(str(path).split('/'), None)
+    myfolder = root.aq_base.unrestrictedTraverse(str(path).split('/'), None)
     if myfolder is None:
         return _(u"The path [%s] doesn't exist yet. Please close this tour and start the first tour." %root+path) 
 
@@ -64,11 +48,7 @@ def isNotFolderCreated(context, path):
 _validators_ = (
   isNotFolderCreated,
   isFolderCreated,
-  isReader,
-  isEditor,
-  isContributor,
-  isReviewer,
-  isManager,
+  hasRole,
   isAuthenticated,
   isAnonymous,
 )
