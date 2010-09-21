@@ -2,7 +2,6 @@
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.layout.viewlets import common
 
-from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.schema.vocabulary import getVocabularyRegistry
 
@@ -15,11 +14,7 @@ class TourViewlet(common.ViewletBase):
     index = ViewPageTemplateFile('tour.pt')
 
     def update(self):
-        # super(TourViewlet, self).update()
-        # self.navigation_root_url exist only in plone.app.layout > 1.1.8
-        # so we create here to be compatible with Plone 3.2.3
-        rootTool = getUtility(ITour, 'collective.amberjack.core.toursroot')
-        self.navigation_root_url = rootTool.getToursRoot(self.context, self.request)
+        super(TourViewlet, self).update()
 
         self.tour = self._choosenTour()
         self.enabled = self.tour is not None
@@ -42,22 +37,17 @@ class TourViewlet(common.ViewletBase):
         manager = getUtility(ITourManager)
         return manager.getTour(tourId, self.context)
 
-
-
-
     def highlight(self, step):
-        
         if (step._options['blueprint']=='collective.amberjack.blueprints.windmillmicrostep'):
             if step.method.find('waits.')!=-1 or step.method=='highlight':
                 return u'display:none'
-            
+
         if step.method != u'':
             return u''
         else:
             return u'display:none'
 
     def getStepUrl(self, url):
-        
         rootTool = getUtility(ITour, 'collective.amberjack.core.toursroot')
         navigation_root_url = rootTool.getToursRoot(self.context, self.request, url)
 
@@ -70,9 +60,9 @@ class TourViewlet(common.ViewletBase):
                 url=url[url.find(navigation_root_url)+len(navigation_root_url):]
         if url.startswith('ABS'):
             url=url[3:]
-            
+
         url = urllib.quote(url)
-            
+
         if url.startswith('/') or url == '':
             url = navigation_root_url + url
         else:
@@ -81,7 +71,7 @@ class TourViewlet(common.ViewletBase):
 
     def _expandSelector(self, selector):
         return selector.replace('AJ_ROOT', self.navigation_root_url)
-        
+
     def getMacroSteps(self):
         return self.tour.steps
 
@@ -90,8 +80,8 @@ class TourViewlet(common.ViewletBase):
         if not step in self.ajsteps:
             self.ajsteps.append(step)
         return self.ajsteps.index(step) + 1
-    
- 
+
+
     def javascriptSteps(self):
         """Return an Array:
         [new AjStep('method', 'selector', 'text'), ...]
@@ -102,24 +92,24 @@ class TourViewlet(common.ViewletBase):
                     """
             cnt = 0
             for step in self.ajsteps:
-                
+
                 if step._options['blueprint']=='collective.amberjack.blueprints.windmillmicrostep':
                     ajstep = """new AjWindmillStep('%s',"%s","%s","%s","%s")""" % (step.method,
                                                                       step.selector.replace('"','\\"'),
                                                                       step.text.replace('\\"','"').replace('"','\\"'), #get the right formatted text from method "editor" without causing error in the others
                                                                       step.required,
                                                                       step.condition.replace('\\"','"').replace('"','\\"')) 
-                else:    
+                else:
                     ajstep = """new AjStep('%s','%s',"%s")""" % (step.method,
                                                              self._expandSelector(step.selector),
                                                              step.text.replace('"','\\"'))
-                
+
                 if cnt+1 != len(self.ajsteps):
                     ajstep += """,
                     """
                 aj += ajstep
                 cnt+=1
-            
+
             return aj + """
             ]
             """
@@ -143,13 +133,16 @@ class TourViewlet(common.ViewletBase):
          'title': u'next tour url'}
         else None
         """
+        rootTool = getUtility(ITour, 'collective.amberjack.core.toursroot')
+        navigation_root_url = rootTool.getToursRoot(self.context, self.request)
+
         tour_id = self.tour.tourId
         vr = getVocabularyRegistry()
         vocab = vr.get(self.context, "collective.amberjack.core.tours")
         previous_term = None
         for term in vocab:
             if previous_term is not None and previous_term.token == tour_id:
-                return {'url': '%s?tourId=%s&skinId=%s' % (self.navigation_root_url, term.token, self._choosenSkin()),
+                return {'url': '%s?tourId=%s&skinId=%s' % (navigation_root_url, term.token, self._choosenSkin()),
                         'title': term.title}
             previous_term = term
         return None
