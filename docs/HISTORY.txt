@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1a (2010-09-20)
+1.1a (2010-09-21)
 -----------------
 
 - updated dependency with collective.js.jqueryui
