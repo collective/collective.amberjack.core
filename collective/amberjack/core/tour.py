@@ -21,11 +21,23 @@ class Tour(UserDict.DictMixin):
         self._steps_ids = self._options['steps'].splitlines()
         self.steps = utils.constructTour(self, self._steps_ids)
         self.title = self._options['title']
+        self.validators = self._options.get('validators','').splitlines()
         self.setTourId(tour_id)
 
     def setTourId(self, tour_id):
         normalizer = getUtility(IIDNormalizer)
         self.tourId = normalizer.normalize('%s.%s' % (tour_id, self.title))
+        
+    def validate(self, context, request):
+        errors = []
+        for expression in self.validators:
+            if not expression:
+                continue
+            condition = utils.Condition(expression, context, request)
+            message = condition()
+            if message:
+                errors.append(message)
+        return errors
 
     def __getitem__(self, step):
         try:

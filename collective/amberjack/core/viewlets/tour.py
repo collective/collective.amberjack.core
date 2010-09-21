@@ -18,9 +18,6 @@ class TourViewlet(common.ViewletBase):
         # super(TourViewlet, self).update()
         # self.navigation_root_url exist only in plone.app.layout > 1.1.8
         # so we create here to be compatible with Plone 3.2.3
-#        self.portal_state = getMultiAdapter((self.context, self.request),
-#                                            name=u'plone_portal_state')
-#        self.navigation_root_url = unicode(self.portal_state.navigation_root_url())
         rootTool = getUtility(ITour, 'collective.amberjack.core.toursroot')
         self.navigation_root_url = rootTool.getToursRoot(self.context, self.request)
 
@@ -107,9 +104,11 @@ class TourViewlet(common.ViewletBase):
             for step in self.ajsteps:
                 
                 if step._options['blueprint']=='collective.amberjack.blueprints.windmillmicrostep':
-                    ajstep = """new AjWindmillStep('%s',"%s","%s")""" % (step.method,
+                    ajstep = """new AjWindmillStep('%s',"%s","%s","%s","%s")""" % (step.method,
                                                                       step.selector.replace('"','\\"'),
-                                                                      step.text.replace('\\"','"').replace('"','\\"')) #get the right formatted text from method "editor" without causing error in the others
+                                                                      step.text.replace('\\"','"').replace('"','\\"'), #get the right formatted text from method "editor" without causing error in the others
+                                                                      step.required,
+                                                                      step.condition.replace('\\"','"').replace('"','\\"')) 
                 else:    
                     ajstep = """new AjStep('%s','%s',"%s")""" % (step.method,
                                                              self._expandSelector(step.selector),

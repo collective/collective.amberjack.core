@@ -142,12 +142,14 @@ function AjStep(type, jqElement, value) {
  * @param {String} locator (optional,depends on method passed,example {'option' : "optionValue",...})
  * @param {String} a string with method's options (optional,depends on method passed, example { "locatorValue" : 'locator'})
  */
-function AjWindmillStep(method,locator,options) {
+function AjWindmillStep(method,locator,options,required,condition) {
 	
 	this._METHOD = method;
 	this._LOCATOR = '';
 	this._LOCVALUE='';	
 	this._OPTIONS = '';
+	this._REQUIRED = required;
+	this._CONDITION = condition;
 	
 	this._NUM=numberMicrostep;
 	numberMicrostep++;
@@ -252,6 +254,10 @@ function AjWindmillStep(method,locator,options) {
 		return this._OPTIONS;
 	};
 	
+	this.getRequired= function() {
+		return this._REQUIRED;
+	};
+	
 
 	this.highlightStep = function(){
 		var metodo=this._METHOD;
@@ -297,7 +303,7 @@ function AjWindmillStep(method,locator,options) {
 		}
 		
 		var stepDone = true;
-	    var stepRequired = true;
+	    var stepRequired = this.getRequired();
 			 
        	        if (stepRequired && obj) {
 		            if (AmberjackPlone.stepAdapters['w_'+metodo] && AmberjackPlone.stepAdapters['w_'+metodo].checkStep)

@@ -77,6 +77,8 @@ class WindmillMicroStep(object):
         self.selector = self._options.get('selector','')
         self.text = normalizeHTML(self._options.get('text',''))
         self.method=self._options.get('method','')
+        self.required=self._options.get('required','')
+        self.condition=self._options.get('condition','')
             
         
 
