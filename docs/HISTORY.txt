@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.1a (2010-??-??) unreleased
------------------------------
+1.1a (2010-09-21)
+-----------------
 
 - updated dependency with collective.js.jqueryui
   [mirco]
@@ -29,6 +29,12 @@ Changelog
 - new tour syntax with registration and config parser
   [amleczko]
 - move old stuff to depracated folder
+  [amleczko]
+- implemented the sandbox
+  [mirco]
+- validation and precondition
+  [mirco]
+- add hasRole validation and remove too specific ones
   [amleczko]
 
 1.0 (2010-05-17)

@@ -13,20 +13,25 @@ class IStepBlueprint(Interface):
 class ITourRegistration(Interface):
     """ """
 
-class IFileArchiveTourRegistration(Interface):
+class IControlPanelTourRegistration(Interface):
     """ """
     zipfile = schema.Bytes(
         title=u'Choose archive file',
         required=False)
-
-class IWebTourRegistration(Interface):
-    """ """
+    
     url = schema.URI(
         title=u'Choose url',
         required=False)
 
-class ITourRegistrationForm(IFileArchiveTourRegistration,
-                            IWebTourRegistration):
+class IAjConfiguration(Interface):
+    """ """
+    sandbox = schema.Bool(
+        title=u'Use Sandbox',
+        default=True,
+        required=False)
+
+class IAmberjackSetupForm(IControlPanelTourRegistration,
+                            IAjConfiguration):
     """ """
 
 class IAmberjackSkin(Interface):
