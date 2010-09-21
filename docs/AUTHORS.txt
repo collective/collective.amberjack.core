@@ -8,25 +8,18 @@ Contributors
 * Mirco Angelini [mirco]
 * Andrew Mleczko [amleczko]
 * Giacomo Spettoli [giacomos]
-
-Sorrento Sprint 2010
---------------------
-
 * Simone Orsi [simahawk]
-
-Ferrara 2010 Sprint
--------------------
-
 * Jacopo Deyla
 * Regione Emilia-Romagna
-
-PloneConf 2009 Sprint
----------------------
- 
 * Aaron VanDerlip [aaronv]
 * Michael Davis [millie]
 * Irene Capatti [nekorin]
 * Giorgio Borelli [gborelli]
+* Andrea Benetti [DkAndrea]
+
+Amberjack library
+-----------------
+* Arash Yalpani [http://amberjack.org/]
 
 Translations
 ------------
