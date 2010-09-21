@@ -32,10 +32,10 @@ Changelog
   [amleczko]
 - implemented the sandbox
   [mirco]
-- validation and precondition
-  [mirco]
 - add hasRole validation and remove too specific ones
   [amleczko]
+- implemented validation and precondition
+  [mirco]
 - remove depracated module - update tests
   [amleczko]
 

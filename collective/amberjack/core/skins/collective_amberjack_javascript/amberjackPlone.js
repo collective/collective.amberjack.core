@@ -2,138 +2,6 @@
 var numberMicrostep=0;  //used to set the number of each microstep
 
 /**
- * The model of a single step of the tour.
- * 
- * @param {String} type the type of action for this step. See ajStandardSteps.py
- * @param {String} jq a jQuery selector
- * @param {String} value an optional value (depends on type choosen)
- */
-function AjStep(type, jqElement, value) {
-	this._JQ = jqElement;
-	this._TYPE = type;
-	this._VALUE = value;
-	
-	this._NUM=numberMicrostep;
-	numberMicrostep++;
-	
-	this.getJq= function() {
-		return this._JQ;
-	};
-	
-	this.getType= function() {
-		return this._TYPE;
-	};
-	
-	this.getValue= function() {
-		return this._VALUE;
-	};
-	
-	this.getNum= function() {
-		return this._NUM;
-	};
-	
-	this.getObj= function() {
-		var type_obj = this._TYPE;
-		if(this._JQ=='') return jq(AjStandardSteps[this._TYPE]);
-		else return jq(this._JQ);
-	};
-	
-   /* Highlight the step for better view
-	* @author Giacomo Spettoli*/
-	 this.highlightStep = function(){
-		try {
-			obj = this.getObj();
-			} catch (e) {
-			var msg = "Error in highlightStep(): Step " + (this._NUM+1) +" not found";
-			AmberjackBase.alert(msg);
-			AmberjackBase.log(msg, e);
-			return false;
-			}
-			var type_obj = this._TYPE;
-		
-			if (AmberjackPlone.stepAdapters[type_obj] && AmberjackPlone.stepAdapters[type_obj].highlight)
-				AmberjackPlone.stepAdapters[type_obj].highlight(obj, type_obj, null, null);	
-			else if (type_obj.match("menu")){
-				obj.children('dt').children('a').addClass(AmberjackPlone.theAJClass+' '+AmberjackPlone.theAJClassBehaviour);
-			}
-			else {
-				obj.addClass(AmberjackPlone.theAJClass+' '+AmberjackPlone.theAJClassBehaviour);
-			}
-		}
-	 
-	 
-	 /* Check that the step has been done.
-	 * @author Giacomo Spettoli*/
-	 this.checkStep = function(){
-		 
-			var obj;
-			try {
-				obj = this.getObj();
-			} catch(e) {
-				var msg = "Error in checkStep(): Step " + (this._NUM+1) +" not found"; 
-				AmberjackBase.alert(msg);
-				AmberjackBase.log(msg, e);
-				return false;
-			}
-			
-			var stepDone = true;
-		    var stepRequired = true; 
-		    var type_obj = this._TYPE;
-		    var jq_obj = this._JQ;
-		    var value = this._VALUE;
-		        
-		        if (stepRequired) {
-		            if (AmberjackPlone.stepAdapters[type_obj] && AmberjackPlone.stepAdapters[type_obj].checkStep)
-		                stepDone = AmberjackPlone.stepAdapters[type_obj].checkStep(obj, jq_obj, value)
-		            else if (value!="") {
-		                stepDone = obj.val()==value;
-		            }
-		        }
-		        return stepDone;
-		 
-	 }
-	 
-	 /* Function for doing step
-	  * @author Giacomo Spettoli*/
-	 this.doStep = function(){
-			var obj, type_obj, jq_obj, value;
-			
-			try {
-				obj = this.getObj();
-				type_obj = this._TYPE;
-				jq_obj = this._JQ;
-				value = this._VALUE;
-			} catch(e) {
-				var msg = "Error in doStep(): Step " + (this._NUM+1) +" not found";
-				AmberjackBase.alert(msg);
-				AmberjackBase.log(msg, e);
-				return false;
-			}
-		    
-			if (AmberjackPlone.stepAdapters[type_obj] && AmberjackPlone.stepAdapters[type_obj].step)
-				AmberjackPlone.stepAdapters[type_obj].step(obj, type_obj, jq_obj, value);		
-			else if (value!="") {
-				changeValue(obj, value);
-			}
-			else if (type_obj.match("menu")) {
-				if (value=='deactivate') obj.removeClass('activated').addclass('deactivated');
-				else obj.removeClass('deactivated').addClass('activated');
-			}
-			else if (jq_obj=="") {
-				obj.click(function(){
-		            AmberjackPlone.setAmberjackCookies()
-				});	
-				obj.click();
-				if (obj.attr("href"))
-					location.href = obj.attr("href");
-			}
-	 }
-	
-};
-
-
-
-/**
  * The model of a windmill microstep
  * 
  * @author Andrea Benetti
@@ -148,7 +16,6 @@ function AjWindmillStep(method,locator,options,required,condition) {
 	this._LOCATOR = '';
 	this._LOCVALUE='';	
 	this._OPTIONS = '';
-	this._REQUIRED = required;
 	this._CONDITION = condition;
 	
 	this._NUM=numberMicrostep;
@@ -228,7 +95,7 @@ function AjWindmillStep(method,locator,options,required,condition) {
 			for(var k in curLocators){
 					this._LOCATOR = curLocators[k];
 					this._LOCVALUE= k;
-					l[i]=this.getObj();
+					l[i]=this.getObj(this._LOCATOR,this._LOCVALUE);
 					i+=1;
 				}
 			this._LOCATOR=curLocators;
@@ -254,8 +121,8 @@ function AjWindmillStep(method,locator,options,required,condition) {
 		return this._OPTIONS;
 	};
 	
-	this.getRequired= function() {
-		return this._REQUIRED;
+	this.getCondition= function() {
+		return this._CONDITION;
 	};
 	
 
@@ -266,7 +133,7 @@ function AjWindmillStep(method,locator,options,required,condition) {
 			return;
 			}
 		try {
-			obj = this.getObj();
+			obj = this.getObj(this._LOCATOR,this._LOCVALUE);
 			} catch (e) {
 				var msg = "Error in highlightStep(): Step " + (this._NUM+1) +" not found";
 				AmberjackBase.alert(msg);
@@ -294,7 +161,7 @@ function AjWindmillStep(method,locator,options,required,condition) {
 		if(metodo=='highlight') return true;
 		var obj;
 		try {
-			obj = this.getObj();
+			obj = this.getObj(this._LOCATOR,this._LOCVALUE);
 		} catch(e) {
 			var msg = "Error in checkStep(): Step " + (this._NUM+1) +" not found"; 
 			AmberjackBase.alert(msg);
@@ -303,16 +170,41 @@ function AjWindmillStep(method,locator,options,required,condition) {
 		}
 		
 		var stepDone = true;
-	    var stepRequired = this.getRequired();
+	    var stepCondition = this._CONDITION;
 			 
-       	        if (stepRequired && obj) {
-		            if (AmberjackPlone.stepAdapters['w_'+metodo] && AmberjackPlone.stepAdapters['w_'+metodo].checkStep)
-		                stepDone = AmberjackPlone.stepAdapters['w_'+metodo].checkStep(obj,this._OPTIONS,this._LOCVALUE)
+       	        if (stepCondition && obj) {
+					if (stepCondition == 'checkstep') {
+						if (AmberjackPlone.stepAdapters['w_' + metodo] && AmberjackPlone.stepAdapters['w_' + metodo].checkStep) 
+							stepDone = AmberjackPlone.stepAdapters['w_' + metodo].checkStep(obj, this._OPTIONS, this._LOCVALUE)
+					}
+					else 
+						stepDone = this.checkCondition();
+					
 		        }
        	        
        	return stepDone;
-
 		
+	};
+	
+	this.checkCondition = function(){
+		var stepCondition = jq.parseJSON(this._CONDITION);
+		var testo = stepCondition['value'];
+		var operator = stepCondition['operator'];
+		var selector = stepCondition['selector'];
+		var locator = ""
+		var locavalue = ""
+		for (var x in selector) {
+			locator = selector[x];
+			locvalue = x;
+		}
+		var obj = this.getObj(locator,locvalue);
+		switch (operator) {
+			case 'eq': return jq(obj).val()==testo; break;
+			case 'ne': return jq(obj).val()!=testo; break;
+			case 'co': return Boolean(jq(obj).val().match(testo)); break;	
+			case 'ne': return Boolean(jq(obj).val().match(testo)); break;
+			default: return true;
+		}
 	};
 	
 	this.doStep = function(){
@@ -320,7 +212,7 @@ function AjWindmillStep(method,locator,options,required,condition) {
 		var obj;
 		var metodo=this._METHOD;
 		try {
-			obj = this.getObj();
+			obj = this.getObj(this._LOCATOR,this._LOCVALUE);
 		} catch(e) {
 			var msg = "Error in doStep(): Step " + (this._NUM+1) +" not found";
 			AmberjackBase.alert(msg);
@@ -342,56 +234,56 @@ function AjWindmillStep(method,locator,options,required,condition) {
 	};
 	
 	
-	this.getObj= function() {
+	this.getObj= function(locator,locvalue) {
 		  var element = null;
 		  //If a link was passed, lookup as link
-		  if(this._LOCATOR =='link') {
-		    element = elementslib.Element.LINK(this._LOCVALUE);
+		  if(locator =='link') {
+		    element = elementslib.Element.LINK(locvalue);
 		  }
 		  //if xpath was passed, lookup as xpath
-		  else if(this._LOCATOR=='xpath') {        
-		    element = elementslib.Element.XPATH(this._LOCVALUE);
+		  else if(locator=='xpath') {        
+		    element = elementslib.Element.XPATH(locvalue);
 		  }
 		  
 		  //if id was passed, do as such
-		  else if(this._LOCATOR=='id') {
-		    element = elementslib.Element.ID(this._LOCVALUE);
+		  else if(locator=='id') {
+		    element = elementslib.Element.ID(locvalue);
 		  }
 		   
 		  //if jsid was passed
-		  else if(this._LOCATOR=='jsid') {
-		    var jsid = window.eval(this._LOCVALUE);
+		  else if(locator=='jsid') {
+		    var jsid = window.eval(locvalue);
 		    element = elementslib.Element.ID(jsid);
 		  }
 		  //if name was passed
-		  else if(this._LOCATOR=='name') {
-		    element = elementslib.Element.NAME(this._LOCVALUE);
+		  else if(locator=='name') {
+		    element = elementslib.Element.NAME(locvalue);
 		  }
 		  //if value was passed
-		  else if(this._LOCATOR=='value') {
-		    element = elementslib.Element.VALUE(this._LOCVALUE);
+		  else if(locator=='value') {
+		    element = elementslib.Element.VALUE(locvalue);
 		  }
 		  //if classname was passed
-		  else if(this._LOCATOR=='classname') {
-		    element = elementslib.Element.CLASSNAME(this._LOCVALUE);
+		  else if(locator=='classname') {
+		    element = elementslib.Element.CLASSNAME(locvalue);
 		  }
 		  //if tagname was passed
-		  else if(this._LOCATOR=='tagname') {
-		    element = elementslib.Element.TAGNAME(this._LOCVALUE);
+		  else if(locator=='tagname') {
+		    element = elementslib.Element.TAGNAME(locvalue);
 		  }
 		  //if label was passed
-		  else if(this._LOCATOR=='label') {
-		    element = elementslib.Element.LABEL(this._LOCVALUE);
+		  else if(locator=='label') {
+		    element = elementslib.Element.LABEL(locvalue);
 		  }
 		  //if jquery was passed
-		  else if(this._LOCATOR=='jquery') {
-			  this._LOCVALUE = helpers.repAll(this._LOCVALUE, ").", ")<*>");
+		  else if(locator=='jquery') {
+			  locvalue = helpers.repAll(locvalue, ").", ")<*>");
 		    var jQ = jQuery(window.document);
-		    var chain= this._LOCVALUE.split('<*>');
+		    var chain= locvalue.split('<*>');
 		    
-		    this._LOCVALUE= helpers.repAll(this._LOCVALUE, "<*>", ".");
+		    locvalue= helpers.repAll(locvalue, "<*>", ".");
 		    var start = eval('jQ.find'+chain[0]);
-		    var theRest = this._LOCVALUE.replace(chain[0],'');
+		    var theRest = locvalue.replace(chain[0],'');
 		    element = eval('start'+theRest);
 		  }
 		  return element;
@@ -406,7 +298,7 @@ function AjWindmillStep(method,locator,options,required,condition) {
 				num=num-1;
 			if(num-1>=0){
 			         if(AjSteps[num-1].getLocValue()==tinyMCE.activeEditor.id+'_style_text_text' || AjSteps[num-1].getLocValue()==tinyMCE.activeEditor.id+"_style_text_open"){  //if in the previous microstep i opened the tiny drop-down style list, now i want to select an entry.
-						   AmberjackPlone.stepAdapters['w_'+AjSteps[num-1].getMethod()].step(AjSteps[num-1].getObj(),AjSteps[num-1].getLocator(),AjSteps[num-1].getOptions(),AjSteps[num-1].getLocValue());
+						   AmberjackPlone.stepAdapters['w_'+AjSteps[num-1].getMethod()].step(AjSteps[num-1].getObj(this._LOCATOR,this._LOCVALUE),AjSteps[num-1].getLocator(),AjSteps[num-1].getOptions(),AjSteps[num-1].getLocValue());
 				}
 			}
 		}

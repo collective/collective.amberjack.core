@@ -6,6 +6,7 @@ from collective.amberjack.core import utils
 
 import UserDict
 import os
+from collective.amberjack.core.validators import AmberjackException
 
 class Tour(UserDict.DictMixin):
     implements(ITour)
@@ -34,9 +35,10 @@ class Tour(UserDict.DictMixin):
             if not expression:
                 continue
             condition = utils.Condition(expression, context, request)
-            message = condition()
-            if message:
-                errors.append(message)
+            try:
+                message = condition()
+            except AmberjackException, e:
+                errors.append(str(e))
         return errors
 
     def __getitem__(self, step):
