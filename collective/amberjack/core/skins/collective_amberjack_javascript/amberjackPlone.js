@@ -173,6 +173,14 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 			return false;
 		}
 		
+		if(jq(obj).parent().children('.required').length)
+			if (jq(obj).val()=='') {
+				var field_name = jq(obj).parent().children('label').text()
+				var msg = "The field \"" + field_name + "\" can't be empty, it's required by Plone"; 
+				AmberjackBase.alert(msg);
+				return false;
+			}
+		
 		var stepDone = true;
 	    var stepCondition = this._CONDITION;
 			 
@@ -184,7 +192,8 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 			else 
 				stepDone = this.checkCondition();
     	}
-       	        
+       	if (!stepDone)
+			AmberjackBase.alert("Complete the step: \"" + AjSteps[steps[i]].getDescription() + "\"");        
        	return stepDone;
 		
 	};
@@ -558,7 +567,6 @@ AmberjackPlone = {
         for (var i = 0; i < steps.length && steps[i] < num; i++) {
             thisStep = AjSteps[steps[i]].checkStep();
             if(!thisStep){
-                AmberjackBase.alert("Complete the step: \"" + AjSteps[steps[i]].getDescription() + "\"");
                 allDone = false;
                 break;
             }

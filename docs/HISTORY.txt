@@ -44,6 +44,9 @@ Changelog
 - changed the alert messages: substituted the number of the tour with the description
   of the tour.
   [mirco]
+- implemented the check for the required fields of Plone, if the required fields are 
+  empty the user can't pass to the next step.
+  [mirco]
 
 1.0 (2010-05-17)
 ----------------
