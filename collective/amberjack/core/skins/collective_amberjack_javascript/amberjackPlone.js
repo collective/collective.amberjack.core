@@ -172,15 +172,14 @@ function AjWindmillStep(method,locator,options,required,condition) {
 		var stepDone = true;
 	    var stepCondition = this._CONDITION;
 			 
-       	        if (stepCondition && obj) {
-					if (stepCondition == 'checkstep') {
-						if (AmberjackPlone.stepAdapters['w_' + metodo] && AmberjackPlone.stepAdapters['w_' + metodo].checkStep) 
-							stepDone = AmberjackPlone.stepAdapters['w_' + metodo].checkStep(obj, this._OPTIONS, this._LOCVALUE)
-					}
-					else 
-						stepDone = this.checkCondition();
-					
-		        }
+        if (stepCondition && obj) {
+			if (stepCondition == 'checkstep') {
+				if (AmberjackPlone.stepAdapters['w_' + metodo] && AmberjackPlone.stepAdapters['w_' + metodo].checkStep) 
+					stepDone = AmberjackPlone.stepAdapters['w_' + metodo].checkStep(obj, this._OPTIONS, this._LOCVALUE)
+			}
+			else 
+				stepDone = this.checkCondition();
+    	}
        	        
        	return stepDone;
 		
@@ -488,7 +487,7 @@ AmberjackPlone = {
 			var ajNext = jq("#ajNext");
 			
 			// BBB
-			ajNext.attr("onClick","if (AmberjackPlone.checkAllSteps()) {" + ajNext.attr('onClick') + "}");
+			ajNext.attr("onClick","AmberjackPlone.doAllSteps(); return false");
 		}
 	},
 
@@ -512,6 +511,21 @@ AmberjackPlone = {
         
         AjSteps[num].doStep();
         
+	}, 
+	
+	/**
+	 * Function for doing all step
+	 * @author Mirco Angelini
+	 */
+	doAllSteps: function() {
+		
+		var steps = AmberjackPlone.getPageSteps();
+		for(var i = 0; i < steps.length; i++) {
+			var prevStepDone = AmberjackPlone.checkPreviousSteps(steps[i])
+			if (!prevStepDone) 
+				return prevStepDone;
+			AjSteps[steps[i]].doStep();
+		}
 	}, 
 	
     /**

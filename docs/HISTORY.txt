@@ -38,6 +38,9 @@ Changelog
   [mirco]
 - remove depracated module - update tests
   [amleczko]
+- we have changed the action of button "Next"(>>) that now perform all the 
+  micro-steps of the step.
+  [mirco]
 
 1.0 (2010-05-17)
 ----------------
