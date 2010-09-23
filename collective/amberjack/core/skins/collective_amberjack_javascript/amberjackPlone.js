@@ -10,13 +10,14 @@ var numberMicrostep=0;  //used to set the number of each microstep
  * @param {String} locator (optional,depends on method passed,example {'option' : "optionValue",...})
  * @param {String} a string with method's options (optional,depends on method passed, example { "locatorValue" : 'locator'})
  */
-function AjWindmillStep(method,locator,options,required,condition) {
+function AjWindmillStep(method,locator,options,required,condition,description) {
 	
 	this._METHOD = method;
 	this._LOCATOR = '';
 	this._LOCVALUE='';	
 	this._OPTIONS = '';
 	this._CONDITION = condition;
+	this._DESCRIPTION = description
 	
 	this._NUM=numberMicrostep;
 	numberMicrostep++;
@@ -125,6 +126,9 @@ function AjWindmillStep(method,locator,options,required,condition) {
 		return this._CONDITION;
 	};
 	
+	this.getDescription= function() {
+		return this._DESCRIPTION;
+	};
 
 	this.highlightStep = function(){
 		var metodo=this._METHOD;
@@ -554,7 +558,7 @@ AmberjackPlone = {
         for (var i = 0; i < steps.length && steps[i] < num; i++) {
             thisStep = AjSteps[steps[i]].checkStep();
             if(!thisStep){
-                AmberjackBase.alert("Step " + (steps[i]+1) + " not completed");
+                AmberjackBase.alert("Complete the step: \"" + AjSteps[steps[i]].getDescription() + "\"");
                 allDone = false;
                 break;
             }

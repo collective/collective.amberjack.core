@@ -41,6 +41,9 @@ Changelog
 - we have changed the action of button "Next"(>>) that now perform all the 
   micro-steps of the step.
   [mirco]
+- changed the alert messages: substituted the number of the tour with the description
+  of the tour.
+  [mirco]
 
 1.0 (2010-05-17)
 ----------------

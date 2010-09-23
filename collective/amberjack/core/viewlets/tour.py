@@ -81,6 +81,9 @@ class TourViewlet(common.ViewletBase):
             self.ajsteps.append(step)
         return self.ajsteps.index(step) + 1
 
+    def manageDescription(self, descr):
+        """Remove html tag from description """
+        return descr.replace('<span class="ajHighlight">','').replace('</span>','')
 
     def javascriptSteps(self):
         """Return an Array:
@@ -94,11 +97,12 @@ class TourViewlet(common.ViewletBase):
             for step in self.ajsteps:
 
                 if step._options['blueprint']=='collective.amberjack.blueprints.windmillmicrostep':
-                    ajstep = """new AjWindmillStep('%s',"%s","%s","%s","%s")""" % (step.method,
+                    ajstep = """new AjWindmillStep('%s',"%s","%s","%s","%s","%s")""" % (step.method,
                                                                       step.selector.replace('"','\\"'),
                                                                       step.text.replace('\\"','"').replace('"','\\"'), #get the right formatted text from method "editor" without causing error in the others
                                                                       step.required,
-                                                                      step.condition.replace('\\"','"').replace('"','\\"')) 
+                                                                      step.condition.replace('\\"','"').replace('"','\\"'),
+                                                                      self.manageDescription(step.description)) 
                 else:
                     ajstep = """new AjStep('%s','%s',"%s")""" % (step.method,
                                                              self._expandSelector(step.selector),
