@@ -14,14 +14,14 @@ class ITourDirective(interface.Interface):
     tourlocation = Path(
         title=u'Location where you placed the tour',
         description=u'The variable that points to the tour',
-        required=False)
+        required=True)
 
 def _registerTour(source, filename):
     reg = getUtility(ITourRegistration, 'zipfile')
     registration = reg(source, filename=filename)
     registration.register()
 
-def tour(_context, tourlocation=None):
+def tour(_context, tourlocation):
     """Tour class factory registration."""
     archive = open(tourlocation,'r')
     archive.seek(0)
@@ -29,7 +29,7 @@ def tour(_context, tourlocation=None):
     archive.close()
     filename = os.path.basename(tourlocation)
     _context.action(
-        discriminator = '_registerTour',
+        discriminator = '_registerTour:%s' % tourlocation,
         callable = _registerTour,
         args = (source, filename)
     )
