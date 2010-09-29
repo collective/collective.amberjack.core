@@ -24,6 +24,8 @@ def isAuthenticated(context):
     return None
 
 def hasRole(context, request, role):
+    if request.AUTHENTICATED_USER.has_role('Manager', context):
+        return None
     if not request.AUTHENTICATED_USER.has_role(role, context):
         raise AmberjackException(_(u"You have to be %s to execute this step." % role))
     return None

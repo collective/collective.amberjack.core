@@ -30,6 +30,7 @@
           </tal:ajstep>
         </tal:ajsteps>
       </ul>
+      <!--
       <div id="ajLastStep"
           tal:condition="repeat/macrostep/end">
         <span tal:define="next_tour view/nextTour"
@@ -41,6 +42,7 @@
              tal:content="next_tour/title">next tour title</a>
         </span>
       </div>
+      -->
     </div>
   </tal:steps>
   <script type="text/ecmascript" tal:content="view/javascriptSteps" />
