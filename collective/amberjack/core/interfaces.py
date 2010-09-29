@@ -44,7 +44,7 @@ class IAjConfiguration(Interface):
     """ """
     sandbox = schema.Bool(
         title=u'Use Sandbox',
-        default=True,
+        default=False,
         required=False)
 
 class IAmberjackSetupForm(IControlPanelTourRegistration,
