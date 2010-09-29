@@ -83,7 +83,7 @@ class TourViewlet(common.ViewletBase):
 
     def manageDescription(self, descr):
         """Remove html tag from description """
-        return descr.replace('<span class="ajHighlight">','').replace('</span>','')
+        return descr.replace('<span class="ajHighlight">','').replace('</span>','').replace('"','\\"')
 
     def javascriptSteps(self):
         """Return an Array:
@@ -139,14 +139,12 @@ class TourViewlet(common.ViewletBase):
         """
         rootTool = getUtility(ITour, 'collective.amberjack.core.toursroot')
         navigation_root_url = rootTool.getToursRoot(self.context, self.request)
-
         tour_id = self.tour.tourId
-        vr = getVocabularyRegistry()
-        vocab = vr.get(self.context, "collective.amberjack.core.tours")
-        previous_term = None
-        for term in vocab:
-            if previous_term is not None and previous_term.token == tour_id:
-                return {'url': '%s?tourId=%s&skinId=%s' % (navigation_root_url, term.token, self._choosenSkin()),
-                        'title': term.title}
-            previous_term = term
+        next_tour_id = self.request.cookies.get('next_tour_id',None)
+        if next_tour_id:
+            vr = getVocabularyRegistry()
+            vocab = vr.get(self.context, "collective.amberjack.core.tours")
+            term = vocab.getTermByToken(next_tour_id)
+            return {'url': '%s?tourId=%s&skinId=%s' % (navigation_root_url, term.token, self._choosenSkin()),
+                    'title': term.title}
         return None

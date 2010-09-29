@@ -162,7 +162,6 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 	this.checkStep = function(){
 		
 		var metodo=this._METHOD;
-		if(metodo=='highlight') return true;
 		var obj;
 		try {
 			obj = this.getObj(this._LOCATOR,this._LOCVALUE);
@@ -173,13 +172,14 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 			return false;
 		}
 		
-		if(jq(obj).parent().children('.required').length)
+		if(jq(obj).parents('.field').children('.required').length)
 			if (jq(obj).val()=='') {
-				var field_name = jq(obj).parent().children('label').text()
+				var field_name = jq(obj).parents('.field').children('label').text()
 				var msg = "The field \"" + field_name + "\" can't be empty, it's required by Plone"; 
 				AmberjackBase.alert(msg);
 				return false;
 			}
+		else if(metodo=='highlight') return true;
 		
 		var stepDone = true;
 	    var stepCondition = this._CONDITION;
@@ -193,7 +193,7 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 				stepDone = this.checkCondition();
     	}
        	if (!stepDone)
-			AmberjackBase.alert("Complete the step: \"" + AjSteps[steps[i]].getDescription() + "\"");        
+			AmberjackBase.alert("Complete the step: \"" + this.getDescription() + "\"");
        	return stepDone;
 		
 	};
@@ -248,6 +248,12 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 	
 	this.getObj= function(locator,locvalue) {
 		  var element = null;
+		  if (typeof(locator)=='object') {
+		  	locator_cp = locator;
+		  	for (var x in locator_cp)
+		  		locator = locator_cp[x];
+		  }
+		  	
 		  //If a link was passed, lookup as link
 		  if(locator =='link') {
 		    element = elementslib.Element.LINK(locvalue);
@@ -335,7 +341,6 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 			return false;
 	};
 	
-	
 };
 
 
@@ -384,6 +389,7 @@ AmberjackPlone = {
 	    // restore previous window position
 	    AmberjackPlone.restoreWindowPosition()
 		AmberjackPlone.disableLinks();
+		AmberjackPlone.exitPage()
 	    var last_step = jq('#ajControl').find('#ajLastStep')
 	    // if it's the last step add this tour to the completed cookie
 	    if (last_step.length !== 0){
@@ -500,7 +506,28 @@ AmberjackPlone = {
 			var ajNext = jq("#ajNext");
 			
 			// BBB
-			ajNext.attr("onClick","AmberjackPlone.doAllSteps(); return false");
+			ajNext.attr("onClick","AmberjackPlone.doAllSteps(\"" + ajNext.attr('onClick') + "\"); return false");
+		}
+	},
+	
+	/**
+	 * 
+	 * @author Mirco Angelini
+	 */
+	exitPage: function() {
+		var steps = AmberjackPlone.getPageSteps();
+		for (var i in steps) {
+			step = AjSteps[steps[i]];
+			if (step.getMethod()=='click') {
+				step_obj = step.getObj(step.getLocator(),step.getLocValue());
+				if (jq(step_obj).parents('form').length) {
+					jq(step_obj).parents('form').submit(function () {
+						if (!AmberjackPlone.checkAllSteps())
+							return false;
+						return true;
+					});
+				}
+			}
 		}
 	},
 
@@ -530,14 +557,23 @@ AmberjackPlone = {
 	 * Function for doing all step
 	 * @author Mirco Angelini
 	 */
-	doAllSteps: function() {
+	doAllSteps: function(next_onclick) {
 		
 		var steps = AmberjackPlone.getPageSteps();
+		var stepDone = false;
 		for(var i = 0; i < steps.length; i++) {
-			var prevStepDone = AmberjackPlone.checkPreviousSteps(steps[i])
-			if (!prevStepDone) 
-				return prevStepDone;
-			AjSteps[steps[i]].doStep();
+			var step_method = AjSteps[steps[i]].getMethod()
+			if (step_method != "highlight" && step_method != "waits.forPageLoad") {
+				stepDone = true;
+				var prevStepDone = AmberjackPlone.checkPreviousSteps(steps[i])
+				if (!prevStepDone) 
+					return prevStepDone;
+				AjSteps[steps[i]].doStep();
+			}
+		}
+		if (!stepDone) {
+			eval(next_onclick.split(';')[1]);
+			return false;
 		}
 	}, 
 	
@@ -646,3 +682,4 @@ jq(document).ready(function () {
 	Amberjack.open();
 	setTimeout(AmberjackPlone.init, 300);
 });
+

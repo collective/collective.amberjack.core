@@ -4,6 +4,12 @@ Changelog
 1.1a (2010-09-21)
 -----------------
 
+- fixing next tour link in viewlets
+  [mirco]
+- fixing doAllStep
+  [mirco]
+- update the checkStep and checkAllStep
+  [mirco]
 - updated dependency with collective.js.jqueryui
   [mirco]
 - removed ui.draggable-1.7.2 file and the registration from jsregistry
