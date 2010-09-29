@@ -4,6 +4,8 @@ Changelog
 1.1a (2010-09-21)
 -----------------
 
+- font-size at 80%
+  [massimo]
 - fixing next tour link in viewlets
   [mirco]
 - fixing doAllStep
