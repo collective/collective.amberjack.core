@@ -680,6 +680,5 @@ var popup_interval = setInterval(function(){
 jq(document).ready(function () {
 	loadDefaults();
 	Amberjack.open();
-	setTimeout(AmberjackPlone.init, 300);
 });
 

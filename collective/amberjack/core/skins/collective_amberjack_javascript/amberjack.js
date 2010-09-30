@@ -334,6 +334,7 @@ AmberjackControl = {
     if (Amberjack.ADD_SCRIPT) {
       AmberjackBase.postFetch(Amberjack.ADD_SCRIPT, 'script');
     }
+    AmberjackPlone.init();
   },
 
   /**
