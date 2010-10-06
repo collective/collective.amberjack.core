@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.1 (2010-??-??)
+-----------------
+
+- moved the check procedure to identify the next tour from the portlet into viewlet
+  [mirco]
+
 1.1a (2010-09-21)
 -----------------
 

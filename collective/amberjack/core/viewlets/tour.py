@@ -139,12 +139,17 @@ class TourViewlet(common.ViewletBase):
         """
         rootTool = getUtility(ITour, 'collective.amberjack.core.toursroot')
         navigation_root_url = rootTool.getToursRoot(self.context, self.request)
-        tour_id = self.tour.tourId
-        next_tour_id = self.request.cookies.get('next_tour_id',None)
-        if next_tour_id:
+        next_tours_id = self.request.cookies.get('next_tours_id',None)
+        if next_tours_id:
+            tour_manager = getUtility(ITourManager)
+            available_tours = dict(tour_manager.getTours(self.context))
             vr = getVocabularyRegistry()
             vocab = vr.get(self.context, "collective.amberjack.core.tours")
-            term = vocab.getTermByToken(next_tour_id)
-            return {'url': '%s?tourId=%s&skinId=%s' % (navigation_root_url, term.token, self._choosenSkin()),
-                    'title': term.title}
+            next_tours_id = [id for id in next_tours_id.split("|")]
+            for tour_id in next_tours_id:
+                valid = available_tours[tour_id].validate(self.context, self.request)
+                if not valid:
+                    term = vocab.getTermByToken(tour_id)
+                    return {'url': '%s?tourId=%s&skinId=%s' % (navigation_root_url, term.token, self._choosenSkin()),
+                            'title': term.title}
         return None

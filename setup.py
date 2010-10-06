@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.1a-Unreleased'
+version = '1.1-unreleased'
 
 setup(name='collective.amberjack.core',
       version=version,
