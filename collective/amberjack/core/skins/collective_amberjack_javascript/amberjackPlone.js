@@ -426,6 +426,9 @@ AmberjackPlone = {
 	
 	canMoveToNextStep: function(){
         canMove = true
+		if (jq("dl.error").length) {
+			canMove = false;
+		}
 	    for (i = 0; i < this.aj_canMove_validators.length; i++){
 			canMove = (canMove & this[this.aj_canMove_validators[i]]())
 	    }

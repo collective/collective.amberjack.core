@@ -6,6 +6,9 @@ Changelog
 
 - moved the check procedure to identify the next tour from the portlet into viewlet
   [mirco]
+- updated the canMoveToNextStep function that now stop the passage to next step if 
+  there is an error message.
+  [mirco]
 
 1.1a (2010-09-21)
 -----------------
