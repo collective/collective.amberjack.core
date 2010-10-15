@@ -9,6 +9,8 @@ Changelog
 - updated the canMoveToNextStep function that now stop the passage to next step if 
   there is an error message.
   [mirco]
+- modified AJ alert message: now the user can choise to restart the tour or close the tour
+  [mirco]
 
 1.1a (2010-09-21)
 -----------------

@@ -91,9 +91,11 @@ AmberjackBase = {
    * @example alert('An error occurred')
    */
 
-  alert: function(str) {
+  alert: function(str,title) {
+  	if (title == undefined)
+		title = 'Amberjack alert';
     if (jq.fn.dialog)
-		jq('<div id="ajMessage">'+str+'<div>').dialog({ modal: true, title: 'Amberjack alert', zIndex: 500000 });
+		jq('<div id="ajMessage">'+str+'<div>').dialog({ modal: true, title: title, zIndex: 500000 });
 	else
 		alert('Amberjack alert: ' + str);
   },
@@ -539,7 +541,11 @@ Amberjack = {
     }
 
     if (!Amberjack.pageId) {
-      AmberjackBase.alert('no matching page in ajTourDef found');
+      AmberjackBase.alert('You can: <ul><li><a href="'+Amberjack.BASE_URL+
+							'">close the tour</a></li><li><a href="'+Amberjack.BASE_URL+
+							'?tourId='+Amberjack.tourId+
+							'&skinId='+Amberjack.skinId+
+							'">restart the tour</a></li></ul>','Unexpected error!');
     }
 	Amberjack.elements = _children
     AmberjackBase.postFetch(Amberjack.PORTAL_URL + 'skin/' + Amberjack.skinId.toLowerCase() + '/control.tpl.js', 'script');

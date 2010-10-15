@@ -144,3 +144,22 @@ a.tour_inactive:hover {
 #ajControlBody div {
   padding: 0 0 0.5em 0;
 }
+
+/*** Amberjack alert ***/
+#ajMessage {
+	font-size:0.8em;
+}
+
+#ajMessage ul{
+	list-style:disc inside none;
+}
+
+#ajMessage li{
+	display:list-item;
+	margin-top:5px;
+}
+
+#ajMessage a:link, #ajMessage a:visited{
+	color:#205C90;
+	text-decoration:underline;
+}
