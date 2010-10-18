@@ -564,6 +564,7 @@ AmberjackPlone = {
 		
 		var steps = AmberjackPlone.getPageSteps();
 		var stepDone = false;
+		var popup_loaded = false;
 		for(var i = 0; i < steps.length; i++) {
 			var step_method = AjSteps[steps[i]].getMethod()
 			if (step_method != "highlight" && step_method != "waits.forPageLoad") {
@@ -572,6 +573,10 @@ AmberjackPlone = {
 				if (!prevStepDone) 
 					return prevStepDone;
 				AjSteps[steps[i]].doStep();
+				if (jq('.plonepopup iframe').length && !popup_loaded) {
+					popup_loaded = true;
+					AmberjackPlone.sleep(10000);
+				}
 			}
 		}
 		if (!stepDone) {
@@ -580,6 +585,19 @@ AmberjackPlone = {
 		}
 	}, 
 	
+	/**
+	 * sleep function
+	 * @author Mirco Angelini
+	 */
+	sleep: function(milliseconds){
+		var start = new Date().getTime();
+		for (var i = 0; i < 1e7; i++) {
+			if ((new Date().getTime() - start) > milliseconds){
+				break;
+			}
+		}
+	},
+
     /**
      * Check all current page's steps
      * @author Giacomo Spettoli
