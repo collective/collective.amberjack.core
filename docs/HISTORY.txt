@@ -11,6 +11,8 @@ Changelog
   [mirco]
 - modified AJ alert message: now the user can choise to restart the tour or close the tour
   [mirco]
+- bugfix for align the phrase "next tour"
+  [mirco]
 
 1.1a (2010-09-21)
 -----------------

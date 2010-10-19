@@ -115,6 +115,10 @@ a.ajHighlight:hover {
 	color: #999 !important;
 } 
 
+#ajLastStep {
+	float: left;
+}
+
 /*** Amberjack portlets styles ***/
 .portletItem ol {
 	padding-left: 1em;
