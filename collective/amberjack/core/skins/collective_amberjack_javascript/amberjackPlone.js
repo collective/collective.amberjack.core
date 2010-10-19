@@ -575,7 +575,7 @@ AmberjackPlone = {
 				AjSteps[steps[i]].doStep();
 				if (jq('.plonepopup iframe').length && !popup_loaded) {
 					popup_loaded = true;
-					AmberjackPlone.sleep(10000);
+					AmberjackPlone.sleep(3000);
 				}
 			}
 		}
