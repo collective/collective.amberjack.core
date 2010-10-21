@@ -13,6 +13,8 @@ Changelog
   [mirco]
 - bugfix for align the phrase "next tour"
   [mirco]
+- changed in #CCC the css color directive for ".contentActions a.aj_link_inactive"
+  [mirco]
 
 1.1a (2010-09-21)
 -----------------

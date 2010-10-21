@@ -106,7 +106,7 @@ a.ajHighlight:hover {
 	color: #CCC !important;
 }
 .contentActions a.aj_link_inactive {
-	color: #FFF !important;
+	color: #CCC !important;
 }
 .contentViews a.aj_link_inactive:hover {
 	background-color: transparent;
