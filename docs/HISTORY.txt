@@ -15,6 +15,8 @@ Changelog
   [mirco]
 - changed in #CCC the css color directive for ".contentActions a.aj_link_inactive"
   [mirco]
+- inverted in the code the parts to load key and value from dictionaries of selectors
+  [mirco]
 
 1.1a (2010-09-21)
 -----------------

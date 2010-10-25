@@ -26,8 +26,8 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 		if( method !='highlight'){
 			var dict=eval('('+locator+')')
 			for(var k in dict){
-				this._LOCATOR = dict[k];
-				this._LOCVALUE = k;
+				this._LOCATOR = k;
+				this._LOCVALUE = dict[k];
 				break;
     			}
 		}
@@ -94,8 +94,8 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 			var l=new Array();
 			i=0;
 			for(var k in curLocators){
-					this._LOCATOR = curLocators[k];
-					this._LOCVALUE= k;
+					this._LOCATOR = k;
+					this._LOCVALUE= curLocators[k];
 					l[i]=this.getObj(this._LOCATOR,this._LOCVALUE);
 					i+=1;
 				}
@@ -206,8 +206,8 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 		var locator = ""
 		var locavalue = ""
 		for (var x in selector) {
-			locator = selector[x];
-			locvalue = x;
+			locator = x;
+			locvalue = selector[x];
 		}
 		var obj = this.getObj(locator,locvalue);
 		switch (operator) {
