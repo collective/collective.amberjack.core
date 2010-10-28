@@ -17,6 +17,8 @@ Changelog
   [mirco]
 - inverted in the code the parts to load key and value from dictionaries of selectors
   [mirco]
+- added a check for the micro-steps of type "highlight" to use in the render of "doAllStep" button.
+  [mirco]
 
 1.1a (2010-09-21)
 -----------------

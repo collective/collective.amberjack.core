@@ -287,7 +287,7 @@ AmberjackControl = {
       tplHtml = tplHtml.replace(/{prevClass}/,   'disabled');
     }
 
-    if (Amberjack.pages[Amberjack.pageId].nextUrl) {
+    if (Amberjack.pages[Amberjack.pageId].nextUrl && AmberjackPlone.checkAllHighlightSteps()) {
       var nextUrl = Amberjack.pages[Amberjack.pageId].nextUrl;
       urlSplit = nextUrl.split('?');
       urlQuery = urlSplit[1] ? urlSplit[1] : false;
@@ -297,10 +297,12 @@ AmberjackControl = {
 
       tplHtml = tplHtml.replace(/{nextClick}/,       "location.href='" + nextUrl + "';return false;");
       tplHtml = tplHtml.replace(/{nextClass}/,       '');
+	  tplHtml = tplHtml.replace(/{nextTitle}/,       'Go to next step automatically.');
     }
     else {
       tplHtml = tplHtml.replace(/{nextClick}/,       'return false;');
       tplHtml = tplHtml.replace(/{nextClass}/,       'disabled');
+	  tplHtml = tplHtml.replace(/{nextTitle}/,       'Can\'t go to next step automatically. Do it manually.');
     }
 
     tplHtml = tplHtml.replace(/{textOf}/,          Amberjack.textOf);

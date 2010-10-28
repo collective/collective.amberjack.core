@@ -15,7 +15,7 @@
 #ajControlInfo a {color:#999}
 
 a#ajPrev, a#ajNext {color:#436976;padding:0 10px;background:#DEE7EC;text-decoration:none;margin-right:10px}
-a#ajPrev.disabled, a#ajNext.disabled {color:#ccc;background:#eee;cursor:default;display:none}
+a#ajPrev.disabled, a#ajNext.disabled {color:#ccc;background:#eee;cursor:default}
 
 #ajCloseCell {text-align:right}
 #ajClose {background:#fff;color:#999;text-decoration:none;padding-left:10px;padding-right:10px}

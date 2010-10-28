@@ -219,6 +219,23 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 		}
 	};
 	
+	/**
+     * Check that the current step can be skipped.
+     *  
+     * @return true if can be skipped else false
+     */
+	this.checkHighlightStep = function(){
+		
+		var method=this._METHOD;
+		var stepCondition = this._CONDITION;
+		
+		if(method=='highlight') {
+			if (stepCondition=='doitmanually') return false;
+			else return true;
+		}
+		return true
+	}
+	
 	this.doStep = function(){
 	
 		var obj;
@@ -597,7 +614,28 @@ AmberjackPlone = {
 			}
 		}
 	},
-
+	
+	/**
+     * Check that all the highlight steps can be skipped.
+     *  
+     * @return true if can be skipped else false
+     */
+    checkAllHighlightSteps:function(){
+        var allDone = true;
+        var thisStep = true;
+        var steps = AmberjackPlone.getPageSteps();
+        
+        for (var i = 0; i < steps.length; i++) {
+			thisStep = AjSteps[steps[i]].checkHighlightStep();
+            if(!thisStep){
+                allDone = false;
+                break;
+            }
+            allDone = allDone && thisStep;
+        }
+        return allDone;
+    },
+	
     /**
      * Check all current page's steps
      * @author Giacomo Spettoli
@@ -702,4 +740,5 @@ jq(document).ready(function () {
 	loadDefaults();
 	Amberjack.open();
 });
+
 
