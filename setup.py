@@ -34,11 +34,14 @@ setup(name='collective.amberjack.core',
           'plone.app.layout',
           'Products.GenericSetup',
           'collective.js.jqueryui>=1.8dev',
+          'i18ndude',
           'plone.registry',
           # -*- Extra requirements: -*-
       ],
       entry_points="""
       [z3c.autoinclude.plugin]
       target = plone
+      [console_scripts]
+      i18ndude=collective.amberjack.core.script:main
       """,
       )
