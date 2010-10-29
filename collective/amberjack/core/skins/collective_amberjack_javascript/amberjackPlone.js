@@ -47,7 +47,7 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 			var start=sub.indexOf('\"');
 			sub=options.substring(start+startOp+1,end);
 			sub = sub.replace(/"/g,'\\"');
-			options=options.substring(0,startOp).trim()+' : "'+sub+'"}';
+			options=jQuery.trim(options.substring(0,startOp))+' : "'+sub+'"}';
 			}
 		
 		else if(this._METHOD=='editorSelect') {
@@ -68,7 +68,7 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 					var end=options.lastIndexOf('"');
 					var sub=options.substring(start+1,end);
 					sub = sub.replace(/"/g,'\\"');
-					options=options.substring(0,start+1).trim()+sub+'"}';
+					options=jQuery.trim(options.substring(0,start+1))+sub+'"}';
 					
 				}else{
 					var ind=0;
@@ -81,7 +81,7 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 					start=options.indexOf('"');
 					var sub=options.substring(start+1,end);
 					sub = sub.replace(/"/g,'\\"');
-					options=options.substring(0,startOp).trim()+' : "'+sub+options.substr(end).trim();
+					options=jQuery.trim(options.substring(0,startOp))+' : "'+sub+jQuery.trim(options.substr(end));
 				}
 				
 		}

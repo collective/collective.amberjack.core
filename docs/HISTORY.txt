@@ -19,6 +19,8 @@ Changelog
   [mirco]
 - added a check for the micro-steps of type "highlight" to use in the render of "doAllStep" button.
   [mirco]
+- changed from function trim()  to function jQuery.trim().
+  [mirco]
 
 1.1a (2010-09-21)
 -----------------
