@@ -12,20 +12,23 @@
         <dd tal:content="error">Error message</dd>
       </dl>
       <h2 tal:content="macrostep/title">the title of a macro step</h2>
-      <div tal:content="structure macrostep/text">the description for the user of a macro step</div>
+      <div tal:condition="macrostep/text" tal:content="structure macrostep/text">the description for the user of a macro step</div>
 
       <ul class="ajSteps">
         <tal:ajsteps repeat="step macrostep/microsteps">
-          <tal:ajstep define="step_nr python:view.getStepNumber(step)">
-            <li>
+          <tal:ajstep define="step_nr python:view.getStepNumber(step);
+                               first_step repeat/step/start;">
+            <li tal:define="evenStep repeat/step/odd;
+			                evenClass python: evenStep and 'evenStep' or '';" 
+                tal:attributes="class python: (first_step and 'ajFirstStep' or '')+' '+evenClass">
               <div class="ajDescr">
                 <span tal:replace="structure step/description">every step has a brief explanation of what to do</span>
               </div>
-              <a href="" onclick="AmberjackPlone.doStep(this); return false" 
+              <a href="" onclick="AmberjackPlone.doStep(this); return false"                 
                  tal:attributes="class string:ajStep-${step_nr} ajLink;
                                  style python: view.highlight(step);
                                  onclick python:errors and 'return false' or default">&gt;&gt;</a>
-			  <span class="visualClear"></span>
+              <div class="visualClear"></div>
             </li>
           </tal:ajstep>
         </tal:ajsteps>
@@ -41,6 +44,7 @@
              tal:content="next_tour/title">next tour title</a>
         </span>
       </div>
+      <div class="visualClear"></div>
     </div>
   </tal:steps>
   <script type="text/ecmascript" tal:content="view/javascriptSteps" />

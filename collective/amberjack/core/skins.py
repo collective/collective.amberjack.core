@@ -13,3 +13,7 @@ class ModelTSkin(object):
 class LightGreySkin(object):
     implements(IAmberjackSkin)
     title = "Light Grey"
+    
+class SunburstSkin(object):
+    implements(IAmberjackSkin)
+    title = "Sunburst"

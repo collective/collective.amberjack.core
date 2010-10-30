@@ -19,5 +19,10 @@
       name="light_grey"
       factory=".skins.LightGreySkin"
       />
+      
+  <utility
+      name="sunburst"
+      factory=".skins.SunburstSkin"
+      />
 
 </configure>

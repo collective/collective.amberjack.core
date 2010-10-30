@@ -21,6 +21,8 @@ Changelog
   [mirco]
 - changed from function trim()  to function jQuery.trim().
   [mirco]
+- added sunburst theme and fixed some problems in tour's template
+  [nekorin]
 
 1.1a (2010-09-21)
 -----------------
