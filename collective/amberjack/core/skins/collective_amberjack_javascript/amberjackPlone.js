@@ -194,6 +194,8 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
     	}
        	if (!stepDone)
 			AmberjackBase.alert("Complete the step: \"" + this.getDescription() + "\".");
+			// For "uncomplete" check, remove the submitting (see #656917)
+			jq(":submit.submitting").removeClass("submitting");
        	return stepDone;
 		
 	};
