@@ -1,7 +1,7 @@
-		
+        
 /* locators & methods used in windmill */
-		
-var windmillLocators = ['id','link','xpath','jsid', 'name','value','classname', 'tagname','label','jquery']
+        
+var windmillLocators = ['id','link','xpath','jsid', 'name','value','classname', 'tagname','label','jquery'];
 
 var windmillMethods ={ 'click': {'locator': true, 'option': false}, 
                    'radio': {'locator': true, 'option': false },
@@ -14,27 +14,27 @@ var windmillMethods ={ 'click': {'locator': true, 'option': false},
                    'waits.forElement': {'locator': true, 'option': 'timeout' },
                    'waits.forPageLoad': {'locator': false, 'option': 'timeout' },
                    'highlight' : {'locator': true, 'option': false }
-                  }
+                  };
                   
 
 var helpers= new function(){
-                  	
+                      
                   this.normalizeNewlines = function(text){
-                  	    return text.replace(/\r\n|\r/g, "\n");	
-                  }
+                          return text.replace(/\r\n|\r/g, "\n");
+                  };
 
 
                   this.repAll = function (OldString, FindString, ReplaceString) {
-                  	  var SearchIndex = 0;
-                  	  var NewString = ""; 
-                  	  while (OldString.indexOf(FindString,SearchIndex) != -1)    {
-                  	    NewString += OldString.substring(SearchIndex,OldString.indexOf(FindString,SearchIndex));
-                  	    NewString += ReplaceString;
-                  	    SearchIndex = (OldString.indexOf(FindString,SearchIndex) + FindString.length);         
-                  	  }
-                  	  NewString += OldString.substring(SearchIndex,OldString.length);
-                  	  return NewString;
-                  	}
+                        var SearchIndex = 0;
+                        var NewString = ""; 
+                        while (OldString.indexOf(FindString,SearchIndex) != -1)    {
+                          NewString += OldString.substring(SearchIndex,OldString.indexOf(FindString,SearchIndex));
+                          NewString += ReplaceString;
+                          SearchIndex = (OldString.indexOf(FindString,SearchIndex) + FindString.length);         
+                        }
+                        NewString += OldString.substring(SearchIndex,OldString.length);
+                        return NewString;
+                      };
 
                   /**
                    * Replace multiple sequential spaces with a single space, and then convert &nbsp; to space.
@@ -54,27 +54,27 @@ var helpers= new function(){
                       // Replace &nbsp; with a space
                       var nbspPattern = new RegExp(String.fromCharCode(160), "g");
                       if (navigator.userAgent.indexOf('Safari') != -1) {
-                  	return helpers.repAll(text, String.fromCharCode(160), " ");
+                      return helpers.repAll(text, String.fromCharCode(160), " ");
                       } else {
-                  	return text.replace(nbspPattern, " ");
+                      return text.replace(nbspPattern, " ");
                       }
-                  }
+                  };
 
                   this.getParentWindow = function(node){
-                  	  var ownerDoc = node.ownerDocument;
-                  	  var win = null;
-                  	  if (ownerDoc.defaultView){
-                  	    win = ownerDoc.defaultView;
-                  	  }
-                  	  else {
-                  	    win = ownerDoc.parentWindow;
-                  	  }
-                  	  if (win == null){
-                  	    win = window;
-                  	  }
-                  	  
-                  	  return win;
-                  	};
+                        var ownerDoc = node.ownerDocument;
+                        var win = null;
+                        if (ownerDoc.defaultView){
+                          win = ownerDoc.defaultView;
+                        }
+                        else {
+                          win = ownerDoc.parentWindow;
+                        }
+                        if (win == null){
+                          win = window;
+                        }
+                        
+                        return win;
+                      };
 
                   };
 
@@ -93,10 +93,12 @@ var windEvents = new function() {
                       };
 
                       this.getTextContent = function(element, preformatted) {
+                          var text = null;
+
                           if (element.nodeType == 3
                           /*Node.TEXT_NODE*/
                           ) {
-                              var text = element.data;
+                              text = element.data;
                               if (!preformatted) {
                                   text = text.replace(/\n|\r|\t/g, " ");
 
@@ -109,7 +111,7 @@ var windEvents = new function() {
                           ) {
 
                               var childrenPreformatted = preformatted || (element.tagName == "PRE");
-                              var text = "";
+                              text = "";
                               for (var i = 0; i < element.childNodes.length; i++) {
                                   var child = element.childNodes.item(i);
                                   text += windEvents.getTextContent(child, childrenPreformatted);
@@ -146,8 +148,8 @@ var windEvents = new function() {
 
                       /* Fire an event in a browser-compatible manner */
                       this.triggerEvent = function(element, eventType, canBubble, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown) {
-                      	
-                          canBubble = (typeof(canBubble) == undefined) ? true: canBubble;
+                          
+                          canBubble = (typeof(canBubble) === undefined) ? true: canBubble;
                           if (element.fireEvent && navigator.userAgent.indexOf('MSIE') != -1) {
                               var evt = windEvents.createEventObject(element, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown);
                               element.fireEvent('on' + eventType, evt);
@@ -218,7 +220,7 @@ var windEvents = new function() {
                               }
                               element.dispatchEvent(evt);
                           }
-                      }
+                      };
 
                       /* Fire a mouse event in a browser-compatible manner */
                       this.triggerMouseEvent = function(element, eventType, canBubble, clientX, clientY, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown) {
@@ -272,7 +274,7 @@ var windEvents = new function() {
                               if (evt.initMouseEvent) {
                                   //LOG.info("element has initMouseEvent");
                                   //Safari
-                                  evt.initMouseEvent(eventType, canBubble, true, document.defaultView, 1, screenX, screenY, clientX, clientY, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown, 0, null)
+                                  evt.initMouseEvent(eventType, canBubble, true, document.defaultView, 1, screenX, screenY, clientX, clientY, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown, 0, null);
 
                               }
                               else {
@@ -289,7 +291,7 @@ var windEvents = new function() {
 
                           }
 
-                      }
+                      };
 
                   };
 
@@ -326,13 +328,13 @@ var controller = new function() {
                       else {*/ windEvents.triggerMouseEvent(element, 'click', true);// }
 
                       try {
-                    	  
+                          
                         // Perform the link action if preventDefault was set.
                         if (savedEvent != null && !savedEvent.getPreventDefault()) {
                             if ((element.href) && (element.href != "#")) {
                                 //windmill.controller.open({"url": element.href, 'reset':false});
                                 if (element.target.length > 0) {
-                              	  
+                                    
                                     window.location=element.href;
                                 }
                                 else {
@@ -340,7 +342,7 @@ var controller = new function() {
                                 }
                             } 
                             else {
-                            	
+                                
                                 var itrElement = element;
                                 while (itrElement != null) {
                                   if ((itrElement.href) && (itrElement.href != "#")) {
@@ -363,16 +365,16 @@ var controller = new function() {
 
                   
                   this.radio = function(element){
-                	  if(element)
-                		  	return jq(element).click();
+                      if(element)
+                              return jq(element).click();
                   };
 
 
                   this.doubleClick = function(element) {
                    //Look up the dom element, return false if its not there so we can report failure
-                  	 windEvents.triggerEvent(element, 'focus', false);
-                  	 windEvents.triggerMouseEvent(element, 'dblclick', true);
-                  	 windEvents.triggerEvent(element, 'blur', false);
+                       windEvents.triggerEvent(element, 'focus', false);
+                       windEvents.triggerMouseEvent(element, 'dblclick', true);
+                       windEvents.triggerEvent(element, 'blur', false);
                   };
 
                   //Type Function
@@ -389,7 +391,7 @@ var controller = new function() {
                      var stringValue = text;
                       
                      if (maxLengthAttr != null) {
-                       var maxLength = parseInt(maxLengthAttr);
+                       var maxLength = parseInt(maxLengthAttr, 10);
                        if (stringValue.length > maxLength) {
                          //truncate it to fit
                          actualValue = stringValue.substr(0, maxLength);
@@ -416,70 +418,70 @@ var controller = new function() {
                    };
                    
                    this.editor = function (editText,id){
-                	   tinyMCE.get(id).setContent(editText); 
+                       tinyMCE.get(id).setContent(editText); 
                    };
                    
                    
                    this.select = function (element,param,value) {
-                  	    
-                  	    //if the index selector was used, select by index
-                  	    if (param=='index'){
-                  	      element.options[param].selected = true;
-                  	      return true;
-                  	    }
-                  	        
-                  	    //Sometimes we can't directly access these at this point, not sure why
-                  	    try {
-                  	      if (element.options[element.options.selectedIndex].text == value){
-                  	        return true;
-                  	      }
-                  	    } catch(err){}
-                  	    try {  
-                  	      if (element.options[element.options.selectedIndex].value == value){
-                  	        return true;
-                  	      }
-                  	    } catch(err){}
-                  	    
-                  	    windEvents.triggerEvent(element, 'focus', false);
-                  	    var optionToSelect = null;
-                  	    for (opt = 0; opt < element.options.length; opt++){
-                  	      try {
-                  	        var el = element.options[opt];
-                  	        if (param=='option'){
-                  	          if(el.innerHTML.indexOf(value) != -1){
-                  	            if (el.selected && el.options[opt] == optionToSelect){
-                  	              continue;
-                  	            }
-                  	            optionToSelect = el;
-                  	            optionToSelect.selected = true;
-                  	            windEvents.triggerEvent(element, 'change', true);
-                  	            break;
-                  	          }
-                  	        }
-                  	        else {
-                  	           if(el.value.indexOf(value) != -1){
-                  	              if (el.selected && el.options[opt] == optionToSelect){
-                  	                continue;
-                  	              }
-                  	              optionToSelect = el;
-                  	              optionToSelect.selected = true;
-                  	              windEvents.triggerEvent(element, 'change', true);
-                  	              break;
-                  	            }
-                  	        }
-                  	      }
-                  	      catch(err){}
-                  	    }
-                  	    if (optionToSelect == null){
-                  	      throw "Unable to select the specified option.";
-                  	    }
-                  	  };
+                          
+                          //if the index selector was used, select by index
+                          if (param=='index'){
+                            element.options[param].selected = true;
+                            return true;
+                          }
+                              
+                          //Sometimes we can't directly access these at this point, not sure why
+                          try {
+                            if (element.options[element.options.selectedIndex].text == value){
+                              return true;
+                            }
+                          } catch(err){}
+                          try {  
+                            if (element.options[element.options.selectedIndex].value == value){
+                              return true;
+                            }
+                          } catch(err){}
+                          
+                          windEvents.triggerEvent(element, 'focus', false);
+                          var optionToSelect = null;
+                          for (var opt = 0; opt < element.options.length; opt++){
+                            try {
+                              var el = element.options[opt];
+                              if (param=='option'){
+                                if(el.innerHTML.indexOf(value) != -1){
+                                  if (el.selected && el.options[opt] == optionToSelect){
+                                    continue;
+                                  }
+                                  optionToSelect = el;
+                                  optionToSelect.selected = true;
+                                  windEvents.triggerEvent(element, 'change', true);
+                                  break;
+                                }
+                              }
+                              else {
+                                 if(el.value.indexOf(value) != -1){
+                                    if (el.selected && el.options[opt] == optionToSelect){
+                                      continue;
+                                    }
+                                    optionToSelect = el;
+                                    optionToSelect.selected = true;
+                                    windEvents.triggerEvent(element, 'change', true);
+                                    break;
+                                  }
+                              }
+                            }
+                            catch(err){}
+                          }
+                          if (optionToSelect == null){
+                            throw "Unable to select the specified option.";
+                          }
+                        };
                    
                    
                    this.editorSelect = function (id,bookmark){
-                  	tinyMCE.get(id).selection.moveToBookmark(eval("(" + bookmark + ")"));
+                      tinyMCE.get(id).selection.moveToBookmark(eval("(" + bookmark + ")"));
                   //solution for show the tiny buttons that appear only when onMouseUp  
-    				windEvents.triggerMouseEvent(tinyMCE.get(id).selection.getNode(), 'mouseup', true);
+                    windEvents.triggerMouseEvent(tinyMCE.get(id).selection.getNode(), 'mouseup', true);
                    };
 
 

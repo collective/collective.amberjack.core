@@ -80,7 +80,7 @@
  */
 
 
-AmberjackBase = {
+var AmberjackBase = {
 
   /**
    * Proxy alerter
@@ -91,8 +91,8 @@ AmberjackBase = {
    * @example alert('An error occurred')
    */
 
-  alert: function(str,title) {
-  	if (title == undefined)
+  alert: function (str,title) {
+  	if (title === undefined)
 		title = 'Amberjack alert';
     if (jq.fn.dialog)
 		jq('<div id="ajMessage">'+str+'<div>').dialog({ modal: true, title: title, zIndex: 500000 });
@@ -102,7 +102,7 @@ AmberjackBase = {
 	jq(":submit.submitting").removeClass("submitting");
   },
 
-  log: function(str, e) {
+  log: function (str, e) {
   	if (window.console && window.console.log) {
 		window.console.log("Amberjack log:" +str);
 		if (e && e.description) window.console.log("Amberjack log:" +e.description);
@@ -120,7 +120,7 @@ AmberjackBase = {
    * @example getByTagName('notexistent') => false
    */
 
-  getByTagName: function(tagName) {
+  getByTagName: function (tagName) {
     var els = document.getElementsByTagName(tagName);
     if (els.length > 0) {
       return els[0];
@@ -141,7 +141,7 @@ AmberjackBase = {
    *
    * @example getElementsByTagNameAndAttr('div', 'class', 'highlight') => [domNode1, domNode2, ...]
    */
-   getElementsByTagNameAndAttr: function(tagName, attrName, attrValue, domNode) {
+   getElementsByTagNameAndAttr: function (tagName, attrName, attrValue, domNode) {
     if (domNode) {
       els = domNode.getElementsByTagName(tagName);
     }
@@ -194,13 +194,12 @@ AmberjackBase = {
    * @example getUrlParam('http://localhost/?a=',    'a') => false
    */
 
-  getUrlParam: function(url, paramName) {
+  getUrlParam: function (url, paramName) {
     var urlSplit = url.split('?');
     if (!urlSplit[1]) { // no query
       return false;
     }
 
-    var urlQuery = urlSplit[1];
     var paramsSplit = urlSplit[1].split('&');
     for (var i = 0; i < paramsSplit.length; i++) {
       paramSplit = paramsSplit[i].split('=');
@@ -225,7 +224,7 @@ AmberjackBase = {
    * Note that a HEAD tag needs to be existent in the current document
    */
 
-  postFetch: function(url, type, onerror) {
+  postFetch: function (url, type, onerror) {
     if (type === 'script') {
       scriptOrStyle = document.createElement('script');
       scriptOrStyle.type = 'text/javascript';
@@ -268,7 +267,7 @@ AmberjackControl = {
    * Note that this method should be called directly through control.tpl.js files
    */
 
-  open: function(tplHtml) {
+  open: function (tplHtml) {
     var urlSplit = false;
     var urlQuery = false;
 
@@ -491,7 +490,7 @@ Amberjack = {
     var tourDef = false;
     var tourDefElements = AmberjackBase.getElementsByTagNameAndAttr('div', 'class', 'ajTourDef');
     for (i = 0; i < tourDefElements.length; i++) {
-      if (tourDefElements[i].getAttribute('id') == Amberjack.tourId) {
+      if (tourDefElements[i].getAttribute('id') === Amberjack.tourId) {
         tourDef = tourDefElements[i];
       }
     }
@@ -521,7 +520,7 @@ Amberjack = {
 
       if (!_children[i].getAttribute('title')) {
         AmberjackBase.alert('Attribute TITLE is missing.');
-        return ;
+        return;
       }
 
       Amberjack.pageCount++;
@@ -600,10 +599,10 @@ Amberjack = {
    */
   matchPage: function(element){
 	var title = element.getAttribute('title');
-	if (title == AmberjackPlone.aj_any_url) {
+	if (title === AmberjackPlone.aj_any_url) {
         return true
     }
-	if (title.substr(title.length-1)=='/') {
+	if (title.substr(title.length-1)==='/') {
 		title = title.substr(0, title.length-1)
 	}
 	var loc = window.location.protocol +'//'+ window.location.host + window.location.pathname;
@@ -613,11 +612,11 @@ Amberjack = {
 		if (xpath){
 			// needs jquery
 			if (jq) {
-				if (xcontent == AmberjackPlone.aj_xpath_exists){
+				if (xcontent === AmberjackPlone.aj_xpath_exists){
 					return (jq(xpath).length > 0)
 				}
 				
-				return (jq.trim(jq(xpath).text()) == xcontent);
+				return (jq.trim(jq(xpath).text()) === xcontent);
 			} else {
 				return true;
 			}
@@ -652,7 +651,7 @@ Amberjack = {
 	  var loc = unescape(window.location.protocol +'//'+ window.location.host + window.location.pathname) + (hasParams ? params : '');
 	  if (href.match("portal_factory"))
 		  return (loc.indexOf(href) != -1);
-	  else return loc == href;
+	  else return loc === href;
   },
 
 
@@ -685,8 +684,8 @@ Amberjack = {
 	var ca = document.cookie.split(';');
 	for(var i=0;i < ca.length;i++) {
 		var c = ca[i];
-		while (c.charAt(0)==' ') c = c.substring(1,c.length);
-		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+		while (c.charAt(0)===' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
 	}
 	return null;
   },

@@ -17,20 +17,20 @@ AmberjackPlone.stepAdapters = {
 	/* collective.amberjack.windmill integration   @author: Andrea Benetti##################################################*/	
 		w_click: {
 			highlight: function(obj) {
-				jq(obj).addClass(AmberjackPlone.theAJClass+' '+AmberjackPlone.theAJClassBehaviour)
+				jq(obj).addClass(AmberjackPlone.theAJClass+' '+AmberjackPlone.theAJClassBehaviour);
 				},
 			step: function(obj,locator,options,locatorValue) {
 			
 					if(locator=='link'){
 						AmberjackPlone.setAmberjackCookies();
-						controller.click(obj)
+						controller.click(obj);
 					}
 					else{
 						if(jq(obj).attr('class')=='context'){
 							jq(obj).click();	
 							return;
 						}
-					controller.click(obj)
+					controller.click(obj);
 					}
 				},
 				
@@ -40,8 +40,8 @@ AmberjackPlone.stepAdapters = {
 		w_highlight:{
 				
 				highlight: function(locators){
-					for(i=0; i<locators.length;i++){
-						jq(locators[i]).addClass(AmberjackPlone.theAJClass)
+					for(var i=0; i<locators.length;i++){
+						jq(locators[i]).addClass(AmberjackPlone.theAJClass);
 					}
 			
 				},
@@ -57,7 +57,7 @@ AmberjackPlone.stepAdapters = {
 			highlight: null,
 			step: function(obj,locator,options,locatorValue) {
 				var testo=options['text'];
-				controller.type(obj,testo)
+				controller.type(obj,testo);
 				},
 			checkStep: function (obj, options,locatorValue) {
 				var testo=options['text'];
@@ -86,7 +86,7 @@ AmberjackPlone.stepAdapters = {
 				jq(obj).addClass(AmberjackPlone.theAJClassBehaviour);
 				},
 			step: function(obj,locator,options,locatorValue) {
-				controller.check(obj)
+				controller.check(obj);
 				},
 			checkStep: null
 		},
@@ -95,7 +95,7 @@ AmberjackPlone.stepAdapters = {
 			highlight: null, // AmberjackPlone.stepAdapters.checkbox.highlight,
 			checkStep: null, // AmberjackPlone.stepAdapters.checkbox.checkStep,
 			step:function(obj,locator,options,locatorValue) {
-				controller.radio(obj)
+				controller.radio(obj);
 				}
 		},
 		
@@ -106,7 +106,7 @@ AmberjackPlone.stepAdapters = {
 			  step:function(obj,locator,options,locatorValue) {
 				  var tx=options['editor'];
 				  tx=tx.replace(/&lt\;/g,'<');
-				  tx=tx.replace(/&gt\;/g,'>')
+				  tx=tx.replace(/&gt\;/g,'>');
 				  controller.editor(tx,locatorValue);
 				},
 			  checkStep:null

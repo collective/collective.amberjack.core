@@ -17,19 +17,19 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 	this._LOCVALUE='';	
 	this._OPTIONS = '';
 	this._CONDITION = condition;
-	this._DESCRIPTION = description
+	this._DESCRIPTION = description;
 	
 	this._NUM=numberMicrostep;
 	numberMicrostep++;
 	
 	if(windmillMethods[this._METHOD]['locator']){
-		if( method !='highlight'){
+		if( method !=='highlight'){
 			var dict=eval('('+locator+')')
-			for(var k in dict){
+			for(var k in dict) {
 				this._LOCATOR = k;
 				this._LOCVALUE = dict[k];
 				break;
-    			}
+			}
 		}
 		else{
 		if(locator!='{}' && locator !='')
@@ -59,7 +59,7 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 					var ind=0;
 					var a=options;
 					var count=0;
-					for(k=0;k<10;k++){
+					for(var k=0;k<10;k++){
                         ind=a.indexOf('"');
 						a=a.substr(ind+1);
                         count+=ind+1;
@@ -73,7 +73,7 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 				}else{
 					var ind=0;
 					var a=options;
-					for(k=0;k<10;k++){
+					for(var k=0;k<10;k++){
 						ind=a.lastIndexOf('"');
 						a=a.substr(0,ind);
 					}
@@ -276,7 +276,7 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 		    element = elementslib.Element.LINK(locvalue);
 		  }
 		  //if xpath was passed, lookup as xpath
-		  else if(locator=='xpath') {        
+		  else if(locator=='xpath') {
 		    element = elementslib.Element.XPATH(locvalue);
 		  }
 		  

@@ -21,13 +21,7 @@
     id="stepAdapters.js"
     cacheable="True" compression="safe" cookable="True"
     insert-after="amberjackPlone.js"
-    enabled="True" expression=""  inline="False" />
-
- <javascript
-    id="amberjackSteps.js"
-    cacheable="True" compression="safe" cookable="True"
-    enabled="True" expression=""  inline="False" />
- 
+    enabled="True" expression=""  inline="False" /> 
  
  <!-- Windmill libraries modified for amberjack's integration-->   
  <javascript
