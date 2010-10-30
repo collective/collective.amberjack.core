@@ -244,7 +244,7 @@ AmberjackBase = {
       return ;
     }
 
-    AmberjackBase.alert('head tag is missing');
+    AmberjackBase.alert('HEAD tag is missing.');
   }
 };
 
@@ -495,7 +495,7 @@ Amberjack = {
     }
 
     if (!tourDef) {
-      AmberjackBase.alert('DIV with CLASS "ajTourDef" and ID "' + Amberjack.tourId + '" is not defined');
+      AmberjackBase.alert('DIV with CLASS "ajTourDef" and ID "' + Amberjack.tourId + '" is not defined.');
     }
 	
     // Is there a specified closeUrl (title attribute of DIV.ajTourDef)?
@@ -518,7 +518,7 @@ Amberjack = {
       if (!_children[i].tagName || _children[i].tagName.toLowerCase() != 'div') { continue ; }
 
       if (!_children[i].getAttribute('title')) {
-        AmberjackBase.alert('attribute "title" is missing');
+        AmberjackBase.alert('Attribute TITLE is missing.');
         return ;
       }
 
