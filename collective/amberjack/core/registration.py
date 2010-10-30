@@ -10,6 +10,7 @@ import zipfile
 import tarfile
 import urllib2
 import os
+from translation import utils
 
 class TourRegistration(object):
     """
@@ -31,15 +32,21 @@ class TourRegistration(object):
     def get_filename(self, request):
         raise NotImplemented
 
+    def translation(self, conf):
+        utils.registerTranslations(conf)
+
     def register(self):
         for conf in self.source_packages():
-            tour = Tour(conf, self.filename)
-            provideUtility(component=tour, 
-                           provides=ITourDefinition,
-                           name=tour.tourId)
+            if self.isProperTour(conf.name):
+                tour = Tour(conf, self.filename)
+                provideUtility(component=tour,
+                               provides=ITourDefinition,
+                               name=tour.tourId)
+            elif conf.name.endswith(".po"):
+                self.translation(conf)
+
     def isProperTour(self, filename):
         return filename.endswith(".cfg")
-
 
 def archive_handler(filename, source):
     """ yield extracted files from a archive """
@@ -76,13 +83,24 @@ class FileArchiveRegistration(TourRegistration):
     def source_packages(self):
         _zip = StringIO()
         _zip.write(self.source)
-        for filename, archive in archive_handler(self.filename, _zip):
-            if not self.isProperTour(filename):
-                continue
+        for archive in archive_handler(self.filename, _zip):
             yield archive
 
     def get_filename(self,request):
         return request.form['form.zipfile'].filename
+
+class FolderRegistration(TourRegistration):
+    """
+    Folder tour registration
+    """
+    classProvides(ITourRegistration)
+
+    def source_packages(self):
+        for root, dirs, files in os.walk(self.filename):
+            for name in files:
+                file = open(os.path.join(root, name),'r')
+                yield file
+
 
 class WebRegistration(TourRegistration):
     """
@@ -95,8 +113,6 @@ class WebRegistration(TourRegistration):
         _zip = StringIO()
         _zip.write(response.read())
         for filename, archive in archive_handler(self.filename, _zip):
-            if not self.isProperTour(filename):
-                continue
             yield archive
 
     def get_filename(self, request):

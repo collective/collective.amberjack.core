@@ -42,6 +42,6 @@ setup(name='collective.amberjack.core',
       [z3c.autoinclude.plugin]
       target = plone
       [console_scripts]
-      i18ndude=collective.amberjack.core.script:main
+      i18ndude_aj=collective.amberjack.core.translation.script:main
       """,
       )

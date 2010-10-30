@@ -9,6 +9,8 @@ from collective.amberjack.core.interfaces import ITour
 from collective.amberjack.core.tour_manager import ITourManager
 import urllib
 import re
+from zope.i18n import translate
+from collective.amberjack.core.blueprints import normalizeHTML
 
 class TourViewlet(common.ViewletBase):
     index = ViewPageTemplateFile('tour.pt')
@@ -23,6 +25,9 @@ class TourViewlet(common.ViewletBase):
         if self.enabled:
             self.tourId = self.tour.tourId
             self.ajsteps = []
+
+    def translate(self, msg):
+        return normalizeHTML(translate(msg, context=self.request))
 
     def _choosenTour(self):
         try:
@@ -97,16 +102,18 @@ class TourViewlet(common.ViewletBase):
             for step in self.ajsteps:
 
                 if step._options['blueprint']=='collective.amberjack.blueprints.windmillmicrostep':
+                    text = translate(step.text, context=self.request)
+                    description = translate(step.description, context=self.request)
                     ajstep = """new AjWindmillStep('%s',"%s","%s","%s","%s","%s")""" % (step.method,
                                                                       step.selector.replace('"','\\"'),
-                                                                      step.text.replace('\\"','"').replace('"','\\"'), #get the right formatted text from method "editor" without causing error in the others
+                                                                      text.replace('\\"','"').replace('"','\\"'), #get the right formatted text from method "editor" without causing error in the others
                                                                       step.required,
                                                                       step.condition.replace('\\"','"').replace('"','\\"'),
-                                                                      self.manageDescription(step.description)) 
+                                                                      self.manageDescription(description)) 
                 else:
                     ajstep = """new AjStep('%s','%s',"%s")""" % (step.method,
                                                              self._expandSelector(step.selector),
-                                                             step.text.replace('"','\\"'))
+                                                             text.replace('"','\\"'))
 
                 if cnt+1 != len(self.ajsteps):
                     ajstep += """,

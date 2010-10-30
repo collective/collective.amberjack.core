@@ -5,8 +5,9 @@ from collective.amberjack.core.interfaces import ITour
 from collective.amberjack.core import utils
 
 import UserDict
-import os
 from collective.amberjack.core.validators import AmberjackException
+from zope.i18nmessageid import MessageFactory
+import os
 
 class Tour(UserDict.DictMixin):
     implements(ITour)
@@ -16,6 +17,8 @@ class Tour(UserDict.DictMixin):
             self._filename = os.path.basename(configuration.name)
         except AttributeError:
             self._filename = 'no_filename'
+        domain = os.path.splitext(os.path.basename(self._filename))[0]
+        self.mf = MessageFactory(domain)
         self._raw = utils._load_config(configuration)
         self._data = {}
         self._options = self._raw['amberjack']
@@ -23,12 +26,12 @@ class Tour(UserDict.DictMixin):
         self.steps = utils.constructTour(self, self._steps_ids)
         self.title = self._options['title']
         self.validators = self._options.get('validators','').splitlines()
-        self.setTourId(tour_id)
+        self.setTourId()
 
-    def setTourId(self, tour_id):
+    def setTourId(self):
         normalizer = getUtility(IIDNormalizer)
-        self.tourId = normalizer.normalize('%s.%s' % (tour_id, self.title))
-        
+        self.tourId = normalizer.normalize('%s.%s' % (os.path.splitext(self._filename)[0], self.title))
+
     def validate(self, context, request):
         errors = []
         for expression in self.validators:
@@ -37,6 +40,7 @@ class Tour(UserDict.DictMixin):
             condition = utils.Condition(expression, context, request)
             try:
                 message = condition()
+                message #pyflakes
             except AmberjackException, e:
                 errors.append(str(e))
         return errors

@@ -16,21 +16,33 @@ class ITourDirective(interface.Interface):
         description=u'The variable that points to the tour',
         required=True)
 
-def _registerTour(source, filename):
+def _zipregisterTour(source, filename):
     reg = getUtility(ITourRegistration, 'zipfile')
     registration = reg(source, filename=filename)
     registration.register()
 
+def _folderregisterTour(path):
+    reg = getUtility(ITourRegistration, 'folder')
+    registration = reg(None, filename=path)
+    registration.register()
+
 def tour(_context, tourlocation):
     """Tour class factory registration."""
-    archive = open(tourlocation,'r')
-    archive.seek(0)
-    source = archive.read()
-    archive.close()
-    filename = os.path.basename(tourlocation)
-    _context.action(
-        discriminator = '_registerTour:%s' % tourlocation,
-        callable = _registerTour,
-        args = (source, filename)
-    )
+    if os.path.isdir(tourlocation): #perform dir registration
+        _context.action(
+            discriminator = '_registerTour:%s' % tourlocation,
+            callable = _folderregisterTour,
+            args = (tourlocation, )
+        )
+    else:
+        archive = open(tourlocation,'r')
+        archive.seek(0)
+        source = archive.read()
+        archive.close()
+        filename = os.path.basename(tourlocation)
+        _context.action(
+            discriminator = '_registerTour:%s' % tourlocation,
+            callable = _zipregisterTour,
+            args = (source, filename)
+        )
 

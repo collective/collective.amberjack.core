@@ -60,6 +60,11 @@
       />
 
   <utility
+      component=".registration.FolderRegistration"
+      name="folder"
+      />
+
+  <utility
       component=".registration.WebRegistration"
       name="url"
       />

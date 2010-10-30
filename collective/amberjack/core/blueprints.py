@@ -18,8 +18,8 @@ class Step(object):
         self.xpath = self._options.get('xpath','')
         self.xcontent = self._options.get('xcontent','')
         self.url = self._options['url']
-        self.title = self._options['title']
-        self.text = normalizeHTML(self._options.get('text',''))
+        self.title = tour.mf(u'%s_title' % name, self._options['title'])
+        self.text = tour.mf(u'%s_text' % name, normalizeHTML(self._options.get('text','')))
         self.validators = self._options.get('validators','').splitlines()
 
     def constructMicroSteps(self, options):
@@ -57,9 +57,9 @@ class MicroStep(object):
     def __init__(self, tour, name, options):
         self._tour = tour
         self._options = options
-        self.description = normalizeHTML(self._options['description'])
+        self.description = tour.mf(u'%s_description' % name, normalizeHTML(self._options['description']))
         self.selector = self._options.get('selector','')
-        self.text = normalizeHTML(self._options.get('text',''))
+        self.text = tour.mf(u'%s_text' % name, normalizeHTML(self._options.get('text','')))
         self.method=self._options.get('method','')
 
  
@@ -73,14 +73,13 @@ class WindmillMicroStep(object):
     def __init__(self, tour, name, options):
         self._tour = tour
         self._options = options
-        self.description = normalizeHTML(self._options['description'])
+        self.description = tour.mf(u'%s_description' % name, normalizeHTML(self._options['description']))
         self.selector = self._options.get('selector','')
-        self.text = normalizeHTML(self._options.get('text',''))
         self.method=self._options.get('method','')
+        self.text = tour.mf(u'%s_text' % name, normalizeHTML(self._options.get('text','')))
         self.required=self._options.get('required','')
         self.condition=self._options.get('condition','')
-            
-        
+
 
 def normalizeHTML(text):
     return text.replace('[', SSPAN).replace(']', ESPAN)

@@ -31,9 +31,9 @@ import sys, os
 import getopt
 from i18ndude import catalog
 from i18ndude.extract import find_files
-import utils
+from collective.amberjack.core import utils
 
-MSG_STR_KEYS = ['title','description']
+MSG_STR_KEYS = ['title','description', 'text']
 
 def cfg_catalog(dir, domain='none', exclude=()):
     catalogs = {}
@@ -44,9 +44,10 @@ def cfg_catalog(dir, domain='none', exclude=()):
         domain = os.path.splitext(os.path.basename(filename))[0]
         if domain not in catalogs:
             catalogs[domain] = []
-        for msgid, row in _raw.items():
+        for _msgid, row in _raw.items():
             for key in row:
                 if key in MSG_STR_KEYS:
+                    msgid = '%s_%s' % (_msgid, key)
                     catalogs[domain].append((msgid, row[key], filename))
     return catalogs
 

@@ -12,6 +12,7 @@ import ConfigParser
 import re
 import UserDict
 
+
 def _load_config(configuration):
     parser = ConfigParser.RawConfigParser()
     parser.optionxform = str # case sensitive
