@@ -139,7 +139,7 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 		try {
 			obj = this.getObj(this._LOCATOR,this._LOCVALUE);
 			} catch (e) {
-				var msg = "Error in highlightStep(): Step " + (this._NUM+1) +" not found";
+				var msg = "Error in highlightStep(): Step " + (this._NUM+1) +" not found.";
 				AmberjackBase.alert(msg);
 				AmberjackBase.log(msg, e);
 				return false;
@@ -166,7 +166,7 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 		try {
 			obj = this.getObj(this._LOCATOR,this._LOCVALUE);
 		} catch(e) {
-			var msg = "Error in checkStep(): Step " + (this._NUM+1) +" not found"; 
+			var msg = "Error in checkStep(): Step " + (this._NUM+1) +" not found."; 
 			AmberjackBase.alert(msg);
 			AmberjackBase.log(msg, e);
 			return false;
@@ -175,7 +175,7 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 		if(jq(obj).parents('.field').children('.required').length)
 			if (jq(obj).val()=='') {
 				var field_name = jq(obj).parents('.field').children('label').text()
-				var msg = "The field \"" + field_name + "\" can't be empty, it's required by Plone"; 
+				var msg = "The field \"" + field_name + "\" is required, please correct."; 
 				AmberjackBase.alert(msg);
 				return false;
 			}
@@ -193,7 +193,7 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 				stepDone = this.checkCondition();
     	}
        	if (!stepDone)
-			AmberjackBase.alert("Complete the step: \"" + this.getDescription() + "\"");
+			AmberjackBase.alert("Complete the step: \"" + this.getDescription() + "\".");
        	return stepDone;
 		
 	};
@@ -243,7 +243,7 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 		try {
 			obj = this.getObj(this._LOCATOR,this._LOCVALUE);
 		} catch(e) {
-			var msg = "Error in doStep(): Step " + (this._NUM+1) +" not found";
+			var msg = "Error in doStep(): Step " + (this._NUM+1) +" not found.";
 			AmberjackBase.alert(msg);
 			AmberjackBase.log(msg, e);
 			return false;
@@ -509,7 +509,7 @@ AmberjackPlone = {
 			var notAj = jq("a").not(".ajHighlight,.ajedElement,[id^='aj'],[class^='aj']");
 			//NOTE: we assume that there are no other 'ajXXX' ids
 			notAj.click(function(){
-				AmberjackBase.alert("You cannot click on other links, please use the console's exit button");
+				AmberjackBase.alert("You cannot click on other links, please use the console's exit button.");
 				return false;
 			});
 			notAj.addClass("aj_link_inactive");
