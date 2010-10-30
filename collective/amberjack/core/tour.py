@@ -37,7 +37,9 @@ class Tour(UserDict.DictMixin):
         for expression in self.validators:
             if not expression:
                 continue
-            condition = utils.Condition(expression, context, request)
+            rootTool = getUtility(ITour, 'collective.amberjack.core.toursroot')
+            path = [s.url for s in self.steps if s.url!='aj_any_url'][0]
+            condition = utils.Condition(expression, rootTool.getTourContext(context, path), request)
             try:
                 message = condition()
                 message #pyflakes

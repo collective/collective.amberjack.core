@@ -164,6 +164,14 @@ class Condition(object):
 
 class ToursRoot(object):
     implements(ITour)
+
+    def getTourContext(self, context, path):
+        site_root = '/'.join(context.portal_url.getPortalObject().getPhysicalPath())
+        if not context.portal_amberjack.sandbox: 
+            return context.unrestrictedTraverse(site_root + path)
+        else:
+            user_id = context.portal_membership.getAuthenticatedMember().id
+            return context.unrestrictedTraverse(site_root + '/Members/' + user_id + path)
     
     def getToursRoot(self, context, request, url=''):
         portal_state =  getMultiAdapter((context, request), name=u'plone_portal_state')
