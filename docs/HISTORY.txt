@@ -23,6 +23,8 @@ Changelog
   [mirco]
 - added sunburst theme and fixed some problems in tour's template
   [nekorin]
+- fix translations
+  [amleczko]
 
 1.1a (2010-09-21)
 -----------------
