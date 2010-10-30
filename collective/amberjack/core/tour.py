@@ -24,7 +24,7 @@ class Tour(UserDict.DictMixin):
         self._options = self._raw['amberjack']
         self._steps_ids = self._options['steps'].splitlines()
         self.steps = utils.constructTour(self, self._steps_ids)
-        self.title = self._options['title']
+        self.title = self.mf(u'amberjack_title', self._options['title'])
         self.validators = self._options.get('validators','').splitlines()
         self.setTourId()
 
