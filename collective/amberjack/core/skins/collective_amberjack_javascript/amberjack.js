@@ -98,6 +98,8 @@ AmberjackBase = {
 		jq('<div id="ajMessage">'+str+'<div>').dialog({ modal: true, title: title, zIndex: 500000 });
 	else
 		alert(title+': ' + str);
+	// For "uncomplete" check, remove the submitting (see #656917)
+	jq(":submit.submitting").removeClass("submitting");
   },
 
   log: function(str, e) {
