@@ -175,7 +175,7 @@ function AjWindmillStep(method,locator,options,required,condition,description) {
 		if(jq(obj).parents('.field').children('.required').length)
 			if (jq(obj).val()=='') {
 				var field_name = jq(obj).parents('.field').children('label').text()
-				var msg = "The field \"" + field_name + "\" is required, please correct."; 
+				var msg = field_name + " : " + AmberjackPlone.aj_plone_consts['FieldRequiredErrorMessage']; 
 				AmberjackBase.alert(msg);
 				return false;
 			}

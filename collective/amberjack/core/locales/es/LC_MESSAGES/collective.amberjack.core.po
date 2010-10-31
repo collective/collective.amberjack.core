@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.amberjack.core\n"
-"POT-Creation-Date: 2010-10-31 16:14+0000\n"
+"POT-Creation-Date: 2010-10-31 16:54+0000\n"
 "PO-Revision-Date: 2009-10-29 21:40-0400\n"
 "Last-Translator: Leonardo Caballero <leonardocaballero@gmail.com>\n"
 "Language-Team: Spanish <plone-conosur@lists.plone.org>\n"
@@ -25,8 +25,12 @@ msgstr ""
 msgid "Amberjack Setup"
 msgstr ""
 
-#: ../javascript/defaults.py:26
+#: ../javascript/defaults.py:28
 msgid "Amberjack alert"
+msgstr ""
+
+#: ../javascript/defaults.py:31
+msgid "Can't go to next step automatically. Do it manually."
 msgstr ""
 
 #: ../interfaces.py:39
@@ -45,11 +49,15 @@ msgstr ""
 msgid "Configuration for Amberjack."
 msgstr ""
 
+#: ../javascript/defaults.py:30
+msgid "Go to next step automatically."
+msgstr ""
+
 #: ../validators.py:58
 msgid "Please remove the [${path}] object to start the tour."
 msgstr ""
 
-#: ../javascript/defaults.py:25
+#: ../javascript/defaults.py:27
 msgid "Please select a file."
 msgstr "Por favor, seleccione un archivo."
 
@@ -61,6 +69,10 @@ msgstr ""
 msgid "The title of the skin shown in the select menu"
 msgstr ""
 
+#: ../javascript/defaults.py:32
+msgid "This field is required, please correct."
+msgstr ""
+
 #: ../controlpanel.py:31
 msgid "Tour registration"
 msgstr ""
@@ -69,7 +81,7 @@ msgstr ""
 msgid "Use Sandbox"
 msgstr ""
 
-#: ../javascript/defaults.py:27
+#: ../javascript/defaults.py:29
 msgid "You cannot click on other links, please use the console's exit button."
 msgstr ""
 
@@ -91,7 +103,7 @@ msgid "next-tour"
 msgstr "Próxima visita guiada:"
 
 #. Default: "of"
-#: ../javascript/defaults.py:44
+#: ../javascript/defaults.py:49
 msgid "separator-between-steps"
 msgstr "de"
 

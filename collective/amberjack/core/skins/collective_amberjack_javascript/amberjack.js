@@ -298,12 +298,12 @@ AmberjackControl = {
 
       tplHtml = tplHtml.replace(/{nextClick}/,       "location.href='" + nextUrl + "';return false;");
       tplHtml = tplHtml.replace(/{nextClass}/,       '');
-	  tplHtml = tplHtml.replace(/{nextTitle}/,       'Go to next step automatically.');
+	  tplHtml = tplHtml.replace(/{nextTitle}/,       AmberjackPlone.aj_plone_consts['GoToNextStepLinkMessage']);
     }
     else {
       tplHtml = tplHtml.replace(/{nextClick}/,       'return false;');
       tplHtml = tplHtml.replace(/{nextClass}/,       'disabled');
-	  tplHtml = tplHtml.replace(/{nextTitle}/,       'Can\'t go to next step automatically. Do it manually.');
+	  tplHtml = tplHtml.replace(/{nextTitle}/,       AmberjackPlone.aj_plone_consts['GoToNextStepLinkErrorMessage']);
     }
 
     tplHtml = tplHtml.replace(/{textOf}/,          Amberjack.textOf);

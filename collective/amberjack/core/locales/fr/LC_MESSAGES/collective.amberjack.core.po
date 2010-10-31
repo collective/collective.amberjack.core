@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.amberjack.core\n"
-"POT-Creation-Date: 2010-10-31 16:14+0000\n"
+"POT-Creation-Date: 2010-10-31 16:54+0000\n"
 "PO-Revision-Date: 2009-08-24 23:27+0100\n"
 "Last-Translator: Vincent Fretin <vincent.fretin@gmail.com>\n"
 "Language-Team: French\n"
@@ -21,9 +21,13 @@ msgstr ""
 msgid "Amberjack Setup"
 msgstr "Paramètres d'Amberjack"
 
-#: ../javascript/defaults.py:26
+#: ../javascript/defaults.py:28
 msgid "Amberjack alert"
 msgstr "Alerte Amberjack"
+
+#: ../javascript/defaults.py:31
+msgid "Can't go to next step automatically. Do it manually."
+msgstr "Il n'est pas possible de passer automatiquement à l'étape suivante. Merci de le faire manuellement."
 
 #: ../interfaces.py:39
 msgid "Choose archive file"
@@ -41,11 +45,15 @@ msgstr "Paramétrage"
 msgid "Configuration for Amberjack."
 msgstr "Paramètres qui agissent sur les visites guidées fournies par Amberjack."
 
+#: ../javascript/defaults.py:30
+msgid "Go to next step automatically."
+msgstr "Passer automatiquement à l'étape suivante."
+
 #: ../validators.py:58
 msgid "Please remove the [${path}] object to start the tour."
 msgstr "Il vous faut supprimer l'objet [${path}] avant de pouvoir commencer la visite guidée."
 
-#: ../javascript/defaults.py:25
+#: ../javascript/defaults.py:27
 msgid "Please select a file."
 msgstr "Veuillez sélectionner un fichier."
 
@@ -57,6 +65,10 @@ msgstr "L'objet [${path}] n'existe pas encore."
 msgid "The title of the skin shown in the select menu"
 msgstr "Titre du thème affiché dans le menu de sélection"
 
+#: ../javascript/defaults.py:32
+msgid "This field is required, please correct."
+msgstr "Ce champ est requis, merci de corriger."
+
 #: ../controlpanel.py:31
 msgid "Tour registration"
 msgstr "Ajout d'une visite guidée"
@@ -65,7 +77,7 @@ msgstr "Ajout d'une visite guidée"
 msgid "Use Sandbox"
 msgstr "Utiliser le bac à sable"
 
-#: ../javascript/defaults.py:27
+#: ../javascript/defaults.py:29
 msgid "You cannot click on other links, please use the console's exit button."
 msgstr "Vous ne pouvez pas cliquer sur d'autre liens, merci d'utiliser le bouton de fermeture pour mettre fin à la visite guidée."
 
@@ -87,7 +99,7 @@ msgid "next-tour"
 msgstr "Prochaine visite guidée :"
 
 #. Default: "of"
-#: ../javascript/defaults.py:44
+#: ../javascript/defaults.py:49
 msgid "separator-between-steps"
 msgstr "sur"
 

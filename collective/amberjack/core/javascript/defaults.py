@@ -18,13 +18,18 @@ class AmberjackDefaults(BrowserView):
                 AmberjackPlone.aj_plone_consts['BrowseFile'] = "%s";
                 AmberjackPlone.aj_plone_consts['AlertDefaultTitle'] = "%s";
                 AmberjackPlone.aj_plone_consts['AlertDisableLinksMessage'] = "%s";
-                
+                AmberjackPlone.aj_plone_consts['GoToNextStepLinkMessage'] = "%s";
+                AmberjackPlone.aj_plone_consts['GoToNextStepLinkErrorMessage'] = "%s";
+                AmberjackPlone.aj_plone_consts['FieldRequiredErrorMessage'] = "%s";
             }
         """ % (translate(PMF(u'Error'), context=self.request),
                translate(PMF(u'Please correct the indicated errors.'), context=self.request),
                translate(_(u'Please select a file.'), context=self.request),
                translate(_(u'Amberjack alert'), context=self.request),
-               translate(_(u"You cannot click on other links, please use the console's exit button."), context=self.request)
+               translate(_(u"You cannot click on other links, please use the console's exit button."), context=self.request),
+               translate(_(u"Go to next step automatically."), context=self.request),
+               translate(_(u"Can't go to next step automatically. Do it manually."), context=self.request),
+               translate(_(u"This field is required, please correct."), context=self.request)
                )
         rootTool = getUtility(ITour, 'collective.amberjack.core.toursroot')
         url = rootTool.getToursRoot(getSite(),context)

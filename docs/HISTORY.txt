@@ -29,6 +29,10 @@ Changelog
   [sylvainb]
 - Sync pot/po files and add french translations
   [sylvainb]
+- amberjackDefaults.js must not be cacheable because of some messages depend on the user's language.
+  [sylvainb]
+- Allow translations for the alert message when the user clics on other links.
+  [sylvainb]
 
 1.1a (2010-09-21)
 -----------------
