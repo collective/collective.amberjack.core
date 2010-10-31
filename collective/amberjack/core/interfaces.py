@@ -1,5 +1,8 @@
 from zope.interface import Interface
 from zope import schema
+from zope.i18nmessageid import MessageFactory
+
+_ = MessageFactory("collective.amberjack.core")
 
 class ITour(Interface):
     """ """
@@ -33,17 +36,17 @@ class ITourManager(Interface):
 class IControlPanelTourRegistration(Interface):
     """ """
     zipfile = schema.Bytes(
-        title=u'Choose archive file',
+        title=_(u'Choose archive file'),
         required=False)
     
     url = schema.URI(
-        title=u'Choose url',
+        title=_(u'Choose url'),
         required=False)
 
 class IAjConfiguration(Interface):
     """ """
     sandbox = schema.Bool(
-        title=u'Use Sandbox',
+        title=_(u'Use Sandbox'),
         default=False,
         required=False)
 
@@ -59,4 +62,4 @@ class IAmberjackSkin(Interface):
        Example:
        http://nohost:8080/plone/skin/<utility_name>/control.tpl.js
     """
-    title = schema.TextLine(title=u"The title of the skin shown in the select menu")
+    title = schema.TextLine(title=_(u"The title of the skin shown in the select menu"))

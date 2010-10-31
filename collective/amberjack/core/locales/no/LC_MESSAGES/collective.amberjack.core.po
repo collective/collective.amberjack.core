@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: amberjack\n"
-"POT-Creation-Date: 2009-10-31 11:51+0000\n"
+"POT-Creation-Date: 2010-10-31 12:25+0000\n"
 "PO-Revision-Date: 2010-08-05 17:44+0100\n"
 "Last-Translator: Espen Moe-Nilssen <espen@medialog.no>\n"
 "Language-Team: Norge <espen@medialog.no>\n"
@@ -19,46 +19,69 @@ msgstr ""
 "X-Poedit-Language: Norwegian Bokmal\n"
 "X-Poedit-Country: NORWAY\n"
 
-#: ../javascript/defaults.py:19
+#: ../controlpanel.py:40
+msgid "Amberjack Setup"
+msgstr ""
+
+#: ../interfaces.py:39
+msgid "Choose archive file"
+msgstr ""
+
+#: ../interfaces.py:43
+msgid "Choose url"
+msgstr ""
+
+#: ../controlpanel.py:35
+msgid "Configuration"
+msgstr ""
+
+#: ../controlpanel.py:41
+msgid "Configuration for Amberjack."
+msgstr ""
+
+#: ../validators.py:58
+msgid "Please remove the [${path}] object to start the tour."
+msgstr ""
+
+#: ../javascript/defaults.py:23
 msgid "Please select a file."
 msgstr "Vennligst velg en fil."
 
-#: ../validators.py:29
-msgid "You have to be Contributor to execute this step."
-msgstr "Du må ha Bidragsyter-rolle for å gjøre dette."
+#: ../validators.py:50
+msgid "The object [${path}] doesn't exist yet."
+msgstr ""
 
-#: ../validators.py:33
-msgid "You have to be Editor to execute this step."
-msgstr "Du må ha Redaktør-rolle for å gjøre dette."
+#: ../interfaces.py:65
+msgid "The title of the skin shown in the select menu"
+msgstr ""
 
-#: ../validators.py:21
-msgid "You have to be Manager to execute this step."
-msgstr "Du må ha Administrator/Manager-rolle for å gjøre dette."
+#: ../controlpanel.py:31
+msgid "Tour registration"
+msgstr ""
 
-#: ../validators.py:37
-msgid "You have to be Reader to execute this step."
-msgstr "Du må ha Leser-rettigheter for å gjøre dette."
+#: ../interfaces.py:49
+msgid "Use Sandbox"
+msgstr ""
 
-#: ../validators.py:25
-#, fuzzy
-msgid "You have to be Reviewer to execute this step."
-msgstr "Du må være Reviewer for å gjøre dette."
+#: ../validators.py:31
+msgid "You have to be ${role} to execute this step."
+msgstr ""
 
-#: ../validators.py:12
+#: ../validators.py:18
 msgid "You have to be anonymous to execute this step."
 msgstr "Du må være anonym (logget ut) for å gjøre dette."
 
-#: ../validators.py:17
+#: ../validators.py:24
 msgid "You have to be logged in to execute this step."
 msgstr "Du må være logget inn for å gjøre dette."
 
 #. Default: "Next tour:"
-#: ../viewlets/tour.pt:36
+#: ../viewlets/tour.pt:42
 msgid "next-tour"
 msgstr "Neste tur."
 
 #. Default: "of"
-#: ../javascript/defaults.py:33
+#: ../javascript/defaults.py:40
 msgid "separator-between-steps"
 msgstr "til"
 

@@ -16,6 +16,7 @@ Contributors
 * Irene Capatti [nekorin]
 * Giorgio Borelli [gborelli]
 * Andrea Benetti [DkAndrea]
+* Sylvain Boureliou [sylvainb]
 
 Amberjack library
 -----------------

@@ -25,6 +25,10 @@ Changelog
   [nekorin]
 - fix translations
   [amleczko]
+- Messages in control panel and validators can be translated
+  [sylvainb]
+- Sync pot/po files and add french translations
+  [sylvainb]
 
 1.1a (2010-09-21)
 -----------------

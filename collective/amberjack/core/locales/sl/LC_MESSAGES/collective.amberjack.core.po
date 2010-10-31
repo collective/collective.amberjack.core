@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: amberjack\n"
-"POT-Creation-Date: 2009-10-31 11:51+0000\n"
+"POT-Creation-Date: 2010-10-31 12:25+0000\n"
 "PO-Revision-Date: 2009-10-31 11:49+0100\n"
 "Last-Translator: Domen Kožar <domen@dev.si>\n"
 "Language-Team: SLOVENIAN <LL@li.org>\n"
@@ -19,45 +19,69 @@ msgstr ""
 "X-Poedit-Language: Slovenian\n"
 "X-Poedit-Country: SLOVENIA\n"
 
-#: ../javascript/defaults.py:19
+#: ../controlpanel.py:40
+msgid "Amberjack Setup"
+msgstr ""
+
+#: ../interfaces.py:39
+msgid "Choose archive file"
+msgstr ""
+
+#: ../interfaces.py:43
+msgid "Choose url"
+msgstr ""
+
+#: ../controlpanel.py:35
+msgid "Configuration"
+msgstr ""
+
+#: ../controlpanel.py:41
+msgid "Configuration for Amberjack."
+msgstr ""
+
+#: ../validators.py:58
+msgid "Please remove the [${path}] object to start the tour."
+msgstr ""
+
+#: ../javascript/defaults.py:23
 msgid "Please select a file."
 msgstr "Izberite datoteko."
 
-#: ../validators.py:29
-msgid "You have to be Contributor to execute this step."
-msgstr "Za izvajanje koraka morate biti Contributor"
+#: ../validators.py:50
+msgid "The object [${path}] doesn't exist yet."
+msgstr ""
 
-#: ../validators.py:33
-msgid "You have to be Editor to execute this step."
-msgstr "Za izvajanje koraka morate biti Editor"
+#: ../interfaces.py:65
+msgid "The title of the skin shown in the select menu"
+msgstr ""
 
-#: ../validators.py:21
-msgid "You have to be Manager to execute this step."
-msgstr "Za izvajanje koraka morate biti Manager"
+#: ../controlpanel.py:31
+msgid "Tour registration"
+msgstr ""
 
-#: ../validators.py:37
-msgid "You have to be Reader to execute this step."
-msgstr "Za izvajanje koraka morate biti Reader"
+#: ../interfaces.py:49
+msgid "Use Sandbox"
+msgstr ""
 
-#: ../validators.py:25
-msgid "You have to be Reviewer to execute this step."
-msgstr "Za izvajanje koraka morate biti Reviewer"
+#: ../validators.py:31
+msgid "You have to be ${role} to execute this step."
+msgstr ""
 
-#: ../validators.py:12
+#: ../validators.py:18
 msgid "You have to be anonymous to execute this step."
 msgstr "Za izvajanje koraka ne smete biti prijavljeni."
 
-#: ../validators.py:17
+#: ../validators.py:24
 msgid "You have to be logged in to execute this step."
 msgstr "Za izvajanje koraka se morate prijaviti."
 
 #. Default: "Next tour:"
-#: ../viewlets/tour.pt:36
+#: ../viewlets/tour.pt:42
 msgid "next-tour"
 msgstr "Nasledni vodič:"
 
 #. Default: "of"
-#: ../javascript/defaults.py:33
+#: ../javascript/defaults.py:40
 msgid "separator-between-steps"
 msgstr "od"
 

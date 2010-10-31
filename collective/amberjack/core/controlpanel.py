@@ -7,6 +7,9 @@ from zope.interface import implements
 from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from zope.component import queryUtility
+from zope.i18nmessageid import MessageFactory
+
+_ = MessageFactory("collective.amberjack.core")
 
 class AJControlPanelAdapter(SchemaAdapterBase):
     adapts(IPloneSiteRoot)
@@ -25,18 +28,18 @@ class AJControlPanelAdapter(SchemaAdapterBase):
 class AJControlPanelForm(ControlPanelForm):
 
     tour_registration = FormFieldsets(IControlPanelTourRegistration)
-    tour_registration.label = u'Tour registration'
+    tour_registration.label = _(u'Tour registration')
     tour_registration.id = 'tour_registration'
 
     configuration = FormFieldsets(IAjConfiguration)
-    configuration.label = u'Configuration'
+    configuration.label = _(u'Configuration')
     configuration.id = 'configuration'
 
     form_fields = FormFieldsets(configuration, tour_registration)
 
-    label = u"Amberjack Setup"
-    description = u"Configuraion for Amberjack."
-    form_name = u"Amberjack Setup"
+    label = _(u"Amberjack Setup")
+    description = _(u"Configuration for Amberjack.")
+    form_name = _(u"Amberjack Setup")
 
     def _on_save(self, data=None):
         for name,source in data.items():

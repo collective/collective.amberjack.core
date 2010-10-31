@@ -6,6 +6,7 @@ from zope.component import getUtility
 from collective.amberjack.core.interfaces import ITour
 
 _ = MessageFactory("collective.amberjack.core")
+_plone = MessageFactory("plone")
 
 class AmberjackException(Exception):
     pass
@@ -27,7 +28,7 @@ def hasRole(context, request, role):
     if request.AUTHENTICATED_USER.has_role('Manager', context):
         return None
     if not request.AUTHENTICATED_USER.has_role(role, context):
-        raise AmberjackException(_(u"You have to be %s to execute this step." % role))
+        raise AmberjackException(_(u"You have to be ${role} to execute this step.", mapping={'role': _plone(role)}))
     return None
 
 def isCreated(context, path):
@@ -46,7 +47,7 @@ def isCreated(context, path):
              path = path[1:]    
     myfolder = root.aq_base.unrestrictedTraverse(str(path).split('/'), None)
     if myfolder is None:
-        raise AmberjackException(_(u"The object [%s] doesn't exist yet." %path)) 
+        raise AmberjackException(_(u"The object [${path}] doesn't exist yet.", mapping={'path': path})) 
     return None
 
 def isNotCreated(context, path):
@@ -54,7 +55,7 @@ def isNotCreated(context, path):
         isCreated(context, path)
     except AmberjackException:
         return None
-    raise AmberjackException(_(u"Please remove the [%s] object to start the tour." %path))
+    raise AmberjackException(_(u"Please remove the [${path}] object to start the tour.", mapping={'path': path}))
     
 _validators_ = (
   isNotCreated,

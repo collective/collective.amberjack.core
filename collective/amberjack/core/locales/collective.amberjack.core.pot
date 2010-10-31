@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2009-10-31 11:51+0000\n"
+"POT-Creation-Date: 2010-10-31 12:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,45 +17,69 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.amberjack.core\n"
 
-#: ../javascript/defaults.py:19
+#: ../controlpanel.py:40
+msgid "Amberjack Setup"
+msgstr ""
+
+#: ../interfaces.py:39
+msgid "Choose archive file"
+msgstr ""
+
+#: ../interfaces.py:43
+msgid "Choose url"
+msgstr ""
+
+#: ../controlpanel.py:35
+msgid "Configuration"
+msgstr ""
+
+#: ../controlpanel.py:41
+msgid "Configuration for Amberjack."
+msgstr ""
+
+#: ../validators.py:58
+msgid "Please remove the [${path}] object to start the tour."
+msgstr ""
+
+#: ../javascript/defaults.py:23
 msgid "Please select a file."
 msgstr ""
 
-#: ../validators.py:29
-msgid "You have to be Contributor to execute this step."
+#: ../validators.py:50
+msgid "The object [${path}] doesn't exist yet."
 msgstr ""
 
-#: ../validators.py:33
-msgid "You have to be Editor to execute this step."
+#: ../interfaces.py:65
+msgid "The title of the skin shown in the select menu"
 msgstr ""
 
-#: ../validators.py:21
-msgid "You have to be Manager to execute this step."
+#: ../controlpanel.py:31
+msgid "Tour registration"
 msgstr ""
 
-#: ../validators.py:37
-msgid "You have to be Reader to execute this step."
+#: ../interfaces.py:49
+msgid "Use Sandbox"
 msgstr ""
 
-#: ../validators.py:25
-msgid "You have to be Reviewer to execute this step."
+#: ../validators.py:31
+msgid "You have to be ${role} to execute this step."
 msgstr ""
 
-#: ../validators.py:12
+#: ../validators.py:18
 msgid "You have to be anonymous to execute this step."
 msgstr ""
 
-#: ../validators.py:17
+#: ../validators.py:24
 msgid "You have to be logged in to execute this step."
 msgstr ""
 
 #. Default: "Next tour:"
-#: ../viewlets/tour.pt:36
+#: ../viewlets/tour.pt:42
 msgid "next-tour"
 msgstr ""
 
 #. Default: "of"
-#: ../javascript/defaults.py:33
+#: ../javascript/defaults.py:40
 msgid "separator-between-steps"
 msgstr ""
 

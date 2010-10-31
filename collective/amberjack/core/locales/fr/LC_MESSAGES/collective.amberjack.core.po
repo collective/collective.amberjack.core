@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.amberjack.core\n"
-"POT-Creation-Date: 2009-10-31 11:51+0000\n"
+"POT-Creation-Date: 2010-10-31 12:25+0000\n"
 "PO-Revision-Date: 2009-08-24 23:27+0100\n"
 "Last-Translator: Vincent Fretin <vincent.fretin@gmail.com>\n"
 "Language-Team: French\n"
@@ -17,45 +17,69 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.amberjack.core\n"
 
-#: ../javascript/defaults.py:19
+#: ../controlpanel.py:40
+msgid "Amberjack Setup"
+msgstr "Paramètres d'Amberjack"
+
+#: ../interfaces.py:39
+msgid "Choose archive file"
+msgstr "A partir d'un fichier d'archive"
+
+#: ../interfaces.py:43
+msgid "Choose url"
+msgstr "A partir d'une adresse Internet (URL)"
+
+#: ../controlpanel.py:35
+msgid "Configuration"
+msgstr "Paramétrage"
+
+#: ../controlpanel.py:41
+msgid "Configuration for Amberjack."
+msgstr "Paramètres qui agissent sur les visites guidées fournies par Amberjack."
+
+#: ../validators.py:58
+msgid "Please remove the [${path}] object to start the tour."
+msgstr "Il vous faut supprimer l'objet [${path}] avant de pouvoir commencer la visite guidée."
+
+#: ../javascript/defaults.py:23
 msgid "Please select a file."
-msgstr ""
+msgstr "Veuillez sélectionner un fichier."
 
-#: ../validators.py:29
-msgid "You have to be Contributor to execute this step."
-msgstr "Vous devez être Contributeur pour exécuter cette étape."
+#: ../validators.py:50
+msgid "The object [${path}] doesn't exist yet."
+msgstr "L'objet [${path}] n'existe pas encore."
 
-#: ../validators.py:33
-msgid "You have to be Editor to execute this step."
-msgstr "Vous devez être Rédacteur pour exécuter cette étape."
+#: ../interfaces.py:65
+msgid "The title of the skin shown in the select menu"
+msgstr "Titre du thème affiché dans le menu de sélection"
 
-#: ../validators.py:21
-msgid "You have to be Manager to execute this step."
-msgstr "Vous devez être Administrateur pour exécuter cette étape."
+#: ../controlpanel.py:31
+msgid "Tour registration"
+msgstr "Ajout d'une visite guidée"
 
-#: ../validators.py:37
-msgid "You have to be Reader to execute this step."
-msgstr "Vous devez être Lecteur pour exécuter cette étape."
+#: ../interfaces.py:49
+msgid "Use Sandbox"
+msgstr "Utiliser le bac à sable"
 
-#: ../validators.py:25
-msgid "You have to be Reviewer to execute this step."
-msgstr "Vous devez être Modérateur pour exécuter cette étape."
+#: ../validators.py:31
+msgid "You have to be ${role} to execute this step."
+msgstr "Vous devez avoir le rôle ${role} pour pouvoir exécuter cette étape."
 
-#: ../validators.py:12
+#: ../validators.py:18
 msgid "You have to be anonymous to execute this step."
 msgstr "Vous devez être anonyme pour exécuter cette étape."
 
-#: ../validators.py:17
+#: ../validators.py:24
 msgid "You have to be logged in to execute this step."
 msgstr "Vous devez vous connecter pour exécuter cette étape."
 
 #. Default: "Next tour:"
-#: ../viewlets/tour.pt:36
+#: ../viewlets/tour.pt:42
 msgid "next-tour"
 msgstr "Prochaine visite guidée :"
 
 #. Default: "of"
-#: ../javascript/defaults.py:33
+#: ../javascript/defaults.py:40
 msgid "separator-between-steps"
 msgstr "sur"
 
