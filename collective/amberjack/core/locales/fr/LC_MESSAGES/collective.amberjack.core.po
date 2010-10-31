@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.amberjack.core\n"
-"POT-Creation-Date: 2010-10-31 12:25+0000\n"
+"POT-Creation-Date: 2010-10-31 16:14+0000\n"
 "PO-Revision-Date: 2009-08-24 23:27+0100\n"
 "Last-Translator: Vincent Fretin <vincent.fretin@gmail.com>\n"
 "Language-Team: French\n"
@@ -20,6 +20,10 @@ msgstr ""
 #: ../controlpanel.py:40
 msgid "Amberjack Setup"
 msgstr "Paramètres d'Amberjack"
+
+#: ../javascript/defaults.py:26
+msgid "Amberjack alert"
+msgstr "Alerte Amberjack"
 
 #: ../interfaces.py:39
 msgid "Choose archive file"
@@ -41,7 +45,7 @@ msgstr "Paramètres qui agissent sur les visites guidées fournies par Amberjack
 msgid "Please remove the [${path}] object to start the tour."
 msgstr "Il vous faut supprimer l'objet [${path}] avant de pouvoir commencer la visite guidée."
 
-#: ../javascript/defaults.py:23
+#: ../javascript/defaults.py:25
 msgid "Please select a file."
 msgstr "Veuillez sélectionner un fichier."
 
@@ -61,6 +65,10 @@ msgstr "Ajout d'une visite guidée"
 msgid "Use Sandbox"
 msgstr "Utiliser le bac à sable"
 
+#: ../javascript/defaults.py:27
+msgid "You cannot click on other links, please use the console's exit button."
+msgstr "Vous ne pouvez pas cliquer sur d'autre liens, merci d'utiliser le bouton de fermeture pour mettre fin à la visite guidée."
+
 #: ../validators.py:31
 msgid "You have to be ${role} to execute this step."
 msgstr "Vous devez avoir le rôle ${role} pour pouvoir exécuter cette étape."
@@ -79,7 +87,7 @@ msgid "next-tour"
 msgstr "Prochaine visite guidée :"
 
 #. Default: "of"
-#: ../javascript/defaults.py:40
+#: ../javascript/defaults.py:44
 msgid "separator-between-steps"
 msgstr "sur"
 

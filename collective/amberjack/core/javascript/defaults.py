@@ -13,14 +13,18 @@ class AmberjackDefaults(BrowserView):
     def __call__(self, context, request):
         constants = """
             if (AmberjackPlone){
-                AmberjackPlone.aj_plone_consts['Error'] = '%s';
-                AmberjackPlone.aj_plone_consts['ErrorValidation'] = '%s';
-                AmberjackPlone.aj_plone_consts['BrowseFile'] = '%s';
+                AmberjackPlone.aj_plone_consts['Error'] = "%s";
+                AmberjackPlone.aj_plone_consts['ErrorValidation'] = "%s";
+                AmberjackPlone.aj_plone_consts['BrowseFile'] = "%s";
+                AmberjackPlone.aj_plone_consts['AlertDefaultTitle'] = "%s";
+                AmberjackPlone.aj_plone_consts['AlertDisableLinksMessage'] = "%s";
                 
             }
-        """ % (PMF(u'Error'),
-               PMF(u'Please correct the indicated errors.'),
-               _(u'Please select a file.'),
+        """ % (translate(PMF(u'Error'), context=self.request),
+               translate(PMF(u'Please correct the indicated errors.'), context=self.request),
+               translate(_(u'Please select a file.'), context=self.request),
+               translate(_(u'Amberjack alert'), context=self.request),
+               translate(_(u"You cannot click on other links, please use the console's exit button."), context=self.request)
                )
         rootTool = getUtility(ITour, 'collective.amberjack.core.toursroot')
         url = rootTool.getToursRoot(getSite(),context)
@@ -37,5 +41,5 @@ class AmberjackDefaults(BrowserView):
         }
         """  % (portal_url,
                 url, 
-                translate(_('separator-between-steps', default=u"of"),context=self.request),
+                translate(_('separator-between-steps', default=u"of"), context=self.request),
                 constants)

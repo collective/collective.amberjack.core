@@ -93,7 +93,7 @@ var AmberjackBase = {
 
   alert: function (str,title) {
   	if (title === undefined)
-		title = 'Amberjack alert';
+		title = AmberjackPlone.aj_plone_consts['AlertDefaultTitle'];
     if (jq.fn.dialog)
 		jq('<div id="ajMessage">'+str+'<div>').dialog({ modal: true, title: title, zIndex: 500000 });
 	else

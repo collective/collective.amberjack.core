@@ -509,7 +509,7 @@ AmberjackPlone = {
 			var notAj = jq("a").not(".ajHighlight,.ajedElement,[id^='aj'],[class^='aj']");
 			//NOTE: we assume that there are no other 'ajXXX' ids
 			notAj.click(function(){
-				AmberjackBase.alert("You cannot click on other links, please use the console's exit button.");
+				AmberjackBase.alert(AmberjackPlone.aj_plone_consts['AlertDisableLinksMessage']);
 				return false;
 			});
 			notAj.addClass("aj_link_inactive");

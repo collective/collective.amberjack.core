@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.amberjack.core\n"
-"POT-Creation-Date: 2010-10-31 12:25+0000\n"
+"POT-Creation-Date: 2010-10-31 16:14+0000\n"
 "PO-Revision-Date: 2009-10-29 21:40-0400\n"
 "Last-Translator: Leonardo Caballero <leonardocaballero@gmail.com>\n"
 "Language-Team: Spanish <plone-conosur@lists.plone.org>\n"
@@ -23,6 +23,10 @@ msgstr ""
 
 #: ../controlpanel.py:40
 msgid "Amberjack Setup"
+msgstr ""
+
+#: ../javascript/defaults.py:26
+msgid "Amberjack alert"
 msgstr ""
 
 #: ../interfaces.py:39
@@ -45,7 +49,7 @@ msgstr ""
 msgid "Please remove the [${path}] object to start the tour."
 msgstr ""
 
-#: ../javascript/defaults.py:23
+#: ../javascript/defaults.py:25
 msgid "Please select a file."
 msgstr "Por favor, seleccione un archivo."
 
@@ -63,6 +67,10 @@ msgstr ""
 
 #: ../interfaces.py:49
 msgid "Use Sandbox"
+msgstr ""
+
+#: ../javascript/defaults.py:27
+msgid "You cannot click on other links, please use the console's exit button."
 msgstr ""
 
 #: ../validators.py:31
@@ -83,7 +91,7 @@ msgid "next-tour"
 msgstr "Próxima visita guiada:"
 
 #. Default: "of"
-#: ../javascript/defaults.py:40
+#: ../javascript/defaults.py:44
 msgid "separator-between-steps"
 msgstr "de"
 

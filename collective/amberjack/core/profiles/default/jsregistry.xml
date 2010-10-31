@@ -9,7 +9,7 @@
 
  <javascript
     id="amberjackDefaults.js"
-    cacheable="True" compression="safe" cookable="True"
+    cacheable="False" compression="safe" cookable="True"
     enabled="True" expression=""  inline="False" />
 
  <javascript
