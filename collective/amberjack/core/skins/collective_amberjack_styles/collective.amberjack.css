@@ -1,4 +1,13 @@
 /* Stylesheet for the 'amberjack' Plone theme */
+p.invalid_tour{
+    font-weight: normal;
+    margin-bottom: 0px !important;
+}
+
+.invalid_tour .discreet{
+    color: #666666;
+    font-size: 85%;
+}
 
 .ajLink {
     font-size: 9px;

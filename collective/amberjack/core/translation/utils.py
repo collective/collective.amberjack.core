@@ -25,7 +25,7 @@ def compile(conf, domain):
     path = os.path.join(os.environ.get('INSTANCE_HOME'), 'var/amberjack_i18n')
     path = os.path.normpath(path)
     if not os.path.isdir(path):
-        os.mkdir(path)
+        os.makedirs(path)
     filename = os.path.basename(conf.name)
 
     po = open(os.path.join(path, filename), 'w')

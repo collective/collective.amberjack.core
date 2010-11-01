@@ -44,8 +44,8 @@ class RegistrationTests(ztc.ZopeTestCase):
         filename = os.path.basename(archive_path)
         registration = reg(source, filename)
         registration.register()
-        tour = getUtility(ITourDefinition, u'basic_tours-zip-add-and-publish-a-folder')
-        self.assertEqual(tour.tourId, 'basic_tours-zip-add-and-publish-a-folder')
+        tour = getUtility(ITourDefinition, u'tour1-add-and-publish-a-folder')
+        self.assertEqual(tour.tourId, 'tour1-add-and-publish-a-folder')
 
 def test_suite():
     return defaultTestLoader.loadTestsFromName(__name__)

@@ -56,7 +56,7 @@ def archive_handler(filename, source):
         #ZIP
         _zip = zipfile.ZipFile(source)
         for f in _zip.namelist():
-            yield f, _zip.open(f,'r')
+            yield _zip.open(f,'r')
         
     elif filename.endswith('.tar'):
         #TAR
@@ -64,7 +64,7 @@ def archive_handler(filename, source):
         for f in _tar.getmembers():
             extract = _tar.extractfile(f)
             if extract:
-                yield extract.name, extract
+                yield extract
 
     elif filename.endswith('.gz'):
         #GZ
@@ -72,7 +72,7 @@ def archive_handler(filename, source):
         for f in _tar.getmembers():
             extract = _tar.extractfile(f)
             if extract:
-                yield extract.name, extract
+                yield extract
 
 class FileArchiveRegistration(TourRegistration):
     """

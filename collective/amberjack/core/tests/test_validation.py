@@ -47,18 +47,11 @@ class ValidationTests(base.AmberjackCoreTestCase):
         <utility component="collective.amberjack.core.registration.FileArchiveRegistration"
                  name="zip_archive" />
         </configure>''')
-        #zcml.load_string(''' 
-        #<configure xmlns="http://namespaces.zope.org/zope">
-        #<utility
-        #      name="collective.amberjack.core.toursroot"
-        #      factory=".utils.ToursRoot"
-        #      />
-        #</configure>''')
 
         reg = queryUtility(ITourRegistration, 'zip_archive')
         registration = reg(source, filename)
         registration.register()
-        self.tour = getUtility(ITourDefinition, u'basic_tours-zip-add-and-publish-a-folder')
+        self.tour = getUtility(ITourDefinition, u'tour1-add-and-publish-a-folder')
 
         step = Mock()
         step.url='/'
@@ -68,7 +61,8 @@ class ValidationTests(base.AmberjackCoreTestCase):
 
 
     def test_validation_sandbox_isCreated(self):
-        '''I have the folder already created
+        '''checks the presence or the absence of a folder: sandbox active
+           sandbox active
         '''
         request = TestRequest()
         self.setRoles('Manager')
@@ -85,7 +79,8 @@ class ValidationTests(base.AmberjackCoreTestCase):
         user_folder.manage_delObjects(['myfolder',])
 
     def test_validation_nosandbox_isCreated(self):
-        '''I have the folder already created
+        '''checks the presence or the absence of a folder
+           sandbox not active
         '''
         request = TestRequest()
         self.setRoles('Manager')
@@ -99,8 +94,28 @@ class ValidationTests(base.AmberjackCoreTestCase):
         self.portal.manage_delObjects(['myfolder',])
 
 
+    def test_validation_sandbox_hasRoles(self):
+        '''checks if the authenticated user has (or not) the given permission 
+           where the tutorial will run
+           sandbox active
+        '''
+        request = TestRequest()
+        user = self.portal.portal_membership.getAuthenticatedMember()
+        user_id = user.getId()
+        request.AUTHENTICATED_USER = user
+        self.context.portal_amberjack.sandbox=True
+        user_folder = getattr(self.portal.Members, user_id)
+        user_folder.manage_setLocalRoles(user_id, ['Reviewer',])
+        self.tour.validators = ["python: hasRole(context, request, 'Editor')", ]
+        self.assertNotEquals(self.tour.validate(self.context, request), [])
+        self.tour.validators = ["python: hasRole(context, request, 'Reviewer')", ]
+        self.assertEquals(self.tour.validate(self.context, request), [])
+
+
     def test_validation_nosandbox_hasRoles(self):
-        '''I have the folder already created
+        '''checks if the authenticated user has (or not) the given permission 
+           where the tutorial will run
+           sandbox not active
         '''
         request = TestRequest()
         user = self.portal.portal_membership.getAuthenticatedMember()
