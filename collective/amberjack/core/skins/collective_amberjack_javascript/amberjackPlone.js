@@ -525,8 +525,8 @@ AmberjackPlone = {
 
 			var ajNext = jq("#ajNext");
 			
-			// BBB
-			ajNext.attr("onClick","AmberjackPlone.doAllSteps(\"" + ajNext.attr('onClick') + "\"); return false");
+			if(AmberjackPlone.checkAllHighlightSteps())
+				ajNext.attr("onClick","AmberjackPlone.doAllSteps(\"" + ajNext.attr('onClick') + "\"); return false");
 		}
 	},
 	

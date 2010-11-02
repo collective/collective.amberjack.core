@@ -11,12 +11,16 @@
 #ajControl {position:absolute;top:-1000px;right:0px;z-index:500000;text-align:left} /* where */
 #ajControl {width:40%; font-size:80%;}
 
+#ajControl .pb-ajax {
+	background-color: #FFF;
+	padding: 4px;
+}
+
 #ajControlNavi {
 	font-size:1.1em;
     font-weight:bold;
 	color:#205C90;
 	background-color: #DDD;
-	margin:4px;
 	padding:0.3em;
 	text-align:right;
 	line-height: 1em;
@@ -29,7 +33,6 @@
 	color: #FFF;
 	padding: 0.2em 1em;
 	font-size: 0.9em;
-	margin: 4px;
 }
 #ajControlInfo .aj_link_inactive {
     color:#DDD !important;
