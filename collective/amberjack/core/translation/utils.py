@@ -6,7 +6,7 @@ from zope.i18n.testmessagecatalog import TestMessageCatalog
 from zope.i18n.gettextmessagecatalog import GettextMessageCatalog
 
 from pythongettext.msgfmt import Msgfmt
-import re, os
+import os
 
 def handler(catalogs, name):
     """ special handler handling the merging of two message catalogs """
@@ -21,12 +21,13 @@ def handler(catalogs, name):
     # make sure we have a TEST catalog for each domain:
     domain.addCatalog(TestMessageCatalog(name))
 
-def compile(conf, domain):
+def compile(conf, domain, lang):
     path = os.path.join(os.environ.get('INSTANCE_HOME'), 'var/amberjack_i18n')
     path = os.path.normpath(path)
     if not os.path.isdir(path):
         os.makedirs(path)
-    filename = os.path.basename(conf.name)
+
+    filename = '%s-%s' % (lang, os.path.basename(conf.name))
 
     po = open(os.path.join(path, filename), 'w')
     po.write(conf.read())
@@ -40,8 +41,9 @@ def compile(conf, domain):
     return str(mo.name)
 
 def registerTranslations(conf):
-    filename = os.path.basename(conf.name)
-    domain, lang = re.compile('^(.*)-(\w\w)\..*').match(filename).groups()
+    path, filename = os.path.split(conf.name)
+    path, lang = os.path.split(os.path.dirname(conf.name))
+    domain, ext = filename.split('.po')
     domain = str(domain)
-    catalogs = [GettextMessageCatalog(lang, domain, compile(conf,domain))]
+    catalogs = [GettextMessageCatalog(lang, domain, compile(conf,domain, lang))]
     handler(catalogs, domain)
