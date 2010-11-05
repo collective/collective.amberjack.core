@@ -7,6 +7,15 @@ p.invalid_tour{
 .invalid_tour .discreet{
     color: #666666;
     font-size: 85%;
+    line-height: 1em;
+}
+
+.invalid_tour span {
+	display: block;
+}
+
+dl.portlet li {
+	margin-bottom: 0.4em !important;
 }
 
 .ajLink {
