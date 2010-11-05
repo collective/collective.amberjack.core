@@ -28,5 +28,13 @@
     id="windmillUtils.js"
     cacheable="True" compression="safe" cookable="True"
     enabled="True" expression=""  inline="False" />
+    
+ <javascript
+    id="js-xpath.js"
+    cacheable="True" compression="safe" cookable="True"
+    enabled="True" expression=""  inline="False" />
+    
+ <javascript cacheable="True" compression="safe" cookable="True"
+    enabled="True" expression="" id="manage_aj_cookie.js" inline="False"/>
    	
 </object>

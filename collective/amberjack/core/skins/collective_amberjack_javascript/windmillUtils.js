@@ -17,7 +17,7 @@ var windmillMethods ={ 'click': {'locator': true, 'option': false},
                   };
                   
 
-var helpers= new function(){
+var helpers = new function(){
                       
                   this.normalizeNewlines = function(text){
                           return text.replace(/\r\n|\r/g, "\n");
@@ -69,7 +69,7 @@ var helpers= new function(){
                         else {
                           win = ownerDoc.parentWindow;
                         }
-                        if (win == null){
+                        if (win === null){
                           win = window;
                         }
                         
@@ -89,7 +89,7 @@ var windEvents = new function() {
                    
                         text = helpers.normalizeNewlines(text);
                         text = helpers.normalizeSpaces(text);
-                        return text.trim();
+                        return jQuery.trim(text);
                       };
 
                       this.getTextContent = function(element, preformatted) {
@@ -149,14 +149,14 @@ var windEvents = new function() {
                       /* Fire an event in a browser-compatible manner */
                       this.triggerEvent = function(element, eventType, canBubble, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown) {
                           
+						  var evt = null;
                           canBubble = (typeof(canBubble) === undefined) ? true: canBubble;
                           if (element.fireEvent && navigator.userAgent.indexOf('MSIE') != -1) {
-                              var evt = windEvents.createEventObject(element, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown);
+                              evt = windEvents.createEventObject(element, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown);
                               element.fireEvent('on' + eventType, evt);
                           }
                           else {
-                              var evt = document.createEvent('HTMLEvents');
-
+                              evt = document.createEvent('HTMLEvents');
                               evt.shiftKey = shiftKeyDown;
                               evt.metaKey = metaKeyDown;
                               evt.altKey = altKeyDown;
@@ -171,28 +171,28 @@ var windEvents = new function() {
 
                       this.getKeyCodeFromKeySequence = function(keySequence) {
                           var match = /^\\(\d{1,3})$/.exec(keySequence);
-                          if (match != null) {
+                          if (match !== null) {
                               return match[1];
 
                           }
                           match = /^.$/.exec(keySequence);
-                          if (match != null) {
+                          if (match !== null) {
                               return match[0].charCodeAt(0);
 
                           }
                           // this is for backward compatibility with existing tests
                           // 1 digit ascii codes will break however because they are used for the digit chars
                           match = /^\d{2,3}$/.exec(keySequence);
-                          if (match != null) {
+                          if (match !== null) {
                               return match[0];
 
                           }
 
-                      }
+                      };
 
                       this.triggerKeyEvent = function(element, eventType, keySequence, canBubble, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown) {
                           var keycode = windEvents.getKeyCodeFromKeySequence(keySequence);
-                          canBubble = (typeof(canBubble) == undefined) ? true: canBubble;
+                          canBubble = (typeof(canBubble) === undefined) ? true: canBubble;
                           //Make sure we don't call fireEvent otuside of IE, mootools adds this to the prototype
                           if (element.fireEvent && navigator.userAgent.indexOf('MSIE') != -1) {
                               var keyEvent = windEvents.createEventObject(element, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown);
@@ -230,12 +230,13 @@ var windEvents = new function() {
                           //LOG.warn("windEvents.triggerMouseEvent assumes setting screenX and screenY to 0 is ok");
                           var screenX = 0;
                           var screenY = 0;
-
-                          canBubble = (typeof(canBubble) == undefined) ? true: canBubble;
+						  var evt = null;
+						  
+                          canBubble = (typeof(canBubble) === undefined) ? true: canBubble;
 
                           if (element.fireEvent && navigator.userAgent.indexOf('MSIE') != -1) {
                               //LOG.info("element has fireEvent");
-                              var evt = windEvents.createEventObject(element, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown);
+                              evt = windEvents.createEventObject(element, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown);
                               evt.detail = 0;
                               evt.button = 1;
                               evt.relatedTarget = null;
@@ -270,7 +271,7 @@ var windEvents = new function() {
                           else {
          
                               //LOG.info("element doesn't have fireEvent");
-                              var evt = document.createEvent('MouseEvents');
+                              evt = document.createEvent('MouseEvents');
                               if (evt.initMouseEvent) {
                                   //LOG.info("element has initMouseEvent");
                                   //Safari
@@ -310,10 +311,18 @@ var controller = new function() {
                       // because we need to let the entire event bubbling and capturing to go through
                       // before making a decision on whether we should force the href
                       var savedEvent = null;
-
-                      element.addEventListener('click', function(evt) {
-                          savedEvent = evt;
-                      }, false);
+						
+					  if (element.addEventListener) { // Mozilla, Netscape, Firefox
+							element.addEventListener('click', function(evt){
+								savedEvent = evt;
+							}, false);
+					  }
+					  else { //IE
+						  	element.attachEvent('onclick', function(evt) {
+	                          	savedEvent = evt;
+	                      	});
+					  }
+                     
                       
                       // Trigger the event.
                       windEvents.triggerMouseEvent(element, 'mousedown', true);
@@ -330,7 +339,7 @@ var controller = new function() {
                       try {
                           
                         // Perform the link action if preventDefault was set.
-                        if (savedEvent != null && !savedEvent.getPreventDefault()) {
+                        if (savedEvent !== null && !savedEvent.getPreventDefault()) {
                             if ((element.href) && (element.href != "#")) {
                                 //windmill.controller.open({"url": element.href, 'reset':false});
                                 if (element.target.length > 0) {
@@ -344,7 +353,7 @@ var controller = new function() {
                             else {
                                 
                                 var itrElement = element;
-                                while (itrElement != null) {
+                                while (itrElement !== null) {
                                   if ((itrElement.href) && (itrElement.href != "#")) {
                                     helpers.getParentWindow(itrElement).location = itrElement.href;
                                     //windmill.controller.open({"url": itrElement.href, 'reset':false});
@@ -364,10 +373,11 @@ var controller = new function() {
                   };
 
                   
-                  this.radio = function(element){
-                      if(element)
-                              return jq(element).click();
-                  };
+				  this.radio = function(element){
+				      if(element) {
+				          return jq(element).click();
+				      } 
+				  };
 
 
                   this.doubleClick = function(element) {
@@ -390,7 +400,7 @@ var controller = new function() {
                      var actualValue = text;
                      var stringValue = text;
                       
-                     if (maxLengthAttr != null) {
+                     if (maxLengthAttr !== null) {
                        var maxLength = parseInt(maxLengthAttr, 10);
                        if (stringValue.length > maxLength) {
                          //truncate it to fit
@@ -472,7 +482,7 @@ var controller = new function() {
                             }
                             catch(err){}
                           }
-                          if (optionToSelect == null){
+                          if (optionToSelect === null){
                             throw "Unable to select the specified option.";
                           }
                         };
@@ -490,7 +500,7 @@ var controller = new function() {
                    
 
                    
-var elementslib =new function(){
+var elementslib = new function(){
                    
                     var domNode = null;
                     //keep track of the locators we cant get via the domNode
@@ -566,7 +576,7 @@ var elementslib =new function(){
                       else{
                         return domNode;
                       }
-                    }
+                    };
                     
                     //do the recursive search
                     //takes the function for resolving nodes and the string
@@ -602,18 +612,18 @@ var elementslib =new function(){
                       recurse(window, func, s, doc);
                       
                       return e;
-                    }
+                    };
                     
                     //Lookup by ID
                     var nodeById = function (s){
                       return this.document.getElementById(s);
-                    }
+                    };
                     
                     //DOM element lookup functions, private to elementslib
                     var nodeByName = function (s) { //search nodes by name
                       var getElementsByAttribute = function(oElm, strTagName, strAttributeName, strAttributeValue){
                           var arrElements = (strTagName == "*" && oElm.all)? oElm.all : oElm.getElementsByTagName(strTagName);
-                          var arrReturnElements = new Array();
+                          var arrReturnElements = [];
                           var oAttributeValue = (typeof strAttributeValue != "undefined")? new RegExp("(^|\\s)" + strAttributeValue + "(\\s|$)", "i") : null;
                           var oCurrent;
                           var oAttribute;
@@ -627,11 +637,11 @@ var elementslib =new function(){
                               }
                           }
                           return arrReturnElements;
-                      }
+                      };
                         
                       if (navigator.userAgent.indexOf('MSIE') != -1){
                         var node = getElementsByAttribute(this.document, "*", "name", s);
-                        if (node.length == 0){
+                        if (node.length === 0){
                           return null;
                         }
                         return node[0];
@@ -643,7 +653,7 @@ var elementslib =new function(){
                             return els[0];
                           }
                         }
-                        catch(err){};
+                        catch(err){}
                       }
                       return null;
                     };
@@ -653,7 +663,7 @@ var elementslib =new function(){
                       var getText = function(el){
                         var text = "";
                         if (el.nodeType == 3){ //textNode
-                          if (el.data != undefined){
+                          if (el.data !== undefined){
                             text = el.data;
                           }
                           else{ text = el.innerHTML; }
@@ -670,16 +680,17 @@ var elementslib =new function(){
                             }
                         }
                         return text;
-                      }
+                      };
                       //sometimes the windows won't have this function
+					  var links = [];
                       try {
-                        var links = this.document.getElementsByTagName('a');
+                        links = this.document.getElementsByTagName('a');
                       }
                       catch(err){}
                       for (var i = 0; i < links.length; i++) {
                         var el = links[i];
                         var linkText = getText(el);
-                        if (linkText.trim() == s.trim()) {
+                        if (jQuery.trim(linkText) == jQuery.trim(s)) {
                           return el;
                         }
                       }
@@ -689,14 +700,15 @@ var elementslib =new function(){
                     //DOM element lookup functions, private to elementslib
                     var nodeByTagname = function (s) { //search nodes by name
                       //sometimes the win object won't have this object
+					  var cn, idx = null;
                       if (s.indexOf(',') != -1){
-                        var cn = s.split(',');
-                        var idx = cn[1];
-                        var cn = cn[0];
+                        cn = s.split(',');
+                        idx = cn[1];
+                        cn = cn[0];
                       }
                       else{
-                        var cn = s;
-                        var idx = 0;
+                        cn = s;
+                        idx = 0;
                       }
                       return this.document.getElementsByTagName(cn)[idx];
                     };
@@ -704,24 +716,27 @@ var elementslib =new function(){
                     //DOM element lookup functions, private to elementslib
                     var nodeByClassname = function (s) { //search nodes by name
                       //sometimes the win object won't have this object
+					  var cn, idx = null;
                       if (s.indexOf(',') != -1){
-                        var cn = s.split(',');
-                        var idx = cn[1];
-                        var cn = cn[0];
+                        cn = s.split(',');
+                        idx = cn[1];
+                        cn = cn[0];
                       }
                       else{
-                        var cn = s;
-                        var idx = 0;
+                        cn = s;
+                        idx = 0;
                       }
                       if (!this.document.getElementsByClassName){
                         this.document.getElementsByClassName = function(cl) {
                           var retnode = [];
                           var myclass = new RegExp('\\b'+cl+'\\b');
                           var elem = this.getElementsByTagName('*');
-                          for (var i = 0; i < elem.length; i++) {
-                          var classes = elem[i].className;
-                          if (myclass.test(classes)) retnode.push(elem[i]);
-                          }
+						  for (var i = 0; i < elem.length; i++) {
+							var classes = elem[i].className;
+							if (myclass.test(classes)) {
+								retnode.push(elem[i]);
+							}
+						  }
                           return retnode;
                         };
                       }
@@ -732,7 +747,7 @@ var elementslib =new function(){
                     var nodeByValue = function (s) {
                       var getElementsByAttribute = function(oElm, strTagName, strAttributeName, strAttributeValue){
                           var arrElements = (strTagName == "*" && oElm.all)? oElm.all : oElm.getElementsByTagName(strTagName);
-                          var arrReturnElements = new Array();
+                          var arrReturnElements = [];
                           var oAttributeValue = (typeof strAttributeValue != "undefined")? new RegExp("(^|\\s)" + strAttributeValue + "(\\s|$)", "i") : null;
                           var oCurrent;
                           var oAttribute;
@@ -746,9 +761,9 @@ var elementslib =new function(){
                               }
                           }
                           return arrReturnElements;
-                      }
+                      };
                       var node = getElementsByAttribute(this.document, "*", "value", s);
-                      if (node.length == 0){
+                      if (node.length === 0){
                         return null;
                       }
                       return node[0];
@@ -762,18 +777,19 @@ var elementslib =new function(){
 
                       //Find the label from all labels on the page
                       for (i = 0;i < labels.length; i++){
-                        if (labels[i].innerHTML.trim() == s.trim()){
+                        if (jQuery.trim(labels[i].innerHTML) == jQuery.trim(s)){
                           label = labels[i];
                         }
                       }
                       
                       //If we have a label, use its for attrib to get the id of the input
-                      if (label != null){
-                        if (navigator.userAgent.indexOf('MSIE') != -1){
-                          var iid = label.getAttribute('htmlFor');
+                      if (label !== null){
+                        var iid = null;
+						if (navigator.userAgent.indexOf('MSIE') != -1){
+                          iid = label.getAttribute('htmlFor');
                         }
                         else {
-                          var iid = label.getAttribute('for');
+                          iid = label.getAttribute('for');
                         }
                         node = this.document.getElementById(iid);
                       }

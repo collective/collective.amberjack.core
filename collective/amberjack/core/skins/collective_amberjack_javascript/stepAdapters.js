@@ -4,8 +4,8 @@
  * the idea:
  * 
  * type_obj: {
- * 		highlight: function() {...},
- * 		step: function() {...}
+ *		highlight: function() {...},
+ *		step: function() {...}
  * },
  * ...
  * 
@@ -56,13 +56,17 @@ AmberjackPlone.stepAdapters = {
 		w_type: {
 			highlight: null,
 			step: function(obj,locator,options,locatorValue) {
-				var testo=options['text'];
+				var testo=options.text;
 				controller.type(obj,testo);
 				},
 			checkStep: function (obj, options,locatorValue) {
-				var testo=options['text'];
-	            if(testo!="") return jq(obj).val()==testo;
-	            else return true;
+				var testo=options.text;
+	            if (testo !== "") {
+					return jq(obj).val() == testo;
+				}
+				else {
+					return true;
+				}
 	        }
 		},
 		
@@ -71,7 +75,7 @@ AmberjackPlone.stepAdapters = {
 			checkStep: null,
 			step: function(obj,locator,options,locatorValue) {
 				AmberjackPlone.setAmberjackCookies();
-				for(var i in options){
+				for(var i; i<options.length; i++){
 					var opt=i;
 					var value=options[i];
 					controller.select(obj,opt, value);
@@ -104,7 +108,7 @@ AmberjackPlone.stepAdapters = {
 				jq('#'+obj.id+'_ifr').addClass(AmberjackPlone.theAJClass);
 				},
 			  step:function(obj,locator,options,locatorValue) {
-				  var tx=options['editor'];
+				  var tx=options.editor;
 				  tx=tx.replace(/&lt\;/g,'<');
 				  tx=tx.replace(/&gt\;/g,'>');
 				  controller.editor(tx,locatorValue);
@@ -119,7 +123,7 @@ AmberjackPlone.stepAdapters = {
 		w_editorSelect:{
 			highlight:null,
 			step:function(obj,locator,options,locatorValue) {
-				var bookmark=options['bookmark'];
+				var bookmark=options.bookmark;
 				controller.editorSelect(locatorValue, bookmark);
 				},
 			checkStep:null
@@ -128,6 +132,6 @@ AmberjackPlone.stepAdapters = {
 				 return tinyMCE.get(locatorValue).selection.getContent({format : 'text'})==selected
 	        }*/
 			
-		},
+		}
 	
 };

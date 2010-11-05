@@ -33,6 +33,10 @@ Changelog
   [sylvainb]
 - Allow translations for the alert message when the user clics on other links.
   [sylvainb]
+- added a js to manage the "next tours" cookie when it's used the "next tour" link of the aj popup.
+  [mirco]
+- IE bugfix into javascripts file.
+  [mirco]
 - translation can be now in language folders
   [amleczko]
 

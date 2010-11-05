@@ -288,7 +288,7 @@ AmberjackControl = {
       tplHtml = tplHtml.replace(/{prevClass}/,   'disabled');
     }
 
-    if (Amberjack.pages[Amberjack.pageId].nextUrl && AmberjackPlone.checkAllHighlightSteps()) {
+    if (Amberjack.pages[Amberjack.pageId].nextUrl && AmberjackPlone.checkAllDoitmanually()) {
       var nextUrl = Amberjack.pages[Amberjack.pageId].nextUrl;
       urlSplit = nextUrl.split('?');
       urlQuery = urlSplit[1] ? urlSplit[1] : false;
@@ -800,6 +800,7 @@ Amberjack = {
       //delete cookies
       Amberjack.eraseCookie('ajcookie_tourId');
       Amberjack.eraseCookie('ajcookie_pageCurrent');
+	  Amberjack.eraseCookie('next_tours_id');
       return null;
     }
 
@@ -809,6 +810,7 @@ Amberjack = {
     //delete cookies
     Amberjack.eraseCookie('ajcookie_tourId');
 	Amberjack.eraseCookie('ajcookie_pageCurrent');
+	Amberjack.eraseCookie('next_tours_id');
 	
     return null;
   }
