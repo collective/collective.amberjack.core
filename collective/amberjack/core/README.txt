@@ -35,6 +35,7 @@ there are also available two blueprints:
 1. Step
 a ``step`` section is defined by ``collective.amberjack.blueprints.step`` and
 has several options: 
+
   * ``title``
   * ``text``
   * ``url`` - step url definition
