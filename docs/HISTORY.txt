@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1 (2010-??-??)
+1.1 (2010-11-05)
 -----------------
 
 - moved the check procedure to identify the next tour from the portlet into viewlet
