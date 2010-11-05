@@ -2,7 +2,6 @@ from unittest import defaultTestLoader, main
 from zope.component import queryUtility, getUtility
 from collective.amberjack.core.interfaces import ITourRegistration
 from collective.amberjack.core.interfaces import ITourDefinition
-from Testing import ZopeTestCase as ztc
 from zope.publisher.browser import TestRequest
 from Products.Five import zcml
 import os
@@ -11,8 +10,10 @@ import zope.component
 import plone.i18n.normalizer
 import collective.amberjack.core.tests
 from collective.amberjack.core.tests import base
-from collective.amberjack.core.tour import Tour
-from mock import Mock
+
+class DummyStep(object):
+    def __init__(self, url):
+        self.url = url
 
 class ValidationTests(base.AmberjackCoreTestCase):
 
@@ -53,8 +54,7 @@ class ValidationTests(base.AmberjackCoreTestCase):
         registration.register()
         self.tour = getUtility(ITourDefinition, u'tour1-add-and-publish-a-folder')
 
-        step = Mock()
-        step.url='/'
+        step = DummyStep('/')
         self.tour.steps = [step,]
 
         self.context = self.portal
