@@ -10,6 +10,7 @@
 
   <i18n:registerTranslations directory="locales" />
 
+  <include package="Products.CMFCore" />
   <include package="plone.registry" />
   <include package="collective.js.jqueryui" />
   <include package="plone.i18n" />
