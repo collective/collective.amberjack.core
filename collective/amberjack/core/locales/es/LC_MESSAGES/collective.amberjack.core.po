@@ -1,12 +1,12 @@
 # Spanish translations for collective.amberjack.core package
 # Traducciones al Español del producto collective.amberjack.core.
-# Leonardo caballero <leonardocaballero@gmail.com>, 2009.
+# Leonardo caballero <leonardocaballero@gmail.com>, 2009, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.amberjack.core\n"
 "POT-Creation-Date: 2010-10-31 16:54+0000\n"
-"PO-Revision-Date: 2009-10-29 21:40-0400\n"
-"Last-Translator: Leonardo Caballero <leonardocaballero@gmail.com>\n"
+"PO-Revision-Date: 2010-12-01 11:10-0400\n"
+"Last-Translator: Leonardo J. Caballero G. <leonardocaballero@gmail.com>\n"
 "Language-Team: Spanish <plone-conosur@lists.plone.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
@@ -23,39 +23,39 @@ msgstr ""
 
 #: ../controlpanel.py:40
 msgid "Amberjack Setup"
-msgstr ""
+msgstr "Instalación de Amberjack"
 
 #: ../javascript/defaults.py:28
 msgid "Amberjack alert"
-msgstr ""
+msgstr "Alerta de Amberjack"
 
 #: ../javascript/defaults.py:31
 msgid "Can't go to next step automatically. Do it manually."
-msgstr ""
+msgstr "No puede ir al próximo paso automáticamente. Debe hacerlo manualmente."
 
 #: ../interfaces.py:39
 msgid "Choose archive file"
-msgstr ""
+msgstr "Seleccionar un archivo "
 
 #: ../interfaces.py:43
 msgid "Choose url"
-msgstr ""
+msgstr "Elegir dirección URL"
 
 #: ../controlpanel.py:35
 msgid "Configuration"
-msgstr ""
+msgstr "Configuración"
 
 #: ../controlpanel.py:41
 msgid "Configuration for Amberjack."
-msgstr ""
+msgstr "Configuración para Amberjack."
 
 #: ../javascript/defaults.py:30
 msgid "Go to next step automatically."
-msgstr ""
+msgstr "Ir al próximo paso automaticamete"
 
 #: ../validators.py:58
 msgid "Please remove the [${path}] object to start the tour."
-msgstr ""
+msgstr "Por favor remueva el objeto [${path}] para iniciar la visita guiada."
 
 #: ../javascript/defaults.py:27
 msgid "Please select a file."
@@ -63,31 +63,31 @@ msgstr "Por favor, seleccione un archivo."
 
 #: ../validators.py:50
 msgid "The object [${path}] doesn't exist yet."
-msgstr ""
+msgstr "El objeto [${path}] no existe."
 
 #: ../interfaces.py:65
 msgid "The title of the skin shown in the select menu"
-msgstr ""
+msgstr "El título del skin se muestra en el menú de selección"
 
 #: ../javascript/defaults.py:32
 msgid "This field is required, please correct."
-msgstr ""
+msgstr "Este campo es requerido, por favor, corrija."
 
 #: ../controlpanel.py:31
 msgid "Tour registration"
-msgstr ""
+msgstr "Registro de la visita guiada"
 
 #: ../interfaces.py:49
 msgid "Use Sandbox"
-msgstr ""
+msgstr "Utilice el entorno de prueba"
 
 #: ../javascript/defaults.py:29
 msgid "You cannot click on other links, please use the console's exit button."
-msgstr ""
+msgstr "Usted no puede hacer clic en otros enlaces, por favor use el botón de salida de la consola."
 
 #: ../validators.py:31
 msgid "You have to be ${role} to execute this step."
-msgstr ""
+msgstr "Usted tiene que se ${role} para ejecutar este paso."
 
 #: ../validators.py:18
 msgid "You have to be anonymous to execute this step."
