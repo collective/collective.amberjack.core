@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<object name="portal_javascripts" meta_type="JavaScripts Registry">
+ <javascript 
+             id="amberjack.js"
+             remove="True"/>
+
+ <javascript 
+             id="amberjackDefaults.js"
+             remove="True"/>
+             
+ <javascript 
+             id="amberjackPlone.js"
+             remove="True"/>
+
+ <javascript 
+             id="stepAdapters.js"
+             remove="True"/>
+             
+ <javascript 
+             id="windmillUtils.js"
+             remove="True"/>
+
+ <javascript 
+             id="js-xpath.js"
+             remove="True"/>
+             
+ <javascript 
+             id="manage_aj_cookie.js"
+             remove="True"/>
+</object>

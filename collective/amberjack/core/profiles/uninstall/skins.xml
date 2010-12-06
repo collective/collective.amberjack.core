@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<object name="portal_skins" allow_any="False" cookie_persistence="False">
+
+ <object name="collective_amberjack_images"
+    meta_type="Filesystem Directory View"
+    directory="collective.amberjack.core:skins/collective_amberjack_images"
+    remove="True"/>
+ <object name="collective_amberjack_javascript"
+    meta_type="Filesystem Directory View"
+    directory="collective.amberjack.core:skins/collective_amberjack_javascript"
+    remove="True"/>
+ <object name="collective_amberjack_styles"
+    meta_type="Filesystem Directory View"
+    directory="collective.amberjack.core:skins/collective_amberjack_styles"
+    remove="True"/>
+ <object name="collective_amberjack_skins"
+    meta_type="Filesystem Directory View"
+    directory="collective.amberjack.core:skins/collective_amberjack_skins"
+    remove="True"/>
+
+ <skin-path name="*">
+  <layer name="collective_amberjack_images"
+     insert-after="custom"
+     remove="True"/>
+  <layer name="collective_amberjack_javascript"
+     insert-after="custom"
+     remove="True"/>
+  <layer name="collective_amberjack_styles"
+     insert-after="custom"
+     remove="True"/>
+  <layer name="collective_amberjack_skins"
+     insert-after="custom"
+     remove="True"/>
+ </skin-path>
+</object>
