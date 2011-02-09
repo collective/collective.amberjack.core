@@ -19,39 +19,39 @@ msgstr ""
 
 #: ../controlpanel.py:40
 msgid "Amberjack Setup"
-msgstr ""
+msgstr "Configuração do Amberjack"
 
 #: ../javascript/defaults.py:28
 msgid "Amberjack alert"
-msgstr ""
+msgstr "Alerta do Amberjack"
 
 #: ../javascript/defaults.py:31
 msgid "Can't go to next step automatically. Do it manually."
-msgstr ""
+msgstr "Não é possível avançar para o próximo passo automaticamente. Faça-o manualmente."
 
 #: ../interfaces.py:39
 msgid "Choose archive file"
-msgstr ""
+msgstr "Escolha o arquivo compactado"
 
 #: ../interfaces.py:43
 msgid "Choose url"
-msgstr ""
+msgstr "Escolha a url"
 
 #: ../controlpanel.py:35
 msgid "Configuration"
-msgstr ""
+msgstr "Configuração"
 
 #: ../controlpanel.py:41
 msgid "Configuration for Amberjack."
-msgstr ""
+msgstr "Configuração para o Amberjack."
 
 #: ../javascript/defaults.py:30
 msgid "Go to next step automatically."
-msgstr ""
+msgstr "Vá para o próximo passo automaticamente."
 
 #: ../validators.py:58
 msgid "Please remove the [${path}] object to start the tour."
-msgstr ""
+msgstr "Por favor remova o objeto [${path}] para iniciar o tour."
 
 #: ../javascript/defaults.py:27
 msgid "Please select a file."
@@ -59,39 +59,39 @@ msgstr "Por favor selecione um arquivo."
 
 #: ../validators.py:50
 msgid "The object [${path}] doesn't exist yet."
-msgstr ""
+msgstr "O objeto [${path}] não existe ainda."
 
 #: ../interfaces.py:65
 msgid "The title of the skin shown in the select menu"
-msgstr ""
+msgstr "O título do skin exibido no menu de seleção"
 
 #: ../javascript/defaults.py:32
 msgid "This field is required, please correct."
-msgstr ""
+msgstr "Este campo é obrigatório, por favor corrija."
 
 #: ../controlpanel.py:31
 msgid "Tour registration"
-msgstr ""
+msgstr "Registro do tour"
 
 #: ../interfaces.py:49
 msgid "Use Sandbox"
-msgstr ""
+msgstr "Use a <em>sandbox</em>"
 
 #: ../javascript/defaults.py:29
 msgid "You cannot click on other links, please use the console's exit button."
-msgstr ""
+msgstr "Você não pode clicar em outros links, por favor use o botão de saída do console."
 
 #: ../validators.py:31
 msgid "You have to be ${role} to execute this step."
-msgstr ""
+msgstr "Você precisa ser ${role} para executar este passo."
 
 #: ../validators.py:18
 msgid "You have to be anonymous to execute this step."
-msgstr "Você deve ser um usuário anônimo para executar este passo."
+msgstr "Você precisa ser um usuário anônimo para executar este passo."
 
 #: ../validators.py:24
 msgid "You have to be logged in to execute this step."
-msgstr "Você deve ser um usuário autenticado para executar este passo."
+msgstr "Você precisa ser um usuário autenticado para executar este passo."
 
 #. Default: "Next tour:"
 #: ../viewlets/tour.pt:42
