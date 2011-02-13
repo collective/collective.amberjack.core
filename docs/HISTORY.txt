@@ -4,6 +4,9 @@ Changelog
 1.1.1 (2010-??-??)
 -----------------
 
+- Fixed i18n of exception messages.
+  [vincentfretin]
+
 - added uninstall profile
   [mirco]
 

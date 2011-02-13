@@ -44,7 +44,7 @@ class Tour(UserDict.DictMixin):
                 message = condition()
                 message #pyflakes
             except AmberjackException, e:
-                errors.append(str(e))
+                errors.append(e.message)
         return errors
 
     def __getitem__(self, step):
