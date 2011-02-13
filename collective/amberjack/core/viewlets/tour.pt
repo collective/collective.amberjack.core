@@ -18,9 +18,9 @@
       <ul class="ajSteps">
         <tal:ajsteps repeat="step macrostep/microsteps">
           <tal:ajstep define="step_nr python:view.getStepNumber(step);
-                               first_step repeat/step/start;">
+                              first_step repeat/step/start;">
             <li tal:define="evenStep repeat/step/odd;
-			                evenClass python: evenStep and 'evenStep' or '';" 
+                            evenClass python: evenStep and 'evenStep' or '';" 
                 tal:attributes="class python: (first_step and 'ajFirstStep' or '')+' '+evenClass">
               <div class="ajDescr">
                 <span tal:replace="structure python: view.translate(step.description)">every step has a brief explanation of what to do</span>
@@ -42,7 +42,7 @@
           <span i18n:translate="next-tour">Next tour:</span>
           <a class="ajNextUrl" i18n:translate=""
              tal:attributes="href next_tour/url;
-             				 onclick string:manage_cookie()"
+                             onclick string:manage_cookie()"
              tal:content="next_tour/title">next tour title</a>
         </span>
       </div>

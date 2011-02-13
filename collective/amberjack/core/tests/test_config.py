@@ -1,4 +1,4 @@
-from unittest import TestCase, defaultTestLoader, main
+from unittest import defaultTestLoader, main
 from Testing import ZopeTestCase as ztc
 import zope.component
 from StringIO import StringIO
@@ -51,10 +51,6 @@ microsteps =
         tour1 = Tour(conf, 'collective.amberjack.tests')
         self.assertEqual(len(tour1.steps), 1)
 
-class UnitTests(TestCase):
-
-    def testSimple(self):
-        print 1
 
 def test_suite():
     return defaultTestLoader.loadTestsFromName(__name__)

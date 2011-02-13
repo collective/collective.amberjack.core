@@ -1,14 +1,17 @@
+import os
 from unittest import defaultTestLoader, main
+
 from zope.component import queryUtility, getUtility
-from collective.amberjack.core.interfaces import ITourRegistration
-from collective.amberjack.core.interfaces import ITourDefinition
+import zope.component
+
+import plone.i18n.normalizer
 from Testing import ZopeTestCase as ztc
 from Products.Five import zcml
-import os
 
-import zope.component
-import plone.i18n.normalizer
+from collective.amberjack.core.interfaces import ITourRegistration
+from collective.amberjack.core.interfaces import ITourDefinition
 import collective.amberjack.core.tests
+
 
 class RegistrationTests(ztc.ZopeTestCase):
 
@@ -37,7 +40,7 @@ class RegistrationTests(ztc.ZopeTestCase):
     def test_register_zip(self):
         reg = queryUtility(ITourRegistration, 'zip_archive')
         archive_path = os.path.join(self.test_folder, 'basic_tours.zip')
-        archive = open(archive_path,'r')
+        archive = open(archive_path, 'r')
         archive.seek(0)
         source = archive.read()
         archive.close()
@@ -47,8 +50,10 @@ class RegistrationTests(ztc.ZopeTestCase):
         tour = getUtility(ITourDefinition, u'tour1-add-and-publish-a-folder')
         self.assertEqual(tour.tourId, 'tour1-add-and-publish-a-folder')
 
+
 def test_suite():
     return defaultTestLoader.loadTestsFromName(__name__)
+
 
 if __name__ == '__main__':
     main(defaultTest='test_suite')

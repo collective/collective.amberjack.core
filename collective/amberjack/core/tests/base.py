@@ -13,7 +13,7 @@ def setup_product():
     zcml.load_config('configure.zcml', collective.amberjack.core)
     fiveconfigure.debug_mode = False
     ztc.installPackage('collective.amberjack.core')
-    
+
 setup_product()
 ptc.setupPloneSite(products=['collective.amberjack.core'])
 

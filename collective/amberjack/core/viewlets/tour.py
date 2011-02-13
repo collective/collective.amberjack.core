@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
+import re
+import urllib
+
+from zope.component import getUtility
+from zope.i18n import translate
+from zope.schema.vocabulary import getVocabularyRegistry
+
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.layout.viewlets import common
 
-from zope.component import getUtility
-from zope.schema.vocabulary import getVocabularyRegistry
-
+from collective.amberjack.core.blueprints import normalizeHTML
 from collective.amberjack.core.interfaces import ITour
 from collective.amberjack.core.tour_manager import ITourManager
-import urllib
-import re
-from zope.i18n import translate
-from collective.amberjack.core.blueprints import normalizeHTML
+
 
 class TourViewlet(common.ViewletBase):
     index = ViewPageTemplateFile('tour.pt')
@@ -58,11 +60,11 @@ class TourViewlet(common.ViewletBase):
 
         if url.startswith('aj_'):
             return url
-        if(url.startswith(navigation_root_url)):
+        if url.startswith(navigation_root_url):
             if(re.search(r'(\d{4})-(\d{2})-(\d{2})',url)!=None): #Use regular expression for check if the url contains a temporary date
                 return 'aj_any_url'
             else:
-                url=url[url.find(navigation_root_url)+len(navigation_root_url):]
+                url = url[url.find(navigation_root_url)+len(navigation_root_url):]
         if url.startswith('ABS'):
             url=url[3:]
 
@@ -87,7 +89,7 @@ class TourViewlet(common.ViewletBase):
         return self.ajsteps.index(step) + 1
 
     def manageDescription(self, descr):
-        """Remove html tag from description """
+        """Remove html tag from description"""
         return descr.replace('<span class="ajHighlight">','').replace('</span>','').replace('"','\\"')
 
     def javascriptSteps(self):
@@ -109,7 +111,7 @@ class TourViewlet(common.ViewletBase):
                                                                       text.replace('\\"','"').replace('"','\\"'), #get the right formatted text from method "editor" without causing error in the others
                                                                       step.required,
                                                                       step.condition.replace('\\"','"').replace('"','\\"'),
-                                                                      self.manageDescription(description)) 
+                                                                      self.manageDescription(description))
                 else:
                     ajstep = """new AjStep('%s','%s',"%s")""" % (step.method,
                                                              self._expandSelector(step.selector),

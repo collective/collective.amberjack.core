@@ -1,18 +1,22 @@
+import os
+import unittest
+
+import zope.component
+
+import plone.i18n.normalizer
+from Products.Five import zcml
+
+import collective.amberjack.core
+import collective.amberjack.core.tests
 from collective.amberjack.core.tests.base import AmberjackCoreTestCase
 from collective.amberjack.core.viewlets.tour import TourViewlet
 
-from Products.Five import zcml
-import zope.component
-import plone.i18n.normalizer
-import os
-import unittest
-import collective.amberjack.core.tests
-import collective.amberjack.core
 
 class TourViewletTestCase(AmberjackCoreTestCase):
 
     def afterSetUp(self):
-        self.test_folder = os.path.dirname(collective.amberjack.core.tests.__file__)
+        self.test_folder = os.path.dirname(
+                collective.amberjack.core.tests.__file__)
         zcml.load_config('meta.zcml', zope.component)
         zcml.load_config('meta.zcml', collective.amberjack.core)
         zcml.load_config('configure.zcml', collective.amberjack.core)
@@ -51,10 +55,12 @@ class TourViewletTestCase(AmberjackCoreTestCase):
         viewlet.update()
         viewlet.render()
 
+
 def test_suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(TourViewletTestCase))
     return suite
+
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')
