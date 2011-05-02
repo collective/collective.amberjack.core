@@ -10,6 +10,9 @@ Changelog
   [mirco]
 - removed "The powered by ..." to the footer of portlet
   [mirco]
+- explicited the exception and changed the return value when the member folder doesn't exist
+  in "ToursRoot" utility
+  [mirco]
 
 1.1 (2010-11-05)
 -----------------

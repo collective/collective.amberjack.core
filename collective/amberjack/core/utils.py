@@ -169,9 +169,11 @@ class ToursRoot(object):
         site_root = '/'.join(context.portal_url.getPortalObject().getPhysicalPath())
         if not context.portal_amberjack.sandbox: 
             return context.unrestrictedTraverse(site_root + path)
-        else:
+        try:
             user_id = context.portal_membership.getAuthenticatedMember().id
             return context.unrestrictedTraverse(site_root + '/Members/' + user_id + path)
+        except AttributeError:
+            return context.unrestrictedTraverse(site_root + path)
     
     def getToursRoot(self, context, request, url=''):
         portal_state =  getMultiAdapter((context, request), name=u'plone_portal_state')
@@ -185,8 +187,8 @@ class ToursRoot(object):
         try:
             portal_state.portal().restrictedTraverse(member_folder_path.split('/')[1:])
             return unicode(portal_state.navigation_root_url() + member_folder_path)
-        except:
-            return None
+        except AttributeError:
+            return unicode(portal_state.navigation_root_url())
         
 class AmberjackTool(SimpleItem):
     """Amberjack Tool"""
