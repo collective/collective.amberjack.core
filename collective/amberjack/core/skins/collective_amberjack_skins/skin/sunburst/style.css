@@ -28,16 +28,11 @@
 
 #ajControlBody td {padding:10px; font-size:80%}
 
-#ajControlInfo {
+#ajControlFooter {
 	background-color: #205C90;
-	color: #FFF;
 	padding: 0.2em 1em;
-	font-size: 0.9em;
+	height: 0.5em;
 }
-#ajControlInfo .aj_link_inactive {
-    color:#DDD !important;
-}
-
 
 a#ajPrev, a#ajNext {
 	color:#FFF;

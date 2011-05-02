@@ -20,6 +20,5 @@ AmberjackControl.open(
         '</div>' +
 	  '</div>' +
 	'</div></div>' +
-	'<div id="ajControlInfo">Tour powered by <a class="ajFooterLink" href="http://amberjack.org">Amberjack</a> &amp; {skinId} skin</div>' +
   '</div>'
 );

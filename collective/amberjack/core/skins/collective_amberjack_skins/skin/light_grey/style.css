@@ -10,9 +10,6 @@
 
 #ajControlBody td {padding:10px; font-size:80%}
 
-#ajControlInfo td {padding:5px 10px;font-size:0.9em;color:#999;background:#eee;border-top:1px solid #ddd}
-#ajControlInfo a {color:#660000}
-
 a#ajPrev, a#ajNext {color:#436976;background:#DEE7EC;text-decoration:none;margin-right:10px}
 a#ajPrev.disabled, a#ajNext.disabled {color:#ccc;background:#eee;cursor:default}
 
@@ -104,12 +101,6 @@ a#ajNext,
 	font-weight: bold;
 	border:0;
 	color: #004b85;
-}
-#ajControlInfo {
-	clear: both;
-	padding: 0.8em 0.5em 0;
-	font-size: 0.85em;
-	color: #333;
 }
 .ajSteps li {
 	padding-bottom:0;

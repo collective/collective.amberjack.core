@@ -14,7 +14,6 @@ AmberjackControl.open(
       '</td>' +
     '</tr>' +
     '<tr id="ajControlBody"><td colspan="2">{body}</td></tr>' +
-    '<tr id="ajControlInfo"><td colspan="2">Tour powered by <a href="http://amberjack.org">Amberjack</a> &amp; {skinId} skin</td></tr>' +
     '</table>' +
   '</div>'
 );

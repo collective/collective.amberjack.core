@@ -14,7 +14,7 @@ AmberjackControl.open(
 	      '</div>' +
 	    '</div>' +
 	    '<div id="ajControlBody">{body}</div>' +
-	    '<div id="ajControlInfo">Tour powered by <a href="http://amberjack.org">Amberjack</a> &amp; {skinId} skin</div>' +
+	    '<div id="ajControlFooter" />' +
 	'</div>'+
   '</div>'
 );

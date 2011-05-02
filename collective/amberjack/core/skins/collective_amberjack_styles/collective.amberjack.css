@@ -117,9 +117,6 @@ a.ajHighlight:hover {
 	color: #CCC !important;
 	cursor: default;
 }
-#ajControlInfo .aj_link_inactive {
-	color: #000 !important;
-}
 .contentViews .selected a.aj_link_inactive{
 	color: #CCC !important;
 }
