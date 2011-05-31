@@ -23,10 +23,6 @@
       available keys and default values.
       -->
 
-<stylesheet title=""
-    id="collective.amberjack.css"
-    media="all" rel="stylesheet" rendering="import"
-    cacheable="True" compression="safe" cookable="True"
-    enabled="1" expression=""/>
+<stylesheet title="" id="collective.amberjack.css" media="all" />
 
 </object>
