@@ -4,6 +4,8 @@ Changelog
 1.1.1 (2010-??-??)
 -----------------
 
+- updated Spanish translation file
+  [macagua]
 - Remove default parameters from cssregistry. Also makes the stylesheets load
   using a <link> not @import, as we currently do in Plone
   [ggozad]
