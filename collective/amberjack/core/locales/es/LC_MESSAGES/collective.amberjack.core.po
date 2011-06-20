@@ -1,5 +1,5 @@
 # Spanish translations for collective.amberjack.core package
-# Traducciones al Espa�ol del producto collective.amberjack.core.
+# Traducciones al Español del producto collective.amberjack.core.
 # Leonardo J. Caballero G. <leonardocaballero@gmail.com>, 2009, 2010, 2011.
 msgid ""
 msgstr ""
@@ -9,18 +9,18 @@ msgstr ""
 "Last-Translator: Leonardo J. Caballero G. <leonardocaballero@gmail.com>\n"
 "Language-Team: Spanish <plone-conosur@lists.plone.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 "Language-code: es\n"
 "Language-name: Spanish\n"
-"Preferred-encodings: latin1 utf-8\n"
+"Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.amberjack.core\n"
 "X-Is-Fallback-For: es-ar es-bo es-cl es-co es-cr es-do es-ec es-es es-sv es-gt es-hn es-mx es-ni es-pa es-py es-pe es-pr es-us es-uy es-ve\n"
 
 #: ../controlpanel.py:40
 msgid "Amberjack Setup"
-msgstr "Instalaci�n de Amberjack"
+msgstr "Instalación de Amberjack"
 
 #: ../javascript/defaults.py:28
 msgid "Amberjack alert"
@@ -28,7 +28,7 @@ msgstr "Alerta de Amberjack"
 
 #: ../javascript/defaults.py:31
 msgid "Can't go to next step automatically. Do it manually."
-msgstr "No puede ir al pr�ximo paso autom�ticamente. Debe hacerlo manualmente."
+msgstr "No puede ir al próximo paso automáticamente. Debe hacerlo manualmente."
 
 #: ../interfaces.py:39
 msgid "Choose archive file"
@@ -36,19 +36,19 @@ msgstr "Seleccionar un archivo "
 
 #: ../interfaces.py:43
 msgid "Choose url"
-msgstr "Elegir direcci�n URL"
+msgstr "Elegir dirección URL"
 
 #: ../controlpanel.py:35
 msgid "Configuration"
-msgstr "Configuraci�n"
+msgstr "Configuración"
 
 #: ../controlpanel.py:41
 msgid "Configuration for Amberjack."
-msgstr "Configuraci�n para Amberjack."
+msgstr "Configuración para Amberjack."
 
 #: ../javascript/defaults.py:30
 msgid "Go to next step automatically."
-msgstr "Ir al pr�ximo paso autom�ticamente"
+msgstr "Ir al próximo paso automáticamente"
 
 #: ../validators.py:58
 msgid "Please remove the [${path}] object to start the tour."
@@ -64,7 +64,7 @@ msgstr "El objeto [${path}] no existe."
 
 #: ../interfaces.py:65
 msgid "The title of the skin shown in the select menu"
-msgstr "El t�tulo del skin se muestra en el men� de selecci�n"
+msgstr "El título del skin se muestra en el menú de selección"
 
 #: ../javascript/defaults.py:32
 msgid "This field is required, please correct."
@@ -80,7 +80,7 @@ msgstr "Utilice el entorno de prueba"
 
 #: ../javascript/defaults.py:29
 msgid "You cannot click on other links, please use the console's exit button."
-msgstr "Usted no puede hacer clic en otros enlaces, por favor use el bot�n de salida de la consola."
+msgstr "Usted no puede hacer clic en otros enlaces, por favor use el botón de salida de la consola."
 
 #: ../validators.py:31
 msgid "You have to be ${role} to execute this step."
@@ -88,7 +88,7 @@ msgstr "Usted tiene que se ${role} para ejecutar este paso."
 
 #: ../validators.py:18
 msgid "You have to be anonymous to execute this step."
-msgstr "Usted tiene que ser un usuario 'an�nimo' para ejecutar este paso."
+msgstr "Usted tiene que ser un usuario 'anónimo' para ejecutar este paso."
 
 #: ../validators.py:24
 msgid "You have to be logged in to execute this step."
@@ -97,7 +97,7 @@ msgstr "Usted debe estar registrado para poder realizar este paso."
 #. Default: "Next tour:"
 #: ../viewlets/tour.pt:42
 msgid "next-tour"
-msgstr "Pr�xima visita guiada:"
+msgstr "Próxima visita guiada:"
 
 #. Default: "of"
 #: ../javascript/defaults.py:49
