@@ -1,6 +1,6 @@
 import doctest
 import unittest
-#from zope.app.testing import placelesssetup
+from zope.component import testing
 
 from collective.amberjack.core.tests import zcml_template
 
@@ -14,7 +14,7 @@ def test_suite():
                              doctest.NORMALIZE_WHITESPACE +
                              doctest.REPORT_NDIFF),
                          globs = {'template': zcml_template},
-#                         setUp=placelesssetup.setUp,
-#                         tearDown=placelesssetup.tearDown,
+                         setUp=testing.setUp,
+                         tearDown=testing.tearDown,
                          ),
             ))

@@ -96,39 +96,35 @@ class TourViewlet(common.ViewletBase):
         """Return an Array:
         [new AjStep('method', 'selector', 'text'), ...]
         """
-        try:
-            aj = """
-            var AjSteps = [
-                    """
-            cnt = 0
-            for step in self.ajsteps:
+        aj = """
+        var AjSteps = [
+                """
+        cnt = 0
+        for step in self.ajsteps:
 
-                if step._options['blueprint']=='collective.amberjack.blueprints.windmillmicrostep':
-                    text = translate(step.text, context=self.request)
-                    description = translate(step.description, context=self.request)
-                    ajstep = """new AjWindmillStep('%s',"%s","%s","%s","%s","%s")""" % (step.method,
-                                                                      step.selector.replace('"','\\"'),
-                                                                      text.replace('\\"','"').replace('"','\\"'), #get the right formatted text from method "editor" without causing error in the others
-                                                                      step.required,
-                                                                      step.condition.replace('\\"','"').replace('"','\\"'),
-                                                                      self.manageDescription(description))
-                else:
-                    ajstep = """new AjStep('%s','%s',"%s")""" % (step.method,
-                                                             self._expandSelector(step.selector),
-                                                             text.replace('"','\\"'))
+            if step._options['blueprint']=='collective.amberjack.blueprints.windmillmicrostep':
+                text = translate(step.text, context=self.request)
+                description = translate(step.description, context=self.request)
+                ajstep = """new AjWindmillStep('%s',"%s","%s","%s","%s","%s")""" % (step.method,
+                                                                  step.selector.replace('"','\\"'),
+                                                                  text.replace('\\"','"').replace('"','\\"'), #get the right formatted text from method "editor" without causing error in the others
+                                                                  step.required,
+                                                                  step.condition.replace('\\"','"').replace('"','\\"'),
+                                                                  self.manageDescription(description))
+            else:
+                ajstep = """new AjStep('%s','%s',"%s")""" % (step.method,
+                                                         self._expandSelector(step.selector),
+                                                         text.replace('"','\\"'))
 
-                if cnt+1 != len(self.ajsteps):
-                    ajstep += """,
-                    """
-                aj += ajstep
-                cnt+=1
+            if cnt+1 != len(self.ajsteps):
+                ajstep += """,
+                """
+            aj += ajstep
+            cnt+=1
 
-            return aj + """
-            ]
-            """
-        except Exception, inst: #XXX put the right Error
-            self.context.plone_log(inst)
-            return ''
+        return aj + """
+        ]
+        """
 
     def _choosenSkin(self):
         try:

@@ -12,33 +12,35 @@ Changelog
 - Fixed i18n of exception messages.
   [vincentfretin]
 - added uninstall profile
-  [mirco]
+  [mircoangelini]
 - removed "The powered by ..." to the footer of portlet
-  [mirco]
+  [mircoangelini]
 - explicited the exception and changed the return value when the member folder doesn't exist
   in "ToursRoot" utility
-  [mirco]
+  [mircoangelini]
+- fixed non-existent import [mircoangelini]
+- removed an not useful try-except [mircoangelini]
 
 1.1 (2010-11-05)
 -----------------
 
 - moved the check procedure to identify the next tour from the portlet into viewlet
-  [mirco]
+  [mircoangelini]
 - updated the canMoveToNextStep function that now stop the passage to next step if 
   there is an error message.
-  [mirco]
+  [mircoangelini]
 - modified AJ alert message: now the user can choise to restart the tour or close the tour
-  [mirco]
+  [mircoangelini]
 - bugfix for align the phrase "next tour"
-  [mirco]
+  [mircoangelini]
 - changed in #CCC the css color directive for ".contentActions a.aj_link_inactive"
-  [mirco]
+  [mircoangelini]
 - inverted in the code the parts to load key and value from dictionaries of selectors
-  [mirco]
+  [mircoangelini]
 - added a check for the micro-steps of type "highlight" to use in the render of "doAllStep" button.
-  [mirco]
+  [mircoangelini]
 - changed from function trim()  to function jQuery.trim().
-  [mirco]
+  [mircoangelini]
 - added sunburst theme and fixed some problems in tour's template
   [nekorin]
 - fix translations
@@ -52,9 +54,9 @@ Changelog
 - Allow translations for the alert message when the user clics on other links.
   [sylvainb]
 - added a js to manage the "next tours" cookie when it's used the "next tour" link of the aj popup.
-  [mirco]
+  [mircoangelini]
 - IE bugfix into javascripts file.
-  [mirco]
+  [mircoangelini]
 - translation can be now in language folders
   [amleczko]
 
@@ -64,19 +66,19 @@ Changelog
 - font-size at 80%
   [massimo]
 - fixing next tour link in viewlets
-  [mirco]
+  [mircoangelini]
 - fixing doAllStep
-  [mirco]
+  [mircoangelini]
 - update the checkStep and checkAllStep
-  [mirco]
+  [mircoangelini]
 - updated dependency with collective.js.jqueryui
-  [mirco]
+  [mircoangelini]
 - removed ui.draggable-1.7.2 file and the registration from jsregistry
-  [mirco]
+  [mircoangelini]
 - add dependency whit collective.amberjack.portlet
-  [mirco]
+  [mircoangelini]
 - Inserted 'checkPreviousSteps' function to control if the previous micro-steps are done
-  [mirco]
+  [mircoangelini]
 - added .metadata files for image inside the skins
   [keul]
 - javascript resources were all not cachable/coockable
@@ -86,7 +88,7 @@ Changelog
 - show label element in the correct way #572464
   [fdelia]
 - change the way to hide actions of micro-steps when they haven't an idStep
-  [mirco]
+  [mircoangelini]
 - layout calendar select #580573
   [fdelia]
 - rely on jQuery UI for performing alert if available (close #572239)
@@ -96,22 +98,22 @@ Changelog
 - move old stuff to depracated folder
   [amleczko]
 - implemented the sandbox
-  [mirco]
+  [mircoangelini]
 - add hasRole validation and remove too specific ones
   [amleczko]
 - implemented validation and precondition
-  [mirco]
+  [mircoangelini]
 - remove depracated module - update tests
   [amleczko]
 - we have changed the action of button "Next"(>>) that now perform all the 
   micro-steps of the step.
-  [mirco]
+  [mircoangelini]
 - changed the alert messages: substituted the number of the tour with the description
   of the tour.
-  [mirco]
+  [mircoangelini]
 - implemented the check for the required fields of Plone, if the required fields are 
   empty the user can't pass to the next step.
-  [mirco]
+  [mircoangelini]
 - fix problem with zcml registration
   [amleczko]
 
@@ -121,17 +123,17 @@ Changelog
 - compatibility with plone4
   [amleczko]
 - add control and functionality to manage text in kupu and tiny for step 'form_text'
-  [mirco]
+  [mircoangelini]
 - add some 'ajStandardSteps' to use the TinyMCE's buttons
-  [mirco]
+  [mircoangelini]
 - inserted some changes into the js to make click on the buttons of TinyMCE
-  [mirco]
+  [mircoangelini]
 - inserted some changes into the js to do actions in the iframe
-  [mirco]
+  [mircoangelini]
 - changes to fix the operation of the highlights
-  [mirco]
+  [mircoangelini]
 - commented the previous button of tours
-  [mirco]
+  [mircoangelini]
 - minor Javascript refactoring
   [keul]
 
