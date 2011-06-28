@@ -5,7 +5,7 @@ from zope.component import queryUtility, getUtility
 import zope.component
 from zope.publisher.browser import TestRequest
 
-from Products.Five import zcml
+from Zope2.App import zcml
 import plone.i18n.normalizer
 
 from collective.amberjack.core.interfaces import ITourRegistration

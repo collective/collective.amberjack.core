@@ -21,6 +21,7 @@ Changelog
 - fixed non-existent import [mircoangelini]
 - removed an not useful try-except [mircoangelini]
 - removed tour_converter.py: not useful [mircoangelini]
+- some fix for test coverage [mircoangelini]
 
 1.1 (2010-11-05)
 -----------------

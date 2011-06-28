@@ -3,7 +3,7 @@ from Testing import ZopeTestCase as ztc
 import zope.component
 from StringIO import StringIO
 import plone.i18n.normalizer
-from Products.Five import zcml
+from Zope2.App import zcml
 
 from collective.amberjack.core import utils
 from collective.amberjack.core.tour import Tour

@@ -4,7 +4,7 @@ import unittest
 import zope.component
 
 import plone.i18n.normalizer
-from Products.Five import zcml
+from Zope2.App import zcml
 
 import collective.amberjack.core
 import collective.amberjack.core.tests

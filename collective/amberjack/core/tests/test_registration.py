@@ -6,7 +6,7 @@ import zope.component
 
 import plone.i18n.normalizer
 from Testing import ZopeTestCase as ztc
-from Products.Five import zcml
+from Zope2.App import zcml
 
 from collective.amberjack.core.interfaces import ITourRegistration
 from collective.amberjack.core.interfaces import ITourDefinition
