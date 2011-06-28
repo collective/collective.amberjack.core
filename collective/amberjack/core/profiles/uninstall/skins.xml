@@ -20,16 +20,12 @@
 
  <skin-path name="*">
   <layer name="collective_amberjack_images"
-     insert-after="custom"
      remove="True"/>
   <layer name="collective_amberjack_javascript"
-     insert-after="custom"
      remove="True"/>
   <layer name="collective_amberjack_styles"
-     insert-after="custom"
      remove="True"/>
   <layer name="collective_amberjack_skins"
-     insert-after="custom"
      remove="True"/>
  </skin-path>
 </object>
