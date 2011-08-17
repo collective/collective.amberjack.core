@@ -1,6 +1,7 @@
 """Step validators
 """
 from Products.CMFCore.utils import getToolByName
+from zope.i18n import translate
 from zope.i18nmessageid import MessageFactory
 from zope.component import getUtility
 from collective.amberjack.core.interfaces import ITour
@@ -36,9 +37,9 @@ def hasRole(context, request, role):
     if request.AUTHENTICATED_USER.has_role('Manager', context):
         return None
     if not request.AUTHENTICATED_USER.has_role(role, context):
-        raise AmberjackException(
+        raise AmberjackException(translate(
                 _(u"You have to be ${role} to execute this step.",
-                  mapping={'role': _plone(role)}))
+                  mapping={'role': _plone(role)})))
     return None
 
 
@@ -58,9 +59,9 @@ def isCreated(context, path):
         path = path[1:]
     myfolder = root.aq_base.unrestrictedTraverse(str(path).split('/'), None)
     if myfolder is None:
-        raise AmberjackException(
+        raise AmberjackException(translate(
                 _(u"The object [${path}] doesn't exist yet.",
-                  mapping={'path': path}))
+                  mapping={'path': path})))
     return None
 
 
@@ -69,9 +70,9 @@ def isNotCreated(context, path):
         isCreated(context, path)
     except AmberjackException:
         return None
-    raise AmberjackException(
+    raise AmberjackException(translate(
             _(u"Please remove the [${path}] object to start the tour.",
-              mapping={'path': path}))
+              mapping={'path': path})))
 
 
 _validators_ = (
