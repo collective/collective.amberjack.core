@@ -104,7 +104,13 @@ class TourViewlet(common.ViewletBase):
 
             if step._options['blueprint']=='collective.amberjack.blueprints.windmillmicrostep':
                 text = translate(step.text, context=self.request)
+                if isinstance(text, unicode):
+                    text = text.encode('utf-8')
+
                 description = translate(step.description, context=self.request)
+                if isinstance(description, unicode):
+                    description = description.encode('utf-8')
+
                 ajstep = """new AjWindmillStep('%s',"%s","%s","%s","%s","%s")""" % (step.method,
                                                                   step.selector.replace('"','\\"'),
                                                                   text.replace('\\"','"').replace('"','\\"'), #get the right formatted text from method "editor" without causing error in the others
