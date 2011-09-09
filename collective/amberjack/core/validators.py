@@ -61,7 +61,7 @@ def isCreated(context, path):
     if myfolder is None:
         raise AmberjackException(translate(
                 _(u"The object [${path}] doesn't exist yet.",
-                  mapping={'path': path})))
+                  mapping={'path': path}), target_language=portal.Language()))
     return None
 
 
@@ -70,9 +70,10 @@ def isNotCreated(context, path):
         isCreated(context, path)
     except AmberjackException:
         return None
+    portal = getToolByName(context, 'portal_url').getPortalObject()
     raise AmberjackException(translate(
             _(u"Please remove the [${path}] object to start the tour.",
-              mapping={'path': path})))
+              mapping={'path': path}), target_language=portal.Language()))
 
 
 _validators_ = (
