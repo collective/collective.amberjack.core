@@ -3,57 +3,56 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
-"Project-Id-Version: amberjack\n"
-"POT-Creation-Date: 2010-10-31 16:54+0000\n"
-"PO-Revision-Date: 2010-08-05 17:44+0100\n"
-"Last-Translator: Espen Moe-Nilssen <espen@medialog.no>\n"
-"Language-Team: Norge <espen@medialog.no>\n"
+"Project-Id-Version: collective.amberjack.core\n"
+"POT-Creation-Date: 2011-09-09 16:54+0000\n"
+"PO-Revision-Date: 2010-09-09 17:44+0100\n"
+"Last-Translator: Tormod Mansaker <tormod@jarn.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: si\n"
-"Language-Name: Slovenian\n"
+"Language-Code: no\n"
+"Language-Name: Norwegian\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.amberjack.core\n"
-"X-Poedit-Language: Norwegian Bokmal\n"
-"X-Poedit-Country: NORWAY\n"
+
 
 #: ../controlpanel.py:40
 msgid "Amberjack Setup"
-msgstr ""
+msgstr "Amberjack Oppsett"
 
 #: ../javascript/defaults.py:28
 msgid "Amberjack alert"
-msgstr ""
+msgstr "Amberjack advarsel"
 
 #: ../javascript/defaults.py:31
 msgid "Can't go to next step automatically. Do it manually."
-msgstr ""
+msgstr "Kan ikke gå videre automatisk. Gjør det manuelt."
 
 #: ../interfaces.py:39
 msgid "Choose archive file"
-msgstr ""
+msgstr "Velg lagringsfil"
 
 #: ../interfaces.py:43
 msgid "Choose url"
-msgstr ""
+msgstr "Velg url"
 
 #: ../controlpanel.py:35
 msgid "Configuration"
-msgstr ""
+msgstr "Konfigurasjon"
 
 #: ../controlpanel.py:41
 msgid "Configuration for Amberjack."
-msgstr ""
+msgstr "Konfigurasjon for Amberjack."
 
 #: ../javascript/defaults.py:30
 msgid "Go to next step automatically."
-msgstr ""
+msgstr "Gå til neste steg automatisk."
 
 #: ../validators.py:58
 msgid "Please remove the [${path}] object to start the tour."
-msgstr ""
+msgstr "Vennligst slett  [${path}] for å starte øvelsen."
 
 #: ../javascript/defaults.py:27
 msgid "Please select a file."
@@ -61,31 +60,31 @@ msgstr "Vennligst velg en fil."
 
 #: ../validators.py:50
 msgid "The object [${path}] doesn't exist yet."
-msgstr ""
+msgstr "Innholdet [${path}] eksisterer ikke enda."
 
 #: ../interfaces.py:65
 msgid "The title of the skin shown in the select menu"
-msgstr ""
+msgstr "Tittelen på laget er i valgmenyen"
 
 #: ../javascript/defaults.py:32
 msgid "This field is required, please correct."
-msgstr ""
+msgstr "Dette feltet er påkrevd, vennligst fyll ut."
 
 #: ../controlpanel.py:31
 msgid "Tour registration"
-msgstr ""
+msgstr "Registrering av øvelsen"
 
 #: ../interfaces.py:49
 msgid "Use Sandbox"
-msgstr ""
+msgstr "Bruk øvelsesmappen"
 
 #: ../javascript/defaults.py:29
 msgid "You cannot click on other links, please use the console's exit button."
-msgstr ""
+msgstr "Du kan ikke klikke på andre lenker, vennlist bruk avslutt knappen."
 
 #: ../validators.py:31
 msgid "You have to be ${role} to execute this step."
-msgstr ""
+msgstr "Du må ha rettigheter som ${role} for å gjøre dette steget."
 
 #: ../validators.py:18
 msgid "You have to be anonymous to execute this step."
