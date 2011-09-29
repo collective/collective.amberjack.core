@@ -57,11 +57,11 @@ class ValidationTests(base.AmberjackCoreTestCase):
         reg = queryUtility(ITourRegistration, 'zip_archive')
         registration = reg(source, filename)
         registration.register()
-        self.tour = getUtility(ITourDefinition, u'tour1-add-and-publish-a-folder')
+        self.tour = getUtility(ITourDefinition, u'01_basic_add_and_publish_a_folder-add-and-publish')
 
-        step = DummyStep('/')
-        self.tour.steps = [step]
-
+#        step = DummyStep('/')
+#        self.tour.steps = [step]
+#
         self.context = self.portal
 
     def test_validation_sandbox_isCreated(self):

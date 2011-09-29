@@ -41,6 +41,7 @@ class TourViewlet(common.ViewletBase):
                 return None
         if not tourId:
             return None
+
         manager = getUtility(ITourManager)
         return manager.getTour(tourId, self.context)
 

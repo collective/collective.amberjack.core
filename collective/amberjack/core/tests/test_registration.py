@@ -30,13 +30,45 @@ class RegistrationTests(ztc.ZopeTestCase):
         <utility component="collective.amberjack.core.blueprints.MicroStep"
                  name="collective.amberjack.blueprints.microstep" />
         </configure>''')
+        
+        zcml.load_string('''<configure
+        xmlns="http://namespaces.zope.org/zope">
+        <utility component="collective.amberjack.core.blueprints.WindmillMicroStep"
+                 name="collective.amberjack.blueprints.windmillmicrostep" />
+        </configure>''')
 
         zcml.load_string('''<configure
         xmlns="http://namespaces.zope.org/zope">
         <utility component="collective.amberjack.core.registration.FileArchiveRegistration"
                  name="zip_archive" />
         </configure>''')
-
+        
+    def test_register_tar_gz(self):
+        reg = queryUtility(ITourRegistration, 'zip_archive')
+        archive_path = os.path.join(self.test_folder, 'basic_tours.tar.gz')
+        archive = open(archive_path, 'r')
+        archive.seek(0)
+        source = archive.read()
+        archive.close()
+        filename = os.path.basename(archive_path)
+        registration = reg(source, filename)
+        registration.register()
+        tour = getUtility(ITourDefinition, u'01_basic_add_and_publish_a_folder-add-and-publish')
+        self.assertEqual(tour.tourId, '01_basic_add_and_publish_a_folder-add-and-publish')
+        
+    def test_register_tar(self):
+        reg = queryUtility(ITourRegistration, 'zip_archive')
+        archive_path = os.path.join(self.test_folder, 'basic_tours.tar')
+        archive = open(archive_path, 'r')
+        archive.seek(0)
+        source = archive.read()
+        archive.close()
+        filename = os.path.basename(archive_path)
+        registration = reg(source, filename)
+        registration.register()
+        tour = getUtility(ITourDefinition, u'01_basic_add_and_publish_a_folder-add-and-publish')
+        self.assertEqual(tour.tourId, '01_basic_add_and_publish_a_folder-add-and-publish')
+    
     def test_register_zip(self):
         reg = queryUtility(ITourRegistration, 'zip_archive')
         archive_path = os.path.join(self.test_folder, 'basic_tours.zip')
@@ -47,9 +79,9 @@ class RegistrationTests(ztc.ZopeTestCase):
         filename = os.path.basename(archive_path)
         registration = reg(source, filename)
         registration.register()
-        tour = getUtility(ITourDefinition, u'tour1-add-and-publish-a-folder')
-        self.assertEqual(tour.tourId, 'tour1-add-and-publish-a-folder')
-
+        tour = getUtility(ITourDefinition, u'01_basic_add_and_publish_a_folder-add-and-publish')
+        self.assertEqual(tour.tourId, '01_basic_add_and_publish_a_folder-add-and-publish')
+        
 
 def test_suite():
     return defaultTestLoader.loadTestsFromName(__name__)
