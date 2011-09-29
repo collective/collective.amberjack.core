@@ -3,7 +3,10 @@ Changelog
 
 1.1.1 (2010-??-??)
 -----------------
-- Pass exception messages to zope.i18n.translate [ggozad]
+- Fix last tour next_tours_id js edge case.
+  [hannosch, ggozad]
+- Pass exception messages to zope.i18n.translate
+  [ggozad]
 - updated Spanish translation file
   [macagua]
 - Remove default parameters from cssregistry. Also makes the stylesheets load

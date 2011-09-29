@@ -9,7 +9,7 @@ function manage_cookie(){
 				c_val_end = new_val.length;
 			}
 			var c_end_first_val = new_val.indexOf("|");
-			new_val = new_val.substring(c_end_first_val+1,c_val_end-1);
+			new_val = new_val.substring(c_end_first_val+1,c_val_end);
 			var cookie_date = new Date(); // current date & time
 			cookie_date.setTime(cookie_date.getTime() - 100);
 			document.cookie = "next_tours_id=; path= /; expires=" + cookie_date.toGMTString();
