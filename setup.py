@@ -6,7 +6,7 @@ version = '1.1.1-unreleased'
 setup(name='collective.amberjack.core',
       version=version,
       description="The Amberjack layer",
-      long_description=open(os.path.join("collective/amberjack/core", "README.txt")).read() + "\n" +
+      long_description=open(os.path.join("README.rst")).read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read() + "\n" +
                        open(os.path.join("docs", "AUTHORS.txt")).read(),
       # Get more strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
