@@ -3,8 +3,8 @@ collective.amberjack.core
 
 This package provides core functionality for collective.amberjack package.
 
-Be aware that series 0.9.x is compatible with Plone3, series 1.x is compatible
-with Plone4.
+Be aware that series ``0.9.x`` is compatible with **Plone3**, series ``1.x`` is compatible
+with **Plone4**.
 
 Useful links
 ============
@@ -13,7 +13,7 @@ Useful links
 - pypi: http://pypi.python.org/pypi/collective.amberjack.core
 - Plone: http://plone.org/products/collective.amberjack.core
 - issue tracker: https://bugs.launchpad.net/collective.amberjack
-- svn repository: http://svn.plone.org/svn/collective/collective.amberjack.core
+- git repository: https://github.com/collective/collective.amberjack.core
 
 
 How to create new tour
